@@ -1,5 +1,19 @@
 server:
   port: 8090
+
+spring:
+  thymeleaf:
+    mode: HTML5
+  redis:
+    database: 0
+    host: 47.104.201.53
+    port: 6379
+    password:
+    max-active: 8
+    max-wait: -1
+    max-idle: 8
+    min-idle: 0
+    timeout: 0
 ---
 spring:
   profile: online

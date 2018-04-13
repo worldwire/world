@@ -10,7 +10,7 @@ public class TestServiceImpl implements TestService{
 	@Override
 	public String greeting(String name) {
 
-		return "greeting" + name;
+		return "greeting " + name;
 	}
 
 }
