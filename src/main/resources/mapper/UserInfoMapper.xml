@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.worldwire.dao.UserInfoDao" >
+  <resultMap id="BaseResultMap" type="com.spring.worldwire.model.UserInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="login_id" property="loginId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="is_foreign" property="isForeign" jdbcType="INTEGER" />
+    <result column="show_img" property="showImg" jdbcType="VARCHAR" />
+    <result column="brithday" property="brithday" jdbcType="TIMESTAMP" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="language" property="language" jdbcType="VARCHAR" />
+    <result column="bri_nationality" property="briNationality" jdbcType="VARCHAR" />
+    <result column="now_nationality" property="nowNationality" jdbcType="VARCHAR" />
+    <result column="local_addr" property="localAddr" jdbcType="VARCHAR" />
+    <result column="occupation" property="occupation" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="website" property="website" jdbcType="VARCHAR" />
+    <result column="public_platform" property="publicPlatform" jdbcType="VARCHAR" />
+    <result column="wechat_qrcode" property="wechatQrcode" jdbcType="VARCHAR" />
+    <result column="wechat" property="wechat" jdbcType="VARCHAR" />
+    <result column="facebook" property="facebook" jdbcType="VARCHAR" />
+    <result column="whatsapp" property="whatsapp" jdbcType="VARCHAR" />
+    <result column="linkedin" property="linkedin" jdbcType="VARCHAR" />
+    <result column="communication" property="communication" jdbcType="VARCHAR" />
+    <result column="idcard_on_img" property="idcardOnImg" jdbcType="VARCHAR" />
+    <result column="idcard_down_img" property="idcardDownImg" jdbcType="VARCHAR" />
+    <result column="idcard_hand_img" property="idcardHandImg" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="company_time" property="companyTime" jdbcType="TIMESTAMP" />
+    <result column="company_num" property="companyNum" jdbcType="VARCHAR" />
+    <result column="company_addr" property="companyAddr" jdbcType="VARCHAR" />
+    <result column="company_tel" property="companyTel" jdbcType="VARCHAR" />
+    <result column="company_mobile" property="companyMobile" jdbcType="VARCHAR" />
+    <result column="company_post_code" property="companyPostCode" jdbcType="VARCHAR" />
+    <result column="company_fax" property="companyFax" jdbcType="VARCHAR" />
+    <result column="company_email" property="companyEmail" jdbcType="VARCHAR" />
+    <result column="company_main_business" property="companyMainBusiness" jdbcType="VARCHAR" />
+    <result column="company_main_contry" property="companyMainContry" jdbcType="VARCHAR" />
+    <result column="business_license_img" property="businessLicenseImg" jdbcType="VARCHAR" />
+    <result column="business_special_license_img" property="businessSpecialLicenseImg" jdbcType="VARCHAR" />
+    <result column="business_bank" property="businessBank" jdbcType="VARCHAR" />
+    <result column="business_bank_name" property="businessBankName" jdbcType="VARCHAR" />
+    <result column="business_bank_addr" property="businessBankAddr" jdbcType="VARCHAR" />
+    <result column="business_bank_img" property="businessBankImg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, login_id, type, is_foreign, show_img, brithday, nick_name, language, bri_nationality, 
+    now_nationality, local_addr, occupation, email, mobile, website, public_platform, 
+    wechat_qrcode, wechat, facebook, whatsapp, linkedin, communication, idcard_on_img, 
+    idcard_down_img, idcard_hand_img, real_name, idcard, company_name, company_time, 
+    company_num, company_addr, company_tel, company_mobile, company_post_code, company_fax, 
+    company_email, company_main_business, company_main_contry, business_license_img, 
+    business_special_license_img, business_bank, business_bank_name, business_bank_addr, 
+    business_bank_img
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.spring.worldwire.model.UserInfo" >
+    insert into user_info (id, login_id, type, 
+      is_foreign, show_img, brithday, 
+      nick_name, language, bri_nationality, 
+      now_nationality, local_addr, occupation, 
+      email, mobile, website, 
+      public_platform, wechat_qrcode, wechat, 
+      facebook, whatsapp, linkedin, 
+      communication, idcard_on_img, idcard_down_img, 
+      idcard_hand_img, real_name, idcard, 
+      company_name, company_time, company_num, 
+      company_addr, company_tel, company_mobile, 
+      company_post_code, company_fax, company_email, 
+      company_main_business, company_main_contry, 
+      business_license_img, business_special_license_img, 
+      business_bank, business_bank_name, business_bank_addr, 
+      business_bank_img)
+    values (#{id,jdbcType=BIGINT}, #{loginId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, 
+      #{isForeign,jdbcType=INTEGER}, #{showImg,jdbcType=VARCHAR}, #{brithday,jdbcType=TIMESTAMP}, 
+      #{nickName,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{briNationality,jdbcType=VARCHAR}, 
+      #{nowNationality,jdbcType=VARCHAR}, #{localAddr,jdbcType=VARCHAR}, #{occupation,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, 
+      #{publicPlatform,jdbcType=VARCHAR}, #{wechatQrcode,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, 
+      #{facebook,jdbcType=VARCHAR}, #{whatsapp,jdbcType=VARCHAR}, #{linkedin,jdbcType=VARCHAR}, 
+      #{communication,jdbcType=VARCHAR}, #{idcardOnImg,jdbcType=VARCHAR}, #{idcardDownImg,jdbcType=VARCHAR}, 
+      #{idcardHandImg,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{companyTime,jdbcType=TIMESTAMP}, #{companyNum,jdbcType=VARCHAR}, 
+      #{companyAddr,jdbcType=VARCHAR}, #{companyTel,jdbcType=VARCHAR}, #{companyMobile,jdbcType=VARCHAR}, 
+      #{companyPostCode,jdbcType=VARCHAR}, #{companyFax,jdbcType=VARCHAR}, #{companyEmail,jdbcType=VARCHAR}, 
+      #{companyMainBusiness,jdbcType=VARCHAR}, #{companyMainContry,jdbcType=VARCHAR}, 
+      #{businessLicenseImg,jdbcType=VARCHAR}, #{businessSpecialLicenseImg,jdbcType=VARCHAR}, 
+      #{businessBank,jdbcType=VARCHAR}, #{businessBankName,jdbcType=VARCHAR}, #{businessBankAddr,jdbcType=VARCHAR}, 
+      #{businessBankImg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.worldwire.model.UserInfo" >
+    insert into user_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="loginId != null" >
+        login_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="isForeign != null" >
+        is_foreign,
+      </if>
+      <if test="showImg != null" >
+        show_img,
+      </if>
+      <if test="brithday != null" >
+        brithday,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="language != null" >
+        language,
+      </if>
+      <if test="briNationality != null" >
+        bri_nationality,
+      </if>
+      <if test="nowNationality != null" >
+        now_nationality,
+      </if>
+      <if test="localAddr != null" >
+        local_addr,
+      </if>
+      <if test="occupation != null" >
+        occupation,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="mobile != null" >
+        mobile,
+      </if>
+      <if test="website != null" >
+        website,
+      </if>
+      <if test="publicPlatform != null" >
+        public_platform,
+      </if>
+      <if test="wechatQrcode != null" >
+        wechat_qrcode,
+      </if>
+      <if test="wechat != null" >
+        wechat,
+      </if>
+      <if test="facebook != null" >
+        facebook,
+      </if>
+      <if test="whatsapp != null" >
+        whatsapp,
+      </if>
+      <if test="linkedin != null" >
+        linkedin,
+      </if>
+      <if test="communication != null" >
+        communication,
+      </if>
+      <if test="idcardOnImg != null" >
+        idcard_on_img,
+      </if>
+      <if test="idcardDownImg != null" >
+        idcard_down_img,
+      </if>
+      <if test="idcardHandImg != null" >
+        idcard_hand_img,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="idcard != null" >
+        idcard,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="companyTime != null" >
+        company_time,
+      </if>
+      <if test="companyNum != null" >
+        company_num,
+      </if>
+      <if test="companyAddr != null" >
+        company_addr,
+      </if>
+      <if test="companyTel != null" >
+        company_tel,
+      </if>
+      <if test="companyMobile != null" >
+        company_mobile,
+      </if>
+      <if test="companyPostCode != null" >
+        company_post_code,
+      </if>
+      <if test="companyFax != null" >
+        company_fax,
+      </if>
+      <if test="companyEmail != null" >
+        company_email,
+      </if>
+      <if test="companyMainBusiness != null" >
+        company_main_business,
+      </if>
+      <if test="companyMainContry != null" >
+        company_main_contry,
+      </if>
+      <if test="businessLicenseImg != null" >
+        business_license_img,
+      </if>
+      <if test="businessSpecialLicenseImg != null" >
+        business_special_license_img,
+      </if>
+      <if test="businessBank != null" >
+        business_bank,
+      </if>
+      <if test="businessBankName != null" >
+        business_bank_name,
+      </if>
+      <if test="businessBankAddr != null" >
+        business_bank_addr,
+      </if>
+      <if test="businessBankImg != null" >
+        business_bank_img,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="loginId != null" >
+        #{loginId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="isForeign != null" >
+        #{isForeign,jdbcType=INTEGER},
+      </if>
+      <if test="showImg != null" >
+        #{showImg,jdbcType=VARCHAR},
+      </if>
+      <if test="brithday != null" >
+        #{brithday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null" >
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="briNationality != null" >
+        #{briNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="nowNationality != null" >
+        #{nowNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="localAddr != null" >
+        #{localAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="occupation != null" >
+        #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null" >
+        #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="publicPlatform != null" >
+        #{publicPlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatQrcode != null" >
+        #{wechatQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="facebook != null" >
+        #{facebook,jdbcType=VARCHAR},
+      </if>
+      <if test="whatsapp != null" >
+        #{whatsapp,jdbcType=VARCHAR},
+      </if>
+      <if test="linkedin != null" >
+        #{linkedin,jdbcType=VARCHAR},
+      </if>
+      <if test="communication != null" >
+        #{communication,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardOnImg != null" >
+        #{idcardOnImg,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardDownImg != null" >
+        #{idcardDownImg,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardHandImg != null" >
+        #{idcardHandImg,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTime != null" >
+        #{companyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyNum != null" >
+        #{companyNum,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddr != null" >
+        #{companyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTel != null" >
+        #{companyTel,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMobile != null" >
+        #{companyMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPostCode != null" >
+        #{companyPostCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyFax != null" >
+        #{companyFax,jdbcType=VARCHAR},
+      </if>
+      <if test="companyEmail != null" >
+        #{companyEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMainBusiness != null" >
+        #{companyMainBusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMainContry != null" >
+        #{companyMainContry,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicenseImg != null" >
+        #{businessLicenseImg,jdbcType=VARCHAR},
+      </if>
+      <if test="businessSpecialLicenseImg != null" >
+        #{businessSpecialLicenseImg,jdbcType=VARCHAR},
+      </if>
+      <if test="businessBank != null" >
+        #{businessBank,jdbcType=VARCHAR},
+      </if>
+      <if test="businessBankName != null" >
+        #{businessBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessBankAddr != null" >
+        #{businessBankAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="businessBankImg != null" >
+        #{businessBankImg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.worldwire.model.UserInfo" >
+    update user_info
+    <set >
+      <if test="loginId != null" >
+        login_id = #{loginId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="isForeign != null" >
+        is_foreign = #{isForeign,jdbcType=INTEGER},
+      </if>
+      <if test="showImg != null" >
+        show_img = #{showImg,jdbcType=VARCHAR},
+      </if>
+      <if test="brithday != null" >
+        brithday = #{brithday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null" >
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="briNationality != null" >
+        bri_nationality = #{briNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="nowNationality != null" >
+        now_nationality = #{nowNationality,jdbcType=VARCHAR},
+      </if>
+      <if test="localAddr != null" >
+        local_addr = #{localAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="occupation != null" >
+        occupation = #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="website != null" >
+        website = #{website,jdbcType=VARCHAR},
+      </if>
+      <if test="publicPlatform != null" >
+        public_platform = #{publicPlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatQrcode != null" >
+        wechat_qrcode = #{wechatQrcode,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null" >
+        wechat = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="facebook != null" >
+        facebook = #{facebook,jdbcType=VARCHAR},
+      </if>
+      <if test="whatsapp != null" >
+        whatsapp = #{whatsapp,jdbcType=VARCHAR},
+      </if>
+      <if test="linkedin != null" >
+        linkedin = #{linkedin,jdbcType=VARCHAR},
+      </if>
+      <if test="communication != null" >
+        communication = #{communication,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardOnImg != null" >
+        idcard_on_img = #{idcardOnImg,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardDownImg != null" >
+        idcard_down_img = #{idcardDownImg,jdbcType=VARCHAR},
+      </if>
+      <if test="idcardHandImg != null" >
+        idcard_hand_img = #{idcardHandImg,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null" >
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTime != null" >
+        company_time = #{companyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyNum != null" >
+        company_num = #{companyNum,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddr != null" >
+        company_addr = #{companyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTel != null" >
+        company_tel = #{companyTel,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMobile != null" >
+        company_mobile = #{companyMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPostCode != null" >
+        company_post_code = #{companyPostCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyFax != null" >
+        company_fax = #{companyFax,jdbcType=VARCHAR},
+      </if>
+      <if test="companyEmail != null" >
+        company_email = #{companyEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMainBusiness != null" >
+        company_main_business = #{companyMainBusiness,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMainContry != null" >
+        company_main_contry = #{companyMainContry,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicenseImg != null" >
+        business_license_img = #{businessLicenseImg,jdbcType=VARCHAR},
+      </if>
+      <if test="businessSpecialLicenseImg != null" >
+        business_special_license_img = #{businessSpecialLicenseImg,jdbcType=VARCHAR},
+      </if>
+      <if test="businessBank != null" >
+        business_bank = #{businessBank,jdbcType=VARCHAR},
+      </if>
+      <if test="businessBankName != null" >
+        business_bank_name = #{businessBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="businessBankAddr != null" >
+        business_bank_addr = #{businessBankAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="businessBankImg != null" >
+        business_bank_img = #{businessBankImg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.worldwire.model.UserInfo" >
+    update user_info
+    set login_id = #{loginId,jdbcType=BIGINT},
+      type = #{type,jdbcType=INTEGER},
+      is_foreign = #{isForeign,jdbcType=INTEGER},
+      show_img = #{showImg,jdbcType=VARCHAR},
+      brithday = #{brithday,jdbcType=TIMESTAMP},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      bri_nationality = #{briNationality,jdbcType=VARCHAR},
+      now_nationality = #{nowNationality,jdbcType=VARCHAR},
+      local_addr = #{localAddr,jdbcType=VARCHAR},
+      occupation = #{occupation,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      website = #{website,jdbcType=VARCHAR},
+      public_platform = #{publicPlatform,jdbcType=VARCHAR},
+      wechat_qrcode = #{wechatQrcode,jdbcType=VARCHAR},
+      wechat = #{wechat,jdbcType=VARCHAR},
+      facebook = #{facebook,jdbcType=VARCHAR},
+      whatsapp = #{whatsapp,jdbcType=VARCHAR},
+      linkedin = #{linkedin,jdbcType=VARCHAR},
+      communication = #{communication,jdbcType=VARCHAR},
+      idcard_on_img = #{idcardOnImg,jdbcType=VARCHAR},
+      idcard_down_img = #{idcardDownImg,jdbcType=VARCHAR},
+      idcard_hand_img = #{idcardHandImg,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      company_time = #{companyTime,jdbcType=TIMESTAMP},
+      company_num = #{companyNum,jdbcType=VARCHAR},
+      company_addr = #{companyAddr,jdbcType=VARCHAR},
+      company_tel = #{companyTel,jdbcType=VARCHAR},
+      company_mobile = #{companyMobile,jdbcType=VARCHAR},
+      company_post_code = #{companyPostCode,jdbcType=VARCHAR},
+      company_fax = #{companyFax,jdbcType=VARCHAR},
+      company_email = #{companyEmail,jdbcType=VARCHAR},
+      company_main_business = #{companyMainBusiness,jdbcType=VARCHAR},
+      company_main_contry = #{companyMainContry,jdbcType=VARCHAR},
+      business_license_img = #{businessLicenseImg,jdbcType=VARCHAR},
+      business_special_license_img = #{businessSpecialLicenseImg,jdbcType=VARCHAR},
+      business_bank = #{businessBank,jdbcType=VARCHAR},
+      business_bank_name = #{businessBankName,jdbcType=VARCHAR},
+      business_bank_addr = #{businessBankAddr,jdbcType=VARCHAR},
+      business_bank_img = #{businessBankImg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

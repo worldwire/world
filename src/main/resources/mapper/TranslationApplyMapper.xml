@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.worldwire.dao.TranslationApplyDao" >
+  <resultMap id="BaseResultMap" type="com.spring.worldwire.model.TranslationApply" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="req_id" property="reqId" jdbcType="BIGINT" />
+    <result column="orig_type" property="origType" jdbcType="INTEGER" />
+    <result column="from_req_id" property="fromReqId" jdbcType="BIGINT" />
+    <result column="from_type" property="fromType" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="operator_id" property="operatorId" jdbcType="BIGINT" />
+    <result column="operator_time" property="operatorTime" jdbcType="TIMESTAMP" />
+    <result column="auditor_id" property="auditorId" jdbcType="BIGINT" />
+    <result column="auditor_time" property="auditorTime" jdbcType="TIMESTAMP" />
+    <result column="auditor_msg" property="auditorMsg" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, req_id, orig_type, from_req_id, from_type, status, operator_id, operator_time, 
+    auditor_id, auditor_time, auditor_msg
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from translation_apply
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from translation_apply
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.spring.worldwire.model.TranslationApply" >
+    insert into translation_apply (id, req_id, orig_type, 
+      from_req_id, from_type, status, 
+      operator_id, operator_time, auditor_id, 
+      auditor_time, auditor_msg)
+    values (#{id,jdbcType=BIGINT}, #{reqId,jdbcType=BIGINT}, #{origType,jdbcType=INTEGER}, 
+      #{fromReqId,jdbcType=BIGINT}, #{fromType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{operatorId,jdbcType=BIGINT}, #{operatorTime,jdbcType=TIMESTAMP}, #{auditorId,jdbcType=BIGINT}, 
+      #{auditorTime,jdbcType=TIMESTAMP}, #{auditorMsg,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.spring.worldwire.model.TranslationApply" >
+    insert into translation_apply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="reqId != null" >
+        req_id,
+      </if>
+      <if test="origType != null" >
+        orig_type,
+      </if>
+      <if test="fromReqId != null" >
+        from_req_id,
+      </if>
+      <if test="fromType != null" >
+        from_type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="operatorId != null" >
+        operator_id,
+      </if>
+      <if test="operatorTime != null" >
+        operator_time,
+      </if>
+      <if test="auditorId != null" >
+        auditor_id,
+      </if>
+      <if test="auditorTime != null" >
+        auditor_time,
+      </if>
+      <if test="auditorMsg != null" >
+        auditor_msg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="reqId != null" >
+        #{reqId,jdbcType=BIGINT},
+      </if>
+      <if test="origType != null" >
+        #{origType,jdbcType=INTEGER},
+      </if>
+      <if test="fromReqId != null" >
+        #{fromReqId,jdbcType=BIGINT},
+      </if>
+      <if test="fromType != null" >
+        #{fromType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=BIGINT},
+      </if>
+      <if test="operatorTime != null" >
+        #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditorId != null" >
+        #{auditorId,jdbcType=BIGINT},
+      </if>
+      <if test="auditorTime != null" >
+        #{auditorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditorMsg != null" >
+        #{auditorMsg,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.spring.worldwire.model.TranslationApply" >
+    update translation_apply
+    <set >
+      <if test="reqId != null" >
+        req_id = #{reqId,jdbcType=BIGINT},
+      </if>
+      <if test="origType != null" >
+        orig_type = #{origType,jdbcType=INTEGER},
+      </if>
+      <if test="fromReqId != null" >
+        from_req_id = #{fromReqId,jdbcType=BIGINT},
+      </if>
+      <if test="fromType != null" >
+        from_type = #{fromType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null" >
+        operator_id = #{operatorId,jdbcType=BIGINT},
+      </if>
+      <if test="operatorTime != null" >
+        operator_time = #{operatorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditorId != null" >
+        auditor_id = #{auditorId,jdbcType=BIGINT},
+      </if>
+      <if test="auditorTime != null" >
+        auditor_time = #{auditorTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditorMsg != null" >
+        auditor_msg = #{auditorMsg,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.worldwire.model.TranslationApply" >
+    update translation_apply
+    set req_id = #{reqId,jdbcType=BIGINT},
+      orig_type = #{origType,jdbcType=INTEGER},
+      from_req_id = #{fromReqId,jdbcType=BIGINT},
+      from_type = #{fromType,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      operator_id = #{operatorId,jdbcType=BIGINT},
+      operator_time = #{operatorTime,jdbcType=TIMESTAMP},
+      auditor_id = #{auditorId,jdbcType=BIGINT},
+      auditor_time = #{auditorTime,jdbcType=TIMESTAMP},
+      auditor_msg = #{auditorMsg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
