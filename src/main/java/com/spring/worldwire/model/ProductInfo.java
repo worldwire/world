@@ -50,4 +50,11 @@ public class ProductInfo {
     public void setType(Integer type) {
         this.type = type;
     }
+
+	@Override
+	public String toString() {
+		return "ProductInfo [id=" + id + ", productName=" + productName + ", amount=" + amount + ", payType=" + payType
+				+ ", type=" + type + "]";
+	}
+    
 }

@@ -102,4 +102,13 @@ public class LoginInfo {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+
+	@Override
+	public String toString() {
+		return "LoginInfo [id=" + id + ", userName=" + userName + ", password=" + password + ", email=" + email
+				+ ", nickName=" + nickName + ", status=" + status + ", thirdKey=" + thirdKey + ", thirdType="
+				+ thirdType + ", createTime=" + createTime + ", updateTime=" + updateTime + "]";
+	}
+    
+    
 }

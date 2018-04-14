@@ -112,4 +112,13 @@ public class TranslationApply {
     public void setAuditorMsg(String auditorMsg) {
         this.auditorMsg = auditorMsg == null ? null : auditorMsg.trim();
     }
+
+	@Override
+	public String toString() {
+		return "TranslationApply [id=" + id + ", reqId=" + reqId + ", origType=" + origType + ", fromReqId=" + fromReqId
+				+ ", fromType=" + fromType + ", status=" + status + ", operatorId=" + operatorId + ", operatorTime="
+				+ operatorTime + ", auditorId=" + auditorId + ", auditorTime=" + auditorTime + ", auditorMsg="
+				+ auditorMsg + "]";
+	}
+    
 }

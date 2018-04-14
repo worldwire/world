@@ -1,5 +1,7 @@
 package com.spring.worldwire.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.spring.worldwire.model.LoginInfo;
 
 public interface LoginInfoDao {
@@ -15,5 +17,5 @@ public interface LoginInfoDao {
 
     int updateByPrimaryKey(LoginInfo record);
     
-    LoginInfo selectByEmail(String email);
+    LoginInfo selectByEmail(@Param("email")String email);
 }

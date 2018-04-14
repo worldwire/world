@@ -442,4 +442,25 @@ public class UserInfo {
     public void setBusinessBankImg(String businessBankImg) {
         this.businessBankImg = businessBankImg == null ? null : businessBankImg.trim();
     }
+
+	@Override
+	public String toString() {
+		return "UserInfo [id=" + id + ", loginId=" + loginId + ", type=" + type + ", isForeign=" + isForeign
+				+ ", showImg=" + showImg + ", brithday=" + brithday + ", nickName=" + nickName + ", language="
+				+ language + ", briNationality=" + briNationality + ", nowNationality=" + nowNationality
+				+ ", localAddr=" + localAddr + ", occupation=" + occupation + ", email=" + email + ", mobile=" + mobile
+				+ ", website=" + website + ", publicPlatform=" + publicPlatform + ", wechatQrcode=" + wechatQrcode
+				+ ", wechat=" + wechat + ", facebook=" + facebook + ", whatsapp=" + whatsapp + ", linkedin=" + linkedin
+				+ ", communication=" + communication + ", idcardOnImg=" + idcardOnImg + ", idcardDownImg="
+				+ idcardDownImg + ", idcardHandImg=" + idcardHandImg + ", realName=" + realName + ", idcard=" + idcard
+				+ ", companyName=" + companyName + ", companyTime=" + companyTime + ", companyNum=" + companyNum
+				+ ", companyAddr=" + companyAddr + ", companyTel=" + companyTel + ", companyMobile=" + companyMobile
+				+ ", companyPostCode=" + companyPostCode + ", companyFax=" + companyFax + ", companyEmail="
+				+ companyEmail + ", companyMainBusiness=" + companyMainBusiness + ", companyMainContry="
+				+ companyMainContry + ", businessLicenseImg=" + businessLicenseImg + ", businessSpecialLicenseImg="
+				+ businessSpecialLicenseImg + ", businessBank=" + businessBank + ", businessBankName="
+				+ businessBankName + ", businessBankAddr=" + businessBankAddr + ", businessBankImg=" + businessBankImg
+				+ "]";
+	}
+    
 }

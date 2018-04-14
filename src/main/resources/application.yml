@@ -18,7 +18,7 @@ spring:
   profile: online
   datasource:
     name: worldwire
-    url: jdbc:mysql://47.104.201.53:3306/worldwire
+    url: jdbc:mysql://47.104.201.53:3306/worldwire?useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
     # 使用druid数据源
@@ -38,15 +38,15 @@ spring:
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
 mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.spring.worldwire.model
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: com.spring.worldwire.model
   
 ---
 spring:
   profile: test
   datasource:
     name: worldwire
-    url: jdbc:mysql://127.0.0.1:3306/worldwire
+    url: jdbc:mysql://127.0.0.1:3306/worldwire?useUnicode=true&characterEncoding=utf8
     username: root
     password: root
     # 使用druid数据源
@@ -66,5 +66,5 @@ spring:
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
 mybatis:
-  mapper-locations: classpath:mapping/*.xml
-  type-aliases-package: com.spring.worldwire.model
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: com.spring.worldwire.model

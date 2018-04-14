@@ -130,4 +130,13 @@ public class ProductRequest {
     public void setUserType(Integer userType) {
         this.userType = userType;
     }
+
+	@Override
+	public String toString() {
+		return "ProductRequest [id=" + id + ", requestType=" + requestType + ", keyWord=" + keyWord + ", titile="
+				+ titile + ", content=" + content + ", mobile=" + mobile + ", email=" + email + ", phone=" + phone
+				+ ", website=" + website + ", languageType=" + languageType + ", languageId=" + languageId + ", status="
+				+ status + ", userType=" + userType + "]";
+	}
+    
 }
