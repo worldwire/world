@@ -14,4 +14,6 @@ public interface LoginInfoDao {
     int updateByPrimaryKeySelective(LoginInfo record);
 
     int updateByPrimaryKey(LoginInfo record);
+    
+    LoginInfo selectByEmail(String email);
 }

@@ -150,4 +150,14 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <!-- ************************************************  -->
+  <!-- 根据邮箱查询注册用户是否存在 -->
+  <select id="selectByEmail">
+  	select <include refid="Base_Column_List"/>
+  	from login_info 
+  	where email = #{email,jdbcType=VARCHAR}
+  </select>
+  
+  
+  
 </mapper>

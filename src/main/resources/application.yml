@@ -1,6 +1,5 @@
 server:
   port: 8090
-
 spring:
   thymeleaf:
     mode: HTML5
