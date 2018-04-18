@@ -1,25 +1,23 @@
 server:
   port: 8090
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.spring.worldwire.model
+---
 spring:
-  thymeleaf:
-    mode: HTML5
-  redis:
-    database: 0
-    host: 47.104.201.53
-    port: 6379
-    password:
-    max-active: 8
-    max-wait: -1
-    max-idle: 8
-    min-idle: 0
-    timeout: 0
-
-spring:
+  profiles: online
   datasource:
+    name: worldwire
     url: jdbc:mysql://47.104.201.53:3306/worldwire
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
-mybatis:
-  mapperLocations: classpath:mapper/*.xml
-  typeAliasesPackage: com.spring.worldwire.model
+---
+spring:
+  profiles: test
+  datasource:
+    name: worldwire
+    url: jdbc:mysql://127.0.0.1:3306/worldwire
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver

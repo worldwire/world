@@ -17,8 +17,6 @@ public class LoginInfoServiceImpl implements LoginInfoService {
 	
 	@Override
 	public int register(String userName, String password, String email) {
-		Long l = 1L;
-		System.out.println(loginInfoDao.selectByPrimaryKey(l));
 		LoginInfo info = loginInfoDao.selectByEmail(email);
 		if(info != null){
 			return -2;//代表邮箱已经被注册
