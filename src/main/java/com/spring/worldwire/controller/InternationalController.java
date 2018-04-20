@@ -20,9 +20,9 @@ public class InternationalController {
 	
 	/**
 	 * 国际化语言切换
-	 * @param request
-	 * @param response
-	 * @param lang
+	 * @param request 请求体
+	 * @param response 响应体
+	 * @param lang 语言
 	 * @return
 	 */
 	@RequestMapping("/lan")
