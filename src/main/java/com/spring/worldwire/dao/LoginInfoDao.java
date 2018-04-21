@@ -1,8 +1,11 @@
 package com.spring.worldwire.dao;
 
+import com.spring.worldwire.query.LoginInfoQuery;
 import org.apache.ibatis.annotations.Param;
 
 import com.spring.worldwire.model.LoginInfo;
+
+import java.util.List;
 
 public interface LoginInfoDao {
     int deleteByPrimaryKey(Long id);
@@ -17,5 +20,7 @@ public interface LoginInfoDao {
 
     int updateByPrimaryKey(LoginInfo record);
     
-    LoginInfo selectByEmail(@Param("email")String email);
+    List<LoginInfo> selectByQuery(@Param("query")LoginInfoQuery loginInfoQuery);
+
+
 }

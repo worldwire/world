@@ -151,13 +151,33 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <!-- ************************************************  -->
-  <!-- 根据邮箱查询注册用户是否存在 -->
-  <select id="selectByEmail" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <!-- 根据条件查询登录用户信息 -->
+  <select id="selectByQuery" resultMap="BaseResultMap" parameterType="com.spring.worldwire.query.LoginInfoQuery" >
   	select <include refid="Base_Column_List" />
-  	from login_info 
-  	where email = #{email,jdbcType=VARCHAR}
+  	from login_info
+    <include refid="Query_Where"/>
   </select>
-  
-  
-  
+
+  <!-- 条件查询语句 -->
+  <sql id="Query_Where">
+    <trim prefix="where" suffixOverrides="and">
+      <if test="query.email != null">
+        email = #{query.email,jdbcType=VARCHAR} and
+      </if>
+      <if test="query.password != null">
+        password = #{query.password,jdbcType=VARCHAR} and
+      </if>
+      <if test="query.pageSize != null  and query.pageStart != null">
+        limit #{query.pageStart,jdbcType=INTEGER},#{query.pageSize,jdbcType=INTEGER}
+      </if>
+    </trim>
+
+  </sql>
+
+  <sql id="query" >
+
+
+  </sql>
+
+
 </mapper>
