@@ -22,10 +22,15 @@ public class MailUtils {
 
     static {
         //初始化邮箱信息
-        session = Session.getDefaultInstance(buildDefaultproperties(MailContant.MAIL_SENDT_ACCOUNT));
+        session = Session.getDefaultInstance(buildDefaultproperties(MailContant.MAIL_SENDT_ACCOUNT),new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(MailContant.MAIL_SENDT_ACCOUNT, MailContant.MAIL_SEND_PASSWORD);
+            }
+        });
     }
 
     public static void sendSimpleMail(String receiverEmail) {
+
         sendMail(receiverEmail,MailContant.MAIL_SEND_TITLE,"哈哈哈哈",null);
     }
 
@@ -61,10 +66,8 @@ public class MailUtils {
      */
     public static MimeMessage createMailMessage(Session session, String receiveMail, String title, String content) throws MessagingException, UnsupportedEncodingException {
         MimeMessage msg = new MimeMessage(session);
-        //设置发件人
-        msg.setFrom(new InternetAddress(MimeUtility.encodeText("发送人：") + "<" + MailContant.MAIL_SENDT_ACCOUNT + ">"));
-        InternetAddress[] address = new InternetAddress[]{new InternetAddress(MimeUtility.encodeText("收件人：") + "<" + receiveMail + ">")};
-        msg.addRecipients(Message.RecipientType.TO, address);  //设置收件人
+        msg.setFrom(new InternetAddress(MailContant.MAIL_SENDT_ACCOUNT ));        //设置发件人
+        msg.addRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress(receiveMail)});  //设置收件人
         msg.setSubject(title); //设置邮件标题
         msg.setContent(content, "text/html;charset=UTF-8");
         msg.setSentDate(new Date()); //  设置发件时间
@@ -81,11 +84,10 @@ public class MailUtils {
         Properties props = System.getProperties();
         // 创建信件服务器
         //code1234
-        props.put("mail.smtp.host", getHostByMail(senderEmail));//主机host，跟邮件发送者必须一致
-        props.put("mail.smtp.auth", "true"); // 通过验证
-        props.put("mail.smtp.port", "465");//加密服务端口465
-        props.put("mail.transport.protocol", "smtp");//方式为smtp
-        props.put("mail.smtp.ssl.enable", "true");//加密
+        props.setProperty("mail.transport.protocol", "stmp");   // 使用的协议（JavaMail规范要求）
+        props.setProperty("mail.smtp.host", MailContant.MAIL_SMTP_HOST);   // 发件人的邮箱的 SMTP 服务器地址
+        props.setProperty("mail.smtp.auth", "true");
+
         return props;
     }
 
@@ -116,16 +118,6 @@ public class MailUtils {
         });
         return mp;
     }
-
-    /**
-     * 根据邮箱获取主机host
-     * @param mail
-     * @return  主机host
-     */
-    public static String getHostByMail(String mail){
-        return mail.substring(mail.indexOf("@"));
-    }
-
     public static void main(String[] args) {
         sendSimpleMail("luxun@jd.com");
     }
