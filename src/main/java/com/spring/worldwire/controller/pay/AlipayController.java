@@ -6,11 +6,13 @@ import com.spring.worldwire.utils.pay.alipay.TradeStatusEnum;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @SuppressWarnings("unused")
 @RequestMapping("/alipay/result")
+@Controller
 public class AlipayController extends BaseResultController {
 
   private static Logger logger = LoggerFactory.getLogger(AlipayController.class);
@@ -39,6 +41,11 @@ public class AlipayController extends BaseResultController {
     }
 
 
+  }
+
+  @RequestMapping("/webNotify")
+  public String webNotify(){
+    return "index";
   }
 
 }

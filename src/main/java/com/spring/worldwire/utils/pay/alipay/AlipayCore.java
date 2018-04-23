@@ -6,6 +6,7 @@ import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.spring.worldwire.config.AlipayConfig;
+import com.spring.worldwire.config.BaseConfig;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +26,8 @@ public class AlipayCore {
 
     //设置请求参数
     AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
-    alipayRequest.setReturnUrl(AlipayConfig.return_url);
-    alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
+    alipayRequest.setReturnUrl(BaseConfig.DOMAIN+AlipayConfig.return_url);
+    alipayRequest.setNotifyUrl(BaseConfig.DOMAIN+AlipayConfig.notify_url);
 
     //商户订单号，商户网站订单系统中唯一订单号，必填
     String out_trade_no = alipayBean.getOut_trade_no();
@@ -76,23 +77,28 @@ public class AlipayCore {
         valueStr = (i == values.length - 1) ? valueStr + values[i]
             : valueStr + values[i] + ",";
       }
-     /* //乱码解决，这段代码在出现乱码时使用
-      try {
+      //乱码解决，这段代码在出现乱码时使用
+/*      try {
         valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
       } catch (UnsupportedEncodingException e) {
-        e.printStackTrace();
+        logger.error("[支付宝回调] 数据存解析异常",e);
       }*/
+      logger.info("支付回调   name="+name +"   valueStr = "+valueStr);
       params.put(name, valueStr);
     }
-    boolean checkSign = checkSign(params);
-    if(checkSign){
-      AlipayNotifyVO alipayNotifyVO = new AlipayNotifyVO();
-      alipayNotifyVO.setOut_trade_no(params.get("out_trade_no"));
-      alipayNotifyVO.setTrade_no(params.get("trade_no"));
-      alipayNotifyVO.setTrade_status(TradeStatusEnum.getTradeStausByName(params.get("trade_status")));
-      return alipayNotifyVO;
+    if(params.size()>0){
+      boolean checkSign = checkSign(params);
+      if(checkSign){
+        AlipayNotifyVO alipayNotifyVO = new AlipayNotifyVO();
+        alipayNotifyVO.setOut_trade_no(params.get("out_trade_no"));
+        alipayNotifyVO.setTrade_no(params.get("trade_no"));
+        alipayNotifyVO.setTrade_status(TradeStatusEnum.getTradeStausByName(params.get("trade_status")));
+        return alipayNotifyVO;
+      }
+      logger.info("[支付宝回调] 数据校验失败 order_id="+params.get("out_trade_no"));
+    }else{
+      logger.info("[支付宝回调] 参数为空");
     }
-    logger.info("[支付宝回调] 数据校验失败 order_id="+params.get("out_trade_no"));
     return null;
   }
 
