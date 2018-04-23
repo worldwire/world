@@ -160,12 +160,12 @@
 
   <!-- 条件查询语句 -->
   <sql id="Query_Where">
-    <trim prefix="where" suffixOverrides="and">
+    <trim prefix="where" prefixOverrides="AND |OR ">
       <if test="query.email != null">
-        email = #{query.email,jdbcType=VARCHAR} and
+        email = #{query.email,jdbcType=VARCHAR}
       </if>
       <if test="query.password != null">
-        password = #{query.password,jdbcType=VARCHAR} and
+        and password = #{query.password,jdbcType=VARCHAR}
       </if>
       <if test="query.pageSize != null  and query.pageStart != null">
         limit #{query.pageStart,jdbcType=INTEGER},#{query.pageSize,jdbcType=INTEGER}
@@ -173,11 +173,5 @@
     </trim>
 
   </sql>
-
-  <sql id="query" >
-
-
-  </sql>
-
 
 </mapper>

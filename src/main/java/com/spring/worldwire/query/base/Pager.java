@@ -8,11 +8,13 @@ public class Pager {
 
     private Integer pageNo;
 
+    private int pageStart;
+
     public Pager(Integer pageSize) {
         this.pageSize = 10;
     }
 
-    //    private int pageStart;
+
 
     public Integer getPageSize() {
         return pageSize;
@@ -31,7 +33,7 @@ public class Pager {
     }
 
     public Integer getPageStart() {
-        return (pageSize - 1)*pageNo;
+        return pageNo == null ? null : (pageSize - 1) * pageNo;
     }
 
 }
