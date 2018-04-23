@@ -6,7 +6,7 @@ mybatis:
 spring:
   thymeleaf:
     cache: false
-    mode: LEGACYHTML5
+#thymeleaf end
   redis:
     database: 0
     host: 47.104.201.53
