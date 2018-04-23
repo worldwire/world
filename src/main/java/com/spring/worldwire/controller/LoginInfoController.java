@@ -1,23 +1,18 @@
-<<<<<<< HEAD
 package com.spring.worldwire.controller;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import com.spring.worldwire.model.LoginInfo;
 import com.spring.worldwire.query.LoginInfoQuery;
+import com.spring.worldwire.service.LoginInfoService;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.spring.worldwire.service.LoginInfoService;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/login")

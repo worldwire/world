@@ -1,76 +1,125 @@
 package com.spring.worldwire.utils.pay.alipay;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.internal.util.AlipaySignature;
+import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.spring.worldwire.config.AlipayConfig;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- *类名：AlipayFunction
- *功能：支付宝接口公用函数类
- *详细：该类是请求、通知返回两个文件所调用的公用函数核心处理文件，不需要修改
- *版本：3.3
- *日期：2012-08-14
- *说明：
- *以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
- *该代码仅供学习和研究支付宝接口使用，只是提供一个参考。
- */
-
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings("unused")
 public class AlipayCore {
 
-    /** 
-     * 除去数组中的空值和签名参数
-     * @param sArray 签名参数组
-     * @return 去掉空值与签名参数后的新签名参数组
-     */
-    public static Map<String, String> paraFilter(Map<String, String> sArray) {
+  private static Logger logger = LoggerFactory.getLogger(AlipayCore.class);
 
-        Map<String, String> result = new HashMap<String, String>();
+  public String pagePay(AlipayBean alipayBean){
+    AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.GET_WAY_URL,AlipayConfig.ALIPAY_PARTNER,
+        AlipayConfig.ALIPAY_PRIVATEKEY,"json",AlipayConfig.ALIPAY_INPUT_CHARSET,
+        AlipayConfig.ALIPAY_PUBLIC_KEY,AlipayConfig.ALIPAY_SIGN_TYPE);
 
-        if (sArray == null || sArray.size() <= 0) {
-            return result;
-        }
+    //设置请求参数
+    AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
+    alipayRequest.setReturnUrl(AlipayConfig.return_url);
+    alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
 
-        for (String key : sArray.keySet()) {
-            String value = sArray.get(key);
-            if (value == null || value.equals("") || key.equalsIgnoreCase("sign")
-                || key.equalsIgnoreCase("sign_type")) {
-                continue;
-            }
-            result.put(key, value);
-        }
+    //商户订单号，商户网站订单系统中唯一订单号，必填
+    String out_trade_no = alipayBean.getOut_trade_no();
+    //付款金额，必填
+    String total_amount =  alipayBean.getTotal_amount();
+    //订单名称，必填
+    String subject =  alipayBean.getSubject();
+    //商品描述，可空
+    String body =  alipayBean.getBody();
 
-        return result;
+    if(payCheck(alipayBean)){
+      String content = "{\"out_trade_no\":\""+ out_trade_no +"\","
+          + "\"total_amount\":\""+ total_amount +"\","
+          + "\"subject\":\""+ subject +"\","
+          + "\"body\":\""+ body +"\","
+          + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}";
+      alipayRequest.setBizContent(content);
+
+      logger.info("[支付宝支付]  content = "+ content);
+
+      try {
+        return alipayClient.pageExecute(alipayRequest).getBody();
+      } catch (AlipayApiException e) {
+        e.printStackTrace();
+      }
     }
+    return null;
 
-    /** 
-     * 把数组所有元素排序，并按照“参数=参数值”的模式用“&”字符拼接成字符串
-     * @param params 需要排序并参与字符拼接的参数组
-     * @return 拼接后字符串
-     */
-    public static String createLinkString(Map<String, String> params) {
+  }
 
-        List<String> keys = new ArrayList<String>(params.keySet());
-        Collections.sort(keys);
 
-        StringBuilder prestr = new StringBuilder();
 
-        for (int i = 0; i < keys.size(); i++) {
-            String key = keys.get(i);
-            String value = params.get(key);
 
-            if (i == keys.size() - 1) {//拼接时，不包括最后一个&字符
-                prestr.append(key).append("=").append(value);
-            } else {
-                prestr.append(key).append("=").append(value).append("&");
-            }
-        }
-
-        return prestr.toString();
+  /**
+   * 返回回调
+   * @param request 回调请求
+   * @return 返回AlipayNotifyVO结果 如果校验失败返回空
+   */
+  public AlipayNotifyVO getNotifyParams(HttpServletRequest request){
+    //获取支付宝POST过来反馈信息
+    Map<String,String> params = new HashMap<>();
+    Map<String,String[]> requestParams = request.getParameterMap();
+    for (String name : requestParams.keySet()) {
+      String[] values = requestParams.get(name);
+      String valueStr = "";
+      for (int i = 0; i < values.length; i++) {
+        valueStr = (i == values.length - 1) ? valueStr + values[i]
+            : valueStr + values[i] + ",";
+      }
+     /* //乱码解决，这段代码在出现乱码时使用
+      try {
+        valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+      } catch (UnsupportedEncodingException e) {
+        e.printStackTrace();
+      }*/
+      params.put(name, valueStr);
     }
+    boolean checkSign = checkSign(params);
+    if(checkSign){
+      AlipayNotifyVO alipayNotifyVO = new AlipayNotifyVO();
+      alipayNotifyVO.setOut_trade_no(params.get("out_trade_no"));
+      alipayNotifyVO.setTrade_no(params.get("trade_no"));
+      alipayNotifyVO.setTrade_status(TradeStatusEnum.getTradeStausByName(params.get("trade_status")));
+      return alipayNotifyVO;
+    }
+    logger.info("[支付宝回调] 数据校验失败 order_id="+params.get("out_trade_no"));
+    return null;
+  }
 
+  /**
+   * 支付参数校验
+   * @param alipayBean 需要支付的参数
+   * @return 返回加盐结果
+   */
+  private boolean payCheck(AlipayBean alipayBean){
+    return(StringUtils.isBlank(alipayBean.getOut_trade_no())
+        ||StringUtils.isBlank(alipayBean.getTotal_amount())
+        ||StringUtils.isBlank(alipayBean.getSubject()));
+  }
 
+  /**
+   * 签名验证
+   * @param params 请求参数
+   * @return 返回结果集
+   */
+  private boolean checkSign(Map<String,String> params){
+    try {
+      return AlipaySignature
+          .rsaCheckV1(params, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.ALIPAY_INPUT_CHARSET, AlipayConfig.ALIPAY_SIGN_TYPE); //调用SDK验证签名
+    } catch (Exception e) {
+      logger.error("[支付宝回调] 数据校验异常 order_id="+params.get("out_trade_no"),e);
+    }
+    return false;
+  }
 
 }

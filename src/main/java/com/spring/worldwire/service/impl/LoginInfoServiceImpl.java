@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package com.spring.worldwire.service.impl;
 
 import java.util.Date;

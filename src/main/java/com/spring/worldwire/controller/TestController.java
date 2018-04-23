@@ -1,10 +1,10 @@
-<<<<<<< HEAD
 package com.spring.worldwire.controller;
 
-import java.util.Locale;
-
-
+import com.spring.worldwire.service.TestService;
 import com.spring.worldwire.utils.RedisUtils;
+import com.spring.worldwire.utils.pay.alipay.AlipayBean;
+import com.spring.worldwire.utils.pay.alipay.AlipayCore;
+import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.spring.worldwire.service.TestService;
-
+@SuppressWarnings("unused")
 @Controller
 @RequestMapping("/test")
 public class TestController {
@@ -28,9 +27,9 @@ public class TestController {
 	private TestService testService;
 	@Autowired
 	private RedisUtils redisUtils;
-	
+
 	private static Logger logger = LoggerFactory.getLogger(TestController.class);
-	
+
 	@RequestMapping("/greet")
 	@ResponseBody
 	public String greeting(String name, ModelAndView model){
@@ -43,6 +42,7 @@ public class TestController {
 		Locale locale = LocaleContextHolder.getLocale();
 		model.addAttribute("greet", testService.greeting(name));
 		model.addAttribute("hello",  messageSource.getMessage("hello", null, locale));
+		logger.info("======================");
 		return "index";
 	}
 	@RequestMapping("/redis")
@@ -55,30 +55,20 @@ public class TestController {
 		System.out.println(redisUtils.getValueByKey("hello"));
 		return "haha";
 	}
-	
+
 	@RequestMapping("/pay")
 	@ResponseBody
 	public String payTest(){
-		/**
-		 * 支付宝支付
-		 */
-        /*Map<String, String> sParaTemp = new HashMap<String, String>();
-        sParaTemp.put("service", "create_direct_pay_by_user");
-        sParaTemp.put("partner", AlipayConfig.ALIPAY_PARTNER);
-        sParaTemp.put("seller_id", AlipayConfig.ALIPAY_PARTNER);
-        sParaTemp.put("_input_charset", AlipayConfig.ALIPAY_INPUT_CHARSET);
-        sParaTemp.put("payment_type", "1");
-        sParaTemp.put("notify_url", "www.baidu.com");
-        sParaTemp.put("out_trade_no", "123"+String.valueOf(System.currentTimeMillis() / 1000));
-        sParaTemp.put("subject", "test");
-        sParaTemp.put("total_fee","1.00");
-        String buildRequest = AlipaySubmit.buildRequest(sParaTemp, "get", "确认");
-        return buildRequest;*/
+			AlipayBean alipayBean = new AlipayBean();
+			alipayBean.setBody("test");
+			alipayBean.setOut_trade_no("123"+System.currentTimeMillis()/1000);
+			alipayBean.setTotal_amount("0.01");
+		AlipayCore alipayCore = new AlipayCore();
+        return alipayCore.pagePay(alipayBean);
 
 
-		return null;
+		//return null;
 
 	}
-	
 
 }
