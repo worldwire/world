@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.worldwire.service.TestService;
 
+@SuppressWarnings("unused")
 @Service
 public class TestServiceImpl implements TestService{
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.spring.worldwire.controller;
 
 import java.util.Locale;
@@ -53,6 +54,30 @@ public class TestController {
 		redisUtils.deleteKey("hello");
 		System.out.println(redisUtils.getValueByKey("hello"));
 		return "haha";
+	}
+	
+	@RequestMapping("/pay")
+	@ResponseBody
+	public String payTest(){
+		/**
+		 * 支付宝支付
+		 */
+        /*Map<String, String> sParaTemp = new HashMap<String, String>();
+        sParaTemp.put("service", "create_direct_pay_by_user");
+        sParaTemp.put("partner", AlipayConfig.ALIPAY_PARTNER);
+        sParaTemp.put("seller_id", AlipayConfig.ALIPAY_PARTNER);
+        sParaTemp.put("_input_charset", AlipayConfig.ALIPAY_INPUT_CHARSET);
+        sParaTemp.put("payment_type", "1");
+        sParaTemp.put("notify_url", "www.baidu.com");
+        sParaTemp.put("out_trade_no", "123"+String.valueOf(System.currentTimeMillis() / 1000));
+        sParaTemp.put("subject", "test");
+        sParaTemp.put("total_fee","1.00");
+        String buildRequest = AlipaySubmit.buildRequest(sParaTemp, "get", "确认");
+        return buildRequest;*/
+
+
+		return null;
+
 	}
 	
 
