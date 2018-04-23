@@ -14,9 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
-@SuppressWarnings("unused")
 @Controller
 @RequestMapping("/test")
 public class TestController {
@@ -32,7 +30,7 @@ public class TestController {
 
 	@RequestMapping("/greet")
 	@ResponseBody
-	public String greeting(String name, ModelAndView model){
+	public String greeting(String name){
 		return testService.greeting(name);
 	}
 	

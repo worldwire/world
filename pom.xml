@@ -38,7 +38,6 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>javax.mail-api</artifactId>
@@ -60,73 +59,46 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.3</version>
 		</dependency>
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>3.1</version>
-    </dependency>
-    <dependency>
-      <groupId>com.alipay.pay</groupId>
-      <artifactId>alipay</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-
-
-
+		<dependency>
+		  <groupId>org.apache.commons</groupId>
+		  <artifactId>commons-lang3</artifactId>
+		  <version>3.1</version>
+		</dependency>
 		<!-- log -->
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
 			<version>1.6.1</version>
 		</dependency>
-    </dependencies>
+		<dependency>
+			<groupId>com.alipay.pay</groupId>
+			<artifactId>alipay</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<id>worldwire</id>
+			<name>WorldWire Repositories</name>
+			<url>http://47.104.201.53:8081/nexus/content/repositories/releases/</url>
+		</repository>
+	</repositories>
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+				  <source>${java.compile.version}</source>
+				  <target>${java.compile.version}</target>
+				</configuration>
 			</plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-install-plugin</artifactId>
-        <version>2.5</version>
-        <executions>
-          <execution>
-            <phase>initialize</phase>
-            <goals>
-              <goal>install-file</goal>
-            </goals>
-            <configuration>
-              <groupId>com.alipay.pay</groupId>
-              <artifactId>alipay</artifactId>
-              <version>1.0.0</version>
-              <packaging>jar</packaging>
-              <file>${basedir}/src/main/lib/alipay-sdk-java.jar</file>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
-        <configuration>
-          <source>${java.compile.version}</source>
-          <target>${java.compile.version}</target>
-        </configuration>
-      </plugin>
 		</plugins>
-		<resources>   
-            <resource>  
-                <directory>src/main/resources</directory>  
-                <includes>  
-                    <include>**/*.properties</include>  
-                    <include>**/*.xml</include>
-					<include>**/*.yml</include>
-				</includes>
-                <filtering>false</filtering>  
-            </resource>  
-        </resources> 
 	</build>
 </project>

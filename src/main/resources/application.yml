@@ -5,7 +5,8 @@ mybatis:
   type-aliases-package: com.spring.worldwire.model
 spring:
   thymeleaf:
-    mode: HTML5
+    cache: false
+#thymeleaf end
   redis:
     database: 0
     host: 47.104.201.53

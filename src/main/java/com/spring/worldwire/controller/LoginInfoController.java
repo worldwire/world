@@ -57,8 +57,8 @@ public class LoginInfoController {
 				map.put("status", -2);
 				return map;
 			}
-			Cookie cookie = new Cookie("loginKey",list.get(0).getUserName());
-			response.addCookie(cookie);
+//			Cookie cookie = new Cookie("loginKey",list.get(0).getUserName());
+//			response.addCookie(cookie);
 
 			map.put("data", list.get(0));
 			map.put("msg", "success");
