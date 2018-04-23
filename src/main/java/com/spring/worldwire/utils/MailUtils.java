@@ -31,6 +31,8 @@ public class MailUtils {
 
     public static void sendSimpleMail(String receiverEmail) {
 
+
+
         sendMail(receiverEmail,MailContant.MAIL_SEND_TITLE,"哈哈哈哈",null);
     }
 

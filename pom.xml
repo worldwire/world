@@ -60,26 +60,35 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.3</version>
 		</dependency>
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-lang3</artifactId>
-      <version>3.1</version>
-    </dependency>
-    <dependency>
-      <groupId>com.alipay.pay</groupId>
-      <artifactId>alipay</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-
-
-
+		<dependency>
+		  <groupId>org.apache.commons</groupId>
+		  <artifactId>commons-lang3</artifactId>
+		  <version>3.1</version>
+		</dependency>
 		<!-- log -->
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
 			<version>1.6.1</version>
 		</dependency>
-    </dependencies>
+		<dependency>
+			<groupId>com.alipay.pay</groupId>
+			<artifactId>alipay</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<id>worldwire</id>
+			<name>WorldWire Repositories</name>
+			<url>http://47.104.201.53:8081/nexus/content/repositories/releases/</url>
+		</repository>
+	</repositories>
+
 
 	<build>
 		<plugins>
@@ -97,13 +106,6 @@
             <goals>
               <goal>install-file</goal>
             </goals>
-            <configuration>
-              <groupId>com.alipay.pay</groupId>
-              <artifactId>alipay</artifactId>
-              <version>1.0.0</version>
-              <packaging>jar</packaging>
-              <file>${basedir}/src/main/lib/alipay-sdk-java.jar</file>
-            </configuration>
           </execution>
         </executions>
       </plugin>
