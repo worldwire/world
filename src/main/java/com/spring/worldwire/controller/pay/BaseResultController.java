@@ -10,4 +10,10 @@ public class BaseResultController {
   }
 
 
+  String notifyOrder(){
+
+
+    return "index";
+  }
+
 }

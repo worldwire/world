@@ -45,7 +45,7 @@ public class AlipayController extends BaseResultController {
 
   @RequestMapping("/webNotify")
   public String webNotify(){
-    return "index";
+    return super.notifyOrder();
   }
 
 }
