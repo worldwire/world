@@ -76,7 +76,13 @@
 			<artifactId>alipay</artifactId>
 			<version>1.0.0</version>
 		</dependency>
-	</dependencies>
+    <dependency>
+      <groupId>com.paypal.sdk</groupId>
+      <artifactId>rest-api-sdk</artifactId>
+      <version>1.4.2</version>
+    </dependency>
+
+  </dependencies>
 
 	<repositories>
 		<repository>

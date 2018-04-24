@@ -16,4 +16,13 @@ public class BaseResultController {
     return "index";
   }
 
+  String cancel(){
+    return "cancel";
+  }
+
+
+  String saveThirdPay(){
+    return "";
+  }
+
 }

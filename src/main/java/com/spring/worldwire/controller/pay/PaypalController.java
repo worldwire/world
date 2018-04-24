@@ -1,5 +1,11 @@
 package com.spring.worldwire.controller.pay;
 
+import com.paypal.api.payments.Links;
+import com.paypal.api.payments.Payment;
+import com.paypal.base.rest.PayPalRESTException;
+import com.spring.worldwire.utils.pay.paypal.PayPalPaymentIntentEnum;
+import com.spring.worldwire.utils.pay.paypal.PaypalCore;
+import com.spring.worldwire.utils.pay.paypal.PaypalPaymentMethodEnum;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -38,12 +44,56 @@ public class PaypalController extends BaseResultController {
       logger.info("[paypal回调]  参数 name="+name +"   valueStr = "+valueStr);
       params.put(name, valueStr);
     }
-      return "fail";
+
+    try {
+      Payment payment = PaypalCore.executePayment(params.get("paymentId"), params.get("PayerID"));
+      logger.info("[paypal回调] payment"+payment.toJSON());
+      if(payment.getState().equals("approved")){
+        return "success";
+      }
+    } catch (PayPalRESTException e) {
+      logger.error(e.getMessage());
+    }
+
+    return "fail";
   }
 
-  @RequestMapping("/webNotify")
+  @RequestMapping("/cancel")
   public String webNotify(){
-    return super.notifyOrder();
+    return super.cancel();
+  }
+
+
+  /**
+   * 支付账户
+   * pengstraw-buyer@163.com
+   * pws 11111111
+   * @return
+   */
+  @RequestMapping("/paytest")
+  @ResponseBody
+  public String testPay(){
+    try{
+      Payment payment = PaypalCore.createPayment(
+          1.00,
+          "USD",
+          PaypalPaymentMethodEnum.paypal,
+          PayPalPaymentIntentEnum.sale,
+          "payment description");
+      String paymentId = payment.getId();
+
+      logger.info("[paypal调用成功] payment"+payment.toJSON());
+      for(Links links : payment.getLinks()){
+        if(links.getRel().equals("approval_url")){
+          return "redirect:" + links.getHref();
+        }
+      }
+
+    }catch (Exception e){
+
+    }
+
+    return "ok";
   }
 
 }
