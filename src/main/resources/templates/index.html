@@ -14,5 +14,11 @@
 
  <h3 th:text="#{hello}"></h3>
 
+ <form method="post" enctype="multipart/form-data" action="/file/upload">
+     <input type="text" name="type" id="type"/>
+     <input type="file" name="file" id="file"/>
+     <input type="submit" value="提交"/>
+ </form>
+
 </body>
 </html>

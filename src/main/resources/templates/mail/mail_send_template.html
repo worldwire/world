@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>test page</title>
@@ -11,10 +11,9 @@
 
 亲爱的用户：
     您好，
-    您于 #{date} 发起找回密码，
-    请点击http://www.baidu.com 找回密码，该邮件20分钟内有效，请及时验证
-
-<h3 th:text="#{hello}"></h3>
+    您于 date 发起找回密码，
+    请点击 url 找回密码，该邮件20分钟内有效，请及时验证
+    该信息10分钟之内有效，请尽快修改
 
 </body>
 </html>

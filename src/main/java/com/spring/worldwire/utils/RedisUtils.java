@@ -13,12 +13,23 @@ public class RedisUtils {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    /**
+     * 设置有失效时间的缓存
+     * @param key 缓存key
+     * @param value 缓存value
+     * @param time 缓存的失效时间，单位是毫秒
+     */
     public void set(String key, Object value, long time) {
 
         redisTemplate.opsForValue().set(key,value,time);
 
     }
 
+    /**
+     * 设置没有失效时间的缓存
+     * @param key   缓存key
+     * @param value 缓存value
+     */
     public void set(String key, Object value) {
 
         redisTemplate.opsForValue().set(key,value);

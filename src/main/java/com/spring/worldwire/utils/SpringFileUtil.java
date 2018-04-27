@@ -20,12 +20,12 @@ public class SpringFileUtil {
         BufferedReader br = new BufferedReader(new FileReader(file));
         String temp = "";
         while((temp = br.readLine()) != null){
-            sb.append(temp);
+            sb.append(temp).append("\n");
         }
         return sb.toString();
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println(SpringFileUtil.getFileStrFromResource("templates/mail_template.html"));
+        System.out.println(SpringFileUtil.getFileStrFromResource("templates/mail/mail_send_template.html"));
     }
 }

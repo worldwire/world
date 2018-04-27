@@ -1,6 +1,6 @@
 package com.spring.worldwire.utils;
 
-import com.spring.worldwire.constants.MailContant;
+import com.spring.worldwire.constants.Constants;
 import org.springframework.util.CollectionUtils;
 
 import javax.activation.DataHandler;
@@ -8,7 +8,10 @@ import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -20,39 +23,41 @@ public class MailUtils {
 
     private static Session session = null;
 
+    private static DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     static {
         //初始化邮箱信息
-        session = Session.getDefaultInstance(buildDefaultproperties(MailContant.MAIL_SENDT_ACCOUNT),new Authenticator() {
+        session = Session.getDefaultInstance(buildDefaultproperties(Constants.MAIL_SENDT_ACCOUNT),new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(MailContant.MAIL_SENDT_ACCOUNT, MailContant.MAIL_SEND_PASSWORD);
+                return new PasswordAuthentication(Constants.MAIL_SENDT_ACCOUNT, Constants.MAIL_SEND_PASSWORD);
             }
         });
     }
 
-    public static void sendSimpleMail(String receiverEmail) {
+    public static void sendSimpleMail(String receiverEmail,Date date, String url) throws IOException, MessagingException {
 
+        {
+            String mailTemplate = SpringFileUtil.getFileStrFromResource(Constants.MAIL_SEND_TEMPLATE);
 
+            mailTemplate = mailTemplate.replace("date",df.format(date)).replace("url",url);
 
-        sendMail(receiverEmail,MailContant.MAIL_SEND_TITLE,"哈哈哈哈",null);
+            sendMail(receiverEmail,Constants.MAIL_SEND_TITLE,mailTemplate,null);
+        }
     }
 
-    public static void sendMail(String receiverEmail, String title,String content, List<File> files){
-        try {
+    public static void sendMail(String receiverEmail, String title,String content, List<File> files) throws UnsupportedEncodingException, MessagingException {
+        {
             MimeMessage msg = createMailMessage(session, receiverEmail, title, content);
 
             Multipart mp = new MimeMultipart();
             multiAttatchFileUpload(mp,files);//处理附件
 
             Transport transport = session.getTransport("smtp");
-            transport.connect(MailContant.MAIL_SENDT_ACCOUNT, MailContant.MAIL_SEND_PASSWORD);
+            transport.connect(Constants.MAIL_SENDT_ACCOUNT, Constants.MAIL_SEND_PASSWORD);
             transport.sendMessage(msg,msg.getRecipients(Message.RecipientType.TO));
             transport.close();
 
 
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
         }
     }
 
@@ -68,7 +73,7 @@ public class MailUtils {
      */
     public static MimeMessage createMailMessage(Session session, String receiveMail, String title, String content) throws MessagingException, UnsupportedEncodingException {
         MimeMessage msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress(MailContant.MAIL_SENDT_ACCOUNT ));        //设置发件人
+        msg.setFrom(new InternetAddress(Constants.MAIL_SENDT_ACCOUNT ));        //设置发件人
         msg.addRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress(receiveMail)});  //设置收件人
         msg.setSubject(title); //设置邮件标题
         msg.setContent(content, "text/html;charset=UTF-8");
@@ -87,7 +92,7 @@ public class MailUtils {
         // 创建信件服务器
         //code1234
         props.setProperty("mail.transport.protocol", "stmp");   // 使用的协议（JavaMail规范要求）
-        props.setProperty("mail.smtp.host", MailContant.MAIL_SMTP_HOST);   // 发件人的邮箱的 SMTP 服务器地址
+        props.setProperty("mail.smtp.host", Constants.MAIL_SMTP_HOST);   // 发件人的邮箱的 SMTP 服务器地址
         props.setProperty("mail.smtp.auth", "true");
 
         return props;
@@ -120,8 +125,8 @@ public class MailUtils {
         });
         return mp;
     }
-    public static void main(String[] args) {
-        sendSimpleMail("luxun@jd.com");
+    public static void main(String[] args) throws IOException, MessagingException {
+        sendSimpleMail("luxun@jd.com",new Date(),"http://wwww.baidu.com");
     }
 
 }

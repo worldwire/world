@@ -11,4 +11,6 @@ public interface LoginInfoService {
 
 	List<LoginInfo> selectByQuery(LoginInfoQuery loginInfoQuery);
 
+	LoginInfo selectByPrimaryKey(Long id);
+
 }

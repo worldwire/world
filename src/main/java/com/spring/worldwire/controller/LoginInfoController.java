@@ -31,9 +31,16 @@ public class LoginInfoController {
 			info.setPassword(password);
 			info.setEmail(email);
 			Integer result = loginInfoService.registerByMail(info);
+			if(result >0){
+				map.put("data", result);
+				map.put("msg", "success");
+				map.put("status", 1);
+				return map;
+			}
 			map.put("data", result);
-			map.put("msg", "success");
-			map.put("status", 1);
+			map.put("msg", "fail");
+			map.put("status", 0);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("msg", "error");
@@ -43,7 +50,6 @@ public class LoginInfoController {
 	}
 
 	@RequestMapping("/loginByMail")
-	@ResponseBody
 	public Map<String,Object> loginByMail(String email, String password, HttpServletResponse response){
 		Map<String,Object> map = new HashMap<String,Object>();
 		try {
@@ -57,8 +63,8 @@ public class LoginInfoController {
 				map.put("status", -2);
 				return map;
 			}
-//			Cookie cookie = new Cookie("loginKey",list.get(0).getUserName());
-//			response.addCookie(cookie);
+			Cookie cookie = new Cookie("loginKey",list.get(0).getId().toString());
+			response.addCookie(cookie);
 
 			map.put("data", list.get(0));
 			map.put("msg", "success");
