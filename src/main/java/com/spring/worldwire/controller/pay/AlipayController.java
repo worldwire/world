@@ -1,5 +1,6 @@
 package com.spring.worldwire.controller.pay;
 
+import com.spring.worldwire.enums.ThirdPayEnum;
 import com.spring.worldwire.utils.pay.alipay.AlipayCore;
 import com.spring.worldwire.utils.pay.alipay.AlipayNotifyVO;
 import com.spring.worldwire.utils.pay.alipay.TradeStatusEnum;
@@ -26,8 +27,10 @@ public class AlipayController extends BaseResultController {
       if(notifyParams!=null){
         //todo 转换成你所需要的类型 然后进行处理
         if (TradeStatusEnum.TRADE_SUCCESS.equals(notifyParams.getTrade_status())) {//处理成功
-          super.complateOrder();
+
           logger.info("[处理成功] orderid = "+ notifyParams.getOut_trade_no() );
+          super.complateOrder(notifyParams.getTrade_no(),notifyParams.getOut_trade_no(),
+              ThirdPayEnum.ALIPAY);
         }
         return "success";
       }else{

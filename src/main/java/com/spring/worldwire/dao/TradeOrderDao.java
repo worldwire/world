@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+
 public interface TradeOrderDao {
     int deleteByPrimaryKey(Long id);
 
@@ -20,4 +21,7 @@ public interface TradeOrderDao {
     int updateByPrimaryKey(TradeOrder record);
 
     List<TradeOrder> selectByPage(@Param("query")TradeOrderQuery query);
+
+    TradeOrder getByThirdTradeNum(String thirdOrderNum,ThirdPayEnum thirdPayEnum);
+
 }

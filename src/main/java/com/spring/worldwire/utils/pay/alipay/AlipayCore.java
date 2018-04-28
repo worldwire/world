@@ -1,6 +1,5 @@
 package com.spring.worldwire.utils.pay.alipay;
 
-import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
@@ -19,7 +18,7 @@ public class AlipayCore {
 
   private static Logger logger = LoggerFactory.getLogger(AlipayCore.class);
 
-  public String pagePay(AlipayBean alipayBean){
+  public String pagePay(AlipayBean alipayBean) throws Exception{
     AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.GET_WAY_URL,AlipayConfig.ALIPAY_PARTNER,
         AlipayConfig.ALIPAY_PRIVATEKEY,"json",AlipayConfig.ALIPAY_INPUT_CHARSET,
         AlipayConfig.ALIPAY_PUBLIC_KEY,AlipayConfig.ALIPAY_SIGN_TYPE);
@@ -48,11 +47,8 @@ public class AlipayCore {
 
       logger.info("[支付宝支付]  content = "+ content);
 
-      try {
-        return alipayClient.pageExecute(alipayRequest).getBody();
-      } catch (AlipayApiException e) {
-        e.printStackTrace();
-      }
+      return alipayClient.pageExecute(alipayRequest).getBody();
+
     }
     return null;
 

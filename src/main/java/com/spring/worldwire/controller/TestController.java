@@ -2,8 +2,6 @@ package com.spring.worldwire.controller;
 
 import com.spring.worldwire.service.TestService;
 import com.spring.worldwire.utils.RedisUtils;
-import com.spring.worldwire.utils.pay.alipay.AlipayBean;
-import com.spring.worldwire.utils.pay.alipay.AlipayCore;
 import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,13 +55,13 @@ public class TestController {
 	@RequestMapping("/pay")
 	@ResponseBody
 	public String payTest(){
-			AlipayBean alipayBean = new AlipayBean();
+			/*AlipayBean alipayBean = new AlipayBean();
 			alipayBean.setBody("test");
 			alipayBean.setOut_trade_no("123"+System.currentTimeMillis()/1000);
 			alipayBean.setTotal_amount("0.01");
 		AlipayCore alipayCore = new AlipayCore();
-        return alipayCore.pagePay(alipayBean);
-
+        return alipayCore.pagePay(alipayBean);*/
+return null;
 
 		//return null;
 

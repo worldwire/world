@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.spring.worldwire.dao.TradeOrderDao" >
+<mapper namespace="com.spring.worldwire.dao.TradeOrderMapper" >
   <resultMap id="BaseResultMap" type="com.spring.worldwire.model.TradeOrder" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="user_acount_id" property="userAcountId" jdbcType="BIGINT" />
-    <result column="amount" property="amount" jdbcType="INTEGER" />
-    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="order_num" property="orderNum" jdbcType="VARCHAR" />
+    <result column="third_order_num" property="thirdOrderNum" jdbcType="VARCHAR" />
+    <result column="third_type" property="thirdType" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="total" property="total" jdbcType="INTEGER" />
+    <result column="currency" property="currency" jdbcType="VARCHAR" />
+    <result column="trade_name" property="tradeName" jdbcType="VARCHAR" />
     <result column="trade_detail" property="tradeDetail" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="status" property="status" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="success_time" property="successTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, user_id, user_acount_id, amount, type, trade_detail, status, create_time, update_time
+    id, user_id, order_num, third_order_num, third_type, amount, total, currency, trade_name, 
+    trade_detail, status, create_time, update_time, success_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -26,14 +32,16 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.spring.worldwire.model.TradeOrder" >
-    insert into trade_order (id, user_id, user_acount_id, 
-      amount, type, trade_detail, 
-      status, create_time, update_time
-      )
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userAcountId,jdbcType=BIGINT}, 
-      #{amount,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{tradeDetail,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
-      )
+    insert into trade_order (id, user_id, order_num, 
+      third_order_num, third_type, amount, 
+      total, currency, trade_name, 
+      trade_detail, status, create_time, 
+      update_time, success_time)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{orderNum,jdbcType=VARCHAR}, 
+      #{thirdOrderNum,jdbcType=VARCHAR}, #{thirdType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{amount,jdbcType=DECIMAL},
+      #{total,jdbcType=INTEGER}, #{currency,jdbcType=VARCHAR}, #{tradeName,jdbcType=VARCHAR}, 
+      #{tradeDetail,jdbcType=VARCHAR}, #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP}, #{successTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.spring.worldwire.model.TradeOrder" >
     insert into trade_order
@@ -46,12 +54,28 @@
       </if>
       <if test="userAcountId != null" >
         user_acount_id,
+      <if test="orderNum != null" >
+        order_num,
+      </if>
+      <if test="thirdOrderNum != null" >
+        third_order_num,
+      </if>
+      <if test="thirdType != null" >
+        third_type,
       </if>
       <if test="amount != null" >
         amount,
       </if>
       <if test="type != null" >
         type,
+      <if test="total != null" >
+        total,
+      </if>
+      <if test="currency != null" >
+        currency,
+      </if>
+      <if test="tradeName != null" >
+        trade_name,
       </if>
       <if test="tradeDetail != null" >
         trade_detail,
@@ -64,6 +88,9 @@
       </if>
       <if test="updateTime != null" >
         update_time,
+      </if>
+      <if test="successTime != null" >
+        success_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -81,18 +108,41 @@
       </if>
       <if test="type != null" >
         #{type,jdbcType=INTEGER},
+      <if test="orderNum != null" >
+        #{orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdOrderNum != null" >
+        #{thirdOrderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdType != null" >
+        #{thirdType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=INTEGER},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeName != null" >
+        #{tradeName,jdbcType=VARCHAR},
       </if>
       <if test="tradeDetail != null" >
         #{tradeDetail,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=INTEGER},
+        #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="successTime != null" >
+        #{successTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -110,18 +160,41 @@
       </if>
       <if test="type != null" >
         type = #{type,jdbcType=INTEGER},
+      <if test="orderNum != null" >
+        order_num = #{orderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdOrderNum != null" >
+        third_order_num = #{thirdOrderNum,jdbcType=VARCHAR},
+      </if>
+      <if test="thirdType != null" >
+        third_type = #{thirdType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="total != null" >
+        total = #{total,jdbcType=INTEGER},
+      </if>
+      <if test="currency != null" >
+        currency = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeName != null" >
+        trade_name = #{tradeName,jdbcType=VARCHAR},
       </if>
       <if test="tradeDetail != null" >
         trade_detail = #{tradeDetail,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
+        status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="successTime != null" >
+        success_time = #{successTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -130,12 +203,18 @@
     update trade_order
     set user_id = #{userId,jdbcType=BIGINT},
       user_acount_id = #{userAcountId,jdbcType=BIGINT},
-      amount = #{amount,jdbcType=INTEGER},
-      type = #{type,jdbcType=INTEGER},
+      order_num = #{orderNum,jdbcType=VARCHAR},
+      third_order_num = #{thirdOrderNum,jdbcType=VARCHAR},
+      third_type = #{thirdType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+      amount = #{amount,jdbcType=DECIMAL},
+      total = #{total,jdbcType=INTEGER},
+      currency = #{currency,jdbcType=VARCHAR},
+      trade_name = #{tradeName,jdbcType=VARCHAR},
       trade_detail = #{tradeDetail,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
+      status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      success_time = #{successTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
@@ -161,4 +240,11 @@
     </where>
   </sql>
 
+  <select id="getByThirdTradeNum" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List" /> FROM
+    trade_order WHERE  third_type = #{thirdType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler} AND  third_order_num = #{thirdOrderNum,jdbcType=VARCHAR}
+
+    LIMIT 1
+
+  </select>
 </mapper>

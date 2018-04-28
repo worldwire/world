@@ -1,95 +1,155 @@
 package com.spring.worldwire.model;
 
+import com.spring.worldwire.config.BaseConfig;
+import com.spring.worldwire.enums.CurrencyEnum;
+import com.spring.worldwire.enums.PayStatusEnum;
+import com.spring.worldwire.enums.ThirdPayEnum;
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class TradeOrder {
-    private Long id;
 
-    private Long userId;
+  private String orderNum;
+  private Integer userId;
+  private BigDecimal amount;
+  private Integer total;
+  private String tradeName;
+  private String tradeDetail;
+  private String thirdOrderNum;
+  private ThirdPayEnum thirdType;
+  private CurrencyEnum currency;
+  private PayStatusEnum status;
+  private Date createTime;
+  private Date updateTime;
+  private Date successTime;
 
-    private Long userAcountId;
+  public TradeOrder(String orderNum, Integer userId, BigDecimal amount, String tradeDetail,ThirdPayEnum thirdType,CurrencyEnum currency) {
+    this.orderNum = orderNum;
+    this.userId = userId;
+    this.amount = amount;
+    this.tradeDetail = tradeDetail;
+    this.thirdType = thirdType;
+    this.currency = currency;
+    init();
+  }
 
-    private Integer amount;
-
-    private Integer type;
-
-    private String tradeDetail;
-
-    private Integer status;
-
-    private Date createTime;
-
-    private Date updateTime;
-
-    public Long getId() {
-        return id;
+  public void init(){
+    this.status = PayStatusEnum.HAVING;
+    this.createTime = new Date();
+    this.updateTime = new Date();
+    if(this.total==null){
+      total = 1;
     }
-
-    public void setId(Long id) {
-        this.id = id;
+    if(this.tradeName==null){
+      tradeDetail = BaseConfig.DONAME;
     }
-
-    public Long getUserId() {
-        return userId;
+    if(tradeDetail==null){
+      tradeDetail = BaseConfig.DOBODY;
     }
+  }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
+  public String getOrderNum() {
+    return orderNum;
+  }
 
-    public Long getUserAcountId() {
-        return userAcountId;
-    }
+  public void setOrderNum(String orderNum) {
+    this.orderNum = orderNum;
+  }
 
-    public void setUserAcountId(Long userAcountId) {
-        this.userAcountId = userAcountId;
-    }
+  public Integer getUserId() {
+    return userId;
+  }
 
-    public Integer getAmount() {
-        return amount;
-    }
+  public void setUserId(Integer userId) {
+    this.userId = userId;
+  }
 
-    public void setAmount(Integer amount) {
-        this.amount = amount;
-    }
+  public BigDecimal getAmount() {
+    return amount;
+  }
 
-    public Integer getType() {
-        return type;
-    }
+  public void setAmount(BigDecimal amount) {
+    this.amount = amount;
+  }
 
-    public void setType(Integer type) {
-        this.type = type;
-    }
+  public String getTradeDetail() {
+    return tradeDetail;
+  }
 
-    public String getTradeDetail() {
-        return tradeDetail;
-    }
+  public void setTradeDetail(String tradeDetail) {
+    this.tradeDetail = tradeDetail;
+  }
 
-    public void setTradeDetail(String tradeDetail) {
-        this.tradeDetail = tradeDetail == null ? null : tradeDetail.trim();
-    }
+  public ThirdPayEnum getThirdType() {
+    return thirdType;
+  }
 
-    public Integer getStatus() {
-        return status;
-    }
+  public void setThirdType(ThirdPayEnum thirdType) {
+    this.thirdType = thirdType;
+  }
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+  public Integer getTotal() {
+    return total;
+  }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
+  public void setTotal(Integer total) {
+    this.total = total;
+  }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
+  public String getTradeName() {
+    return tradeName;
+  }
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+  public void setTradeName(String tradeName) {
+    this.tradeName = tradeName;
+  }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+  public String getThirdOrderNum() {
+    return thirdOrderNum;
+  }
+
+  public void setThirdOrderNum(String thirdOrderNum) {
+    this.thirdOrderNum = thirdOrderNum;
+  }
+
+  public CurrencyEnum getCurrency() {
+    return currency;
+  }
+
+  public void setCurrency(CurrencyEnum currency) {
+    this.currency = currency;
+  }
+
+  public PayStatusEnum getStatus() {
+    return status;
+  }
+
+  public void setStatus(PayStatusEnum status) {
+    this.status = status;
+  }
+
+  public Date getCreateTime() {
+    return createTime;
+  }
+
+  public void setCreateTime(Date createTime) {
+    this.createTime = createTime;
+  }
+
+  public Date getUpdateTime() {
+    return updateTime;
+  }
+
+  public void setUpdateTime(Date updateTime) {
+    this.updateTime = updateTime;
+  }
+
+  public Date getSuccessTime() {
+    return successTime;
+  }
+
+  public void setSuccessTime(Date successTime) {
+    this.successTime = successTime;
+  }
 }
+
