@@ -54,6 +54,7 @@
       </if>
       <if test="userAcountId != null" >
         user_acount_id,
+      </if>
       <if test="orderNum != null" >
         order_num,
       </if>
@@ -68,6 +69,7 @@
       </if>
       <if test="type != null" >
         type,
+      </if>
       <if test="total != null" >
         total,
       </if>
@@ -108,6 +110,7 @@
       </if>
       <if test="type != null" >
         #{type,jdbcType=INTEGER},
+      </if>
       <if test="orderNum != null" >
         #{orderNum,jdbcType=VARCHAR},
       </if>
@@ -160,6 +163,7 @@
       </if>
       <if test="type != null" >
         type = #{type,jdbcType=INTEGER},
+      </if>
       <if test="orderNum != null" >
         order_num = #{orderNum,jdbcType=VARCHAR},
       </if>

@@ -1,10 +1,10 @@
 package com.spring.worldwire.dao;
 
+import com.spring.worldwire.enums.ThirdPayEnum;
 import com.spring.worldwire.model.TradeOrder;
 import com.spring.worldwire.query.TradeOrderQuery;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 
 public interface TradeOrderDao {
@@ -23,5 +23,6 @@ public interface TradeOrderDao {
     List<TradeOrder> selectByPage(@Param("query")TradeOrderQuery query);
 
     TradeOrder getByThirdTradeNum(String thirdOrderNum,ThirdPayEnum thirdPayEnum);
+
 
 }
