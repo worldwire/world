@@ -8,4 +8,9 @@ import com.spring.worldwire.model.UserAccount;
 public interface UserAccountService {
 
     int insert(UserAccount record);
+
+    UserAccount selectByUserId(Long userId);
+
+    int updateUserAccount(UserAccount record);
+
 }

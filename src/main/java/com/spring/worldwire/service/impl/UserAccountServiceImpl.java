@@ -19,4 +19,14 @@ public class UserAccountServiceImpl implements UserAccountService {
     public int insert(UserAccount record) {
         return userAccountDao.insert(record);
     }
+
+    @Override
+    public UserAccount selectByUserId(Long userId) {
+        return userAccountDao.selectAccountByUserId(userId);
+    }
+
+    @Override
+    public int updateUserAccount(UserAccount record) {
+        return userAccountDao.updateByPrimaryKeySelective(record);
+    }
 }

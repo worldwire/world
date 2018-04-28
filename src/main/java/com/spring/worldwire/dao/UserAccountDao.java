@@ -14,4 +14,6 @@ public interface UserAccountDao {
     int updateByPrimaryKeySelective(UserAccount record);
 
     int updateByPrimaryKey(UserAccount record);
+
+    UserAccount selectAccountByUserId(Long userId);
 }

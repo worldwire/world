@@ -1,14 +1,18 @@
 package com.spring.worldwire.controller;
 
+import com.spring.worldwire.constants.Constants;
+import com.spring.worldwire.enums.StatusCodeEnum;
 import com.spring.worldwire.model.UserAccount;
 import com.spring.worldwire.service.UserAccountService;
+import com.spring.worldwire.utils.DateUtil;
+import com.spring.worldwire.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.ParseException;
+import java.util.*;
 
 /**
  * Created by luxun on 2018/4/27.
@@ -19,6 +23,8 @@ public class UserAccountController {
 
     @Autowired
     private UserAccountService userAccountService;
+    @Autowired
+    private RedisUtils redisUtils;
 
     @RequestMapping("/init")
     public void initUserAccount(Long userId){
@@ -33,6 +39,48 @@ public class UserAccountController {
             account.setUpdateTime(new Date());
             userAccountService.insert(account);
         }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/sign")
+    @ResponseBody
+    public Map<String,Object> sign(Long userId){
+        Map<String,Object> map = new HashMap<String,Object>();
+        String cacheKey = Constants.CACHE_SIGN_KEY + userId;
+        if(Objects.nonNull(redisUtils.getValueByKey(cacheKey))){
+            map.put("msg",StatusCodeEnum.EXISTS.getMsg());
+            map.put("code", StatusCodeEnum.EXISTS.getCode());
+            return map;
+        }
+        Date now = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR, 23);
+        cal.set(Calendar.MINUTE, 59);
+        cal.set(Calendar.SECOND, 59);
+        long interval = cal.getTimeInMillis() - now.getTime();
+        calculateSignDays(userId);
+        redisUtils.set(cacheKey,userId,interval);
+        map.put("msg",StatusCodeEnum.SUCCCESS.getMsg());
+        map.put("code", StatusCodeEnum.SUCCCESS.getCode());
+        return map;
+    }
+
+    private void calculateSignDays(Long userId) {
+        UserAccount account = userAccountService.selectByUserId(userId);
+        Date last = account.getLastSignTime();
+        Date now = new Date();
+        try {
+            if(DateUtil.dateInterval(last,now) == 1){//时间相差一天即为连续签到，否则连续签到天数为1
+                account.setSignNum(account.getSignNum() + 1);
+                if(account.getSignNum() % 7 == 0){//每7天增加一次免费翻译次数
+                    account.setFreeTranslate(account.getFreeTranslate() + 1);
+                }
+                userAccountService.updateUserAccount(account);
+            }else{
+                account.setSignNum(1);//时间不连续，则连续签到天数置为1
+            }
+        } catch (ParseException e) {
             e.printStackTrace();
         }
     }

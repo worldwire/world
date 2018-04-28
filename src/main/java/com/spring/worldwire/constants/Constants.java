@@ -26,6 +26,8 @@ public class Constants {
     //邮件有效期
     public static final String CACHE_MAIL_VALID_PREFIX = "mail_valid_";
 
+    public static final String CACHE_SIGN_KEY = "cache_sign_key_"
+;
 
 
 }

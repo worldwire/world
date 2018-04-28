@@ -9,24 +9,24 @@ public enum LanguageEnum {
 	GERMAN(5,"german","德语"),
 	SPANISH(6,"spanish","西班牙语");
 	
-	private int id;
+	private int code;
 	
 	private String enName;
 	
 	private String cnName;
 
-	private LanguageEnum(int id, String enName, String cnName) {
-		this.id = id;
+	private LanguageEnum(int code, String enName, String cnName) {
+		this.code = code;
 		this.enName = enName;
 		this.cnName = cnName;
 	}
 
-	public int getId() {
-		return id;
+	public int getCode() {
+		return code;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setCode(int code) {
+		this.code = code;
 	}
 
 	public String getEnName() {
@@ -45,10 +45,10 @@ public enum LanguageEnum {
 		this.cnName = cnName;
 	}
 	
-	public static String getNameById(int id){
+	public static String getNameByCode(int code){
 		LanguageEnum[] array = LanguageEnum.values();
 		for (LanguageEnum languageEnum : array) {
-			if(id == languageEnum.getId()){
+			if(code == languageEnum.getCode()){
 				return languageEnum.getEnName();
 			}
 		}
