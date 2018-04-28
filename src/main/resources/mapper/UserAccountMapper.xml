@@ -5,14 +5,14 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="viewing_times" property="viewingTimes" jdbcType="INTEGER" />
     <result column="free_translate" property="freeTranslate" jdbcType="INTEGER" />
-    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="userId" property="userId" jdbcType="BIGINT" />
     <result column="sign_num" property="signNum" jdbcType="INTEGER" />
     <result column="last_sign_time" property="lastSignTime" jdbcType="TIMESTAMP" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, viewing_times, free_translate, user_id, sign_num, last_sign_time, create_time, 
+    id, viewing_times, free_translate, userId, sign_num, last_sign_time, create_time,
     update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -27,7 +27,7 @@
   </delete>
   <insert id="insert" parameterType="com.spring.worldwire.model.UserAccount" >
     insert into user_account (id, viewing_times, free_translate, 
-      user_id, sign_num, last_sign_time, 
+      userId, sign_num, last_sign_time,
       create_time, update_time)
     values (#{id,jdbcType=BIGINT}, #{viewingTimes,jdbcType=INTEGER}, #{freeTranslate,jdbcType=INTEGER}, 
       #{userId,jdbcType=BIGINT}, #{signNum,jdbcType=INTEGER}, #{lastSignTime,jdbcType=TIMESTAMP}, 
@@ -46,7 +46,7 @@
         free_translate,
       </if>
       <if test="userId != null" >
-        user_id,
+        userId,
       </if>
       <if test="signNum != null" >
         sign_num,
@@ -98,7 +98,7 @@
         free_translate = #{freeTranslate,jdbcType=INTEGER},
       </if>
       <if test="userId != null" >
-        user_id = #{userId,jdbcType=BIGINT},
+        userId = #{userId,jdbcType=BIGINT},
       </if>
       <if test="signNum != null" >
         sign_num = #{signNum,jdbcType=INTEGER},
@@ -119,7 +119,7 @@
     update user_account
     set viewing_times = #{viewingTimes,jdbcType=INTEGER},
       free_translate = #{freeTranslate,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=BIGINT},
+      userId = #{userId,jdbcType=BIGINT},
       sign_num = #{signNum,jdbcType=INTEGER},
       last_sign_time = #{lastSignTime,jdbcType=TIMESTAMP},
       create_time = #{createTime,jdbcType=TIMESTAMP},

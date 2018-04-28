@@ -2,17 +2,19 @@ package com.spring.worldwire.enums;
 
 import com.spring.worldwire.extent.INumericEnum;
 
-public enum ThirdPayEnum implements INumericEnum {
+public enum PayStatusEnum implements INumericEnum {
 
-	PAY_PAL(1,"paypal支付"),
-	ALIPAY(2,"支付宝"),
+	HAVING(0,"进行中"),
+	SUCCESS(1,"成功"),
+	FAIL(3,"失败"),
+
 	;
 
 	private int code;
 
 	private String name;
 
-	ThirdPayEnum(int code, String name) {
+	PayStatusEnum(int code, String name) {
 		this.code = code;
 		this.name = name;
 	}

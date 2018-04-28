@@ -1,11 +1,9 @@
 package com.spring.worldwire.controller.pay;
 
-import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
-import com.spring.worldwire.utils.pay.paypal.PayPalPaymentIntentEnum;
+import com.spring.worldwire.enums.ThirdPayEnum;
 import com.spring.worldwire.utils.pay.paypal.PaypalCore;
-import com.spring.worldwire.utils.pay.paypal.PaypalPaymentMethodEnum;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -35,20 +33,16 @@ public class PaypalController extends BaseResultController {
         valueStr = (i == values.length - 1) ? valueStr + values[i]
             : valueStr + values[i] + ",";
       }
-      //乱码解决，这段代码在出现乱码时使用
-/*      try {
-        valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
-      } catch (UnsupportedEncodingException e) {
-        logger.error("[支付宝回调] 数据存解析异常",e);
-      }*/
       logger.info("[paypal回调]  参数 name="+name +"   valueStr = "+valueStr);
       params.put(name, valueStr);
     }
 
     try {
-      Payment payment = PaypalCore.executePayment(params.get("paymentId"), params.get("PayerID"));
+      String paymentId = params.get("paymentId");
+      Payment payment = PaypalCore.executePayment(paymentId, params.get("PayerID"));
       logger.info("[paypal回调] payment"+payment.toJSON());
       if(payment.getState().equals("approved")){
+        super.complateOrder(paymentId, ThirdPayEnum.PAY_PAL);
         return "success";
       }
     } catch (PayPalRESTException e) {
@@ -73,7 +67,7 @@ public class PaypalController extends BaseResultController {
   @RequestMapping("/paytest")
   @ResponseBody
   public String testPay(){
-    try{
+    /*try{
       Payment payment = PaypalCore.createPayment(
           1.00,
           "USD",
@@ -91,9 +85,14 @@ public class PaypalController extends BaseResultController {
 
     }catch (Exception e){
 
-    }
+    }*/
 
-    return "ok";
+    StringBuilder sb = new StringBuilder();
+    sb.append("<script language=\"javascript\" type=\"text/javascript\">")
+        .append("window.open(\"")
+        .append("www.baidu.com")
+        .append("\")</script> ");
+    return sb.toString();
   }
 
 }
