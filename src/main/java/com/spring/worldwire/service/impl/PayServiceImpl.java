@@ -29,35 +29,34 @@ public class PayServiceImpl implements PayService {
 
 	@Override
 	public String doPayWay(TradeOrder tradeOrder) {
-
 		String toWeb = null;
-    int insert = tradeOrderDao.insert(tradeOrder);
-    if(insert==0){
-      logger.info("[支付]保存订单出现异常 orderNum={}", tradeOrder.getOrderNum());
-      return JsUtil.webOpenNewWindow(errorUrl);
-    }
-	switch (tradeOrder.getThirdType()){
-		case PAY_PAL:
-			toWeb = payPayPal(tradeOrder);
-			break;
-		case ALIPAY:
-			toWeb = payAlipay(tradeOrder);
-			break;
-		default:
-			logger.info("[支付]出现异常问题 orderNum={}", tradeOrder.getOrderNum());
-	}
-	if(StringUtils.isNotBlank(tradeOrder.getThirdOrderNum())){
-		int update = tradeOrderDao.updateByPrimaryKeySelective(tradeOrder);
-		if(update==0){
-			logger.info("[支付]更新订单出现异常 orderNum={}", tradeOrder.getOrderNum());
-			return JsUtil.webOpenNewWindow(errorUrl);
+		int insert = tradeOrderDao.insert(tradeOrder);
+		if(insert==0){
+		  logger.info("[支付]保存订单出现异常 orderNum={}", tradeOrder.getOrderNum());
+		  return JsUtil.webOpenNewWindow(errorUrl);
 		}
-	}
-    if(StringUtils.isBlank(toWeb)){
-      return JsUtil.webOpenNewWindow(errorUrl);
-    }
+		switch (tradeOrder.getThirdType()){
+			case PAY_PAL:
+				toWeb = payPayPal(tradeOrder);
+				break;
+			case ALIPAY:
+				toWeb = payAlipay(tradeOrder);
+				break;
+			default:
+				logger.info("[支付]出现异常问题 orderNum={}", tradeOrder.getOrderNum());
+		}
+		if(StringUtils.isNotBlank(tradeOrder.getThirdOrderNum())){
+			int update = tradeOrderDao.updateByPrimaryKeySelective(tradeOrder);
+			if(update==0){
+				logger.info("[支付]更新订单出现异常 orderNum={}", tradeOrder.getOrderNum());
+				return JsUtil.webOpenNewWindow(errorUrl);
+			}
+		}
+		if(StringUtils.isBlank(toWeb)){
+		  return JsUtil.webOpenNewWindow(errorUrl);
+		}
 
-    return toWeb;
+		return toWeb;
 	}
 
 

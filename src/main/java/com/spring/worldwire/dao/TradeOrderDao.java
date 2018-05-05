@@ -22,8 +22,8 @@ public interface TradeOrderDao {
 
     List<TradeOrder> selectByPage(@Param("query")TradeOrderQuery query);
 
-    TradeOrder getByThirdTradeNum(String thirdOrderNum,ThirdPayEnum thirdPayEnum);
+    TradeOrder getByThirdTradeNum(@Param("thirdOrderNum")String thirdOrderNum,@Param("thirdPayEnum")ThirdPayEnum thirdPayEnum);
 
 
-    TradeOrder getByTradeNum(String tradeNo, ThirdPayEnum thirdPayEnum);
+    TradeOrder getByTradeNum(@Param("orderNum") String orderNum, @Param("thirdPayEnum") ThirdPayEnum thirdPayEnum);
 }

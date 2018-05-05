@@ -24,6 +24,11 @@ public class TradeOrder {
   private Date updateTime;
   private Date successTime;
 
+  public TradeOrder(){
+
+  }
+
+
   public TradeOrder(String orderNum, Integer userId, BigDecimal amount, String tradeDetail,ThirdPayEnum thirdType,CurrencyEnum currency) {
     this.orderNum = orderNum;
     this.userId = userId;

@@ -19,8 +19,10 @@ public class BaseResultController {
   TradeOrderservice tradeOrderservice;
 
   void complateOrder(TradeOrder tradeOrder){
+
     tradeOrder.setStatus(PayStatusEnum.SUCCESS);
     tradeOrder.setSuccessTime(new Date());
+    logger.info("[支付完成] 查找数据修改状态 orderNum={}",tradeOrder.getOrderNum());
     int i = tradeOrderservice.updateByPrimaryKeySelective(tradeOrder);
     if(i>0){
       logger.info("[支付完成] 支付完成更新数据库 orderNum = {}" ,tradeOrder.getOrderNum());

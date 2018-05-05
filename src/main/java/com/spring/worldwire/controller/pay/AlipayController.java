@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Date;
 
 @SuppressWarnings("unused")
 @RequestMapping("/alipay/result")
@@ -24,17 +23,23 @@ public class AlipayController extends BaseResultController {
   @RequestMapping("/webCallBack")
   @ResponseBody
   public String webCallBack(HttpServletRequest request){
+    String orderNum = "";
     try {
       AlipayCore alipayCore = new AlipayCore();
       AlipayNotifyVO notifyParams = alipayCore.getNotifyParams(request);
       if(notifyParams!=null){
+        orderNum = notifyParams.getOut_trade_no();
         if (TradeStatusEnum.TRADE_SUCCESS.equals(notifyParams.getTrade_status())) {//处理成功
 
-          logger.info("[处理成功] orderid = "+ notifyParams.getOut_trade_no() );
-          TradeOrder tradeOrder = tradeOrderservice.getByTradeNum(notifyParams.getTrade_no(),ThirdPayEnum.ALIPAY);
-          tradeOrder.setThirdOrderNum(notifyParams.getTrade_no());
+          TradeOrder tradeOrder = tradeOrderservice.getByTradeNum(notifyParams.getOut_trade_no(),ThirdPayEnum.ALIPAY);
+          logger.info("[支付宝支付回调] orderNum = {} thirdNum = {}",notifyParams.getOut_trade_no(),notifyParams.getTrade_no() );
+          if(tradeOrder.getId()!=null){
+            tradeOrder.setThirdOrderNum(notifyParams.getTrade_no());
+            super.complateOrder(tradeOrder);
+          }else{
+            logger.info("[支付宝支付回调] 未查的数据 orderNum = {} ", notifyParams.getOut_trade_no());
+          }
 
-          super.complateOrder(tradeOrder);
         }
         return "success";
       }else{
@@ -44,14 +49,19 @@ public class AlipayController extends BaseResultController {
       }
 
     }catch (Exception e){
+      logger.error("[支付宝回调] 支付发生异常 orderNum = {}",orderNum,e);
       return "fail";
     }
 
 
   }
 
+
+
+
   @RequestMapping("/webNotify")
-  public String webNotify(){
+  public String webNotify(String orderNUm){
+
     return super.notifyOrder();
   }
 

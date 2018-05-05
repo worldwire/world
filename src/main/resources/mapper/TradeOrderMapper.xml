@@ -6,13 +6,13 @@
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="order_num" property="orderNum" jdbcType="VARCHAR" />
     <result column="third_order_num" property="thirdOrderNum" jdbcType="VARCHAR" />
-    <result column="third_type" property="thirdType" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" />
+    <result column="third_type" property="thirdType" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.ThirdPayEnum" />
     <result column="amount" property="amount" jdbcType="DECIMAL" />
     <result column="total" property="total" jdbcType="INTEGER" />
-    <result column="currency" property="currency" jdbcType="VARCHAR" />
+    <result column="currency" property="currency" jdbcType="VARCHAR" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.CurrencyEnum" />
     <result column="trade_name" property="tradeName" jdbcType="VARCHAR" />
     <result column="trade_detail" property="tradeDetail" jdbcType="VARCHAR" />
-    <result column="status" property="status" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" />
+    <result column="status" property="status" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.PayStatusEnum" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="success_time" property="successTime" jdbcType="TIMESTAMP" />
@@ -39,7 +39,7 @@
       update_time, success_time)
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{orderNum,jdbcType=VARCHAR}, 
       #{thirdOrderNum,jdbcType=VARCHAR}, #{thirdType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{amount,jdbcType=DECIMAL},
-      #{total,jdbcType=INTEGER}, #{currency,jdbcType=VARCHAR}, #{tradeName,jdbcType=VARCHAR}, 
+      #{total,jdbcType=INTEGER}, #{currency,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{tradeName,jdbcType=VARCHAR},
       #{tradeDetail,jdbcType=VARCHAR}, #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{createTime,jdbcType=TIMESTAMP},
       #{updateTime,jdbcType=TIMESTAMP}, #{successTime,jdbcType=TIMESTAMP})
   </insert>
@@ -115,7 +115,7 @@
         #{total,jdbcType=INTEGER},
       </if>
       <if test="currency != null" >
-        #{currency,jdbcType=VARCHAR},
+        #{currency,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="tradeName != null" >
         #{tradeName,jdbcType=VARCHAR},
@@ -162,7 +162,7 @@
         total = #{total,jdbcType=INTEGER},
       </if>
       <if test="currency != null" >
-        currency = #{currency,jdbcType=VARCHAR},
+        currency = #{currency,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="tradeName != null" >
         trade_name = #{tradeName,jdbcType=VARCHAR},
@@ -193,7 +193,7 @@
       third_type = #{thirdType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       amount = #{amount,jdbcType=DECIMAL},
       total = #{total,jdbcType=INTEGER},
-      currency = #{currency,jdbcType=VARCHAR},
+      currency = #{currency,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       trade_name = #{tradeName,jdbcType=VARCHAR},
       trade_detail = #{tradeDetail,jdbcType=VARCHAR},
       status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
@@ -225,9 +225,9 @@
     </where>
   </sql>
 
-  <select id="getByThirdTradeNum" resultMap="BaseResultMap">
+  <select id="getByThirdTradeNum" resultMap="BaseResultMap" >
     SELECT <include refid="Base_Column_List" /> FROM
-    trade_order WHERE third_order_num = #{thirdOrderNum,jdbcType=VARCHAR} AND  third_type = #{thirdType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}
+    trade_order WHERE third_order_num = #{thirdOrderNum,jdbcType=VARCHAR} AND  third_type = #{thirdPayEnum,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}
 
     LIMIT 1
 
@@ -235,7 +235,7 @@
 
   <select id="getByTradeNum" resultMap="BaseResultMap">
     SELECT <include refid="Base_Column_List" /> FROM
-    trade_order WHERE  order_num = #{orderNum,jdbcType=VARCHAR} third_type = #{thirdType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}
+    trade_order WHERE  order_num = #{orderNum,jdbcType=VARCHAR} AND third_type = #{thirdPayEnum,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}
 
     LIMIT 1
 
