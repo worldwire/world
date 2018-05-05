@@ -2,8 +2,12 @@ package com.spring.worldwire.controller.pay;
 
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
+import com.spring.worldwire.enums.PayStatusEnum;
 import com.spring.worldwire.enums.ThirdPayEnum;
+import com.spring.worldwire.model.TradeOrder;
 import com.spring.worldwire.utils.pay.paypal.PaypalCore;
+
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +46,8 @@ public class PaypalController extends BaseResultController {
       Payment payment = PaypalCore.executePayment(paymentId, params.get("PayerID"));
       logger.info("[paypal回调] payment"+payment.toJSON());
       if(payment.getState().equals("approved")){
-        super.complateOrder(paymentId, ThirdPayEnum.PAY_PAL);
+        TradeOrder tradeOrder = tradeOrderservice.getByThirdTradeNum(paymentId,ThirdPayEnum.PAY_PAL);
+        super.complateOrder(tradeOrder);
         return "success";
       }
     } catch (PayPalRESTException e) {

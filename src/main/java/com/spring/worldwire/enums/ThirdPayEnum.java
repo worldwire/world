@@ -2,6 +2,8 @@ package com.spring.worldwire.enums;
 
 import com.spring.worldwire.extent.INumericEnum;
 
+
+@SuppressWarnings("unused")
 public enum ThirdPayEnum implements INumericEnum {
 
 	PAY_PAL(1,"paypal支付"),
@@ -31,6 +33,16 @@ public enum ThirdPayEnum implements INumericEnum {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public static ThirdPayEnum getThirdPayByCode(int code){
+		ThirdPayEnum[] values = ThirdPayEnum.values();
+		for (ThirdPayEnum value : values) {
+			if (value.code == code) {
+				return value;
+			}
+		}
+		return null;
 	}
 
 	@Override

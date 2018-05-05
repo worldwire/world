@@ -1,24 +1,34 @@
 package com.spring.worldwire.controller.pay;
 
-import com.spring.worldwire.dao.TradeOrderDao;
+import com.spring.worldwire.enums.PayStatusEnum;
 import com.spring.worldwire.enums.ThirdPayEnum;
 import com.spring.worldwire.model.TradeOrder;
+import com.spring.worldwire.service.TradeOrderservice;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Date;
 
 /**
  * 处理公共的业务逻辑区域
  */
 public class BaseResultController {
-
+  private static Logger logger = LoggerFactory.getLogger(BaseResultController.class);
   @Autowired
-  private TradeOrderDao tradeOrderDao;
+  TradeOrderservice tradeOrderservice;
 
-  void complateOrder(String thirdOrderNum,ThirdPayEnum thirdPayEnum){
-    TradeOrder tradeOrder = tradeOrderDao.getByThirdTradeNum(thirdOrderNum,thirdPayEnum);
-
-    complateOrder(thirdOrderNum,null,thirdPayEnum);
+  void complateOrder(TradeOrder tradeOrder){
+    tradeOrder.setStatus(PayStatusEnum.SUCCESS);
+    tradeOrder.setSuccessTime(new Date());
+    int i = tradeOrderservice.updateByPrimaryKeySelective(tradeOrder);
+    if(i>0){
+      logger.info("[支付完成] 支付完成更新数据库 orderNum = {}" ,tradeOrder.getOrderNum());
+      complateOrder(tradeOrder.getOrderNum(),null,tradeOrder.getThirdType());
+    }
   }
 
+  //todo 执行支付之后的逻辑
   void complateOrder(String thirdOrderNum,String orderNum,ThirdPayEnum thirdPayEnum){
 
   }

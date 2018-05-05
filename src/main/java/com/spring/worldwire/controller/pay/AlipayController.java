@@ -1,6 +1,7 @@
 package com.spring.worldwire.controller.pay;
 
 import com.spring.worldwire.enums.ThirdPayEnum;
+import com.spring.worldwire.model.TradeOrder;
 import com.spring.worldwire.utils.pay.alipay.AlipayCore;
 import com.spring.worldwire.utils.pay.alipay.AlipayNotifyVO;
 import com.spring.worldwire.utils.pay.alipay.TradeStatusEnum;
@@ -10,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Date;
 
 @SuppressWarnings("unused")
 @RequestMapping("/alipay/result")
@@ -25,12 +28,13 @@ public class AlipayController extends BaseResultController {
       AlipayCore alipayCore = new AlipayCore();
       AlipayNotifyVO notifyParams = alipayCore.getNotifyParams(request);
       if(notifyParams!=null){
-        //todo 转换成你所需要的类型 然后进行处理
         if (TradeStatusEnum.TRADE_SUCCESS.equals(notifyParams.getTrade_status())) {//处理成功
 
           logger.info("[处理成功] orderid = "+ notifyParams.getOut_trade_no() );
-          super.complateOrder(notifyParams.getTrade_no(),notifyParams.getOut_trade_no(),
-              ThirdPayEnum.ALIPAY);
+          TradeOrder tradeOrder = tradeOrderservice.getByTradeNum(notifyParams.getTrade_no(),ThirdPayEnum.ALIPAY);
+          tradeOrder.setThirdOrderNum(notifyParams.getTrade_no());
+
+          super.complateOrder(tradeOrder);
         }
         return "success";
       }else{

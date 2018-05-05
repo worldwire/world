@@ -9,6 +9,7 @@ import java.util.Date;
 
 public class TradeOrder {
 
+  private Integer id;
   private String orderNum;
   private Integer userId;
   private BigDecimal amount;
@@ -46,6 +47,14 @@ public class TradeOrder {
     if(tradeDetail==null){
       tradeDetail = BaseConfig.DOBODY;
     }
+  }
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
   }
 
   public String getOrderNum() {

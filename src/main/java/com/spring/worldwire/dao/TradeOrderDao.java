@@ -25,4 +25,5 @@ public interface TradeOrderDao {
     TradeOrder getByThirdTradeNum(String thirdOrderNum,ThirdPayEnum thirdPayEnum);
 
 
+    TradeOrder getByTradeNum(String tradeNo, ThirdPayEnum thirdPayEnum);
 }

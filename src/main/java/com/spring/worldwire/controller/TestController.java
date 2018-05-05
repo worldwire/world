@@ -1,7 +1,13 @@
 package com.spring.worldwire.controller;
 
+import com.spring.worldwire.enums.CurrencyEnum;
+import com.spring.worldwire.enums.ThirdPayEnum;
+import com.spring.worldwire.model.TradeOrder;
+import com.spring.worldwire.service.PayService;
 import com.spring.worldwire.service.TestService;
 import com.spring.worldwire.utils.RedisUtils;
+
+import java.math.BigDecimal;
 import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +19,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping("/test")
 public class TestController {
@@ -23,6 +31,8 @@ public class TestController {
 	private TestService testService;
 	@Autowired
 	private RedisUtils redisUtils;
+	@Autowired
+	private PayService payService;
 
 	private static Logger logger = LoggerFactory.getLogger(TestController.class);
 
@@ -54,14 +64,12 @@ public class TestController {
 
 	@RequestMapping("/pay")
 	@ResponseBody
-	public String payTest(){
-			/*AlipayBean alipayBean = new AlipayBean();
-			alipayBean.setBody("test");
-			alipayBean.setOut_trade_no("123"+System.currentTimeMillis()/1000);
-			alipayBean.setTotal_amount("0.01");
-		AlipayCore alipayCore = new AlipayCore();
-        return alipayCore.pagePay(alipayBean);*/
-return null;
+	public String payTest(String pay,int payCode,int currencyCode){
+
+		TradeOrder tradeOrder = new TradeOrder("123"+System.currentTimeMillis()/1000,10,new BigDecimal(pay),"test",ThirdPayEnum.getThirdPayByCode(payCode),CurrencyEnum.getCurrencyByCode(currencyCode));
+		String s = payService.doPayWay(tradeOrder);
+		System.out.println(s);
+		return s;
 
 		//return null;
 

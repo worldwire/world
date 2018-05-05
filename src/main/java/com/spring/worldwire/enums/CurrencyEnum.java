@@ -2,9 +2,10 @@ package com.spring.worldwire.enums;
 
 import com.spring.worldwire.extent.INumericEnum;
 
+@SuppressWarnings("unused")
 public enum CurrencyEnum implements INumericEnum {
 
-	RMD(1,"人民币","RMB"),
+	RMB(1,"人民币","RMB"),
 	USD(2,"美元","USD"),
 	EUR(3,"欧元","EUR"),
 
@@ -43,6 +44,15 @@ public enum CurrencyEnum implements INumericEnum {
 
 	public void setAb(String ab) {
 		this.ab = ab;
+	}
+
+	public static CurrencyEnum getCurrencyByCode(int code){
+		CurrencyEnum[] values = CurrencyEnum.values();
+		for (CurrencyEnum value : values) {
+			if(value.code == code)
+				return value;
+		}
+		return null;
 	}
 
 	@Override
