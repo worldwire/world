@@ -11,9 +11,9 @@
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="website" property="website" jdbcType="VARCHAR" />
-    <result column="language_type" property="languageType" jdbcType="INTEGER" />
+    <result column="language_type" property="languageType" jdbcType="INTEGER" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.LanguageEnum"  />
     <result column="language_id" property="languageId" jdbcType="BIGINT" />
-    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER"  typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.ProductRequestStatusEnum" />
     <result column="user_type" property="userType" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -39,7 +39,7 @@
     values (#{id,jdbcType=BIGINT}, #{requestType,jdbcType=INTEGER}, #{keyWord,jdbcType=VARCHAR}, 
       #{titile,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, 
-      #{languageType,jdbcType=INTEGER}, #{languageId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, 
+      #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{languageId,jdbcType=BIGINT}, #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}},
       #{userType,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.spring.worldwire.model.ProductRequest" >
@@ -114,13 +114,13 @@
         #{website,jdbcType=VARCHAR},
       </if>
       <if test="languageType != null" >
-        #{languageType,jdbcType=INTEGER},
+        #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="languageId != null" >
         #{languageId,jdbcType=BIGINT},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=INTEGER},
+        #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}},
       </if>
       <if test="userType != null" >
         #{userType,jdbcType=INTEGER},
@@ -155,13 +155,13 @@
         website = #{website,jdbcType=VARCHAR},
       </if>
       <if test="languageType != null" >
-        language_type = #{languageType,jdbcType=INTEGER},
+        language_type = #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="languageId != null" >
         language_id = #{languageId,jdbcType=BIGINT},
       </if>
       <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
+        status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}},
       </if>
       <if test="userType != null" >
         user_type = #{userType,jdbcType=INTEGER},
@@ -179,9 +179,9 @@
       email = #{email,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       website = #{website,jdbcType=VARCHAR},
-      language_type = #{languageType,jdbcType=INTEGER},
+      language_type = #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       language_id = #{languageId,jdbcType=BIGINT},
-      status = #{status,jdbcType=INTEGER},
+      status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}},
       user_type = #{userType,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>

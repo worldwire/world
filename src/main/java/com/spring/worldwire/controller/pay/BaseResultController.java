@@ -3,7 +3,7 @@ package com.spring.worldwire.controller.pay;
 import com.spring.worldwire.enums.PayStatusEnum;
 import com.spring.worldwire.enums.ThirdPayEnum;
 import com.spring.worldwire.model.TradeOrder;
-import com.spring.worldwire.service.TradeOrderservice;
+import com.spring.worldwire.service.TradeOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.Date;
 public class BaseResultController {
   private static Logger logger = LoggerFactory.getLogger(BaseResultController.class);
   @Autowired
-  TradeOrderservice tradeOrderservice;
+  TradeOrderService tradeOrderservice;
 
   void complateOrder(TradeOrder tradeOrder){
 

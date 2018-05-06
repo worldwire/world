@@ -1,5 +1,9 @@
 package com.spring.worldwire.model;
 
+import com.spring.worldwire.enums.LanguageEnum;
+import com.spring.worldwire.enums.ProductRequestStatusEnum;
+
+@SuppressWarnings("unused")
 public class ProductRequest {
     private Long id;
 
@@ -19,11 +23,11 @@ public class ProductRequest {
 
     private String website;
 
-    private Integer languageType;
+    private LanguageEnum languageType;
 
     private Long languageId;
 
-    private Integer status;
+    private ProductRequestStatusEnum status;
 
     private Integer userType;
 
@@ -99,11 +103,11 @@ public class ProductRequest {
         this.website = website == null ? null : website.trim();
     }
 
-    public Integer getLanguageType() {
+    public LanguageEnum getLanguageType() {
         return languageType;
     }
 
-    public void setLanguageType(Integer languageType) {
+    public void setLanguageType(LanguageEnum languageType) {
         this.languageType = languageType;
     }
 
@@ -115,11 +119,11 @@ public class ProductRequest {
         this.languageId = languageId;
     }
 
-    public Integer getStatus() {
+    public ProductRequestStatusEnum getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(ProductRequestStatusEnum status) {
         this.status = status;
     }
 
@@ -130,6 +134,31 @@ public class ProductRequest {
     public void setUserType(Integer userType) {
         this.userType = userType;
     }
+
+
+    /**
+     * 克隆一个新语种的翻译
+     * @param languageType 转变成的语言类型
+     * @return 返回一个新的对象 缺少ID 和需要翻译的对象
+     */
+    public ProductRequest converFromProduct(LanguageEnum languageType){
+        ProductRequest fromProductRequest = new ProductRequest();
+        fromProductRequest.mobile = this.mobile;
+        fromProductRequest.email = this.email;
+        fromProductRequest.languageType = languageType;
+        fromProductRequest.phone = this.phone;
+        fromProductRequest.status = ProductRequestStatusEnum.INIT;
+        fromProductRequest.website = this.website;
+        fromProductRequest.userType = this.userType;
+        fromProductRequest.requestType = this.requestType;
+        if(this.languageId==null){
+            fromProductRequest.languageId = this.id;
+        }else{
+            fromProductRequest.languageId = this.languageId;
+        }
+        return fromProductRequest;
+    }
+
 
 	@Override
 	public String toString() {

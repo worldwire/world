@@ -1,19 +1,23 @@
 package com.spring.worldwire.model;
 
+import com.spring.worldwire.enums.LanguageEnum;
+import com.spring.worldwire.enums.TranslationApplyStatusEnum;
+
 import java.util.Date;
 
+@SuppressWarnings("unused")
 public class TranslationApply {
     private Long id;
 
     private Long reqId;
 
-    private Integer origType;
+    private LanguageEnum origType;
 
     private Long fromReqId;
 
-    private Integer fromType;
+    private LanguageEnum fromType;
 
-    private Integer status;
+    private TranslationApplyStatusEnum status;
 
     private Long operatorId;
 
@@ -24,6 +28,10 @@ public class TranslationApply {
     private Date auditorTime;
 
     private String auditorMsg;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     public Long getId() {
         return id;
@@ -41,14 +49,6 @@ public class TranslationApply {
         this.reqId = reqId;
     }
 
-    public Integer getOrigType() {
-        return origType;
-    }
-
-    public void setOrigType(Integer origType) {
-        this.origType = origType;
-    }
-
     public Long getFromReqId() {
         return fromReqId;
     }
@@ -57,19 +57,27 @@ public class TranslationApply {
         this.fromReqId = fromReqId;
     }
 
-    public Integer getFromType() {
+    public LanguageEnum getOrigType() {
+        return origType;
+    }
+
+    public void setOrigType(LanguageEnum origType) {
+        this.origType = origType;
+    }
+
+    public LanguageEnum getFromType() {
         return fromType;
     }
 
-    public void setFromType(Integer fromType) {
+    public void setFromType(LanguageEnum fromType) {
         this.fromType = fromType;
     }
 
-    public Integer getStatus() {
+    public TranslationApplyStatusEnum getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(TranslationApplyStatusEnum status) {
         this.status = status;
     }
 
@@ -113,12 +121,38 @@ public class TranslationApply {
         this.auditorMsg = auditorMsg == null ? null : auditorMsg.trim();
     }
 
-	@Override
-	public String toString() {
-		return "TranslationApply [id=" + id + ", reqId=" + reqId + ", origType=" + origType + ", fromReqId=" + fromReqId
-				+ ", fromType=" + fromType + ", status=" + status + ", operatorId=" + operatorId + ", operatorTime="
-				+ operatorTime + ", auditorId=" + auditorId + ", auditorTime=" + auditorTime + ", auditorMsg="
-				+ auditorMsg + "]";
-	}
-    
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "TranslationApply{" +
+                "id=" + id +
+                ", reqId=" + reqId +
+                ", origType=" + origType +
+                ", fromReqId=" + fromReqId +
+                ", fromType=" + fromType +
+                ", status=" + status +
+                ", operatorId=" + operatorId +
+                ", operatorTime=" + operatorTime +
+                ", auditorId=" + auditorId +
+                ", auditorTime=" + auditorTime +
+                ", auditorMsg='" + auditorMsg + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }
