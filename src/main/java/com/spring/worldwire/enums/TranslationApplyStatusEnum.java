@@ -5,9 +5,10 @@ import com.spring.worldwire.extent.INumericEnum;
 @SuppressWarnings("unused")
 public enum TranslationApplyStatusEnum implements INumericEnum {
 	INIT(0,"初始状态"),
-	NORMAL(1,"正常状态"),
-	ON(2,"上架"),
-	OFF(3,"下架");
+	NORMAL(1,"支付可翻译"),
+	AUDITION(2,"翻译待审核"),
+	SUCCESS(3,"审核通过"),
+	FAIL(4,"审核不通过");
 
 
 	TranslationApplyStatusEnum(int code, String name) {

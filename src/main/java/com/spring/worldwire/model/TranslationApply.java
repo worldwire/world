@@ -139,7 +139,7 @@ public class TranslationApply {
 
     @Override
     public String toString() {
-        return "TranslationApply{" +
+        return "TranslationApplyVO{" +
                 "id=" + id +
                 ", reqId=" + reqId +
                 ", origType=" + origType +
