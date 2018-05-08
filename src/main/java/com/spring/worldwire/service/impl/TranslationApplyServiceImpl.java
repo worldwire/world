@@ -93,7 +93,9 @@ public class TranslationApplyServiceImpl implements TranslationApplyService {
 
     @Override
     public int payTranslation(Long id) {
-
-        return 0;
+        TranslationApply translationApply = new TranslationApply();
+        translationApply.setId(id);
+        translationApply.setStatus(TranslationApplyStatusEnum.NORMAL);
+        return translationApplyDao.updateByPrimaryKeySelective(translationApply);
     }
 }
