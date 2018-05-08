@@ -8,7 +8,7 @@ import com.spring.worldwire.model.TradeOrder;
 import com.spring.worldwire.model.UserAccount;
 import com.spring.worldwire.query.TradeOrderQuery;
 import com.spring.worldwire.service.LoginInfoService;
-import com.spring.worldwire.service.TradeOrderservice;
+import com.spring.worldwire.service.TradeOrderService;
 import com.spring.worldwire.service.UserAccountService;
 import com.spring.worldwire.utils.DateUtil;
 import com.spring.worldwire.utils.HttpUtils;
@@ -17,7 +17,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
@@ -35,7 +34,7 @@ public class UserCenterController {
     @Autowired
     private UserAccountService userAccountService;
     @Autowired
-    private TradeOrderservice tradeOrderservice;
+    private TradeOrderService tradeOrderservice;
     @Autowired
     private LoginInfoService loginInfoService;
     @Autowired

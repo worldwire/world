@@ -1,5 +1,6 @@
 package com.spring.worldwire.service;
 
+import com.spring.worldwire.model.TranslationApply;
 import com.spring.worldwire.model.UserAccount;
 
 /**
@@ -13,4 +14,5 @@ public interface UserAccountService {
 
     int updateUserAccount(UserAccount record);
 
+    UserAccount getById(Long userId);
 }

@@ -40,9 +40,9 @@ public class PaypalController extends BaseResultController {
       logger.info("[paypal回调]  参数 name="+name +"   valueStr = "+valueStr);
       params.put(name, valueStr);
     }
-
+    String paymentId = "";
     try {
-      String paymentId = params.get("paymentId");
+      paymentId = params.get("paymentId");
       Payment payment = PaypalCore.executePayment(paymentId, params.get("PayerID"));
       logger.info("[paypal回调] payment"+payment.toJSON());
       if(payment.getState().equals("approved")){
@@ -51,7 +51,7 @@ public class PaypalController extends BaseResultController {
         return "success";
       }
     } catch (PayPalRESTException e) {
-      logger.error(e.getMessage());
+      logger.error("[paypal回调] 支付出现异常  thirdOrderNum = {} ",paymentId,e);
     }
 
     return "fail";

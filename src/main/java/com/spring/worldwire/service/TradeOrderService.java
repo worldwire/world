@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by luxun on 2018/4/27.
  */
-public interface TradeOrderservice {
+public interface TradeOrderService {
 
     List<TradeOrder> selectByPage(TradeOrderQuery query);
 

@@ -1,6 +1,9 @@
 package com.spring.worldwire.enums;
 
-public enum LanguageEnum {
+import com.spring.worldwire.extent.INumericEnum;
+
+@SuppressWarnings("unused")
+public enum LanguageEnum implements INumericEnum {
 	
 	CHINESE(1,"chinese","中文"),
 	ENGLISH(2,"english","英语"),
@@ -15,7 +18,7 @@ public enum LanguageEnum {
 	
 	private String cnName;
 
-	private LanguageEnum(int code, String enName, String cnName) {
+	LanguageEnum(int code, String enName, String cnName) {
 		this.code = code;
 		this.enName = enName;
 		this.cnName = cnName;
@@ -45,14 +48,18 @@ public enum LanguageEnum {
 		this.cnName = cnName;
 	}
 	
-	public static String getNameByCode(int code){
+	public static LanguageEnum getNameByCode(int code){
 		LanguageEnum[] array = LanguageEnum.values();
-		for (LanguageEnum languageEnum : array) {
-			if(code == languageEnum.getCode()){
-				return languageEnum.getEnName();
+		for (LanguageEnum value : array) {
+			if(code == value.getCode()){
+				return value;
 			}
 		}
-		return "";
+		return null;
 	}
 
+	@Override
+	public int getNumericValue() {
+		return this.code;
+	}
 }

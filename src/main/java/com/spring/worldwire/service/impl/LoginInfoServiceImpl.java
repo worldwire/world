@@ -53,4 +53,9 @@ public class LoginInfoServiceImpl implements LoginInfoService {
 		return loginInfoDao.selectByPrimaryKey(id);
 	}
 
+	@Override
+	public int update(LoginInfo info) {
+		return loginInfoDao.updateByPrimaryKeySelective(info);
+	}
+
 }
