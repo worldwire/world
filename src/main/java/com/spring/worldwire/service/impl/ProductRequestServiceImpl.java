@@ -15,4 +15,9 @@ public class ProductRequestServiceImpl implements ProductRequestService {
     public ProductRequest findById(Long id) {
         return productRequestDao.selectByPrimaryKey(id);
     }
+
+    @Override
+    public int save(ProductRequest productRequest) {
+        return productRequestDao.insert(productRequest);
+    }
 }

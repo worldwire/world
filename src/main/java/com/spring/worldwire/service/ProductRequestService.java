@@ -4,4 +4,6 @@ import com.spring.worldwire.model.ProductRequest;
 
 public interface ProductRequestService {
     ProductRequest findById(Long id);
+
+    int save(ProductRequest productRequest);
 }
