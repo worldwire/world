@@ -3,6 +3,8 @@ package com.spring.worldwire.model;
 import com.spring.worldwire.enums.LanguageEnum;
 import com.spring.worldwire.enums.ProductRequestStatusEnum;
 
+import java.util.Date;
+
 @SuppressWarnings("unused")
 public class ProductRequest {
     private Long id;
@@ -30,6 +32,12 @@ public class ProductRequest {
     private ProductRequestStatusEnum status;
 
     private Integer userType;
+
+    private Long userId;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     public Long getId() {
         return id;
@@ -135,6 +143,29 @@ public class ProductRequest {
         this.userType = userType;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
 
     /**
      * 克隆一个新语种的翻译
@@ -151,6 +182,8 @@ public class ProductRequest {
         fromProductRequest.website = this.website;
         fromProductRequest.userType = this.userType;
         fromProductRequest.requestType = this.requestType;
+        fromProductRequest.createTime = new Date();
+        fromProductRequest.userId = this.userId;
         if(this.languageId==null){
             fromProductRequest.languageId = this.id;
         }else{
@@ -159,13 +192,25 @@ public class ProductRequest {
         return fromProductRequest;
     }
 
-
-	@Override
-	public String toString() {
-		return "ProductRequest [id=" + id + ", requestType=" + requestType + ", keyWord=" + keyWord + ", titile="
-				+ titile + ", content=" + content + ", mobile=" + mobile + ", email=" + email + ", phone=" + phone
-				+ ", website=" + website + ", languageType=" + languageType + ", languageId=" + languageId + ", status="
-				+ status + ", userType=" + userType + "]";
-	}
-    
+    @Override
+    public String toString() {
+        return "ProductRequest{" +
+                "id=" + id +
+                ", requestType=" + requestType +
+                ", keyWord='" + keyWord + '\'' +
+                ", titile='" + titile + '\'' +
+                ", content='" + content + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", website='" + website + '\'' +
+                ", languageType=" + languageType +
+                ", languageId=" + languageId +
+                ", status=" + status +
+                ", userType=" + userType +
+                ", userId=" + userId +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
 }

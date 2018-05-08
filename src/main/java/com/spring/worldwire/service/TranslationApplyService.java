@@ -18,4 +18,6 @@ public interface TranslationApplyService {
     int translation(TranslationApplyVO translationApplyVO);
 
     int updateAudit(Long id, Long auditId);
+
+    int payTranslation(Long id);
 }

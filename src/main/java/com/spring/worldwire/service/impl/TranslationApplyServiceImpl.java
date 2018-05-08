@@ -18,13 +18,18 @@ import java.util.Date;
 /**
  * Created by pg on 2018/4/28.
  */
+@SuppressWarnings("unused")
 @Service
 public class TranslationApplyServiceImpl implements TranslationApplyService {
 
-    @Autowired
     private TranslationApplyDao translationApplyDao;
-    @Autowired
     private ProductRequestDao productRequestDao;
+
+    @Autowired
+    public TranslationApplyServiceImpl(TranslationApplyDao translationApplyDao, ProductRequestDao productRequestDao) {
+        this.translationApplyDao = translationApplyDao;
+        this.productRequestDao = productRequestDao;
+    }
 
 
     @Override
@@ -40,6 +45,7 @@ public class TranslationApplyServiceImpl implements TranslationApplyService {
             translationApply.setStatus(TranslationApplyStatusEnum.INIT);
             translationApply.setCreateTime(new Date());
             translationApply.setFromReqId(converFromProduct.getId());
+            translationApply.setUserId(converFromProduct.getUserId());
             if(translationApplyDao.insert(translationApply)>0){
                 return translationApply;
             }else{
@@ -83,5 +89,11 @@ public class TranslationApplyServiceImpl implements TranslationApplyService {
         translationApply.setAuditorTime(new Date());
         return translationApplyDao.updateByPrimaryKeySelective(translationApply);
 
+    }
+
+    @Override
+    public int payTranslation(Long id) {
+
+        return 0;
     }
 }
