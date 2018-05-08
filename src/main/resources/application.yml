@@ -6,9 +6,6 @@ mybatis:
 spring:
   thymeleaf:
     cache: false
-file:
-  basedir: D:\data\worldwire\file\
-#thymeleaf end
   redis:
     database: 0
     host: 47.104.201.53
@@ -19,6 +16,11 @@ file:
     max-idle: 8
     min-idle: 0
     timeout: 0
+multipart:
+  maxFileSize: 50Mb
+qq:
+  appid: 1106875040
+  appkey: xy0YfT0z8I2JcN44
 ---
 spring:
   profile: online
@@ -28,6 +30,8 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
+file:
+  basedir: data\worldwire\file\
 ---
 spring:
   profiles: test
@@ -37,3 +41,5 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
+file:
+  basedir: D:\data\worldwire\file\
