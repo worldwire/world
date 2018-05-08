@@ -13,4 +13,6 @@ public interface LoginInfoService {
 
 	LoginInfo selectByPrimaryKey(Long id);
 
+	int update(LoginInfo info);
+
 }

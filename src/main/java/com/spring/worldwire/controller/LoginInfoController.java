@@ -72,12 +72,13 @@ public class LoginInfoController {
 				map.put("status", StatusCodeEnum.EMPTY.getCode());
 				return map;
 			}
-			Cookie cookie = new Cookie("loginKey",list.get(0).getId().toString());
+			Cookie cookie = new Cookie("loginKey" + list.get(0).getId(),list.get(0).getId().toString());
 			response.addCookie(cookie);
 
 			UserAccount account = userAccountService.selectByUserId(list.get(0).getId());
 			if(DateUtil.dateInterval(account.getLastSignTime(),new Date()) > 1){
-				account.setSignNum(0);//上次签到时间比当前
+				account.setSignNum(0);//上次签到时间比当前时间大于一天
+				userAccountService.updateUserAccount(account);
 			}
 
 			map.put("data", list.get(0));

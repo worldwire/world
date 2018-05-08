@@ -14,7 +14,7 @@ public class DateUtil {
     private static DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
-     * 计算两个日期相差的天数
+     * 计算两个日期相差的时间
      * @param start 开始日期
      * @param end   结束日期
      * @return
@@ -24,6 +24,19 @@ public class DateUtil {
 
         return (int) ((df.parse(df.format(end)).getTime() - df.parse(df.format(start)).getTime())/(3600 * 24 * 1000));
 
+    }
 
+    /**
+     * 计算当天还剩多长时间，单位是毫秒
+     * @param date
+     * @return
+     */
+    public static Long getTimeInterval(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR,23);
+        cal.set(Calendar.MINUTE,59);
+        cal.set(Calendar.SECOND,59);
+        cal.set(Calendar.MILLISECOND,999);
+        return cal.getTime().getTime() - date.getTime();
     }
 }

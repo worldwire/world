@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -23,7 +24,7 @@ public class FileControler{
     private String baseFilePath;
 
     @RequestMapping("/upload")
-    public String fileUpload(MultipartFile file,String type){
+    public String fileUpload(MultipartFile file,String type) throws IOException {
         if(StringUtils.isEmpty(type)){
             type = "default";
         }
@@ -37,5 +38,4 @@ public class FileControler{
         }
         return "";
     }
-
 }

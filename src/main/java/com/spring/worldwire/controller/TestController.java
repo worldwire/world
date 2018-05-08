@@ -62,6 +62,12 @@ public class TestController {
 		return "haha";
 	}
 
+	@RequestMapping("/login")
+	public String login(){
+
+		return "";
+	}
+
 	@RequestMapping("/pay")
 	@ResponseBody
 	public String payTest(String pay,int payCode,int currencyCode){
