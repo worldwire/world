@@ -5,11 +5,10 @@ import com.spring.worldwire.enums.LanguageEnum;
 import com.spring.worldwire.model.ProductRequest;
 import com.spring.worldwire.model.TranslationApply;
 import com.spring.worldwire.model.UserAccount;
-import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.service.ProductRequestService;
 import com.spring.worldwire.service.TranslationApplyService;
 import com.spring.worldwire.service.UserAccountService;
-import com.spring.worldwire.service.UserInfoService;
+import com.spring.worldwire.utils.WordsUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +76,7 @@ public class TranslationController {
 			ProductRequest productRequest = productRequestService.findById(translationApply.getReqId());
 			//todo 计算费用
 			String content = productRequest.getContent();
-			if(freeFlag&&content.length()<200){
+			if(freeFlag&&WordsUtils.countWord(content,productRequest.getLanguageType().getEnName())<200){
 				//翻译流程通过
 				UserAccount userInfo = userAccountService.getById(userId);
 				if(userInfo.getFreeTranslate()>0){
