@@ -14,5 +14,4 @@ public interface UserAccountService {
 
     int updateUserAccount(UserAccount record);
 
-    UserAccount getById(Long userId);
 }

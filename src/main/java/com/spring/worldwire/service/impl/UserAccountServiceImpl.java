@@ -29,9 +29,4 @@ public class UserAccountServiceImpl implements UserAccountService {
     public int updateUserAccount(UserAccount record) {
         return userAccountDao.updateByPrimaryKeySelective(record);
     }
-
-    @Override
-    public UserAccount getById(Long userId) {
-        return userAccountDao.selectAccountByUserId(userId);
-    }
 }

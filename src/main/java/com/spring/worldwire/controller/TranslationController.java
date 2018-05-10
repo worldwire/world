@@ -78,7 +78,7 @@ public class TranslationController {
 			String content = productRequest.getContent();
 			if(freeFlag&&WordsUtils.countWord(content,productRequest.getLanguageType().getEnName())<200){
 				//翻译流程通过
-				UserAccount userInfo = userAccountService.getById(userId);
+				UserAccount userInfo = userAccountService.selectByUserId(userId);
 				if(userInfo.getFreeTranslate()>0){
 					//
 					int i = translationApplyService.payTranslation(id);

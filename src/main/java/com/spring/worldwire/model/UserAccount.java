@@ -19,6 +19,10 @@ public class UserAccount {
 
     private Date updateTime;
 
+    private Integer version;
+
+    private Integer oldVersion;
+
     public Long getId() {
         return id;
     }
@@ -75,6 +79,14 @@ public class UserAccount {
         this.createTime = createTime;
     }
 
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
     public Date getUpdateTime() {
         return updateTime;
     }
@@ -83,11 +95,27 @@ public class UserAccount {
         this.updateTime = updateTime;
     }
 
-	@Override
-	public String toString() {
-		return "UserAccount [id=" + id + ", viewingTimes=" + viewingTimes + ", freeTranslate=" + freeTranslate
-				+ ", userId=" + userId + ", signNum=" + signNum + ", lastSignTime=" + lastSignTime + ", createTime="
-				+ createTime + ", updateTime=" + updateTime + "]";
-	}
-    
+    public Integer getOldVersion() {
+        return oldVersion;
+    }
+
+    public void setOldVersion(Integer oldVersion) {
+        this.oldVersion = oldVersion;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("UserAccount{");
+        sb.append("id=").append(id);
+        sb.append(", viewingTimes=").append(viewingTimes);
+        sb.append(", freeTranslate=").append(freeTranslate);
+        sb.append(", userId=").append(userId);
+        sb.append(", signNum=").append(signNum);
+        sb.append(", lastSignTime=").append(lastSignTime);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", updateTime=").append(updateTime);
+        sb.append(", version=").append(version);
+        sb.append('}');
+        return sb.toString();
+    }
 }

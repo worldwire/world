@@ -14,4 +14,6 @@ public interface UserCheckDao {
     int updateByPrimaryKeySelective(UserCheck record);
 
     int updateByPrimaryKey(UserCheck record);
+
+    UserCheck getByUserAndReq(Long userId, Long reqId);
 }

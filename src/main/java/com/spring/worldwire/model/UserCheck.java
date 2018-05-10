@@ -7,6 +7,8 @@ public class UserCheck {
 
     private Long reqId;
 
+    private Long userId;
+
     private Date createTime;
 
     public Long getId() {
@@ -33,9 +35,21 @@ public class UserCheck {
         this.createTime = createTime;
     }
 
-	@Override
-	public String toString() {
-		return "UserCheck [id=" + id + ", reqId=" + reqId + ", createTime=" + createTime + "]";
-	}
-    
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    @Override
+    public String toString() {
+        return "UserCheck{" +
+                "id=" + id +
+                ", reqId=" + reqId +
+                ", userId=" + userId +
+                ", createTime=" + createTime +
+                '}';
+    }
 }

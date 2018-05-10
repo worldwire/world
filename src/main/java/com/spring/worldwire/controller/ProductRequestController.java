@@ -2,7 +2,11 @@ package com.spring.worldwire.controller;
 
 import com.spring.worldwire.enums.ProductRequestStatusEnum;
 import com.spring.worldwire.model.ProductRequest;
+import com.spring.worldwire.model.UserAccount;
+import com.spring.worldwire.model.UserCheck;
 import com.spring.worldwire.service.ProductRequestService;
+import com.spring.worldwire.service.UserAccountService;
+import com.spring.worldwire.service.UserCheckService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +27,16 @@ public class ProductRequestController {
 
     private ProductRequestService productRequestService;
 
+    private UserCheckService userCheckService;
+
+    private UserAccountService userAccountService;
+
     @Autowired
-    public ProductRequestController(ProductRequestService productRequestService) {
+    public ProductRequestController(ProductRequestService productRequestService,UserCheckService userCheckService,
+                                    UserAccountService userAccountService) {
         this.productRequestService = productRequestService;
+        this.userCheckService = userCheckService;
+        this.userAccountService = userAccountService;
     }
 
     @RequestMapping("/toApply")
@@ -48,6 +59,41 @@ public class ProductRequestController {
         }else{
             logger.info("[发布需求] 申请信息数据校验不完整");
         }
+
+        return "";
+    }
+
+    @RequestMapping("/detail")
+    public String detail(Long reqId){
+
+        ProductRequest productRequest = productRequestService.findById(reqId);
+
+        return "";
+    }
+
+    @RequestMapping("/checkProductRequest")
+    public String checkProductRequest(Long reqId){
+        Long userId = 0L;
+
+        UserCheck userCheck = userCheckService.checkUserCheck(userId, reqId);
+        if(userCheck!=null&&userCheck.getId()!=null){
+            return "";
+        }else{
+            //循环执行三次，内部是乐观锁实现
+            for(int i = 0 ; i <3 ;i++) {
+                UserAccount userAccount = userAccountService.selectByUserId(userId);
+                if (userAccount.getViewingTimes() > 0) {
+                    if(userCheckService.checkProductRequest(userAccount,reqId)>0){
+                        break;
+                    }
+                    logger.info("[申请查看] userId={} reqId={} 更新失败",userId,reqId);
+                } else {
+                    //支付页面
+                    return "";
+                }
+            }
+        }
+
 
         return "";
     }
