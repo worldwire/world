@@ -20,8 +20,8 @@ public class UserInfoController {
     @Autowired
     private UserInfoService userInfoService;
 
-    @RequestMapping("/fullfillInfo")
-    public Map<String,Object> fullFillUserInfo(UserInfo userInfo){
+    @RequestMapping("/insert")
+    public Map<String,Object> insertUserInfo(UserInfo userInfo){
         Map<String,Object> map = new HashMap<String,Object>();
         try{
             int status = userInfoService.insert(userInfo);

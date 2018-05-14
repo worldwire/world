@@ -26,6 +26,10 @@ public class UserAccountController {
     @Autowired
     private RedisUtils redisUtils;
 
+    /**
+     * 注册完成之后初始化用户账号信息
+     * @param userId
+     */
     @RequestMapping("/init")
     public void initUserAccount(Long userId){
         Map<String,Object> map = new HashMap<String,Object>();
@@ -53,12 +57,7 @@ public class UserAccountController {
             map.put("code", StatusCodeEnum.EXISTS.getCode());
             return map;
         }
-        Date now = new Date();
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR, 23);
-        cal.set(Calendar.MINUTE, 59);
-        cal.set(Calendar.SECOND, 59);
-        long interval = cal.getTimeInMillis() - now.getTime();
+        long interval = DateUtil.getTimeInterval(new Date());
         calculateSignDays(userId);
         redisUtils.set(cacheKey,userId,interval);
         map.put("msg",StatusCodeEnum.SUCCCESS.getMsg());

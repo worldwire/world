@@ -56,6 +56,7 @@ public class UserCenterController {
      * @param userId
      * @return
      */
+    @RequestMapping("/sign")
     public Map<String,Object> signUp(Long userId){
         Map<String,Object> map = new HashMap<String,Object>();
         try {

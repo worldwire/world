@@ -16,8 +16,6 @@ public class Constants {
     public static final String MAIL_SMTP_HOST  = "smtp.163.com";
     // 发送邮件的模板页面
     public static final String MAIL_SEND_TEMPLATE = "templates/mail/mail_send_template.html";
-    //发送邮件的模板页面
-    public static final String MAIL_TEMPLATE = "mail/mail_send_template";
     //找回密码邮件里面url的模板
     public static final String MAIL_ADDRESS_PREFIX = "http://www.baidu.com";
 

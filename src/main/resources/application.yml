@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 80
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.spring.worldwire.model

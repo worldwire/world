@@ -41,5 +41,20 @@ public class MailController {
         }
         return "";
     }
+    @RequestMapping("/registerMail")
+    public String sendRegisterMail(Long userId){
+        LoginInfo info = loginInfoService.selectByPrimaryKey(userId);
+        try {
+            Date date = new Date();
+            String url = Constants.MAIL_ADDRESS_PREFIX + "?timestamps=" + date.getTime() + "&userId=" + userId;
+            MailUtils.sendSimpleMail(info.getEmail(), date, url);
+            redisUtils.set(Constants.CACHE_MAIL_VALID_PREFIX + userId + "_" + date.getTime() ,"" ,10 * 60 * 1000);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
 
 }

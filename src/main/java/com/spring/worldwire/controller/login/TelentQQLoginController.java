@@ -16,11 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by luxun on 2018/5/7.
  */
-@Controller
 @RequestMapping("/login/qq")
+@Controller
 public class TelentQQLoginController {
 
-    @RequestMapping("/beforelogin")
+    @RequestMapping("/auth")
     public ModelAndView beforeLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
         response.setContentType("text/html;charset=utf-8");
         try {
