@@ -13,7 +13,7 @@
     <result column="version" property="version" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, viewing_times, free_translate, userId, sign_num, last_sign_time, create_time,
+    id, viewing_times, free_translate, user_id, sign_num, last_sign_time, create_time,
     update_time,version
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -47,7 +47,7 @@
         free_translate,
       </if>
       <if test="userId != null" >
-        userId,
+        user_id,
       </if>
       <if test="signNum != null" >
         sign_num,
@@ -138,7 +138,7 @@
     where id = #{id,jdbcType=BIGINT} and version = #{oldVersion,jdbcType=INTEGER}
   </update>
 
-  <select id="selectAccountByUserId" parameterType="java.lang.Long">
+  <select id="selectAccountByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>
     from user_account
     where user_id = #{userId,jdbcType=BIGINT}

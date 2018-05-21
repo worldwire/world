@@ -22,5 +22,6 @@ public interface LoginInfoDao {
     
     List<LoginInfo> selectByQuery(@Param("query")LoginInfoQuery loginInfoQuery);
 
+    List<LoginInfo> selectByThirdLogin(@Param("thirdKey")String thirdKey, @Param("thirdType")Integer thirdType);
 
 }

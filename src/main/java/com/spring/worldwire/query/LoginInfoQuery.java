@@ -11,6 +11,10 @@ public class LoginInfoQuery extends Pager {
 
     private String email;
 
+    private Integer thirdType;
+
+    private String thirdKey;
+
     public LoginInfoQuery() {
         super(10);
     }
@@ -29,5 +33,21 @@ public class LoginInfoQuery extends Pager {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Integer getThirdType() {
+        return thirdType;
+    }
+
+    public void setThirdType(Integer thirdType) {
+        this.thirdType = thirdType;
+    }
+
+    public String getThirdKey() {
+        return thirdKey;
+    }
+
+    public void setThirdKey(String thirdKey) {
+        this.thirdKey = thirdKey;
     }
 }

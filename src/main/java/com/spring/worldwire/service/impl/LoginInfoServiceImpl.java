@@ -58,4 +58,21 @@ public class LoginInfoServiceImpl implements LoginInfoService {
 		return loginInfoDao.updateByPrimaryKeySelective(info);
 	}
 
+	@Override
+	public int insert(LoginInfo info) {
+		 return loginInfoDao.insertSelective(info);
+	}
+
+	@Override
+	public LoginInfo selectByThirdLogin(String thirdKey,Integer thirdType) throws Exception {
+		List<LoginInfo> list = loginInfoDao.selectByThirdLogin(thirdKey,thirdType);
+		if(!CollectionUtils.isEmpty(list) ){
+			if(list.size() > 0){
+				throw new Exception("multiple data result");
+			}
+			return list.get(0);
+		}
+		return null;
+	}
+
 }

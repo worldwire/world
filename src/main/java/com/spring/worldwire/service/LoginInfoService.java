@@ -15,4 +15,8 @@ public interface LoginInfoService {
 
 	int update(LoginInfo info);
 
+	int insert(LoginInfo info);
+
+	LoginInfo selectByThirdLogin(String thirdKey,Integer thirdType) throws Exception;
+
 }

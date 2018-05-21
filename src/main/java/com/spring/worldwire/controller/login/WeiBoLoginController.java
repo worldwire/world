@@ -1,5 +1,12 @@
 package com.spring.worldwire.controller.login;
 
+import com.spring.worldwire.model.LoginInfo;
+import com.spring.worldwire.service.LoginService;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,6 +17,7 @@ import weibo4j.util.BareBonesBrowserLaunch;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Objects;
 
 /**
  * @Author luxun.
@@ -20,38 +28,30 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class WeiBoLoginController {
 
+    @Autowired
+    @Qualifier("weiboService")
+    private LoginService loginService;
+
+    private Logger log = LoggerFactory.getLogger(WeiBoLoginController.class);
+
     @RequestMapping("/auth")
-    public ModelAndView auth(HttpServletRequest request,
-                             HttpServletResponse response) throws Exception {
-        Oauth oauth = new Oauth();
-        String url = oauth.authorize("code", null);
-        response.sendRedirect(url);
-//      BareBonesBrowserLaunch.openURL(oauth.authorize("code", null));
-        return null;
+    public void auth(HttpServletRequest request,HttpServletResponse response) throws Exception {
+
+        String result = loginService.auth();
+        if (!StringUtils.isEmpty(result)) {
+            response.sendRedirect(result);
+        }
     }
 
     @RequestMapping("/callback")
-    public ModelAndView authCallback(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String code = request.getParameter("code");
-        Oauth oauth = new Oauth();
-        String token = "";
-        try {
-            token = oauth.getAccessTokenByCode(code).toString();
-            String str[] = token.split(",");
-            String accessToken = str[0].split("=")[1];
-            String str1[] = str[3].split("]");
-            String uid = str1[0].split("=")[1];
-            Users users = new Users();
-            users.client.setToken(accessToken);
-            User weiboUser = users.showUserById(uid);
-            String name = weiboUser.getScreenName();
-            request.getSession().setAttribute("user", name);
-        } catch (Exception e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
+    public String authCallback(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        LoginInfo loginInfo = loginService.callback(request,response);
+        if (Objects.isNull(loginInfo)) {
+            return "redirect:login";
         }
-        response.sendRedirect(request.getContextPath() + "/index.do");
-        return null;
+        String fromURL = request.getHeader("Referer");
+        return "redirect:" + fromURL;  //登录成功跳转到登录前页面
+
     }
 
 }

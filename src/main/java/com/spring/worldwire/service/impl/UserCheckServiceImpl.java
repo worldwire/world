@@ -6,6 +6,7 @@ import com.spring.worldwire.model.UserAccount;
 import com.spring.worldwire.model.UserCheck;
 import com.spring.worldwire.service.UserCheckService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -14,6 +15,7 @@ import java.util.Date;
  * @Auther pg
  * @Date create in 22:04 2018/5/10
  */
+@Service
 public class UserCheckServiceImpl implements UserCheckService {
 
     @Autowired

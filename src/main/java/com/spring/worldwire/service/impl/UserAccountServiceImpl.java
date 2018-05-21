@@ -17,7 +17,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public int insert(UserAccount record) {
-        return userAccountDao.insert(record);
+        return userAccountDao.insertSelective(record);
     }
 
     @Override

@@ -162,7 +162,16 @@
   <sql id="Query_Where">
     <trim prefix="where" prefixOverrides="AND |OR ">
       <if test="query.email != null">
-        email = #{query.email,jdbcType=VARCHAR}
+        and email = #{query.email,jdbcType=VARCHAR}
+      </if>
+      <if test="query.password != null">
+        and password = #{query.password,jdbcType=VARCHAR}
+      </if>
+      <if test="query.thirdType != null">
+        and third_type = #{query.thirdType,jdbcType=INTEGER}
+      </if>
+      <if test="query.thirdKey != null">
+        and third_key = #{query.thirdKey,jdbcType=VARCHAR}
       </if>
       <if test="query.password != null">
         and password = #{query.password,jdbcType=VARCHAR}
@@ -173,5 +182,12 @@
     </trim>
 
   </sql>
+
+  <select id="selectByThirdLogin" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from login_info
+    where third_key = #{thirdKey,jdbcType=VARCHAR} and third_type = #{thirdType,jdbcType=INTEGER}
+    and status = 1
+  </select>
 
 </mapper>
