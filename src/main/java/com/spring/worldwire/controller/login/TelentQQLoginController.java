@@ -31,27 +31,27 @@ public class TelentQQLoginController {
         return null;
     }
 
-    @RequestMapping("/afterlogin")
+    @RequestMapping("/callback")
     public ModelAndView afterLogin(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         try {
             AccessToken accessTokenObj = (new Oauth()).getAccessTokenByRequest(request);
-            String accessToken   = null,
-                    openID        = null;
+            String accessToken = null,
+                    openID = null;
             long tokenExpireIn = 0L;
             if (accessTokenObj.getAccessToken().equals("")) {
                 System.out.print("没有获取到响应参数");
-            }else{
+            } else {
                 accessToken = accessTokenObj.getAccessToken();
                 tokenExpireIn = accessTokenObj.getExpireIn();
-                OpenID openIDObj =  new OpenID(accessToken);
+                OpenID openIDObj = new OpenID(accessToken);
                 openID = openIDObj.getUserOpenID();
                 UserInfo qzoneUserInfo = new UserInfo(accessToken, openID);
                 UserInfoBean userInfoBean = qzoneUserInfo.getUserInfo();
                 String name = userInfoBean.getNickname();
                 System.out.println("欢迎你，" + name + "!");
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

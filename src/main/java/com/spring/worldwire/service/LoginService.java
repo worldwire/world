@@ -15,7 +15,7 @@ public interface LoginService {
 
     public int register(LoginInfo info);
 
-    LoginInfo login(LoginInfo info);
+    public LoginInfo login(LoginInfo info,HttpServletResponse response);
 
     public abstract String auth();
 

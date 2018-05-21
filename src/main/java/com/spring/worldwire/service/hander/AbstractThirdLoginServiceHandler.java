@@ -19,4 +19,9 @@ public abstract class AbstractThirdLoginServiceHandler extends AbstractLoginServ
         return 0;
     }
 
+    @Override
+    public LoginInfo login(LoginInfo info,HttpServletResponse response) {
+        return null;
+    }
+
 }

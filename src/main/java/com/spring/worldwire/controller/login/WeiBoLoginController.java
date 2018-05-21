@@ -9,11 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import weibo4j.Oauth;
-import weibo4j.Users;
-import weibo4j.model.User;
-import weibo4j.util.BareBonesBrowserLaunch;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +30,7 @@ public class WeiBoLoginController {
     private Logger log = LoggerFactory.getLogger(WeiBoLoginController.class);
 
     @RequestMapping("/auth")
-    public void auth(HttpServletRequest request,HttpServletResponse response) throws Exception {
+    public void auth(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         String result = loginService.auth();
         if (!StringUtils.isEmpty(result)) {
@@ -45,7 +40,7 @@ public class WeiBoLoginController {
 
     @RequestMapping("/callback")
     public String authCallback(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        LoginInfo loginInfo = loginService.callback(request,response);
+        LoginInfo loginInfo = loginService.callback(request, response);
         if (Objects.isNull(loginInfo)) {
             return "redirect:login";
         }

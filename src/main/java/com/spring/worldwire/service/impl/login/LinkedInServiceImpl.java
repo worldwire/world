@@ -47,11 +47,6 @@ public class LinkedInServiceImpl extends AbstractThirdLoginServiceHandler {
     private static Logger log = LoggerFactory.getLogger(LinkedInServiceImpl.class);
 
     @Override
-    public LoginInfo login(LoginInfo info) {
-        return null;
-    }
-
-    @Override
     public String auth() {
         return linkedInHelper.authorize();
     }

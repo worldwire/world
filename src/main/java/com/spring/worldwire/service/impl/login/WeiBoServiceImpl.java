@@ -41,11 +41,6 @@ public class WeiBoServiceImpl extends AbstractThirdLoginServiceHandler {
     private static Logger log = LoggerFactory.getLogger(WeiBoServiceImpl.class);
 
     @Override
-    public LoginInfo login(LoginInfo info) {
-        return null;
-    }
-
-    @Override
     public String auth() {
         Oauth oauth = new Oauth();
         try {

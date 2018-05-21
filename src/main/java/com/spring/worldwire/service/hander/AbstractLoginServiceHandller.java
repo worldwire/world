@@ -10,6 +10,7 @@ import com.spring.worldwire.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.util.Date;
@@ -20,7 +21,7 @@ import java.util.Objects;
  * @author luxun.
  * @date 2018/5/15 10:54
  */
-public abstract class AbstractLoginServiceHandller implements LoginService{
+public abstract class AbstractLoginServiceHandller implements LoginService {
 
     @Autowired
     private UserAccountService userAccountService;
@@ -34,7 +35,7 @@ public abstract class AbstractLoginServiceHandller implements LoginService{
 
     public void handleSignUp(Long id) throws ParseException {
         UserAccount account = userAccountService.selectByUserId(id);
-        if(Objects.isNull(account)){
+        if (Objects.isNull(account)) {
             return;
         }
         if (DateUtil.dateInterval(account.getLastSignTime(), new Date()) > 1) {
@@ -52,11 +53,8 @@ public abstract class AbstractLoginServiceHandller implements LoginService{
 
         if (Objects.nonNull(loginInfo.getEmail()) && Objects.nonNull(loginInfo.getPassword())) {
 
-            LoginInfoQuery query = new LoginInfoQuery();
-            query.setEmail(loginInfo.getEmail());
-            query.setPassword(loginInfo.getPassword());
 
-            List<LoginInfo> list = loginInfoService.selectByQuery(query);
+            List<LoginInfo> list = loginInfoService.selectByQuery(buildQuery(loginInfo));
 
             return list.stream().findFirst().orElse(null);
         }
@@ -71,6 +69,23 @@ public abstract class AbstractLoginServiceHandller implements LoginService{
             return list.stream().findFirst().orElse(null);
 
         }
+        return null;
+    }
+
+    protected LoginInfoQuery buildQuery(LoginInfo loginInfo) {
+        LoginInfoQuery query = new LoginInfoQuery();
+        query.setEmail(loginInfo.getEmail());
+        query.setPassword(loginInfo.getPassword());
+        return query;
+    }
+
+    @Override
+    public String auth() {
+        return null;
+    }
+
+    @Override
+    public LoginInfo callback(HttpServletRequest request, HttpServletResponse response) {
         return null;
     }
 
