@@ -2,6 +2,7 @@ package com.spring.worldwire.controller;
 
 import com.spring.worldwire.enums.StatusCodeEnum;
 import com.spring.worldwire.model.UserInfo;
+import com.spring.worldwire.result.ResponseResult;
 import com.spring.worldwire.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,21 +22,15 @@ public class UserInfoController {
     private UserInfoService userInfoService;
 
     @RequestMapping("/insert")
-    public Map<String,Object> insertUserInfo(UserInfo userInfo){
-        Map<String,Object> map = new HashMap<String,Object>();
+    public ResponseResult insertUserInfo(UserInfo userInfo){
         try{
             int status = userInfoService.insert(userInfo);
             if(status == 1){
-                map.put("msg", StatusCodeEnum.SUCCCESS.getMsg());
-                map.put("status", StatusCodeEnum.SUCCCESS.getCode());
-                return map;
+                return new ResponseResult(null,StatusCodeEnum.SUCCESS,"添加成功");
             }
-            map.put("msg", StatusCodeEnum.FAIL.getMsg());
-            map.put("status", StatusCodeEnum.FAIL.getCode());
+            return new ResponseResult(null,StatusCodeEnum.FAIL,"添加返回码错误");
         }catch (Exception e){
-            map.put("msg", StatusCodeEnum.ERROR.getMsg());
-            map.put("status", StatusCodeEnum.ERROR.getCode());
+            return new ResponseResult(null,StatusCodeEnum.ERROR,"添加操作系统异常:");
         }
-        return map;
     }
 }

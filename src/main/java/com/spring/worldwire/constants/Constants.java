@@ -16,16 +16,18 @@ public class Constants {
     public static final String MAIL_SMTP_HOST  = "smtp.163.com";
     // 发送邮件的模板页面
     public static final String MAIL_SEND_TEMPLATE = "templates/mail/mail_send_template.html";
+    // 找回密码的模板页面
+    public static final String MAIL_PASSWORD_TEMPLATE = "templates/mail/mail_password_template.html";
     //找回密码邮件里面url的模板
     public static final String MAIL_ADDRESS_PREFIX = "http://www.baidu.com";
-
-    //---------------------------------缓存相关常量----------------------------------------
-
     //邮件有效期
     public static final String CACHE_MAIL_VALID_PREFIX = "mail_valid_";
+    //邮件链接失效时间,10分钟有效
+    public static final int MAIL_CODE_INVALIDATE_TIME = 10 * 60 * 1000;
+
+    //----------------------------------------签到相关常量--------------------------------------
     //签到缓存的key前缀
-    public static final String CACHE_SIGN_KEY = "cache_sign_key_"
-;
+    public static final String CACHE_SIGN_KEY = "cache_sign_key_";
 
 
 }

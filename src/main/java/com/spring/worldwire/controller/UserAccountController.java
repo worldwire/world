@@ -32,7 +32,6 @@ public class UserAccountController {
      */
     @RequestMapping("/init")
     public void initUserAccount(Long userId){
-        Map<String,Object> map = new HashMap<String,Object>();
         try {
             UserAccount account = new UserAccount();
             account.setFreeTranslate(0);
@@ -47,40 +46,4 @@ public class UserAccountController {
         }
     }
 
-    @RequestMapping("/sign")
-    @ResponseBody
-    public Map<String,Object> sign(Long userId){
-        Map<String,Object> map = new HashMap<String,Object>();
-        String cacheKey = Constants.CACHE_SIGN_KEY + userId;
-        if(Objects.nonNull(redisUtils.getValueByKey(cacheKey))){
-            map.put("msg",StatusCodeEnum.EXISTS.getMsg());
-            map.put("code", StatusCodeEnum.EXISTS.getCode());
-            return map;
-        }
-        long interval = DateUtil.getTimeInterval(new Date());
-        calculateSignDays(userId);
-        redisUtils.set(cacheKey,userId,interval);
-        map.put("msg",StatusCodeEnum.SUCCCESS.getMsg());
-        map.put("code", StatusCodeEnum.SUCCCESS.getCode());
-        return map;
-    }
-
-    private void calculateSignDays(Long userId) {
-        UserAccount account = userAccountService.selectByUserId(userId);
-        Date last = account.getLastSignTime();
-        Date now = new Date();
-        try {
-            if(DateUtil.dateInterval(last,now) == 1){//时间相差一天即为连续签到，否则连续签到天数为1
-                account.setSignNum(account.getSignNum() + 1);
-                if(account.getSignNum() % 7 == 0){//每7天增加一次免费翻译次数
-                    account.setFreeTranslate(account.getFreeTranslate() + 1);
-                }
-                userAccountService.updateUserAccount(account);
-            }else{
-                account.setSignNum(1);//时间不连续，则连续签到天数置为1
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
 }
