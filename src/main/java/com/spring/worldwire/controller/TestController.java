@@ -49,7 +49,7 @@ public class TestController {
 		model.addAttribute("greet", testService.greeting(name));
 		model.addAttribute("hello",  messageSource.getMessage("hello", null, locale));
 		logger.info("======================");
-		return "index";
+		return "test";
 	}
 	@RequestMapping("/redis")
 	@ResponseBody
