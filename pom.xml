@@ -114,7 +114,7 @@
             </snapshots>
             <id>worldwire</id>
             <name>WorldWire Repositories</name>
-            <url>http://http://101.200.137.78:8081/nexus/content/repositories/releases/</url>
+            <url>http://47.104.201.53:8082/nexus/content/repositories/releases/</url>
         </repository>
     </repositories>
 
