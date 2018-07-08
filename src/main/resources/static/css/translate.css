@@ -1,0 +1,332 @@
+body {
+    background-color: #f2f2f2;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    font-family: "microsoft yahei";
+    width: 1200px;
+    overflow: hidden;
+    margin: 30px auto 0 auto;
+}
+
+.left {
+    float: left;
+}
+
+.main {
+    width: 955px;
+    background-color: #ffffff;
+    float: right;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+    border-radius: 2px;
+}
+
+/* 个人信息部分 */
+/* 头像*/
+.information {
+    margin: 20px 0 0 0;
+    overflow: hidden;
+}
+.photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #cccccc;
+    margin: 20px 0 0 30px;
+    float: left;
+}
+.photo a {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: block;
+}
+.photo a img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+/* 名字 */
+.info {
+    color: #333333;
+    margin: 25px 0 0 15px;
+    font-size: 12px;
+    float: left;
+}
+.info .name {
+    font-size: 16px;
+    font-weight: bold;
+}
+.info .nat {
+    margin: 10px 0;
+}
+.info .nat span {
+    font-size: 14px;
+    display: inline-block;
+    margin: 0 5px;
+}
+.info .nat i {
+    font-size: 12px;
+}
+.info .nat img {
+    width: 18px;
+    height: 18px;
+    margin: -4px 0 0 0;
+    border-radius: 50%;
+}
+.info .text .disc {
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background-color: #D42026;
+    margin: 0px 10px 0 0;
+}
+.info .text span {
+    font-size: 12px;
+    color: #d42026;
+    margin-right: 10px;
+}
+.nationality {
+    float: right;
+    font-size: 14px;
+    margin: 20px 50px 0 0;
+}
+.nationality img {
+    width: 24px;
+    height: 24px;
+    margin-top: 15px;
+    border-radius: 50%;
+}
+
+
+/* 内容区 */
+.content {
+    margin-top: 40px;
+    padding: 0 30px;
+    overflow: hidden;
+}
+.content h2 {
+    font-size: 18px;
+    color: #333333;
+    font-weight: bold;
+    width: 30em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.content-main p {
+    color: #333333;
+    font-size: 14px;
+    line-height: 25px;
+    margin-top: 20px;
+    text-align: justify;
+}
+.content .time {
+    color: #333333;
+    font-size: 14px;
+    float: right;
+    margin: 50px 0 0 0;
+}
+
+/* 发布这等级 */
+.level {
+    padding: 0 30px;
+    margin: 20px 0 0 0;
+    overflow: hidden;
+}
+.level p {
+    font-weight: bold;
+}
+.level dl {
+    float: left;
+    width: 110px;
+}
+.level dl dt,
+.level dl dd {
+    margin-top: 20px;
+    font-size: 14px;
+}
+.level dl dt {
+    color: #333333;
+}
+.level dl dd {
+    color: #cccccc;
+}
+
+/* 其他 */
+.other {
+    /*border-top: 1px solid #cccccc;*/
+    margin: 30px 0 0 0;
+    padding: 0 30px;
+    padding-top: 50px;
+    clear: both;
+    overflow: hidden;
+}
+.other > div:nth-child(1)::after,
+.other > div:nth-child(1)::before {
+    display: block;
+    content: '';
+    height: 1px;
+    background-color: #e0e0e0;
+}
+
+.other > div:nth-child(1)::before {
+    margin-bottom: 30px;
+}
+.other > div:nth-child(1)::after {
+    margin-top: 20px;
+}
+
+.other a {
+    padding: 5px 10px;
+    background-color: #cccccc;
+    display: inline-block;
+    margin: 0 5px 10px 0;
+}
+.bdsharebuttonbox a {
+    background-color: transparent;
+}
+
+/* 二维码这一块的联系资料 */
+.contact {
+    color: #333333;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 25px;
+    overflow: hidden;
+    margin: 0 0 30px 0;
+}
+.contact .ewm {
+    padding: 5px;
+    height: 120px;
+    width: 120px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+}
+.ewm img {
+    height: 120px;
+    width: 120px;
+}
+.contact p {
+    display: inline-block;
+    margin: 0 auto;
+    color: #838383;
+    font-size: 14px;
+    margin: 20px 0 0 30px;
+}
+.contact ul {
+    font-size: 14px;
+    float: left;
+    margin-right: 40px;
+}
+.contact ul li {
+    line-height: 42px;
+}
+.btn-group {
+    clear: both;
+    margin: 140px auto 60px auto;
+    width: 463px;
+}
+.btn-group a {
+    font-size: 18px;
+    padding: 8px 42px;
+    background-color: #ffffff;
+    margin-right: 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/*            ============*/
+.tran-box {
+    width: 734px;
+    height: 540px;
+    background-color: #fff;
+    margin: 0 auto;
+    border-radius: 2px;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+    position: relative;
+}
+.tran-box .tran-tit {
+    width: 100%;
+    height: 89px;
+    background-color: #f2f2f2;
+    border-bottom:1px solid #c2c2c2;
+    text-align: center;
+    line-height: 89px;
+}
+.tran-box .tran-tit h2 {
+    color: #333333;
+    font-weight: bold;
+    font-size: 23px;
+}
+.tran-box .tran-main {
+    margin: 0 0 0 50px;
+}
+.tran-box .tran-tit span {
+    font-size: 36px;
+    margin: 0 15px;
+}
+.tran-box .row p {
+    color: #333333;
+    font-size: 17px;
+    font-weight: bold;
+    clear: both;
+    margin: 25px 0 20px 0;
+}
+.tran-box .row div {
+    float: left;
+    color: #333333;
+    font-size: 18px;
+    width: 200px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+    border-radius: 2px;
+    margin-right: 20px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.tran-box .row div.active {
+    font-weight:bold;
+    box-sizing: border-box;
+    border-bottom: 2px solid #D42026;
+}
+.tran-box .row div:hover{
+    border-bottom: 2px solid #D42026;
+}
+.tran-box hr {
+    display: inline-block;
+    width: 640px;
+    margin: 40px 0 45px 0;
+}
+.tran-box .conf {
+    overflow: hidden;
+    margin-right: 44px;
+}
+.tran-box .conf div{
+    font-weight:bold;
+    color: #333333;
+    font-size: 16px;
+    float: right;
+}
+.tran-box .conf div span {
+    font-size: 30px;
+    margin: 0 20px 0 0;
+}
+.tran-box .conf div button {
+    font-weight: 100;
+    width: 218px;
+    height: 40px;
+    background-color: #D42026;
+}
+.tran-box .tran-close-btn {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    top:0;
+    right:0;
+    cursor: pointer;
+}
+

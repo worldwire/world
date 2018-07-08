@@ -1,0 +1,68 @@
+body { background: #F2F2F2; }
+body .content { padding-top: 1px; margin-top: 29px; width: 100%; }
+body .content .contentbox { width: 1200px; margin: auto; overflow: hidden; }
+body .content .contentbox .left-nav { float: left; }
+body .content .contentbox .contentbox-right { width: 920px; float: right; margin-top: 5px; margin-right: 5px; -moz-box-shadow: 0px 1px 5px #33333350; -webkit-box-shadow: 0px 1px 5px #33333350; box-shadow: 0px 1px 5px #33333350; }
+body .content .contentbox .contentbox-right .contentbox-body-title { height: 89px; background: #F9F9F9; line-height: 90px; font-size: 30px; color: #333333; font-weight: 500; padding-left: 60px; border-bottom: 1px solid #E0E0E0; }
+body .content .contentbox .contentbox-right .contentbox-body { padding: 0 60px; background: #FFFFFF; }
+body .content .contentbox .contentbox-right .contentbox-body .body-line-style .body-line-style-dot { width: 8px; height: 8px; background: #D42026; border-radius: 4px; display: inline-block; margin-bottom: 2px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-line-style .body-line-style-span { font-size: 14px; color: #858585; }
+body .content .contentbox .contentbox-right .contentbox-body .body-choose-title { font-size: 18px; color: #333333; font-weight: 600; padding: 27px 0; }
+body .content .contentbox .contentbox-right .contentbox-body .body-choose-list { height: 60px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-choose-list div { height: 57px; width: 360px; text-align: center; line-height: 60px; font-size: 16px; -moz-box-shadow: 0px 1px 5px #33333350; -webkit-box-shadow: 0px 1px 5px #33333350; box-shadow: 0px 1px 5px #33333350; border-bottom: 3px solid #FFFFFF; }
+body .content .contentbox .contentbox-right .contentbox-body .body-choose-list div:hover { cursor: pointer; font-weight: 600; -moz-box-shadow: 0px 1px 5px #33333380; -webkit-box-shadow: 0px 1px 5px #33333380; box-shadow: 0px 1px 5px #33333380; border-bottom: 3px solid #D42026; }
+body .content .contentbox .contentbox-right .contentbox-body .body-choose-list span { margin-left: 30px; font-size: 16px; font-weight: 500; line-height: 60px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-choose-list .body-choose-list-choose1 { float: left; }
+body .content .contentbox .contentbox-right .contentbox-body .body-choose-list .body-choose-list-choose2 { float: right; }
+body .content .contentbox .contentbox-right .contentbox-body .body-tag { margin-top: 80px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-tag .body-tag-content { margin-top: 8px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-tag .body-tag-content .body-tag-content-list span { width: 120px; font-size: 14px; line-height: 40px; border: 1px solid #E0E0E0; display: inline-block; padding: 0 10px; border-radius: 3px; color: #333333; position: relative; margin-left: 15px; text-align: center; }
+body .content .contentbox .contentbox-right .contentbox-body .body-tag .body-tag-content .body-tag-content-list span .span-i { font-size: 22px; position: absolute; right: -6px; top: -15px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-tag .body-tag-content .body-tag-content-list span .span-i:hover { color: #D42026; cursor: pointer; }
+body .content .contentbox .contentbox-right .contentbox-body .body-tag .body-tag-content .body-tag-content-list span:nth-of-type(1), body .content .contentbox .contentbox-right .contentbox-body .body-tag .body-tag-content .body-tag-content-list span:nth-of-type(6) { margin-left: 0; }
+body .content .contentbox .contentbox-right .contentbox-body .body-tag .body-tag-content .body-tag-content-list span:nth-of-type(6) { margin-top: 20px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-tag .body-tag-content .body-tag-content-btn { width: 120px; font-size: 14px; line-height: 40px; border: 1px solid #E0E0E0; display: inline-block; padding: 0 10px; border-radius: 3px; color: #838383; position: relative; margin-left: 15px; text-align: center; }
+body .content .contentbox .contentbox-right .contentbox-body .body-tag .body-tag-content .body-tag-content-btn .span-add { font-size: 14px; margin-top: 10px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-tag .body-tag-content .body-tag-content-btn:hover { border: 1px solid #D42026; color: #D42026; cursor: pointer; }
+body .content .contentbox .contentbox-right .contentbox-body .body-DeTitle { margin-top: 20px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-DeTitle .body-DeTitle-input { color: #333333; margin-top: 10px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-DeContent { margin-top: 20px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-DeContent .body-DeContent-textarea { margin-top: 10px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-epsp { margin-top: 20px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-epsp .body-epsp-ep { width: 660px; overflow: hidden; }
+body .content .contentbox .contentbox-right .contentbox-body .body-epsp .body-epsp-ep .body-epsp-ep-email { float: left; width: 48%; }
+body .content .contentbox .contentbox-right .contentbox-body .body-epsp .body-epsp-ep .body-epsp-ep-email .body-epsp-ep-email-input { margin-top: 10px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-epsp .body-epsp-ep .body-epsp-ep-phone { float: right; width: 48%; }
+body .content .contentbox .contentbox-right .contentbox-body .body-epsp .body-epsp-ep .body-epsp-ep-phone .body-epsp-ep-phone-input { margin-top: 10px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-epsp .body-epsp-sp { margin-top: 10px; width: 660px; overflow: hidden; }
+body .content .contentbox .contentbox-right .contentbox-body .body-epsp .body-epsp-sp .body-epsp-sp-site { float: left; width: 48%; }
+body .content .contentbox .contentbox-right .contentbox-body .body-epsp .body-epsp-sp .body-epsp-sp-site .body-epsp-ep-site-input { margin-top: 10px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-epsp .body-epsp-sp .body-epsp-sp-public { float: right; width: 48%; }
+body .content .contentbox .contentbox-right .contentbox-body .body-epsp .body-epsp-sp .body-epsp-sp-public .body-epsp-sp-public-input { margin-top: 10px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-details { margin-top: 20px; width: 660px; overflow: hidden; }
+body .content .contentbox .contentbox-right .contentbox-body .body-details .body-details-img { float: left; width: 140px; height: 140px; border: 2px solid #E2E2E2; border-radius: 5px; background: #F9F9F9; position: relative; overflow: hidden; }
+body .content .contentbox .contentbox-right .contentbox-body .body-details .body-details-img p { margin-top: 50px; text-align: center; color: #888888; font-size: 14px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-details .body-details-img .body-details-ewm { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 666; }
+body .content .contentbox .contentbox-right .contentbox-body .body-details .body-details-list { float: right; width: 500px; overflow: hidden; }
+body .content .contentbox .contentbox-right .contentbox-body .body-details .body-details-list .body-details-vf { overflow: hidden; }
+body .content .contentbox .contentbox-right .contentbox-body .body-details .body-details-list .body-details-vf .body-details-vf-vx { float: left; width: 48%; }
+body .content .contentbox .contentbox-right .contentbox-body .body-details .body-details-list .body-details-vf .body-details-vf-vx .body-details-vf-vx-input { margin-top: 10px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-details .body-details-list .body-details-vf .body-details-vf-facebook { float: right; width: 48%; }
+body .content .contentbox .contentbox-right .contentbox-body .body-details .body-details-list .body-details-vf .body-details-vf-facebook .body-details-vf-facebook-input { margin-top: 10px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-details .body-details-list .body-details-wl { margin-top: 10px; overflow: hidden; }
+body .content .contentbox .contentbox-right .contentbox-body .body-details .body-details-list .body-details-wl .body-details-wl-wapp { float: left; width: 48%; }
+body .content .contentbox .contentbox-right .contentbox-body .body-details .body-details-list .body-details-wl .body-details-wl-wapp .body-details-wl-wapp-input { margin-top: 10px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-details .body-details-list .body-details-wl .body-details-wl-lin { float: right; width: 48%; }
+body .content .contentbox .contentbox-right .contentbox-body .body-details .body-details-list .body-details-wl .body-details-wl-lin .body-details-wl-lin-input { margin-top: 10px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-ComMethods { margin-top: 20px; width: 660px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-ComMethods .body-ComMethods-com { margin-top: 10px; position: relative; }
+body .content .contentbox .contentbox-right .contentbox-body .body-ComMethods .body-ComMethods-com .body-ComMethods-com-addbtn { position: absolute; top: 8px; right: -35px; font-size: 25px; color: #D42026; cursor: pointer; }
+body .content .contentbox .contentbox-right .contentbox-body .body-ComMethods .body-ComMethods-com .body-ComMethods-com-box { padding-bottom: 10px; overflow: hidden; }
+body .content .contentbox .contentbox-right .contentbox-body .body-ComMethods .body-ComMethods-com .body-ComMethods-com-box .body-ComMethods-com-name { float: left; width: 185px; height: 40px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-ComMethods .body-ComMethods-com .body-ComMethods-com-box .body-ComMethods-com-content { float: right; width: 443px; height: 40px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-ComMethods .body-ComMethods-com .body-ComMethods-com-box span { line-height: 40px; margin-left: 14px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-userAgreement { margin-top: 40px; color: #838383; }
+body .content .contentbox .contentbox-right .contentbox-body .body-userAgreement .layui-icon { color: #D42026; }
+body .content .contentbox .contentbox-right .contentbox-body .body-SaveBtn { padding: 40px 0; }
+body .content .contentbox .contentbox-right .contentbox-body .body-SaveBtn .body-SaveBtn-btn { width: 218px; height: 40px; font-size: 16px; color: #FFFFFF; text-align: center; line-height: 40px; background: #D42026; margin: auto; border-radius: 3px; }
+body .content .contentbox .contentbox-right .contentbox-body .body-SaveBtn .body-SaveBtn-btn:hover { cursor: pointer; background: #D4202690; }

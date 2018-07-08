@@ -1,0 +1,38 @@
+<div class="head">
+
+    <div class="head1 ">
+        <img class="img" src="/images/top1.png" alt="汇网" width="50" height="50"/>
+        <div class="head-search layui-form">
+            <i class="layui-icon layui-icon-face-smile search-icon">&#xe615;</i>
+            <div class="layui-input-inline head-search-input">
+                <select name="modules" lay-verify="required" lay-search="">
+                    <option value="">寻找人才</option>
+                    <option value="1">人才1号</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-btn layui-btn-sm fabu-btn">发&nbsp;&nbsp;布</div>
+        <div class="btns">
+					<span class="language-btns">
+						<#if lan?? && lan== 'en'>
+                            English
+                        <#else>
+                            中文
+						</#if>
+						<i class="layui-icon layui-icon-face-smile language-icon">&#xe61a;</i>
+					&nbsp;&nbsp;&nbsp;
+						<div class="span-div">
+                            <p class="cn" onclick="redirectClick('/lan?lang=zh_CN')">中文</p>
+							<hr/>
+							<p class="eng" onclick="redirectClick('/lan?lang=en')">English</p>
+						</div>
+					</span>
+            <span>&nbsp;&nbsp;&nbsp;</span>
+            <span class="login-btn">登录</span>
+            <span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+            <span class="register-btn">注册</span>
+        </div>
+    </div>
+
+</div>

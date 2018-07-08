@@ -45,6 +45,7 @@ public class I18NController {
             }
 
         }
+        request.getSession().setAttribute("lan", lang);
         return new ModelAndView("redirect:" + oriUrl);
     }
 

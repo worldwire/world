@@ -1,0 +1,48 @@
+@keyframes img1 { from { top: 0; right: -230px; }
+  to { top: 0; right: -200px; } }
+@keyframes img2 { from { top: 120px; right: 0px; }
+  to { top: 195px; left: 0; } }
+@keyframes img3 { from { top: 138px; left: 256px; }
+  to { top: 213px; left: 256px; } }
+@keyframes img7 { from { top: 360px; left: 135px; }
+  to { top: 340px; left: 135px; } }
+body { margin: 0px; padding: 0px; min-width: 1200px; }
+body .content { width: 100%; background: #000000; overflow: hidden; position: relative; }
+body .content .content1 { width: 1200px; height: 766px; margin: auto; position: relative; }
+body .content .content1 .img1 { position: absolute; animation: img1 1s; top: 0; right: -200px; }
+body .content .content1 .img2 { position: absolute; animation: img2 1.5s; top: 195px; left: 0; }
+body .content .content1 .img3 { position: absolute; animation: img3 1.5s; top: 213px; left: 256px; }
+body .content .content1 .img4 { position: absolute; top: 315px; left: 25px; }
+body .content .content1 .img5 { position: absolute; width: 450px; height: 1.15px; top: 355px; left: 25px; }
+body .content .content1 .img6 { width: 380px; position: absolute; top: 375px; left: 25px; }
+body .content .content1 .img7 { width: 120px; position: absolute; animation: img7 1s; top: 340px; left: 135px; }
+body .content .search-div { width: 100%; background: #ffffff20; position: absolute; bottom: 0px; left: 0px; padding: 25px 0 25px 0; }
+body .content .search-div .search-box { width: 986px; margin: auto; opacity: 1; position: relative; font-size: 16px; }
+body .content .search-div .search-box input { height: 50px; color: #808080; }
+body .content .search-div .search-box-btn { position: absolute; top: 0; right: 0; width: 157px; height: 50px; font-size: 16px; background: #D42026; }
+body .demand { width: 100%; overflow: hidden; position: relative; }
+body .demand .demand-box { width: 1200px; margin: auto; overflow: hidden; }
+body .demand .demand-box .demand-title { font-size: 30px; font-weight: 500; text-align: center; padding: 35px 0 35px 0; border-bottom: 1px solid #f0f0f0; }
+body .demand .demand-box .demand-list { width: 100%; overflow: hidden; }
+body .demand .demand-box .demand-list .demand-personal { width: 580px; float: left; }
+body .demand .demand-box .demand-list .demand-personal .demand-personal-list { width: 580px; height: 130px; overflow: hidden; border: 1px solid #f1f1f1; }
+body .demand .demand-box .demand-list .demand-personal .demand-personal-list div { float: left; }
+body .demand .demand-box .demand-list .demand-personal .demand-personal-list .demand-personal-list-img { width: 88px; height: 88px; border-radius: 50px; border: 2px solid #F1F1F1; overflow: hidden; margin: 15px 0 0 15px; }
+body .demand .demand-box .demand-list .demand-personal .demand-personal-list .list-conten { position: relative; }
+body .demand .demand-box .demand-list .demand-personal .demand-personal-list .list-conten p { position: absolute; top: 19px; left: 15px; width: 400px; font-size: 18px;  color: #333333; }
+body .demand .demand-box .demand-list .demand-personal .demand-personal-list .list-conten div { position: absolute; top: 60px; left: 15px; width: 400px; max-height: 40px; font-size: 14px; color: #838383; }
+body .demand .demand-box .demand-list .demand-personal .demand-personal-btn { float: right; color: #838383; cursor: pointer; margin-top: 40px; font-size: 14px; }
+body .demand .demand-box .demand-list .demand-personal .demand-personal-btn:hover { color: #D42026; }
+body .demand .demand-box .demand-list .demand-enterprise { width: 580px; float: left; margin-left: 36px; }
+body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list { width: 580px; height: 130px; overflow: hidden; border: 1px solid #f1f1f1; }
+body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list div { float: left; }
+body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list .demand-enterprise-list-img { width: 88px; height: 88px; border-radius: 50px; border: 2px solid #F1F1F1; overflow: hidden; margin: 15px 0 0 15px; }
+body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list .list-conten { position: relative; }
+body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list .list-conten p { position: absolute; top: 19px; left: 15px; width: 400px; font-size: 18px;  }
+body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list .list-conten div { position: absolute; top: 60px; left: 15px; width: 400px; max-height: 40px; font-size: 14px; color: #838383; }
+body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-btn { float: right; color: #838383; cursor: pointer; margin-top: 40px; font-size: 14px; }
+body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-btn:hover { color: #D42026; }
+body .demand .demand-box .demand-list .dpt { text-align: center; font-size: 18px; color: #333333; padding: 20px 0 20px 0; font-weight: 500; }
+body .demand .demand-vx { width: 135px; height: 165px; border: 1px solid #F0F0F0; position: absolute; top: 235px; right: 20px; background: #FFFFFF; }
+body .demand .demand-vx .demand-vx-img { padding: 17.5px 10px 17.5px 14px; width: 100px; height: 100px; }
+body .demand .demand-vx .demand-vx-text { width: 135px; height: 35px; background: #e0e0e0; font-size: 14px; color: #333333; text-align: center; line-height: 35px; }

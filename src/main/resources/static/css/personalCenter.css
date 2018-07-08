@@ -1,0 +1,33 @@
+body { background: #F2F2F2; }
+body .content { padding-top: 1px; margin-top: 29px; width: 100%; }
+body .content .contentBox { width: 1200px; margin: auto; overflow: hidden; }
+body .content .contentBox .left-nav { float: left; }
+body .content .contentBox .contentBox-body { width: 920px; float: right; margin-top: 5px; margin-right: 5px; }
+body .content .contentBox .contentBox-body .contentBox-head { width: 920px; height: 200px; background: #FFFFFF; -moz-box-shadow: 0px 1px 5px #33333350; -webkit-box-shadow: 0px 1px 5px #33333350; box-shadow: 0px 1px 5px #33333350; }
+body .content .contentBox .contentBox-body .contentBox-head div { width: 50%; height: 200px; float: left; position: relative; }
+body .content .contentBox .contentBox-body .contentBox-head .contentBox-head-view .contentBox-head-view-i { position: absolute; top: 40px; left: 200px; width: 48px; height: 48px; border-radius: 24px; background: #dfdfdf; text-align: center; line-height: 48px; }
+body .content .contentBox .contentBox-body .contentBox-head .contentBox-head-view .contentBox-head-view-i i { font-size: 28px; color: #FFFFFF; }
+body .content .contentBox .contentBox-body .contentBox-head .contentBox-head-view .contentBox-head-view-span1 { position: absolute; top: 100px; left: 150px; font-size: 16px; color: #333333; font-weight: 600; }
+body .content .contentBox .contentBox-body .contentBox-head .contentBox-head-view .contentBox-head-view-num { font-size: 36px; color: #838383; position: absolute; top: 131px; left: 170px; }
+body .content .contentBox .contentBox-body .contentBox-head .contentBox-head-view .contentBox-head-view-span2 { font-size: 14px; color: #838383; position: absolute; top: 149px; left: 217px; }
+body .content .contentBox .contentBox-body .contentBox-head .contentBox-head-view .contentBox-head-view-btn { width: 50px; height: 26px; border: 1px solid #D42026; text-align: center; line-height: 28px; color: #D42026; font-size: 14px; border-radius: 3px; position: absolute; top: 132px; left: 236px; }
+body .content .contentBox .contentBox-body .contentBox-head .contentBox-head-view .contentBox-head-view-btn:hover { cursor: pointer; border: 1px solid #D4202690; }
+body .content .contentBox .contentBox-body .contentBox-head .contentBox-head-translation .contentBox-head-translation-i { position: absolute; top: 40px; left: 200px; width: 48px; height: 48px; border-radius: 24px; background: #dfdfdf; text-align: center; line-height: 48px; }
+body .content .contentBox .contentBox-body .contentBox-head .contentBox-head-translation .contentBox-head-translation-i i { font-size: 28px; color: #FFFFFF; }
+body .content .contentBox .contentBox-body .contentBox-head .contentBox-head-translation a i { position: absolute; top: 40px; left: 259px; font-size: 22px; color: #333333; }
+body .content .contentBox .contentBox-body .contentBox-head .contentBox-head-translation a i:hover { color: #33333390; }
+body .content .contentBox .contentBox-body .contentBox-head .contentBox-head-translation .contentBox-head-translation-span1 { position: absolute; top: 100px; left: 130px; font-size: 16px; color: #333333; font-weight: 600; }
+body .content .contentBox .contentBox-body .contentBox-head .contentBox-head-translation .contentBox-head-translation-num { font-size: 36px; color: #838383; position: absolute; top: 131px; left: 200px; }
+body .content .contentBox .contentBox-body .contentBox-head .contentBox-head-translation .contentBox-head-translation-span2 { font-size: 14px; color: #838383; position: absolute; top: 149px; left: 247px; }
+body .content .contentBox .contentBox-body .contentBox-trading { width: 920px; float: right; margin-top: 20px; background: #FFFFFF; -moz-box-shadow: 0px 1px 5px #33333350; -webkit-box-shadow: 0px 1px 5px #33333350; box-shadow: 0px 1px 5px #33333350; }
+body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-title { width: 100%; height: 90px; background: #F9F9F9; line-height: 90px; border-bottom: 1px solid #E0E0E0; }
+body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-title .contentBox-trading-title-span { font-size: 20px; color: #333333; font-weight: bold; margin-left: 55px; }
+body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-table { padding: 0 55px; border-bottom: 1px #E0E0E0 solid; }
+body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-table table { width: 100%; color: #333333; }
+body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-table .table-trth-style { width: 100%; border-bottom: 1px #E0E0E0 solid; }
+body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-table .table-trth-style th { width: 25%; height: 67px; }
+body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-table .table-trtd-style { width: 100%; border-bottom: 1px #E0E0E0 solid; }
+body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-table .table-trtd-style td { width: 25%; height: 67px; text-align: center; }
+body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-table .table-trtd-style td:nth-of-type(1) p:nth-of-type(1) { font-size: 14px; }
+body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-table .table-trtd-style td:nth-of-type(1) p:nth-of-type(2) { font-size: 12px; color: #808080; }
+body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-table .table-trtd-style:last-of-type { border: 0px; }

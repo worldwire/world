@@ -1,0 +1,11 @@
+.left-nav { width: 230px; overflow: hidden; }
+.left-nav .left-userhead { width: 80px; height: 80px; border-radius: 40px; border: 2px solid #E0E0E0; overflow: hidden; margin: auto; }
+.left-nav .left-userhead img { width: 80px; height: 80px; }
+.left-nav .left-username { margin: auto; color: #333333; text-align: center; font-family: "microsoft yahei"; font-size: 16px; font-weight: bold; margin-top: 20px; }
+.left-nav .left-btn-style { width: 227px; height: 40px; text-align: center; line-height: 40px; color: #333333; position: relative; border-left: 3px #ffffff00 solid; margin-top: 10px; }
+.left-nav .left-btn-style i { position: absolute; top: 0px; left: 70px; font-size: 20px; }
+.left-nav .left-btn-style span { font-size: 14px; padding-bottom: 3px; padding-left: 35px; }
+.left-nav .left-btn-style:hover { cursor: pointer; border-left: 3px #D42026 solid; color: #D42026; background: #FFFFFF; }
+.left-nav .left-sign { text-align: center; margin-top: 50px; }
+.left-nav .left-sign span { color: #838383; font-size: 14px; }
+.left-nav .left-sign .left-sign-btn { width: 100px; height: 26px; color: #D42026; border: 1px solid #D42026; margin: auto; border-radius: 3px; line-height: 26px; margin-top: 10px; cursor: pointer; }

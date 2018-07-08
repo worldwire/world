@@ -1,0 +1,265 @@
+body {
+    background-color: #F2F2F2;
+}
+
+.container {
+    width: 1200px;
+    margin: 20px auto 0 auto;
+    overflow: hidden;
+}
+
+.left {
+    float: left;
+}
+.main {
+    width: 950px;
+    background-color: #ffffff;
+    float: right;
+    box-shadow: 0 0 10px rgba(0,0,0,.2);
+}
+
+.foot {
+    clear: both;
+}
+
+/*/////*/
+.wrap {
+    width: 745px;
+    margin: 0 auto;
+}
+
+.head-img {
+    text-align: center;
+    margin: 40px 0 20px 0;
+}
+.head-img .head-box {
+	margin: auto;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.head-img .head-box img{
+	width: 80px;
+    height: 80px;
+    
+}
+
+
+.base {
+
+}
+.container .title {
+    color: #333333;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 30px;
+}
+.base form .tiput {
+    width: 660px;
+}
+.container form button {
+    width: 80px;
+    height: 30px;
+    background-color: #D42026;
+    line-height: 30px;
+    float: right;
+}
+
+form label {
+    color: #808080;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+form label::before {
+    display: inline-block;
+    content: '';
+    margin-right: 10px;
+}
+
+form label.req {
+    color: #808080;
+    display: block;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+form label.req::before {
+    height: 8px;
+    width: 8px;
+    vertical-align: 2px;
+    border-radius: 50%;
+    display: inline-block;
+    content: '';
+    margin-right: 10px;
+    background-color: #D42026;
+}
+
+.base .layui-form-item .layui-input-inline {
+    width: 213px;
+    margin-right: 12px;
+}
+
+.container form .layui-form-item .item2 {
+    width: 325px;
+    margin-bottom: 10px;
+}
+
+.plus-btn {
+    color: #D42026;
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    margin-top: 6px;
+    cursor: pointer;
+}
+
+.base .layui-form-select dl dd.layui-this{
+    background-color: #ffffff;
+    color: #000;
+}
+
+.contact {
+
+}
+.contact .layui-form-item .layui-input-inline {
+    width: 319px;
+}
+.click-upload {
+    width: 140px;
+    height: 140px;
+    border: 1px solid #e2e2e2;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-align: center;
+    cursor: pointer;
+    color: #808080;
+    position: relative;
+}
+.click-upload p {
+    height: 38px;
+    margin-top: 53px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+}
+.account {
+    width: 580px;
+    float: right;
+}
+.contact .account .layui-inline {
+    margin-right: 0;
+}
+.contact .account .layui-input-inline{
+    width: 244px;
+    margin-right: 5px;
+}
+
+/* 展示照片 */
+#upload-btn {
+    color: #cccccc;
+    font-size: 70px;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    float: left;
+}
+/* 预览 */
+.preview {
+
+}
+.pre-box {
+    position: relative;
+    float: left;
+}
+.pre-box-close {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: -1px;
+    right: 17px;
+    cursor: pointer;
+}
+.preview img {
+    width: 98px;
+    height: 98px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    margin-right: 12px;
+}
+
+/* 证件照 */
+.certificates {
+    margin-top: 30px;
+}
+.certificates .layui-form-item .layui-input-inline {
+    width: 243px;
+    height: 153px;
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+    color: #808080;
+}
+.msg-box {
+    margin-top: 35px;
+}
+.cer-msg {
+}
+.example {
+    margin: -34px 0 0 20px;
+}
+.example p {
+    color: #808080;
+}
+.example div {
+    width: 115px;
+    height: 70px;
+    margin-top: 10px;
+}
+.sc {
+    width: 200px;
+    height: 125px;
+    margin-left: -10px;
+    border: 1px solid #cccccc;
+    border-radius: 2px;
+}
+#save {
+    display: block;
+    width: 218px;
+    height: 40px;
+    margin: 20px auto;
+    float: none;
+}
+.upload-a {
+    color: #D42026;
+}
+.upload-a:hover {
+
+}
+
+#up-ewm img {
+    width: 142px;
+    height: 142px;
+    border-radius: 5px;
+}
+/*  证件照预览 */
+#up-face img,
+#up-badge img,
+#up-take img
+{
+    width: 245px;
+    height: 155px;
+    border-radius: 5px;
+}
+
+
+
+

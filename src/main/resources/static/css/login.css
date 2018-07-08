@@ -1,0 +1,146 @@
+body {
+    background-color: #f2f2f2;
+    font-family: "Microsoft YaHei";
+    margin: 0;
+    padding: 0;
+}
+
+/* 容器主体 */
+.container {
+    width: 510px;
+    height: 560px;
+    margin: 50px auto 0 auto;
+    background-color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 标题 */
+.title {
+    color: #333333;
+    font-size: 30px;
+    text-align: center;
+    margin: 40px 0 30px 0;
+}
+
+/* 底部部分 */
+.footer {
+    color: #333333;
+    width: 100%;
+    height: 110px;
+    text-align: center;
+    font-size: 14px;
+    margin: 0 0 0 0;
+    position: absolute;
+    left:0;
+    bottom:0;
+    z-index: 2;
+    background-color: #fafafa;
+}
+.footer a {
+    width: 210px;
+    height: 40px;
+    line-height: 40px;
+    display: block;
+    margin:0 auto;
+    margin-top: 35px;
+    border-radius: 2px;
+    color: #333333;
+    font-size: 16px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+/* 表单部分 */
+.main {
+    position: relative;
+    z-index: 1;
+}
+.layui-form-item {
+    width: 344px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    clear: both;
+}
+.layui-form-pane .layui-form-label {
+    width: 40px;
+    padding: 10px 1px;
+    background-color: #ffffff;
+    border: none;
+}
+.layui-form-pane .layui-input-block {
+    margin-left: 40px;
+}
+.layui-form-pane input {
+    border: none;
+    padding-left: 0;
+}
+.bord-fa {
+    width: 344px;
+    height: 40px;
+    position: absolute;
+    border: 1px solid #c2c2c2;
+    border-radius: 2px;
+    top: -1px;
+    left: -40px;
+    z-index: -1;
+}
+.layui-form-pane input:focus + .bord-fa  {
+    border-color: #333333;
+}
+.msg, .tip {
+    font-size: 12px;
+    color: #838383;
+}
+.msg {
+    color: #333;
+    font-weight: bold;
+    float: right;
+    position: relative;
+}
+.msg span {
+    display: block;
+    position: absolute;
+    height: 7px;
+    width: 7px;
+    left: -15px;
+    bottom: 3px;
+    border-radius: 50%;
+    background-color: #D42026;
+}
+.tip {
+    float: left;
+    margin-left: 25px;
+}
+/* 下一步按钮 */
+.nextBtn {
+    width: 218px;
+    margin:0 auto;
+    display: block;
+    background-color: #d42026;
+}
+/*  分享 */
+.login {
+    margin-top: 35px;
+    text-align: center;
+}
+.login-title {
+    font-size: 12px;
+    color: #838383;
+}
+.login-title span {
+    margin: 0 10px;
+}
+.login-title > i {
+    width: 120px;
+    height: 1px;
+    display: inline-block;
+    vertical-align: 3px;
+    background-color: #f2f2f2;
+}
+.login a {
+    display: inline-block;
+    margin: 35px 0 0 10px;
+    /*background-image: url("../img/login.png");*/
+}
+.login a i {
+    font-size: 32px;
+}
