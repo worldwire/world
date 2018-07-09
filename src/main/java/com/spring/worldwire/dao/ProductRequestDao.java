@@ -2,6 +2,7 @@ package com.spring.worldwire.dao;
 
 import com.spring.worldwire.model.ProductRequest;
 import com.spring.worldwire.query.ProductRequestQuery;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,5 +19,5 @@ public interface ProductRequestDao {
 
     int updateByPrimaryKey(ProductRequest record);
 
-    List<ProductRequest> selectByQuery(ProductRequestQuery query);
+    List<ProductRequest> selectByQuery(@Param("query") ProductRequestQuery query);
 }

@@ -32,7 +32,7 @@
       <if test="query.requestType != null and query.requestType > 0">
         request_type = #{query.requestType,jdbcType=INTEGER} and
       </if>
-      and status = 1
+      status = 1
     </trim>
   </sql>
 
@@ -43,7 +43,7 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <select id="selectByQuery" resultType="com.spring.worldwire.model.ProductRequest" resultMap="BaseResultMap">
+  <select id="selectByQuery" resultMap="BaseResultMap" parameterType="com.spring.worldwire.query.ProductRequestQuery">
     select
     <include refid="Base_Column_List"/>
     from product_request
