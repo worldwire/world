@@ -23,13 +23,36 @@
     id, request_type, key_word, titile, content, mobile, email, phone, website, language_type, 
     language_id, status, user_type,user_id,create_time,update_time
   </sql>
+
+  <sql id="select_query">
+    <trim suffixOverrides="and">
+      <if test="query.userType != null and query.userType > 0">
+        user_type = #{query.userType,jdbcType=INTEGER} and
+      </if>
+      <if test="query.requestType != null and query.requestType > 0">
+        request_type = #{query.requestType,jdbcType=INTEGER} and
+      </if>
+      and status = 1
+    </trim>
+  </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
     from product_request
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+
+  <select id="selectByQuery" resultType="com.spring.worldwire.model.ProductRequest" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from product_request
+    <where>
+      <include refid="select_query"/>
+    </where>
+  </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from product_request
     where id = #{id,jdbcType=BIGINT}
   </delete>

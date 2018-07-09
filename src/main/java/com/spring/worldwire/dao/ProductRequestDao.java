@@ -1,6 +1,9 @@
 package com.spring.worldwire.dao;
 
 import com.spring.worldwire.model.ProductRequest;
+import com.spring.worldwire.query.ProductRequestQuery;
+
+import java.util.List;
 
 public interface ProductRequestDao {
     int deleteByPrimaryKey(Long id);
@@ -14,4 +17,6 @@ public interface ProductRequestDao {
     int updateByPrimaryKeySelective(ProductRequest record);
 
     int updateByPrimaryKey(ProductRequest record);
+
+    List<ProductRequest> selectByQuery(ProductRequestQuery query);
 }

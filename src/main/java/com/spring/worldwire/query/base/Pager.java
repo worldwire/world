@@ -4,17 +4,11 @@ package com.spring.worldwire.query.base;
  * Created by luxun on 2018/4/21.
  */
 public class Pager {
-    private Integer pageSize ;
+    private Integer pageSize = 10;
 
     private Integer pageNo;
 
     private int pageStart;
-
-    public Pager(Integer pageSize) {
-        this.pageSize = 10;
-    }
-
-
 
     public Integer getPageSize() {
         return pageSize;

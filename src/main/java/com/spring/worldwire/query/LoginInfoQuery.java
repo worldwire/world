@@ -15,10 +15,6 @@ public class LoginInfoQuery extends Pager {
 
     private String thirdKey;
 
-    public LoginInfoQuery() {
-        super(10);
-    }
-
     public String getPassword() {
         return password;
     }

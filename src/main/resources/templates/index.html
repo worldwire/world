@@ -39,70 +39,37 @@
 				<div class="demand-list">
 					<div class="demand-personal">
 						<div class="dpt">个人需求</div>
-						<div class="demand-personal-list">
-							<div class="demand-personal-list-img">
-								<img src="/images/1/12.png" width="100" height="100"/>
-							</div>
-							<div class="list-conten">
-								<p>我提供服务产品设计服务，这个是服务标题</p>
-								<div>这个是服务的详细描述这个是服务的详细描述这个是服务的详细描述这个是服务的详细描述这个是服务的详…</div>
-							</div>
-						</div>
-						<div class="demand-personal-list" style="margin-top: 20px;">
-							<div class="demand-personal-list-img">
-								<img src="/images/1/10.png" width="100" height="100"/> 
-							</div>
-							
-							<div class="list-conten">
-								<p>我提供服务产品设计服务，这个是服务标题</p>
-								<div>这个是服务的详细描述这个是服务的详细描述这个是服务的详细描述这个是服务的详细描述这个是服务的详…</div>
-							</div>
-						</div>
-						<div class="demand-personal-list" style="margin-top: 20px;">
-							<div class="demand-personal-list-img">
-								<img src="/images/1/10.png" width="100" height="100"/> 
-							</div>
-							
-							<div class="list-conten">
-								<p>我提供服务产品设计服务，这个是服务标题</p>
-								<div>这个是服务的详细描述这个是服务的详细描述这个是服务的详细描述这个是服务的详细描述这个是服务的详…</div>
-							</div>
-						</div>
+						<#if personalList??>
+							<#list personalList as personal>
+								<div class="demand-personal-list">
+									<div class="demand-personal-list-img">
+										<img src="/images/1/12.png" width="100" height="100"/>
+									</div>
+									<div class="list-conten">
+										<p>${personal.title}</p>
+										<div>${personal.content}</div>
+									</div>
+								</div>
+							</#list>
+						</#if>
 						<div ><span class="demand-personal-btn">更多>></span></div>
 					</div>
 					<div class="demand-enterprise">
 						<div class="dpt">企业需求</div>
-						<div class="demand-enterprise-list">
-							<div class="demand-enterprise-list-img">
-								<img src="/images/1/11.png" width="100" height="100" />
-							</div>
-							
-							<div class="list-conten">
-								<p>我提供服务产品设计服务，这个是服务标题</p>
-								<div>这个是服务的详细描述这个是服务的详细描述这个是服务的详细描述这个是服务的详细描述这个是服务的详...</div>
-							</div>
-						</div>
-						<div class="demand-enterprise-list" style="margin-top:20px ;">
-							<div class="demand-enterprise-list-img">
-								<img src="/images/1/9.png" width="100" height="100"/> 
-							</div>
-							
-							<div class="list-conten">
-								<p>我提供服务产品设计服务，这个是服务标题</p>
-								<div>这个是服务的详细描述这个是服务的详细描述这个是服务的详细描述这个是服务的详细描述这个是服务的详...</div>
-							</div>
-						</div>
-						<div class="demand-enterprise-list" style="margin-top:20px ;">
-							<div class="demand-enterprise-list-img">
-								<img src="/images/1/9.png" width="100" height="100"/> 
-							</div>
-							
-							<div class="list-conten">
-								<p>我提供服务产品设计服务，这个是服务标题</p>
-								<div>这个是服务的详细描述这个是服务的详细描述这个是服务的详细描述这个是服务的详细描述这个是服务的详...</div>
-							</div>
-						</div>
-						
+						<#if enterpriseList??>
+							<#list enterprise as enterpriseList>
+								<div class="demand-enterprise-list">
+									<div class="demand-enterprise-list-img">
+										<img src="/images/1/11.png" width="100" height="100" />
+									</div>
+
+									<div class="list-conten">
+										<p>${enterprise.title}</p>
+										<div>${enterprise.content}</div>
+									</div>
+								</div>
+							</#list>
+						</#if>
 						<div><span class="demand-enterprise-btn">更多>></span></div>
 					</div>
 				</div>

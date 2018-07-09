@@ -25,7 +25,8 @@ body .demand .demand-box { width: 1200px; margin: auto; overflow: hidden; }
 body .demand .demand-box .demand-title { font-size: 30px; font-weight: 500; text-align: center; padding: 35px 0 35px 0; border-bottom: 1px solid #f0f0f0; }
 body .demand .demand-box .demand-list { width: 100%; overflow: hidden; }
 body .demand .demand-box .demand-list .demand-personal { width: 580px; float: left; }
-body .demand .demand-box .demand-list .demand-personal .demand-personal-list { width: 580px; height: 130px; overflow: hidden; border: 1px solid #f1f1f1; }
+body .demand .demand-box .demand-list .demand-personal .demand-personal-list { width: 580px; height: 130px; overflow: hidden; border: 1px solid #f1f1f1;margin-top:20px ; }
+body .demand .demand-box .demand-list .demand-personal .demand-personal-list:nth-of-type(0){margin-top: 0;}
 body .demand .demand-box .demand-list .demand-personal .demand-personal-list div { float: left; }
 body .demand .demand-box .demand-list .demand-personal .demand-personal-list .demand-personal-list-img { width: 88px; height: 88px; border-radius: 50px; border: 2px solid #F1F1F1; overflow: hidden; margin: 15px 0 0 15px; }
 body .demand .demand-box .demand-list .demand-personal .demand-personal-list .list-conten { position: relative; }
@@ -34,7 +35,8 @@ body .demand .demand-box .demand-list .demand-personal .demand-personal-list .li
 body .demand .demand-box .demand-list .demand-personal .demand-personal-btn { float: right; color: #838383; cursor: pointer; margin-top: 40px; font-size: 14px; }
 body .demand .demand-box .demand-list .demand-personal .demand-personal-btn:hover { color: #D42026; }
 body .demand .demand-box .demand-list .demand-enterprise { width: 580px; float: left; margin-left: 36px; }
-body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list { width: 580px; height: 130px; overflow: hidden; border: 1px solid #f1f1f1; }
+body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list { width: 580px; height: 130px; overflow: hidden; border: 1px solid #f1f1f1;margin-top:20px ;  }
+body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list:nth-of-type(0){margin-top: 0;}
 body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list div { float: left; }
 body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list .demand-enterprise-list-img { width: 88px; height: 88px; border-radius: 50px; border: 2px solid #F1F1F1; overflow: hidden; margin: 15px 0 0 15px; }
 body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list .list-conten { position: relative; }
