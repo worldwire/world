@@ -3,17 +3,21 @@ package com.spring.worldwire.model;
 import com.spring.worldwire.enums.LanguageEnum;
 import com.spring.worldwire.enums.ProductRequestStatusEnum;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @SuppressWarnings("unused")
-public class ProductRequest {
+public class ProductRequest implements Serializable {
+
+    private static final long serialVersionUID = 2648973495617278934L;
+
     private Long id;
 
     private Integer requestType;
 
     private String keyWord;
 
-    private String titile;
+    private String title;
 
     private String content;
 
@@ -63,12 +67,12 @@ public class ProductRequest {
         this.keyWord = keyWord == null ? null : keyWord.trim();
     }
 
-    public String getTitile() {
-        return titile;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitile(String titile) {
-        this.titile = titile == null ? null : titile.trim();
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 
     public String getContent() {
@@ -198,7 +202,7 @@ public class ProductRequest {
                 "id=" + id +
                 ", requestType=" + requestType +
                 ", keyWord='" + keyWord + '\'' +
-                ", titile='" + titile + '\'' +
+                ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", mobile='" + mobile + '\'' +
                 ", email='" + email + '\'' +

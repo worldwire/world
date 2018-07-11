@@ -26,8 +26,12 @@ public class Pager {
         this.pageNo = pageNo;
     }
 
+    public void setPageStart(int pageStart) {
+        this.pageStart = pageNo == null ? null : (pageSize - 1) * pageNo;
+    }
+
     public Integer getPageStart() {
-        return pageNo == null ? null : (pageSize - 1) * pageNo;
+        return pageStart;
     }
 
 }

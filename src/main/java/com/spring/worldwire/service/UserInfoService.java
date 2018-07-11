@@ -8,4 +8,6 @@ import com.spring.worldwire.model.UserInfo;
 public interface UserInfoService {
 
     int insert(UserInfo record);
+
+    UserInfo selectByLoginId(Long id);
 }

@@ -3,10 +3,13 @@ package com.spring.worldwire.model;
 import com.spring.worldwire.enums.LanguageEnum;
 import com.spring.worldwire.enums.TranslationApplyStatusEnum;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @SuppressWarnings("unused")
-public class TranslationApply {
+public class TranslationApply implements Serializable{
+    private static final long serialVersionUID = 6711257418819083454L;
+
     private Long id;
 
     private Long reqId;

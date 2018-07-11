@@ -1,3 +1,8 @@
+<link rel="stylesheet" href="/js/layui-v2.2.6/layui/css/layui.css"/>
+<script src="/js/layui-v2.2.6/layui/layui.js" ></script>
+<script src="/js/common/common.js" ></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="../css/head_style.css"/>
 <div class="head">
 
     <div class="head1 ">
@@ -29,10 +34,80 @@
 						</div>
 					</span>
             <span>&nbsp;&nbsp;&nbsp;</span>
-            <span class="login-btn">登录</span>
-            <span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-            <span class="register-btn">注册</span>
+            <#if userId??>
+                <div class="img-userhead">
+                    <img src="${userInfo.showImg!'/images/1/10.png'}" width="32" height="32" style="border-radius: 16px;;"><!--头像-->
+                    <span class="user-btn">${loginInfo.userName!''}
+                                <i class="layui-icon layui-icon-face-smile user-icon" style="font-size: 14px;">&#xe61a;</i>
+                            </span>
+                    <div class="userbox">
+                        <div class="userbox-user">
+                            <img src="${userInfo.showImg!'/images/1/10.png'}"/>
+                            <span class="userbox-usename">${loginInfo.userName!''}</span>
+                            <span class="userbox-usertype">
+                                <#if loginInfo??>
+                                    <#if loginInfo.type && loginInfo.type == 2>
+                                        企业用户
+                                    <#else>
+                                        个人用户
+                                    </#if>
+                                </#if>
+                            </span>
+                        </div>
+                        <div class="userbox-set">
+                            <i class="iconfont " style="font-size: 14px;color: #333333;">&#xe606;</i>
+                            &nbsp;&nbsp;&nbsp;设置
+                        </div>
+                        <div class="userbox-out" onclick="redirectClick('/login/logout')">
+                            <i class="iconfont " style="font-size: 14px;color: #333333;">&#xe652;</i>
+                            &nbsp;&nbsp;&nbsp;安全退出
+                        </div>
+                    </div>
+                </div>
+            <#else>
+                <span class="login-btn" onclick="redirectClick('/login/')">登录</span>
+                <span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+                <span class="register-btn">注册</span>
+            </#if>
+
         </div>
     </div>
 
 </div>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate
+            ,$ = layui.jquery;
+
+        $(".language-btns").click(function(){
+            if(!$(".span-div").is(':hidden')){//如果当前不隐藏
+                $('.span-div').hide();//就隐藏div
+                $(".language-icon").html("&#xe61a;")
+            }else{//否则
+                $('.userbox').hide();//就隐藏div
+                $(".user-icon").html("&#xe61a;")
+                $('.span-div').show();//那么就显示div
+                $(".language-icon").html("&#xe619;")
+            }
+        })
+
+        $(".user-btn").click(function(){
+            if(!$(".userbox").is(':hidden')){//如果当前不隐藏
+                $('.userbox').hide();//就隐藏div
+                $(".user-icon").html("&#xe61a;")
+            }else{//否则
+                $('.span-div').hide();//就隐藏div
+                $(".language-icon").html("&#xe61a;")
+                $('.userbox').show();//那么就显示div
+                $(".user-icon").html("&#xe619;")
+            }
+        });
+
+
+
+
+    })
+</script>

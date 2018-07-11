@@ -105,7 +105,7 @@ public class ProductRequestController {
      */
     private boolean check(ProductRequest productRequest) {
         return StringUtils.isNotBlank(productRequest.getContent())&&
-                StringUtils.isNotBlank(productRequest.getTitile());
+                StringUtils.isNotBlank(productRequest.getTitle());
     }
 
 

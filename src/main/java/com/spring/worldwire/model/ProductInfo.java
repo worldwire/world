@@ -1,6 +1,11 @@
 package com.spring.worldwire.model;
 
-public class ProductInfo {
+import java.io.Serializable;
+
+public class ProductInfo implements Serializable{
+
+    private static final long serialVersionUID = 3453425989173545796L;
+
     private Long id;
 
     private String productName;

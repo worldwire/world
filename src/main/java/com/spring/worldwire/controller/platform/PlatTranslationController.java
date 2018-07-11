@@ -34,7 +34,7 @@ public class PlatTranslationController {
 			ProductRequest productRequest = productRequestService.findById(translationApply.getReqId());
 			TranslationApplyVO translationApplyVO = new TranslationApplyVO();
 			translationApplyVO.setContext(productRequest.getContent());
-			translationApplyVO.setTitle(productRequest.getTitile());
+			translationApplyVO.setTitle(productRequest.getTitle());
 			translationApplyVO.setReqId(productRequest.getId());
 			translationApplyVO.setOrigType(productRequest.getLanguageType());
 			translationApplyVO.setFromType(translationApply.getFromType());
@@ -66,7 +66,7 @@ public class PlatTranslationController {
 			ProductRequest productRequest = productRequestService.findById(translationApply.getReqId());
 			TranslationApplyVO translationApplyVO = new TranslationApplyVO();
 			translationApplyVO.setContext(productRequest.getContent());
-			translationApplyVO.setTitle(productRequest.getTitile());
+			translationApplyVO.setTitle(productRequest.getTitle());
 			translationApplyVO.setReqId(productRequest.getId());
 			translationApplyVO.setOrigType(productRequest.getLanguageType());
 			translationApplyVO.setFromType(translationApply.getFromType());

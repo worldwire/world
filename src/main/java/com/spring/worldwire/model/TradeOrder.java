@@ -4,10 +4,14 @@ import com.spring.worldwire.config.BaseConfig;
 import com.spring.worldwire.enums.CurrencyEnum;
 import com.spring.worldwire.enums.PayStatusEnum;
 import com.spring.worldwire.enums.ThirdPayEnum;
+
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class TradeOrder {
+public class TradeOrder implements Serializable{
+
+  private static final long serialVersionUID = -3639002650145644211L;
 
   private Integer id;
   private String orderNum;

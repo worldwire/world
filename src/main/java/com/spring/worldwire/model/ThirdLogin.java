@@ -1,10 +1,14 @@
 package com.spring.worldwire.model;
 
+import java.io.Serializable;
+
 /**
  * @author luxun.
  * @date 2018/5/15 11:16
  */
-public class ThirdLogin {
+public class ThirdLogin implements Serializable{
+
+    private static final long serialVersionUID = 555480011824873303L;
 
     private String userName;
 

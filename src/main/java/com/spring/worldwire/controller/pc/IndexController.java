@@ -1,4 +1,4 @@
-package com.spring.worldwire.controller;
+package com.spring.worldwire.controller.pc;
 
 import com.spring.worldwire.enums.UserTypeEnum;
 import com.spring.worldwire.model.ProductRequest;
@@ -23,16 +23,18 @@ public class IndexController {
 
         ProductRequestQuery personalQuery = new ProductRequestQuery();
         personalQuery.setPageSize(4);
+        personalQuery.setPageNo(1);
         personalQuery.setUserType(UserTypeEnum.PERSONAL.getCode());
         List<ProductRequest> personalList = productRequestService.selectByQuery(personalQuery);
 
         ProductRequestQuery enterpriseQuery = new ProductRequestQuery();
         enterpriseQuery.setPageSize(4);
+        enterpriseQuery.setPageNo(1);
         enterpriseQuery.setUserType(UserTypeEnum.ENTERPRISE.getCode());
         List<ProductRequest> enterpriseList = productRequestService.selectByQuery(enterpriseQuery);
 
         model.addAttribute("personalList", personalList);
         model.addAttribute("enterpriseList", enterpriseList);
-        return "index";
+        return "pc/index";
     }
 }

@@ -1,8 +1,12 @@
 package com.spring.worldwire.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UserAccount {
+public class UserAccount implements Serializable{
+
+    private static final long serialVersionUID = -94931448867844759L;
+
     private Long id;
 
     private Integer viewingTimes;

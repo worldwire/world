@@ -1,6 +1,10 @@
 package com.spring.worldwire.model;
 
-public class AdminUser {
+import java.io.Serializable;
+
+public class AdminUser implements Serializable{
+    private static final long serialVersionUID = -12231136390267238L;
+
     private Long id;
 
     private String userName;

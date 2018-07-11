@@ -20,4 +20,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 
         return userInfoDao.insertSelective(record);
     }
+
+    @Override
+    public UserInfo selectByLoginId(Long id) {
+        return userInfoDao.selectByLoginId(id);
+    }
 }

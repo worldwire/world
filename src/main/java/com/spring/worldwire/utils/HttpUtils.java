@@ -4,23 +4,40 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created by luxun on 2018/5/7.
  */
 public class HttpUtils {
 
-    public static String getCookieByKey(String key, HttpServletRequest request){
-        if(StringUtils.isEmpty(key)){
+    public static String getCookieByKey(String key, HttpServletRequest request) {
+        if (StringUtils.isEmpty(key)) {
             return null;
         }
         Cookie[] cookies = request.getCookies();
-        for (Cookie cookie:cookies) {
-            if(cookie.getName().equals(key)){
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(key)) {
                 return cookie.getValue();
             }
         }
         return null;
+    }
+
+    public static Boolean removeCookie(String key, HttpServletRequest request, HttpServletResponse response) {
+        if (StringUtils.isEmpty(key)) {
+            return false;
+        }
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals(key)) {
+                cookie.setPath("/");
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+                return true;
+            }
+        }
+        return false;
     }
 
     public static String getIpAddress(HttpServletRequest request) {

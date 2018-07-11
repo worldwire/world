@@ -5,7 +5,7 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="request_type" property="requestType" jdbcType="INTEGER" />
     <result column="key_word" property="keyWord" jdbcType="VARCHAR" />
-    <result column="titile" property="titile" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
@@ -20,7 +20,7 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, request_type, key_word, titile, content, mobile, email, phone, website, language_type, 
+    id, request_type, key_word, title, content, mobile, email, phone, website, language_type, 
     language_id, status, user_type,user_id,create_time,update_time
   </sql>
 
@@ -50,20 +50,24 @@
     <where>
       <include refid="select_query"/>
     </where>
+    <if test="query.pageStart != null">
+      limit ${query.pageStart} ,${query.pageSize}
+    </if>
   </select>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from product_request
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
   <insert id="insert" parameterType="com.spring.worldwire.model.ProductRequest" >
     insert into product_request (id, request_type, key_word, 
-      titile, content, mobile, 
+      title, content, mobile, 
       email, phone, website, 
       language_type, language_id, status, 
       user_type,user_id, create_time, update_time)
     values (#{id,jdbcType=BIGINT}, #{requestType,jdbcType=INTEGER}, #{keyWord,jdbcType=VARCHAR}, 
-      #{titile,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, 
       #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{languageId,jdbcType=BIGINT}, #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}},
       #{userType,jdbcType=INTEGER},#{userId,jdbcType=BIGINT},#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
@@ -80,8 +84,8 @@
       <if test="keyWord != null" >
         key_word,
       </if>
-      <if test="titile != null" >
-        titile,
+      <if test="title != null" >
+        title,
       </if>
       <if test="content != null" >
         content,
@@ -130,8 +134,8 @@
       <if test="keyWord != null" >
         #{keyWord,jdbcType=VARCHAR},
       </if>
-      <if test="titile != null" >
-        #{titile,jdbcType=VARCHAR},
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
       </if>
       <if test="content != null" >
         #{content,jdbcType=VARCHAR},
@@ -180,8 +184,8 @@
       <if test="keyWord != null" >
         key_word = #{keyWord,jdbcType=VARCHAR},
       </if>
-      <if test="titile != null" >
-        titile = #{titile,jdbcType=VARCHAR},
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
       </if>
       <if test="content != null" >
         content = #{content,jdbcType=VARCHAR},
@@ -226,7 +230,7 @@
     update product_request
     set request_type = #{requestType,jdbcType=INTEGER},
       key_word = #{keyWord,jdbcType=VARCHAR},
-      titile = #{titile,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
       mobile = #{mobile,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},

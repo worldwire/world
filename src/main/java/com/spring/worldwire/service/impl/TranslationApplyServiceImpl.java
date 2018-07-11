@@ -67,7 +67,7 @@ public class TranslationApplyServiceImpl implements TranslationApplyService {
         TranslationApply translationApply = translationApplyDao.selectByPrimaryKey(translationApplyVO.getId());
         if(StringUtils.isNotBlank(translationApplyVO.getContext())){
             fromProduct.setContent(translationApplyVO.getContext());
-            fromProduct.setTitile(translationApplyVO.getTitle());
+            fromProduct.setTitle(translationApplyVO.getTitle());
             translationApply.setStatus(TranslationApplyStatusEnum.AUDITION);
             translationApply.setOperatorId(translationApplyVO.getOperatorId());
             translationApply.setUpdateTime(new Date());
