@@ -3,70 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <title>登陆页面</title>
+    <link rel="stylesheet" type="text/css" href="../css/foot_style.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/head_style.css"/>
+    <link rel="stylesheet" href="../js/layui-v2.2.6/layui/css/layui.css">
     <link rel="stylesheet" href="../css/fontCss.css">
     <link rel="stylesheet" href="../css/login.css">
+    <script src="../js/layui-v2.2.6/layui/layui.js"></script>
+    <script src="../js/layui-v2.2.6/layui/layui.js"></script>
 </head>
 <body>
-    <#include "../public/head.html" encoding="utf-8">
-    <div class="container">
-        <div class="title">登陆</div>
-        <div class="main">
-            <form class="layui-form layui-form-pane" action="/login/login">
-                <div class="layui-form-item">
-                    <div class="bord">
-                        <label class="layui-form-label"><i class="iconfont">&#xe757;</i></label>
-                        <div class="layui-input-block">
-                            <input type="text" placeholder="请输入邮箱" class="layui-input">
-                            <div class="bord-fa"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="bord">
-                        <label class="layui-form-label"><i class="iconfont">&#xe759;</i></label>
-                        <div class="layui-input-block">
-                            <input type="text" placeholder="请输密码" class="layui-input">
-                            <div class="bord-fa"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <a href="resultPsd.html" class="tip">忘记密码?</a>
-                    <p href="###" class="msg"><span class="disc" style="display: none"></span></p>
-                </div>
-                <div>
-                    <button class="layui-btn nextBtn">立即提交</button>
-                </div>
-                <div class="login">
-                    <div class="login-title">
-                        <i></i><span>快捷登陆</span><i></i>
-                        <div>
-                            <a href="###"><i class="iconfont" style="color: #8dc51c">&#xe6ed;</i></a>
-                            <a href="###"><i class="iconfont" style="color: #62a4ee">&#xe64d;</i></a>
-                            <a href="###"><i class="iconfont" style="color: #ec6061">&#xe63c;</i></a>
-                            <a href="###"><i class="iconfont" style="color: #667eba">&#xe627;</i></a>
-                            <a href="###"><i class="iconfont" style="color: #3aa6d7">&#xe6c1;</i></a>
-                            <a href="###"><i class="iconfont" style="color: #5fd4ff">&#xe60a;</i></a>
-                            <!--<a href="####"></a>-->
-                            <!--<a href="####" style="background-position: -50px 0"></a>-->
-                            <!--<a href="####" style="background-position: -100px 0"></a>-->
-                            <!--<a href="####" style="background-position: -150px 0"></a>-->
-                            <!--<a href="####" style="background-position: -200px 0"></a>-->
-                            <!--<a href="####" style="background-position: -247px 0"></a>-->
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="footer">
-            <a href="./register.html">注册</a>
-        </div>
-    </div>
-        <#include "../public/foot.html" encoding="utf-8">
-</body>
-<script>
-    var submit_form = functino(){
+<#include "../public/head.html" encoding="utf-8">
 
-    }
-</script>
+<div class="container">
+    <div class="title">登陆</div>
+    <div class="main">
+        <form class="layui-form layui-form-pane" action="">
+            <div class="layui-form-item">
+                <div class="bord">
+                    <label class="layui-form-label"><i class="iconfont">&#xe757;</i></label>
+                    <div class="layui-input-block">
+                        <input type="text" placeholder="请输入邮箱" class="layui-input">
+                        <div class="bord-fa"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="bord">
+                    <label class="layui-form-label"><i class="iconfont">&#xe759;</i></label>
+                    <div class="layui-input-block">
+                        <input type="text" placeholder="请输密码" class="layui-input">
+                        <div class="bord-fa"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <a href="resultPsd.html" class="tip">忘记密码?</a>
+                <p href="###" class="msg" style="display: none"><span class="disc"></span>邮箱或密码错误</p>
+            </div>
+            <div>
+                <button class="layui-btn nextBtn">立即提交</button>
+            </div>
+            <div class="login">
+                <div class="login-title">
+                    <i></i><span>快捷登陆</span><i></i>
+                    <div>
+                        <a href="###"><i class="iconfont" style="color: #8dc51c">&#xe6ed;</i></a>
+                        <a href="###"><i class="iconfont" style="color: #62a4ee">&#xe64d;</i></a>
+                        <a href="###"><i class="iconfont" style="color: #ec6061">&#xe63c;</i></a>
+                        <a href="###"><i class="iconfont" style="color: #667eba">&#xe627;</i></a>
+                        <a href="###"><i class="iconfont" style="color: #3aa6d7">&#xe6c1;</i></a>
+                        <a href="###"><i class="iconfont" style="color: #5fd4ff">&#xe60a;</i></a>
+                        <!--<a href="####"></a>-->
+                        <!--<a href="####" style="background-position: -50px 0"></a>-->
+                        <!--<a href="####" style="background-position: -100px 0"></a>-->
+                        <!--<a href="####" style="background-position: -150px 0"></a>-->
+                        <!--<a href="####" style="background-position: -200px 0"></a>-->
+                        <!--<a href="####" style="background-position: -247px 0"></a>-->
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="footer">
+        <a href="./register.html">注册</a>
+    </div>
+</div>
+
+    <#include "../public/foot.html" encoding="utf-8">
+</body>
 </html>
