@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>帮助中心</title>
+		<link rel="stylesheet" type="text/css" href="/css/helpCenter.css"/>
+		<#include "../public/common.html" encoding="utf-8">
+	</head>
+	<body>
+        <#include "../public/head.html" encoding="utf-8">
+        <#include "../public/navigator.html" encoding="utf-8">
+		<div class="help-centerview">
+			<div class="help-centerview1">
+				<img class="help-centerview1-help1" src="/images/help1.png"/>
+				<span class="help-centerview1-text1">
+					帮助中心
+				</span>
+				<span class="help-centerview1-text2">
+					关于世界汇网的招聘和自由职业的概述
+				</span>
+				<div class="help-centerview1-start">
+					开始吧
+				</div>
+			</div>
+		</div>
+		<div class="choose-menu">
+			<div class="choose-menu1">
+				<ul>
+					<li><div class="">
+						寻找
+					</div>
+					</li>
+					<li>
+						<div class="">
+							寻聘用及合作
+						</div>
+					</li>
+					<li>
+						<div class="">
+							开展聘用或合作
+						</div>
+					</li>
+					<li>
+						<div class="">
+							支付
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="content">
+			<div class="contentbox">
+				<div class="contentbox-fjob contentbox-list-style">
+					<div class="fjob-img list-img-style">
+						<img class="" src="/images/help2.png"/>
+					</div>
+					<span class="fjob-span1">轻松找到优质的自由职业者</span>
+					<span class="fjob-span2" >发布关于您个人或您公司的招聘需求或公司商务资源，我们将会自己推送与您<br>需求相匹配的求职者或是公司资源。</span>
+					<div class="fjob-btn">
+						寻找人才、寻找工作、寻找商务资源
+						<img src="/images/help6.png" style="width:23px;height:23px;margin-left: 10px;">
+					</div>
+				</div>
+				<div class="contentbox-hire contentbox-list-style">
+					<div class="hire-img list-img-style">
+						<img class="" src="/images/help3.png"/>
+					</div>
+					<span class="hire-span1">雇用最好的自由职业者</span>
+					<span class="hire-span2" style="text-align: right;">上传您个人或是您公司的资料和需求，然后对国际高级人才进行面试。聘用适<br>合您个人或公司的人才及商务资源并进行合作。</span>
+					<div class="hire-btn">
+						发布需求
+						<img src="/images/help6.png" style="width:23px;height:23px;margin-left: 10px;">
+					</div>
+				</div>
+				<div class="contentbox-efficient contentbox-list-style">
+					<div class="efficient-img list-img-style">
+						<img class="" src="/images/help4.png"/>
+					</div>
+					<span class="efficient-span1">高效地工作</span>
+					<span class="efficient-span2" >运用世界汇网平台在电脑端或是在线下商洽，进行国际高级人才信息及商务资<br>源的分享及合作。</span>
+
+				</div>
+				<div class="contentbox-pay contentbox-list-style">
+					<div class="pay-img list-img-style">
+						<img class="" src="/images/help5.png"/>
+					</div>
+					<span class="pay-span1">安全支付</span>
+					<span class="pay-span2" style="text-align: right;">世界汇网将支持与保护您的交易权益，在您同意及授权之后<br>才会支持到对方账户。</span>
+					<div class="pay-btn">
+						了解用户电子协议
+						<img src="/images/help6.png" style="width:23px;height:23px;margin-left: 10px;">
+					</div>
+				</div>
+			</div>
+		</div>
+        <#include "../public/foot.html" encoding="utf-8">
+
+	</body>
+
+	<script>
+	layui.use(['form', 'layedit', 'laydate'], function(){
+	  var form = layui.form
+	  ,layer = layui.layer
+	  ,layedit = layui.layedit
+	  ,laydate = layui.laydate
+	  ,$ = layui.jquery;
+
+		 $(".language-btns").click(function(){
+                if(!$(".span-div").is(':hidden')){//如果当前不隐藏
+                    $('.span-div').hide();//就隐藏div
+                    $(".language-icon").html("&#xe61a;")
+                }else{//否则
+					$('.userbox').hide();//就隐藏div
+					$(".user-icon").html("&#xe61a;")
+                    $('.span-div').show();//那么就显示div
+                    $(".language-icon").html("&#xe619;")
+                }
+            })
+
+            $(".user-btn").click(function(){
+                if(!$(".userbox").is(':hidden')){//如果当前不隐藏
+                    $('.userbox').hide();//就隐藏div
+                    $(".user-icon").html("&#xe61a;")
+                }else{//否则
+ 					$('.span-div').hide();//就隐藏div
+ 					$(".language-icon").html("&#xe61a;")
+                    $('.userbox').show();//那么就显示div
+                    $(".user-icon").html("&#xe619;")
+                }
+            });
+
+
+})
+  	</script>
+</html>
