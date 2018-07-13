@@ -9,11 +9,16 @@ import org.springframework.stereotype.Service;
 /**
  * Created by luxun on 2018/4/27.
  */
+@SuppressWarnings("unused")
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
 
     @Autowired
     private UserInfoDao userInfoDao;
+
+    public UserInfoServiceImpl(UserInfoDao userInfoDao) {
+        this.userInfoDao = userInfoDao;
+    }
 
     @Override
     public int insert(UserInfo record) {
@@ -24,5 +29,15 @@ public class UserInfoServiceImpl implements UserInfoService {
     @Override
     public UserInfo selectByLoginId(Long id) {
         return userInfoDao.selectByLoginId(id);
+    }
+
+    @Override
+    public int update(UserInfo userInfo) {
+        return userInfoDao.updateByPrimaryKeySelective(userInfo);
+    }
+
+    @Override
+    public UserInfo selectSimpleById(long id) {
+        return userInfoDao.selectSimpleById(id);
     }
 }

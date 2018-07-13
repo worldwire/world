@@ -75,7 +75,7 @@
     delete from user_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.spring.worldwire.model.UserInfo" >
+  <insert id="insert" parameterType="com.spring.worldwire.model.UserInfo" keyProperty="id" useGeneratedKeys="true" >
     insert into user_info (id, login_id, type, 
       is_foreign, show_img, brithday, 
       nick_name, language, bri_nationality, 
@@ -562,4 +562,11 @@
       business_bank_img = #{businessBankImg,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <select id="selectSimpleById" resultMap="BaseResultMap">
+    SELECT id,show_img,login_id,type,nick_name FROM user_info WHERE id = #{id }
+
+  </select>
+
 </mapper>

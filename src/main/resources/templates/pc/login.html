@@ -17,12 +17,12 @@
 <div class="container">
     <div class="title">登陆</div>
     <div class="main">
-        <form class="layui-form layui-form-pane" action="">
+        <form class="layui-form layui-form-pane" action="/login/login">
             <div class="layui-form-item">
                 <div class="bord">
                     <label class="layui-form-label"><i class="iconfont">&#xe757;</i></label>
                     <div class="layui-input-block">
-                        <input type="text" placeholder="请输入邮箱" class="layui-input">
+                        <input type="text" name="email" placeholder="请输入邮箱" class="layui-input">
                         <div class="bord-fa"></div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                 <div class="bord">
                     <label class="layui-form-label"><i class="iconfont">&#xe759;</i></label>
                     <div class="layui-input-block">
-                        <input type="text" placeholder="请输密码" class="layui-input">
+                        <input type="text" name="password" placeholder="请输密码" class="layui-input">
                         <div class="bord-fa"></div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
         </form>
     </div>
     <div class="footer">
-        <a href="./register.html">注册</a>
+        <a href="/register/">注册</a>
     </div>
 </div>
 

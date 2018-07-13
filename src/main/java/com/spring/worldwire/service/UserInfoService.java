@@ -10,4 +10,8 @@ public interface UserInfoService {
     int insert(UserInfo record);
 
     UserInfo selectByLoginId(Long id);
+
+    int update(UserInfo userInfo);
+
+    UserInfo selectSimpleById(long l);
 }

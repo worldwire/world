@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+
+    <#include "../public/common.html" encoding="utf-8">
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+<#include "../public/head.html" encoding="utf-8">
+
+<div class="container">
+    <div class="title">注册</div>
+    <div class="main">
+        <form class="layui-form layui-form-pane" method="post" action="/register/save">
+            <div class="layui-form-item">
+                <label class="layui-form-label"><i class="iconfont">&#xe757;</i></label>
+                <div class="layui-input-block">
+                    <input type="text" name="userName" placeholder="请输入用户名" class="layui-input">
+                    <div class="bord-fa"></div>
+                    <!--<p class="msg">请输入名字</p>-->
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><i class="iconfont">&#xe75a;</i></label>
+                <div class="layui-input-block">
+                    <input type="text" name="email" placeholder="请输入邮箱" class="layui-input">
+                    <div class="bord-fa"></div>
+                    <!--<p class="msg">请输入正确邮箱</p>-->
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><i class="iconfont">&#xe757;</i></label>
+                <div class="layui-input-block">
+                    <input type="text" name="password" placeholder="密码不得少于6位" class="layui-input">
+                    <div class="bord-fa"></div>
+                    <!--<p class="msg">密码不得少于6位</p>-->
+                </div>
+            </div>
+            <div class="btnbox">
+                <button class="layui-btn nextBtn">下一步</button>
+            </div>
+        </form>
+    </div>
+    <div class="footer">
+        <p><!--已有账号?--><a href="/login/">登陆</a></p>
+    </div>
+</div>
+
+    <#include "../public/foot.html" encoding="utf-8">
+</body>
+<script>
+        layui.use(['form', 'layedit', 'laydate'], function(){
+            var form = layui.form
+                ,layer = layui.layer
+                ,layedit = layui.layedit
+                ,laydate = layui.laydate
+                ,$ = layui.jquery;
+
+             $(".language-btns").click(function(){
+                if(!$(".span-div").is(':hidden')){//如果当前不隐藏
+                    $('.span-div').hide();//就隐藏div
+                    $(".language-icon").html("&#xe61a;")
+                }else{//否则
+					$('.userbox').hide();//就隐藏div
+					$(".user-icon").html("&#xe61a;")
+                    $('.span-div').show();//那么就显示div
+                    $(".language-icon").html("&#xe619;")
+                }
+            })
+
+            $(".user-btn").click(function(){
+                if(!$(".userbox").is(':hidden')){//如果当前不隐藏
+                    $('.userbox').hide();//就隐藏div
+                    $(".user-icon").html("&#xe61a;")
+                }else{//否则
+ 					$('.span-div').hide();//就隐藏div
+ 					$(".language-icon").html("&#xe61a;")
+                    $('.userbox').show();//那么就显示div
+                    $(".user-icon").html("&#xe619;")
+                }
+            });
+
+
+
+        })
+    </script>
+</html>

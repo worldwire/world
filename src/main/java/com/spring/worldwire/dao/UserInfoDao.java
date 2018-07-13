@@ -16,4 +16,6 @@ public interface UserInfoDao {
     int updateByPrimaryKey(UserInfo record);
 
     UserInfo selectByLoginId(Long id);
+
+    UserInfo selectSimpleById(long id);
 }

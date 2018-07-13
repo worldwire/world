@@ -30,4 +30,8 @@ public class Constants {
     public static final String CACHE_SIGN_KEY = "cache_sign_key_";
 
 
+    //----------------------------------------业务相关字段--------------------------------------
+    public static final String USER_COOKIES_NAME = "userInfo";
+
+    public static final String USER_SESSION = "userInfo";
 }
