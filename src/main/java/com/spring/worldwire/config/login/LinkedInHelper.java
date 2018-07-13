@@ -1,4 +1,4 @@
-package com.spring.worldwire.utils.login.linkedin;
+package com.spring.worldwire.config.login;
 
 import com.alibaba.fastjson.JSONObject;
 import com.spring.worldwire.utils.HttpReqUtil;

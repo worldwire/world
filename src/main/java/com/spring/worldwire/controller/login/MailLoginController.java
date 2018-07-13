@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,9 +44,9 @@ public class MailLoginController {
     }
 
     @RequestMapping("")
-    public ResponseResult loginByMail(LoginInfo loginInfo, HttpServletResponse response) {
+    public ResponseResult loginByMail(LoginInfo loginInfo, HttpServletResponse response, HttpServletRequest request) {
         try {
-            LoginInfo info = loginService.login(loginInfo, response);
+            LoginInfo info = loginService.login(loginInfo, response,request);
             if (Objects.isNull(info)) {
                 return new ResponseResult(null, StatusCodeEnum.EMPTY, "没找到相关用户");
             }

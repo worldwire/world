@@ -6,6 +6,7 @@ import com.spring.worldwire.service.hander.AbstractLoginServiceHandller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
 import java.util.List;
@@ -29,14 +30,14 @@ public class MailLoginServiceImpl extends AbstractLoginServiceHandller {
     }
 
     @Override
-    public LoginInfo login(LoginInfo info, HttpServletResponse response) {
+    public LoginInfo login(LoginInfo info, HttpServletResponse response, HttpServletRequest request) {
 
         List<LoginInfo> list = loginInfoService.selectByQuery(buildQuery(info));
 
         LoginInfo loginInfo = list.stream().findFirst().orElse(null);
         if (Objects.nonNull(loginInfo)) {
             try {
-                handleCookie(response, list.get(0).getId());
+                handleHttpParams(request,response, list.get(0).getId());
                 handleSignUp(list.get(0).getId());
                 return loginInfo;
             } catch (ParseException e) {

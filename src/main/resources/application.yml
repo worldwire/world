@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: 80
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.spring.worldwire.model
@@ -30,6 +30,9 @@ multipart:
 qq:
   appid: 1106875040
   appkey: xy0YfT0z8I2JcN44
+wx:
+  appid: wxb2a2591be835d810
+  appsecret: 293443b83fb49842e02b3100551a5373
 ---
 spring:
   profile: online
