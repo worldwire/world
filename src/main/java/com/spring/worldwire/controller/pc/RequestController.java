@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
-public class IndexController {
+@RequestMapping("/request")
+public class RequestController {
 
     @Autowired
     private ProductRequestService productRequestService;
@@ -35,11 +35,14 @@ public class IndexController {
 
         model.addAttribute("personalList", personalList);
         model.addAttribute("enterpriseList", enterpriseList);
-        return "pc/index";
+        return "pc/demandHall";
     }
 
-    @RequestMapping("helpCenter")
-    public String toHelpCenter(Model model) {
-        return "pc/helpCenter";
+    @RequestMapping("detail")
+    public String toDetail(Model model,int id) {
+
+        System.out.println("================="+id);
+
+        return "pc/demand";
     }
 }
