@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8083
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.spring.worldwire.model
@@ -35,7 +35,7 @@ spring:
   profile: online
   datasource:
     name: worldwire
-    url: jdbc:mysql://101.200.137.78:3306/worldwire
+    url: jdbc:mysql://127.0.0.1:3306/worldwire
     username: root
     password: 123456aA!!
     driver-class-name: com.mysql.jdbc.Driver
