@@ -53,7 +53,7 @@ public class LoginController {
         query.setPassword(password);
         List<LoginInfo> list = loginInfoService.selectByQuery(query);
         if(CollectionUtils.isEmpty(list)){
-            return null;
+            return "";
         }
 
         LoginInfo loginInfo = list.get(0);

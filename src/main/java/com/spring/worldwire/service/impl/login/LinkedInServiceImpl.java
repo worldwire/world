@@ -10,8 +10,8 @@ import com.spring.worldwire.service.UserAccountService;
 import com.spring.worldwire.service.UserInfoService;
 import com.spring.worldwire.service.hander.AbstractThirdLoginServiceHandler;
 import com.spring.worldwire.utils.HttpUtils;
-import com.spring.worldwire.utils.login.linkedin.LinkedInConfig;
-import com.spring.worldwire.utils.login.linkedin.LinkedInHelper;
+import com.spring.worldwire.config.login.LinkedInConfig;
+import com.spring.worldwire.config.login.LinkedInHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,7 +89,7 @@ public class LinkedInServiceImpl extends AbstractThirdLoginServiceHandler {
                 } else {
                     // 获取信息成功,保存用户
                     LoginInfo user = new LoginInfo();
-                    LoginInfo info = handleLoginCheck(warpLoginUser(userInfo));
+                    LoginInfo info = handleLoginCheck(warpLoginUser(userInfo),request,response);
                     if (Objects.isNull(info)) {//用户不存在则创建一个新用户
                         user = createNewUser(userInfo);
                     }else{
@@ -97,7 +97,7 @@ public class LinkedInServiceImpl extends AbstractThirdLoginServiceHandler {
                     }
                     try {
                         //登录操作
-                        handleCookie(response, user.getId());
+                        handleHttpParams(request,response, user.getId());
                         handleSignUp(user.getId());
                     } catch (ParseException e) {
                         e.printStackTrace();

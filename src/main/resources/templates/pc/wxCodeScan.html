@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微信登陆页面</title>
+    <script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js" type="javascript"/>
+    <script>
+
+        var obj = new WxLogin({
+            self_redirect:true,
+            id:"qrcode",
+            appid: "${appId}",
+            scope: "${scope}",
+            redirect_uri: "${redirectURI}",
+            state: "${state}"
+        });
+
+    </script>
+</head>
+<body>
+<div id="qrcode" style="width: 1000px;height: 500px;border: 1px solid red;">
+
+</div>
+</body>
+</html>

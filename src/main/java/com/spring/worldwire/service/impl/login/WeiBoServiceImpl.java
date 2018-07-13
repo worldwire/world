@@ -65,7 +65,7 @@ public class WeiBoServiceImpl extends AbstractThirdLoginServiceHandler {
             Users users = new Users();
             users.client.setToken(accessToken);
             User weiboUser = users.showUserById(uid);
-            LoginInfo info = handleLoginCheck(warpLoginUser(weiboUser));
+            LoginInfo info = handleLoginCheck(warpLoginUser(weiboUser),request,response);
             LoginInfo user = new LoginInfo();
             if (Objects.isNull(info)) {
                 user = createNewUser(weiboUser);
@@ -73,7 +73,7 @@ public class WeiBoServiceImpl extends AbstractThirdLoginServiceHandler {
                 user = info;
             }
             //登录操作
-            handleCookie(response, user.getId());
+            handleHttpParams(request,response, user.getId());
             handleSignUp(user.getId());
         } catch (Exception e) {
             log.error("callback exception", e);

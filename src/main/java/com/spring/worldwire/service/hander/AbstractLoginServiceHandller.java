@@ -2,17 +2,21 @@ package com.spring.worldwire.service.hander;
 
 import com.spring.worldwire.model.LoginInfo;
 import com.spring.worldwire.model.UserAccount;
+import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.query.LoginInfoQuery;
 import com.spring.worldwire.service.LoginInfoService;
 import com.spring.worldwire.service.LoginService;
 import com.spring.worldwire.service.UserAccountService;
+import com.spring.worldwire.service.UserInfoService;
 import com.spring.worldwire.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -27,8 +31,10 @@ public abstract class AbstractLoginServiceHandller implements LoginService {
     private UserAccountService userAccountService;
     @Autowired
     private LoginInfoService loginInfoService;
+    @Autowired
+    private UserInfoService userInfoService;
 
-    public void handleCookie(HttpServletResponse response, Long id) {
+    public void handleHttpParams(HttpServletRequest request, HttpServletResponse response, Long id) {
         Cookie cookie = new Cookie("loginKey" + id, id.toString());
         response.addCookie(cookie);
     }
@@ -49,12 +55,13 @@ public abstract class AbstractLoginServiceHandller implements LoginService {
      *
      * @param loginInfo
      */
-    public LoginInfo handleLoginCheck(LoginInfo loginInfo) {
+    public LoginInfo handleLoginCheck(LoginInfo loginInfo,HttpServletRequest request,HttpServletResponse response) {
+
+        List<LoginInfo> list = new ArrayList<LoginInfo>();
 
         if (Objects.nonNull(loginInfo.getEmail()) && Objects.nonNull(loginInfo.getPassword())) {
 
-
-            List<LoginInfo> list = loginInfoService.selectByQuery(buildQuery(loginInfo));
+            list = loginInfoService.selectByQuery(buildQuery(loginInfo));
 
             return list.stream().findFirst().orElse(null);
         }
@@ -64,13 +71,18 @@ public abstract class AbstractLoginServiceHandller implements LoginService {
             query.setThirdType(loginInfo.getThirdType());
             query.setThirdKey(loginInfo.getThirdKey());
 
-            List<LoginInfo> list = loginInfoService.selectByQuery(query);
-
-            return list.stream().findFirst().orElse(null);
-
+            list = loginInfoService.selectByQuery(query);
         }
-        return null;
+        if(CollectionUtils.isEmpty(list)){
+            return null;
+        }
+        LoginInfo info = list.get(0);
+        UserInfo userInfo = userInfoService.selectByLoginId(info.getId());
+
+        return list.stream().findFirst().orElse(null);
+
     }
+
 
     protected LoginInfoQuery buildQuery(LoginInfo loginInfo) {
         LoginInfoQuery query = new LoginInfoQuery();

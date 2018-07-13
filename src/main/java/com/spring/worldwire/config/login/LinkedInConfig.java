@@ -1,4 +1,4 @@
-package com.spring.worldwire.utils.login.linkedin;
+package com.spring.worldwire.config.login;
 
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Value;
