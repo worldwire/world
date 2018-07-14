@@ -1,5 +1,6 @@
 package com.spring.worldwire.controller.pc;
 
+import com.spring.worldwire.enums.RequestTypeEnum;
 import com.spring.worldwire.enums.UserTypeEnum;
 import com.spring.worldwire.model.ProductRequest;
 import com.spring.worldwire.query.ProductRequestQuery;
@@ -53,5 +54,28 @@ public class RequestController {
         model.addAttribute("productRequest",productRequest);
 
         return "pc/myDetail";
+    }
+
+    @RequestMapping("release")
+    public String release(Model model) {
+
+        return "pc/releaseRequest";
+    }
+
+    @RequestMapping("releaseCommit")
+    public String releaseCommit(Model model,Integer requestType) {
+
+        ProductRequest productRequest = new ProductRequest();
+
+        RequestTypeEnum requestTypeEnum = RequestTypeEnum.getNameByCode(requestType);
+        if(requestTypeEnum==null){
+            return "/";
+        }
+
+        productRequest.setRequestType(requestTypeEnum);
+
+        productRequestService.save(productRequest);
+
+        return "pc/releaseRequest";
     }
 }

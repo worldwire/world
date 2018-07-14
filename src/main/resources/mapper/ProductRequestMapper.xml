@@ -3,7 +3,7 @@
 <mapper namespace="com.spring.worldwire.dao.ProductRequestDao" >
   <resultMap id="BaseResultMap" type="com.spring.worldwire.model.ProductRequest" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="request_type" property="requestType" jdbcType="INTEGER" />
+    <result column="request_type" property="requestType" jdbcType="INTEGER" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.RequestTypeEnum" />
     <result column="key_word" property="keyWord" jdbcType="VARCHAR" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
@@ -32,8 +32,8 @@
       <if test="query.userType != null and query.userType > 0">
         user_type = #{query.userType,jdbcType=INTEGER} and
       </if>
-      <if test="query.requestType != null and query.requestType > 0">
-        request_type = #{query.requestType,jdbcType=INTEGER} and
+      <if test="query.requestType != null">
+        request_type = #{query.requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler} and
       </if>
       status = 1
     </trim>
@@ -69,7 +69,7 @@
       email, phone, website, wechat, linkedIn,
       language_type, language_id, `status`, language_level,
       user_type,user_id, create_time, update_time)
-    values (#{id,jdbcType=BIGINT}, #{requestType,jdbcType=INTEGER}, #{keyWord,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=BIGINT}, #{requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{keyWord,jdbcType=VARCHAR},
       #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{linkedIn,jdbcType=VARCHAR},
       #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{languageId,jdbcType=BIGINT}, #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
@@ -133,7 +133,7 @@
         #{id,jdbcType=BIGINT},
       </if>
       <if test="requestType != null" >
-        #{requestType,jdbcType=INTEGER},
+        #{requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="keyWord != null" >
         #{keyWord,jdbcType=VARCHAR},
@@ -183,7 +183,7 @@
     update product_request
     <set >
       <if test="requestType != null" >
-        request_type = #{requestType,jdbcType=INTEGER},
+        request_type = #{requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="keyWord != null" >
         key_word = #{keyWord,jdbcType=VARCHAR},
@@ -232,7 +232,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.spring.worldwire.model.ProductRequest" >
     update product_request
-    set request_type = #{requestType,jdbcType=INTEGER},
+    set request_type = #{requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       key_word = #{keyWord,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>发布需求</title>
+    <#include "../public/common.html" encoding="utf-8"/>
+
+    <link rel="stylesheet" type="text/css" href="/css/releaseRequirements.css"/>
+	</head>
+	<body>
+        <#include "../public/head.html" encoding="utf-8"/>
+        <#include "../public/navigator.html" encoding="utf-8"/>
+          <div class="content">
+            <div class="content1">
+              <#include "../public/left.html" encoding="utf-8" />
+
+              <div class="content1-right">
+                <div class="content1-right-title">
+                  请选择您的需求方向
+                </div>
+                <div class="content1-right-choose">
+                  <div class="choose-1">我有才能可以帮助外国人或公司</div>
+                  <div class="choose-2">我要找国际人才或者资源</div>
+                </div>
+                <div class="choose-nextbtn" onclick="submitRequest()">
+                  下一步
+                </div>
+              </div>
+            </div>
+          </div>
+        <#include "../public/foot.html" encoding="utf-8"/>
+
+	</body>
+
+<script>
+
+  var requestType = 1;
+
+  layui.use(['form', 'layedit', 'laydate'], function(){
+    var form = layui.form
+        ,layer = layui.layer
+        ,layedit = layui.layedit
+        ,laydate = layui.laydate
+        ,$ = layui.jquery;
+
+    $(".language-btns").click(function(){
+      if(!$(".span-div").is(':hidden')){//如果当前不隐藏
+        $('.span-div').hide();//就隐藏div
+        $(".language-icon").html("&#xe61a;")
+      }else{//否则
+        $('.userbox').hide();//就隐藏div
+        $(".user-icon").html("&#xe61a;")
+        $('.span-div').show();//那么就显示div
+        $(".language-icon").html("&#xe619;")
+      }
+    })
+
+    $(".user-btn").click(function(){
+      if(!$(".userbox").is(':hidden')){//如果当前不隐藏
+        $('.userbox').hide();//就隐藏div
+        $(".user-icon").html("&#xe61a;")
+      }else{//否则
+        $('.span-div').hide();//就隐藏div
+        $(".language-icon").html("&#xe61a;")
+        $('.userbox').show();//那么就显示div
+        $(".user-icon").html("&#xe619;")
+      }
+    });
+
+    $(".choose-1").click(function(){
+      $(".choose-1").css("border-bottom","3px solid #D42026")
+      $(".choose-2").css("border-bottom","3px solid #ffffff")
+      requestType = 1
+    })
+    $(".choose-2").click(function(){
+      $(".choose-2").css("border-bottom","3px solid #D42026")
+      $(".choose-1").css("border-bottom","3px solid #ffffff")
+      requestType = 2
+    })
+  })
+
+  function submitRequest() {
+    location.href='/request/releaseCommit?requestType='+requestType;
+  }
+
+
+
+</script>
+</html>
