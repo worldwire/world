@@ -34,4 +34,5 @@ public class Constants {
     public static final String USER_COOKIES_NAME = "userInfo";
 
     public static final String USER_SESSION = "userInfo";
+    public static final String USER_ID_SESSION = "userId";
 }

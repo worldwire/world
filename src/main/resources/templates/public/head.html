@@ -32,13 +32,13 @@
             <#if userId??>
                 <div class="img-userhead">
                     <img src="${userInfo.showImg!'/images/1/10.png'}" width="32" height="32" style="border-radius: 16px;;"><!--头像-->
-                    <span class="user-btn">${loginInfo.userName!''}
+                    <span class="user-btn">${userInfo.nickName!''}
                                 <i class="layui-icon layui-icon-face-smile user-icon" style="font-size: 14px;">&#xe61a;</i>
                             </span>
                     <div class="userbox">
                         <div class="userbox-user">
                             <img src="${userInfo.showImg!'/images/1/10.png'}"/>
-                            <span class="userbox-usename">${loginInfo.userName!''}</span>
+                            <span class="userbox-usename">${userInfo.nickName!''}</span>
                             <span class="userbox-usertype">
                                 <#if loginInfo??>
                                     <#if loginInfo.type && loginInfo.type == 2>

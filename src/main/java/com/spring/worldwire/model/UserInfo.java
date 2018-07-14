@@ -466,5 +466,30 @@ public class UserInfo implements Serializable{
 				+ businessBankName + ", businessBankAddr=" + businessBankAddr + ", businessBankImg=" + businessBankImg
 				+ "]";
 	}
-    
+
+	private static String BLANK_STRING = "null";
+
+
+	public String cookiesValue(){
+
+      return String.join("$$", id.toString(), type!=null?type.toString():BLANK_STRING, nickName!=null?nickName:BLANK_STRING, showImg!=null?showImg:BLANK_STRING);
+  }
+
+  public void analysisCookiesValue(String cookiesValue){
+      if(cookiesValue.contains("$$")) {
+          String[] split = cookiesValue.split("\\$\\$");
+          setId(Long.parseLong(split[0]));
+          if(!BLANK_STRING.equals(split[1])) {
+              setType(Integer.parseInt(split[1]));
+          }
+          if(!BLANK_STRING.equals(split[2])) {
+              setNickName(split[2]);
+          }
+          if(!BLANK_STRING.equals(split[3])) {
+              setShowImg(split[3]);
+          }
+
+      }
+  }
+
 }

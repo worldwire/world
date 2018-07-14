@@ -1,21 +1,19 @@
 package com.spring.worldwire.controller.pc;
 
-import com.alibaba.fastjson.JSONObject;
 import com.spring.worldwire.constants.Constants;
 import com.spring.worldwire.model.LoginInfo;
 import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.query.LoginInfoQuery;
 import com.spring.worldwire.service.LoginInfoService;
 import com.spring.worldwire.service.UserInfoService;
+import java.util.List;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  * Desc: Desc
@@ -60,7 +58,7 @@ public class LoginController {
 
         UserInfo userInfo = userInfoService.selectByLoginId(loginInfo.getId());
 
-        Cookie userIdCookie = new Cookie(Constants.USER_COOKIES_NAME,userInfo.getId().toString());
+        Cookie userIdCookie = new Cookie(Constants.USER_COOKIES_NAME,userInfo.cookiesValue());
         userIdCookie.setPath("/");
         userIdCookie.setMaxAge(3600);
 
