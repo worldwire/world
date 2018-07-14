@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>翻译页面</title>
+  <#include "../public/common.html" encoding="utf-8">
+  <link rel="stylesheet" href="/css/translate.css">
+</head>
+<body>
+<#include "../public/head.html" encoding="utf-8" />
+  <!-- 主体内容 -->
+  <div class="container">
+
+    <#include "../public/left.html" encoding="utf-8" />
+
+    <div class="main">
+      <div>
+        <div class="information">
+          <div class="photo">
+            <a href=""><img src="${userInfo.showImg!'/images/zdd.jpg'}" alt="张大大的头像"></a>
+          </div>
+          <div class="info">
+            <p class="name">${userInfo.nickName!''}</p>
+            <p class="nat"><i class="iconfont">&#xe611;</i><span>中国 北京</span><img src="/images/gj.png" alt="国籍"></p>
+            <p class="text"><span class="disc"></span><span>个人需求</span>我要找国际人才或资源</p>
+          </div>
+          <div class="nationality">
+            <p>国籍</p>
+            <p><img src="/images/gj.png" alt="国籍"></p>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div><h2>${productRequest.title}</h2></div>
+        <div class="content-main">
+          ${productRequest.content}
+        </div>
+        <div class="time">
+          <p>发布时间: ${productRequest.createTime?string("yyyy-MM-dd HH:mm:ss")}</p>
+        </div>
+      </div>
+      <div class="level">
+        <p>发布者水平</p>
+        <div>
+          <#list productRequest.languageLevel as languageLevel>
+            <dl>
+              <dt>${languageLevel.languageEnum.cnName}</dt>
+              <dd>${languageLevel.level.cnName}</dd>
+            </dl>
+          </#list>
+        </div>
+      </div>
+      <div class="other">
+        <div style="margin-bottom: 30px;">
+          <#list productRequest.keyWordsVeiw as key>
+            <a href="###">${key}</a>
+          </#list>
+        </div>
+        <div class="contact">
+<!--?          <div style="width: 132px; float: left;margin-right: 20px">
+            <div class="ewm"><img src="/images/ewm1.jpg" alt="二维码"></div>
+            <p>微信二维码</p>
+          </div>-->
+          <ul>
+            <li>手机号：<span>${productRequest.mobile!''}</span></li>
+            <li>微信号：<span>${productRequest.wechat!''}</span></li>
+            <li>LinkedIn：<span>${productRequest.linkedIn!''}</span></li>
+          </ul>
+          <ul>
+            <li>座机号：<span>${productRequest.phone!''}</span></li>
+            <li>联系邮箱：<span>${productRequest.email!''}</span></li>
+            <li>我的网站：<span>${productRequest.website!''}</span></li>
+          </ul>
+        </div>
+        <div style="float: right;">
+          <div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_tqf" data-cmd="tqf" title="分享到腾讯朋友"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a></div>
+          <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+        </div>
+        <div class="btn-group">
+          <div style="margin-right: -30px;">
+            <a href="###" id="tran-btn">翻译</a>
+            <a href="###">修改</a>
+            <a href="###">开启</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <#include "../public/foot.html" encoding="utf-8">
+</body>
+</html>

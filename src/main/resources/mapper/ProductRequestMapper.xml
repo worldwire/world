@@ -11,17 +11,20 @@
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
     <result column="website" property="website" jdbcType="VARCHAR" />
+    <result column="wechat" property="wechat" jdbcType="VARCHAR" />
+    <result column="linkedIn" property="linkedIn" jdbcType="VARCHAR" />
     <result column="language_type" property="languageType" jdbcType="INTEGER" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.LanguageEnum"  />
     <result column="language_id" property="languageId" jdbcType="BIGINT" />
     <result column="status" property="status" jdbcType="INTEGER"  typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.ProductRequestStatusEnum" />
+    <result column="language_level" property="languageLevel" jdbcType="VARCHAR"  typeHandler="com.spring.worldwire.model.typeHandler.LanguageLevelHandel" javaType="com.spring.worldwire.model.LanguageLevel" />
     <result column="user_type" property="userType" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, request_type, key_word, title, content, mobile, email, phone, website, language_type, 
-    language_id, status, user_type,user_id,create_time,update_time
+    id, request_type, key_word, title, content, mobile, email, phone, website,wechat,linkedIn, language_type,
+    language_id, status,language_level , user_type,user_id,create_time,update_time
   </sql>
 
   <sql id="select_query">
@@ -60,16 +63,17 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="insert" parameterType="com.spring.worldwire.model.ProductRequest" >
+  <insert id="insert" parameterType="com.spring.worldwire.model.ProductRequest" keyProperty="id" useGeneratedKeys="true" keyColumn="id" >
     insert into product_request (id, request_type, key_word, 
       title, content, mobile, 
-      email, phone, website, 
-      language_type, language_id, status, 
+      email, phone, website, wechat, linkedIn,
+      language_type, language_id, `status`, language_level,
       user_type,user_id, create_time, update_time)
     values (#{id,jdbcType=BIGINT}, #{requestType,jdbcType=INTEGER}, #{keyWord,jdbcType=VARCHAR}, 
       #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, 
-      #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{languageId,jdbcType=BIGINT}, #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}},
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{linkedIn,jdbcType=VARCHAR},
+      #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{languageId,jdbcType=BIGINT}, #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+      #{languageLevel,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel},
       #{userType,jdbcType=INTEGER},#{userId,jdbcType=BIGINT},#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.spring.worldwire.model.ProductRequest" >
@@ -235,10 +239,13 @@
       mobile = #{mobile,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
+      wechat = #{wechat,jdbcType=VARCHAR},
       website = #{website,jdbcType=VARCHAR},
+      linkedIn = #{linkedIn,jdbcType=VARCHAR},
       language_type = #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       language_id = #{languageId,jdbcType=BIGINT},
       status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}},
+      language_level = #{languageLevel,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel},
       user_type = #{userType,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},

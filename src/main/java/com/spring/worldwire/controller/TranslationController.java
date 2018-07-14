@@ -37,27 +37,30 @@ public class TranslationController {
 
 	@RequestMapping("/apply")
 	public String apply(Long reqId,Integer fromType){
-		if(reqId!=null&&fromType!=null){
-			ProductRequest productRequest = productRequestService.findById(reqId);
-			if(productRequest!=null){
-				try {
-					TranslationApply translationApply = translationApplyService.applyTranslation(productRequest, LanguageEnum.getNameByCode(fromType));
-					if(translationApply==null){
-						logger.info("[翻译申请] 报错数据异常 reqId = {} fromType = {}",reqId,fromType);
-					}else{
-						//todo 返回正常结果路径
-						return "";
-					}
-				} catch (Exception e) {
-					logger.error("[翻译申请] 报错数据异常 reqId = {} fromType = {}",reqId,fromType,e);
-				}
-
-			}else{
-				logger.info("[翻译申请] 请求参数有误 reqId = {} fromType = {}",reqId,fromType);
-			}
-		}else{
+		if(reqId==null||fromType==null){
 			logger.info("[翻译申请] 请求参数有误");
+			return BaseConfig.BAD_PAGE;
 		}
+		ProductRequest productRequest = productRequestService.findById(reqId);
+		if(productRequest==null){
+			logger.info("[翻译申请] 请求参数有误 reqId = {} fromType = {}",reqId,fromType);
+			return BaseConfig.BAD_PAGE;
+		}
+
+		try {
+			TranslationApply translationApply = translationApplyService.applyTranslation(productRequest, LanguageEnum.getNameByCode(fromType));
+			if(translationApply==null){
+				logger.info("[翻译申请] 报错数据异常 reqId = {} fromType = {}",reqId,fromType);
+				return BaseConfig.BAD_PAGE;
+			}
+
+
+
+			return "pc/translation";
+		} catch (Exception e) {
+			logger.error("[翻译申请] 报错数据异常 reqId = {} fromType = {}",reqId,fromType,e);
+		}
+
 		return BaseConfig.BAD_PAGE;
 	}
 

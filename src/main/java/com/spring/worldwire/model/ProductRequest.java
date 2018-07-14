@@ -2,9 +2,10 @@ package com.spring.worldwire.model;
 
 import com.spring.worldwire.enums.LanguageEnum;
 import com.spring.worldwire.enums.ProductRequestStatusEnum;
-
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings("unused")
 public class ProductRequest implements Serializable {
@@ -29,7 +30,13 @@ public class ProductRequest implements Serializable {
 
     private String website;
 
+    private String wechat;
+
+    private String linkedIn;
+
     private LanguageEnum languageType;
+
+    private List<LanguageLevel> languageLevel;
 
     private Long languageId;
 
@@ -39,6 +46,7 @@ public class ProductRequest implements Serializable {
 
     private Long userId;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
 
     private Date updateTime;
@@ -171,6 +179,30 @@ public class ProductRequest implements Serializable {
         this.updateTime = updateTime;
     }
 
+    public List<LanguageLevel> getLanguageLevel() {
+        return languageLevel;
+    }
+
+    public void setLanguageLevel(List<LanguageLevel> languageLevel) {
+        this.languageLevel = languageLevel;
+    }
+
+    public String getWechat() {
+        return wechat;
+    }
+
+    public void setWechat(String wechat) {
+        this.wechat = wechat;
+    }
+
+    public String getLinkedIn() {
+        return linkedIn;
+    }
+
+    public void setLinkedIn(String linkedIn) {
+        this.linkedIn = linkedIn;
+    }
+
     /**
      * 克隆一个新语种的翻译
      * @param languageType 转变成的语言类型
@@ -188,6 +220,10 @@ public class ProductRequest implements Serializable {
         fromProductRequest.requestType = this.requestType;
         fromProductRequest.createTime = new Date();
         fromProductRequest.userId = this.userId;
+        fromProductRequest.website = this.website;
+        fromProductRequest.wechat = this.wechat;
+        fromProductRequest.linkedIn = this.linkedIn;
+        fromProductRequest.languageLevel = this.languageLevel;
         if(this.languageId==null){
             fromProductRequest.languageId = this.id;
         }else{
@@ -217,4 +253,14 @@ public class ProductRequest implements Serializable {
                 ", updateTime=" + updateTime +
                 '}';
     }
+
+
+    public String[] getKeyWordsVeiw(){
+        if(keyWord==null){
+            return null;
+        }
+        return keyWord.split(",");
+
+    }
+
 }
