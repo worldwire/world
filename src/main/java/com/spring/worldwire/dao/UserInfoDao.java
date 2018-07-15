@@ -3,6 +3,7 @@ package com.spring.worldwire.dao;
 import com.spring.worldwire.model.UserInfo;
 
 public interface UserInfoDao {
+
     int deleteByPrimaryKey(Long id);
 
     int insert(UserInfo record);
@@ -18,4 +19,6 @@ public interface UserInfoDao {
     UserInfo selectByLoginId(Long id);
 
     UserInfo selectSimpleById(long id);
+
+
 }

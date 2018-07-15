@@ -20,4 +20,6 @@ public interface ProductRequestDao {
     int updateByPrimaryKey(ProductRequest record);
 
     List<ProductRequest> selectByQuery(@Param("query") ProductRequestQuery query);
+
+    int selectCountByQuery(@Param("query") ProductRequestQuery query);
 }

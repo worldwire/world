@@ -7,6 +7,7 @@ import com.spring.worldwire.service.ProductRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -18,31 +19,70 @@ public class RequestController {
     @Autowired
     private ProductRequestService productRequestService;
 
-    @RequestMapping("")
-    public String toIndex(Model model) {
+//    @RequestMapping("")
+//    public String toIndex(Model model) {
+//
+//        ProductRequestQuery personalQuery = new ProductRequestQuery();
+//        personalQuery.setPageSize(4);
+//        personalQuery.setPageNo(1);
+//        personalQuery.setUserType(UserTypeEnum.PERSONAL.getCode());
+//        personalQuery.setPageCount(productRequestService.selectCountByQuery(personalQuery));
+//        List<ProductRequest> personalList = productRequestService.selectByQuery(personalQuery, true);
+//
+//        ProductRequestQuery enterpriseQuery = new ProductRequestQuery();
+//        enterpriseQuery.setPageSize(4);
+//        enterpriseQuery.setPageNo(1);
+//        enterpriseQuery.setUserType(UserTypeEnum.ENTERPRISE.getCode());
+//        enterpriseQuery.setPageCount(productRequestService.selectCountByQuery(enterpriseQuery));
+//        List<ProductRequest> enterpriseList = productRequestService.selectByQuery(enterpriseQuery, true);
+//
+//        model.addAttribute("personalQuery", personalQuery);
+//        model.addAttribute("personalList", personalList);
+//
+//        model.addAttribute("enterpriseQuery", enterpriseQuery);
+//        model.addAttribute("enterpriseList", enterpriseList);
+//
+//        return "pc/demandHall";
+//    }
 
-        ProductRequestQuery personalQuery = new ProductRequestQuery();
-        personalQuery.setPageSize(4);
-        personalQuery.setPageNo(1);
-        personalQuery.setUserType(UserTypeEnum.PERSONAL.getCode());
-        List<ProductRequest> personalList = productRequestService.selectByQuery(personalQuery);
+    @RequestMapping("/list/{userType}/{requestType}/{pageSize}/{pageNo}.html")
+    public String productRequestList(Model model,@PathVariable int userType, @PathVariable int requestType, @PathVariable int pageSize, @PathVariable int pageNo) {
+        {
 
-        ProductRequestQuery enterpriseQuery = new ProductRequestQuery();
-        enterpriseQuery.setPageSize(4);
-        enterpriseQuery.setPageNo(1);
-        enterpriseQuery.setUserType(UserTypeEnum.ENTERPRISE.getCode());
-        List<ProductRequest> enterpriseList = productRequestService.selectByQuery(enterpriseQuery);
+            ProductRequestQuery personalQuery = new ProductRequestQuery();
+            personalQuery.setPageSize(pageSize);
+            personalQuery.setPageNo(pageNo);
+            personalQuery.setUserType(userType);
+            personalQuery.setRequestType(userType);
+            personalQuery.setUserType(UserTypeEnum.PERSONAL.getCode());
+            personalQuery.setPageCount(productRequestService.selectCountByQuery(personalQuery));
+            List<ProductRequest> personalList = productRequestService.selectByQuery(personalQuery, true);
 
-        model.addAttribute("personalList", personalList);
-        model.addAttribute("enterpriseList", enterpriseList);
-        return "pc/demandHall";
+            ProductRequestQuery enterpriseQuery = new ProductRequestQuery();
+            enterpriseQuery.setPageSize(pageSize);
+            enterpriseQuery.setPageNo(pageNo);
+            enterpriseQuery.setUserType(userType);
+            enterpriseQuery.setRequestType(userType);
+            enterpriseQuery.setUserType(UserTypeEnum.ENTERPRISE.getCode());
+            enterpriseQuery.setPageCount(productRequestService.selectCountByQuery(enterpriseQuery));
+            List<ProductRequest> enterpriseList = productRequestService.selectByQuery(enterpriseQuery, true);
+
+            model.addAttribute("personalQuery", personalQuery);
+            model.addAttribute("personalList", personalList);
+
+            model.addAttribute("enterpriseQuery", enterpriseQuery);
+            model.addAttribute("enterpriseList", enterpriseList);
+
+            return "pc/demandHall";
+        }
     }
 
     @RequestMapping("detail")
-    public String toDetail(Model model,int id) {
+    public String toDetail(Model model, Long id) {
 
-        System.out.println("================="+id);
-
+        System.out.println("=================" + id);
+        ProductRequest productRequest = productRequestService.findById(id);
+        model.addAttribute("productRequest", productRequest);
         return "pc/demand";
     }
 }

@@ -25,13 +25,13 @@ public class IndexController {
         personalQuery.setPageSize(4);
         personalQuery.setPageNo(1);
         personalQuery.setUserType(UserTypeEnum.PERSONAL.getCode());
-        List<ProductRequest> personalList = productRequestService.selectByQuery(personalQuery);
+        List<ProductRequest> personalList = productRequestService.selectByQuery(personalQuery,false);
 
         ProductRequestQuery enterpriseQuery = new ProductRequestQuery();
         enterpriseQuery.setPageSize(4);
         enterpriseQuery.setPageNo(1);
         enterpriseQuery.setUserType(UserTypeEnum.ENTERPRISE.getCode());
-        List<ProductRequest> enterpriseList = productRequestService.selectByQuery(enterpriseQuery);
+        List<ProductRequest> enterpriseList = productRequestService.selectByQuery(enterpriseQuery,false);
 
         model.addAttribute("personalList", personalList);
         model.addAttribute("enterpriseList", enterpriseList);

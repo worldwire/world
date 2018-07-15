@@ -43,6 +43,10 @@ public class ProductRequest implements Serializable {
 
     private Date updateTime;
 
+    private UserInfo userInfo;
+
+    private Long viewCount;
+
     public Long getId() {
         return id;
     }
@@ -171,6 +175,22 @@ public class ProductRequest implements Serializable {
         this.updateTime = updateTime;
     }
 
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+
+    public Long getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(Long viewCount) {
+        this.viewCount = viewCount;
+    }
+
     /**
      * 克隆一个新语种的翻译
      * @param languageType 转变成的语言类型
@@ -215,6 +235,8 @@ public class ProductRequest implements Serializable {
                 ", userId=" + userId +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", userInfo=" + userInfo +
+                ", viewCount=" + viewCount +
                 '}';
     }
 }

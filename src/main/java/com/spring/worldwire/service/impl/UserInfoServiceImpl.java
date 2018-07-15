@@ -38,6 +38,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public UserInfo selectSimpleById(long id) {
-        return userInfoDao.selectSimpleById(id);
+        return userInfoDao.selectByPrimaryKey(id);
     }
 }
