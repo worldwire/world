@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>发布历史</title>
+		<#include "../public/common.html" encoding="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="/css/releaseHistory.css"/>
+	</head>
+	<body>
+        <#include "../public/head.html" encoding="utf-8"/>
+        <#include "../public/navigator.html" encoding="utf-8"/>
+		<div class="content">
+			<div class="contentbox">
+				<div class="left-nav">
+					<#include "../public/left.html" encoding="utf-8"/>
+				</div>
+				<div class="contentbox-right">
+
+					<#list productRequestList as productRequest>
+
+					<div class="contentbox-list" style="margin-top: 0px;">
+						<div class="list-tt">
+							<span class="list-tt-title">${productRequest.title}</span>
+							<span class="list-tt-time">发布时间：${productRequest.createTime?date("yyyy-MM-dd")}</span>
+						</div>
+						<div class="list-cont">
+							${productRequest.content?substring(30)}
+						</div>
+						<div class="list-btn">
+							<div class="list-btn-state">
+								<div class="list-btn-d"></div>
+								<span class="list-btn-state-span">${productRequest.status.name}</span>
+							</div>
+							<div class="list-btn-btns">
+								<div class="list-btn-btns-style list-btn-btns-translation">翻译</div>
+								<div class="list-btn-btns-style">修改</div>
+								<div class="list-btn-btns-style">关闭</div>
+							</div>
+						</div>
+					</div>
+
+					</#list>
+				</div>
+			</div>
+
+		</div>
+        <#include "../public/foot.html" encoding="utf-8">
+
+	</body>
+
+	<script>
+	layui.use(['form', 'layedit', 'laydate','layer'], function(){
+	  var form = layui.form
+	  ,layer = layui.layer
+	  ,layedit = layui.layedit
+	  ,laydate = layui.laydate
+	  ,$ = layui.jquery;
+
+
+		//翻译弹出层
+		$(".list-btn-btns-translation").click(function(){
+			layer.open({
+			  type: 1,
+			  skin: 'layer-div',
+			  content: '<div class="layer-div-btns"><div class="layer-div-btns-cancel">取&nbsp;&nbsp;&nbsp;消</div><div class="layer-div-btns-translation">继续翻译</div> </div>  <div class="layer-div-title">可免费翻译200字内的次数</div><div class="layer-div-num"><span class="layer-div-num-1">1</span><span class="layer-div-num-2">次</span></div>	'
+			  ,area: ['500px', '300px'] //宽高
+			  ,title: false
+			  ,shadeClose: true //开启遮罩关闭
+			  ,closeBtn: 0, //不显示关闭按钮
+			});
+
+		})
+
+
+		//关闭弹出层
+		$(document).on('click', '.layer-div-btns-cancel', function() {
+			layer.closeAll()
+		});
+
+
+		//继续翻译按钮
+		$(document).on('click', '.layer-div-btns-translation', function() {
+			layer.closeAll()
+			layer.open({
+			  type: 1,
+			  skin: 'layer-div-CN-ENG',
+			  content: '<div class="choose-CN choose-CE-style">翻&nbsp;译&nbsp;成&nbsp;中&nbsp;文</div><div class="choose-ENG choose-CE-style">翻&nbsp;译&nbsp;成&nbsp;英&nbsp;文</div>'
+			  ,area: ['500px', '300px'] //宽高
+			  ,title: false
+			  ,shadeClose: true //开启遮罩关闭
+			  ,closeBtn: 1, //不显示关闭按钮
+			});
+		});
+		//翻译中文按钮
+		$(document).on('click', '.choose-CN', function() {
+			layer.closeAll()
+			layer.msg("这里是翻译中文按钮")
+		});
+		//翻译英文按钮
+		$(document).on('click', '.choose-ENG', function() {
+			layer.closeAll()
+			layer.msg("这里是翻译英文按钮")
+		});
+
+		 $(".language-btns").click(function(){
+                if(!$(".span-div").is(':hidden')){//如果当前不隐藏
+                    $('.span-div').hide();//就隐藏div
+                    $(".language-icon").html("&#xe61a;")
+                }else{//否则
+					$('.userbox').hide();//就隐藏div
+					$(".user-icon").html("&#xe61a;")
+                    $('.span-div').show();//那么就显示div
+                    $(".language-icon").html("&#xe619;")
+                }
+            })
+
+            $(".user-btn").click(function(){
+                if(!$(".userbox").is(':hidden')){//如果当前不隐藏
+                    $('.userbox').hide();//就隐藏div
+                    $(".user-icon").html("&#xe61a;")
+                }else{//否则
+ 					$('.span-div').hide();//就隐藏div
+ 					$(".language-icon").html("&#xe61a;")
+                    $('.userbox').show();//那么就显示div
+                    $(".user-icon").html("&#xe619;")
+                }
+            });
+
+
+})
+  	</script>
+</html>

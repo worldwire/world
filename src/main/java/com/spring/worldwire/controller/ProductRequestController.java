@@ -1,9 +1,11 @@
 package com.spring.worldwire.controller;
 
+import com.spring.worldwire.constants.Constants;
 import com.spring.worldwire.enums.ProductRequestStatusEnum;
 import com.spring.worldwire.model.ProductRequest;
 import com.spring.worldwire.model.UserAccount;
 import com.spring.worldwire.model.UserCheck;
+import com.spring.worldwire.query.ProductRequestQuery;
 import com.spring.worldwire.service.ProductRequestService;
 import com.spring.worldwire.service.UserAccountService;
 import com.spring.worldwire.service.UserCheckService;
@@ -12,7 +14,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 /**
@@ -108,5 +114,17 @@ public class ProductRequestController {
                 StringUtils.isNotBlank(productRequest.getTitle());
     }
 
+    @RequestMapping("history")
+    public String showHistory(Model model, HttpServletRequest request, ProductRequestQuery productRequestQuery){
+
+        Long userId = (Long)request.getAttribute(Constants.USER_ID_SESSION);
+        productRequestQuery.setUserId(userId);
+
+        List<ProductRequest> productRequests = productRequestService.selectByQuery(productRequestQuery, false);
+
+        model.addAttribute("productRequestList",productRequests);
+
+        return "pc/requestHistory";
+    }
 
 }

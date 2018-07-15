@@ -13,6 +13,8 @@ public class ProductRequestQuery extends Pager {
     private Integer userType;
     // 需求类型，帮助别人或者寻求帮助
     private Integer requestType;
+    // userId
+    private Long userId;
 
     public Integer getUserType() {
         return userType;
@@ -28,5 +30,13 @@ public class ProductRequestQuery extends Pager {
 
     public void setRequestType(Integer requestType) {
         this.requestType = requestType;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
