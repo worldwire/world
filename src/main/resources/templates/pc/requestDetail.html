@@ -15,12 +15,14 @@
 				<div>
 					<div class="information">
 						<div class="photo">
-							<a href=""><img src="/images/zdd.jpg" alt="张大大的头像"></a>
+							<a href=""><img src="${productRequest.userInfo.showImg!''}" alt="张大大的头像"></a>
 						</div>
 						<div class="info">
-							<p class="name">张大大</p>
+							<p class="name">${productRequest.userInfo.nickName!''</p>
 							<p class="nat"><i class="iconfont">&#xe611;</i><span>中国 北京</span><img src="/images/gj.png" alt="国籍"></p>
-							<p class="text"><span class="disc"></span><span>个人需求</span>我要找国际人才或资源</p>
+							<p class="text"><span class="disc"></span>
+								<span><#if productRequest.userType==1>个人<#else>企业</#else></#if><#if productRequest.requestType == 1>服务<#else>需求</#if></span>
+								<#if productRequest.requestType == 1>我可以提供国际人才或资源<#else>我要找国际人才或资源</#if></p>
 						</div>
 						<div class="nationality">
 							<p>国籍</p>
@@ -28,17 +30,12 @@
 						</div>
 					</div>
 					<div class="content">
-						<div><h2>我提供服务产品设计服务，这个是服务标题，最多显示30个字</h2></div>
+						<div><h2>${productRequest.title}</h2></div>
 						<div class="content-main">
-							<p>App是英文Application的简称，由于iPhone智能手机的流行，现在的APP多指智能手机的第三方应用程序。</p>
-							<p>因为一个项目需要,从Android暂时转了web。对于新生的我选择了layui框架,做了这个开发,,废话少提,进入正题,, layui的字体图标,在layui中使用非常常见,...</p><p>因为一个项目需要,从Android暂时转了web。对于新生的我选择了layui框架,做了这个开发,,废话少提,进入正题,, layui的字体图标,在layui中使用非常常见,...</p>
-							<p>因为一个项目需要,从And因为一个项目需要,从Androi因为一个项目需要,从Android暂时转了web。对于新生的因为一个项目需要,从Android暂时转了web。对于新生的我选择了layui框架,做了这个开发,,废话少提,进入正题,, layui的字体图标,在layui中使用非常常见我选择了layui框架,做了这个开发,,废话少提,进入正题,, layui的字体图标,在layui中使用非常常见d暂时转了web。对于新生的我选择了layui框架,做了这个开发,,废话少提,进入正题,, layui的字体图标,在layui中使用非常常见roid暂时转了web。对于新生的我选择了layui框架,做了这个开发,,废话少提,进入正题,, layui的字体图标,在layui中使用非常常见,...</p>
-							<p>因为一个项目需要,从Android暂时转了web。对于新生的我选择了layui框架,做了这个开发,,废话少提,进入正题,, layui的字体图标,在layui中使用非常常见,...</p>
-							<p>因为一个项目需要,从Android暂时转了web。对于新生的我选择了layui框架,做了这个开发,,废话少提,进入正题,, layui的字体图标,在layui中使用非常常见,...</p>
-							<p>因为一个项目需要,从Android暂时转了web。对于新生的我选择了layui框架,做了这个开发,,废话少提,进入正题,, layui的字体图标,在layui中使用非常常见,...</p>
+							${productRequest.content}
 						</div>
 						<div class="time">
-							<p>发布时间: 2018-03-03</p>
+							<p>发布时间: ${productRequest.createTime?string("yyyy-MM-dd HH:mm:ss")}</p>
 						</div>
 					</div>
 					<div class="level">

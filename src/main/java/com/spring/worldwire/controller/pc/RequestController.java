@@ -73,16 +73,16 @@ public class RequestController {
             model.addAttribute("enterpriseQuery", enterpriseQuery);
             model.addAttribute("enterpriseList", enterpriseList);
 
-            return "pc/demandHall";
+            return "pc/requestList";
         }
     }
 
-    @RequestMapping("detail")
+    @RequestMapping("/detail")
     public String toDetail(Model model, Long id) {
 
         System.out.println("=================" + id);
         ProductRequest productRequest = productRequestService.findById(id);
         model.addAttribute("productRequest", productRequest);
-        return "pc/demand";
+        return "pc/requestDetail";
     }
 }
