@@ -21,7 +21,9 @@ public class ProductRequestServiceImpl implements ProductRequestService {
 
     @Override
     public ProductRequest findById(Long id) {
-        return productRequestDao.selectByPrimaryKey(id);
+        ProductRequest request = productRequestDao.selectByPrimaryKey(id);
+        request.setUserInfo(userInfoDao.selectSimpleById(request.getUserId()));
+        return request;
     }
 
     @Override

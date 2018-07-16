@@ -32,7 +32,7 @@
       <if test="query.userType != null and query.userType > 0">
         user_type = #{query.userType,jdbcType=INTEGER} and
       </if>
-      <if test="query.requestType != null">
+      <if test="query.requestType != null and query.requestType > 0">
         request_type = #{query.requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler} and
       </if>
       status = 1
