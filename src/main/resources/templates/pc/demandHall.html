@@ -14,13 +14,6 @@
 			<div class="contentBox">
 				<div class="contentBox-choose">
 					<ul class="contentBox-choose1">
-						<li class="li-1">供需大厅</li>
-						<li>所有</li>
-						<li>个人</li>
-						<li>公司</li>
-					</ul>
-					<br />
-					<ul class="contentBox-choose1">
 						<li class="li-1">服务提供</li>
 						<li >全部</li>
 						<li>个人服务</li>
@@ -39,613 +32,69 @@
 						<div carousel-item style="background: #FFFFFF;">
 							<!--个人第一页-->
 							<div class="carousel-item" style="width: 1077px;">
-								<div class="list-style" style="margin-left:0px ;">
-									<div class="list-style-title" >
-										个人需求
-										<img class="list-style-title-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-title-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/demandHall3.png"/>
-									</div>
-									<div class="list-style-name">
-										张大大
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
+								<#if personalList??>
+									<#list personalList as personal>
+										<div class="list-style" style="margin-left:0px ;">
+											<div class="list-style-title" >
+												个人<#if personal.requestType == 1>服务<#else>需求</#if>
+												<img class="list-style-title-img1" src="/images/demandHall1.png"/>
+												<div class="list-style-title-img2">
+													<img src="/images/demandHall2.png"/>
+												</div>
 											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计萨达萨达所
+											<div class="list-style-headImg">
+												<img src="${personal.userInfo.showImg}"/>
 											</div>
+											<div class="list-style-name">
+												${personal.userInfo.nickName}
+											</div>
+											<div class="list-style-explain">
+												<#if personal.requestType == 1>我能提供国际人才或资源<#else>我要找国际人才或资源</#if>
+											</div>
+											<div class="list-style-place">
+												现所在地
+												<span class="list-style-place-span">
+													<#if personal.userInfo??>
+														${personal.userInfo.localAddr!''}
+													<#else>
+														未知
+													</#if>
+												</span>
+												<div class="list-style-place-img">
+													<img src="/images/demandHall2.png"/>
+												</div>
+											</div>
+											<div class="list-style-specialty">
+												<div class="specialty-label-box">
+													<div class="specialty-label specialty-label-style">
+														钢琴
+													</div>
+													<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
+														LOGO设计萨达萨达所
+													</div>
 
-										</div>
+												</div>
 
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-title">
-										个人需求
-										<img class="list-style-title-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-title-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/demandHall3.png"/>
-									</div>
-									<div class="list-style-name">
-										张大大
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
 											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
+											<div class="list-style-PerTitle">
+												${personal.title}
+											</div>
+											<div class="list-style-PerContent">
+												${personal.content}
+											</div>
+											<div class="list-style-details">
+												<a href="/request/detail?id=1"> 查看详情</a>
+											</div>
+											<div class="list-style-viewtime">
+												<i class="iconfont i-view" > &#xe60d;</i>
+												<span class="span-view">${personal.viewCount!'0'}</span>
+												<i class="iconfont i-times">&#xe75f;</i>
+												<span class="span-times">${personal.createTime?string("yyyy-MM-dd HH:mm:ss")}</span>
 											</div>
 										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-title">
-										个人需求
-										<img class="list-style-title-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-title-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/demandHall3.png"/>
-									</div>
-									<div class="list-style-name">
-										张大大
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-title">
-										个人需求
-										<img class="list-style-title-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-title-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/demandHall3.png"/>
-									</div>
-									<div class="list-style-name">
-										张大大
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
+									</#list>
+								</#if>
 							</div>
-							<!--个人第二页-->
-							<div class="carousel-item">
-								<div class="list-style" style="margin-left:0px ;">
-									<div class="list-style-title" >
-										个人需求
-										<img class="list-style-title-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-title-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/1/10.png"/>
-									</div>
-									<div class="list-style-name">
-										王大大
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-title">
-										个人需求
-										<img class="list-style-title-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-title-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/1/10.png"/>
-									</div>
-									<div class="list-style-name">
-										王大大
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-title">
-										个人需求
-										<img class="list-style-title-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-title-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/1/10.png"/>
-									</div>
-									<div class="list-style-name">
-										王大大
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-title">
-										个人需求
-										<img class="list-style-title-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-title-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/1/10.png"/>
-									</div>
-									<div class="list-style-name">
-										王大大
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div></div>
-							<!--个人第三页-->
-							<div class="carousel-item">
-								<div class="list-style" style="margin-left:0px ;">
-									<div class="list-style-title" >
-										个人需求
-										<img class="list-style-title-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-title-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/demandHall3.png"/>
-									</div>
-									<div class="list-style-name">
-										张大大
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-title">
-										个人需求
-										<img class="list-style-title-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-title-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/demandHall3.png"/>
-									</div>
-									<div class="list-style-name">
-										张大大
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-title">
-										个人需求
-										<img class="list-style-title-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-title-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/demandHall3.png"/>
-									</div>
-									<div class="list-style-name">
-										张大大
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-title">
-										个人需求
-										<img class="list-style-title-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-title-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/demandHall3.png"/>
-									</div>
-									<div class="list-style-name">
-										张大大
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div></div>
 						</div>
 
 					</div>
@@ -653,610 +102,68 @@
 
 						<div carousel-item style="background: #FFFFFF;">
 							<div class="carousel-item" style="width: 1077px;">
-								<div class="list-style" style="margin-left:0px ;">
-									<div class="list-style-1" >
-										公司需求
-										<img class="list-style-1-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-1-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/demandHall3.png"/>
-									</div>
-									<div class="list-style-name">
-										某某某有限公司
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> <a href="/request/detail?id=1"> 查看详情</a></a>
+								<#if enterpriseList??>
+									<#list enterpriseList as enterprise>
+										<div class="list-style" style="margin-left:0px ;">
+                                            <div class="list-style-1" >
+                                                公司需求
+                                                <img class="list-style-1-img1" src="/images/demandHall1.png"/>
+                                                <div class="list-style-1-img2">
+                                                    <img src="/images/demandHall2.png"/>
+                                                </div>
+                                            </div>
+                                            <div class="list-style-headImg">
+                                                <img src="${enterprise.userInfo.showImg!''}"/>
+                                            </div>
+                                            <div class="list-style-name">
+                                                ${enterprise.userInfo.companyName!''}
+                                            </div>
+                                            <div class="list-style-explain">
+                                                <#if enterprise.requestType == 1>我能提供国际人才或资源<#else>我要找国际人才或资源</#if>
+                                            </div>
+                                            <div class="list-style-place">
+                                                现所在地
+                                                <span class="list-style-place-span">
+													<#if enterprise.userInfo??>
+														${enterprise.userInfo.companyAddr!''}
+													<#else>
+														未知
+													</#if>
+												</span>
+                                                <div class="list-style-place-img">
+                                                    <img src="/images/demandHall2.png"/>
+                                                </div>
+                                            </div>
+                                            <div class="list-style-specialty">
+                                                <div class="specialty-label-box">
+                                                    <div class="specialty-label specialty-label-style">
+                                                        钢琴
+                                                    </div>
+                                                    <div class="specialty-label specialty-label-style" style="margin-left: 15px;">
+                                                        LOGO设计
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="list-style-PerTitle">
+												${enterprise.title!''}
+                                            </div>
+                                            <div class="list-style-PerContent">
+                                                ${enterprise.content!''}
+                                            </div>
+                                            <div class="list-style-details">
+                                                <a href="/request/detail?id=1"> <a href="/request/detail?id=1"> 查看详情</a></a>
 
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-1">
-										公司需求
-										<img class="list-style-1-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-1-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/demandHall3.png"/>
-									</div>
-									<div class="list-style-name">
-										某某某有限公司
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details" value="1">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-1">
-										公司需求
-										<img class="list-style-1-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-1-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/demandHall3.png"/>
-									</div>
-									<div class="list-style-name">
-										某某某有限公司
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-1">
-										公司需求
-										<img class="list-style-1-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-1-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/demandHall3.png"/>
-									</div>
-									<div class="list-style-name">
-										某某某有限公司
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
+                                            </div>
+                                            <div class="list-style-viewtime">
+                                                <i class="iconfont i-view" > &#xe60d;</i>
+                                                <span class="span-view">${enterprise.viewCount!'0'}</span>
+                                                <i class="iconfont i-times">&#xe75f;</i>
+                                                <span class="span-times">${enterprise.createTime?string("yyyy-MM-dd HH:mm:ss")}</span>
+                                            </div>
+                                        </div>
+									</#list>
+								</#if>
 							</div>
-							<div class="carousel-item">
-								<div class="list-style" style="margin-left:0px ;">
-									<div class="list-style-1" >
-										公司需求
-										<img class="list-style-1-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-1-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/1/10.png"/>
-									</div>
-									<div class="list-style-name">
-										某某某有限公司
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-1">
-										公司需求
-										<img class="list-style-1-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-1-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/1/10.png"/>
-									</div>
-									<div class="list-style-name">
-										某某某有限公司
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-1">
-										公司需求
-										<img class="list-style-1-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-1-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/1/10.png"/>
-									</div>
-									<div class="list-style-name">
-										某某某有限公司
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-1">
-										公司需求
-										<img class="list-style-1-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-1-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/1/10.png"/>
-									</div>
-									<div class="list-style-name">
-										某某某有限公司
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div></div>
-							<div class="carousel-item">
-								<div class="list-style" style="margin-left:0px ;">
-									<div class="list-style-1" >
-										公司需求
-										<img class="list-style-1-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-1-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/demandHall3.png"/>
-									</div>
-									<div class="list-style-name">
-										某某某有限公司
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-1">
-										公司需求
-										<img class="list-style-1-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-1-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/demandHall3.png"/>
-									</div>
-									<div class="list-style-name">
-										某某某有限公司
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-1">
-										公司需求
-										<img class="list-style-1-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-1-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/demandHall3.png"/>
-									</div>
-									<div class="list-style-name">
-										某某某有限公司
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div>
-								<div class="list-style">
-									<div class="list-style-1">
-										公司需求
-										<img class="list-style-1-img1" src="/images/demandHall1.png"/>
-										<div class="list-style-1-img2">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-headImg">
-										<img src="/images/demandHall3.png"/>
-									</div>
-									<div class="list-style-name">
-										某某某有限公司
-									</div>
-									<div class="list-style-explain">
-										我要找国际人才或资源
-									</div>
-									<div class="list-style-place">
-										现所在地
-										<span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-										<div class="list-style-place-img">
-											<img src="/images/demandHall2.png"/>
-										</div>
-									</div>
-									<div class="list-style-specialty">
-										<div class="specialty-label-box">
-											<div class="specialty-label specialty-label-style">
-												钢琴
-											</div>
-											<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-												LOGO设计
-											</div>
-										</div>
-									</div>
-									<div class="list-style-PerTitle">
-										我提供服务产品设计服务，这个……
-									</div>
-									<div class="list-style-PerContent">
-										几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-									</div>
-									<div class="list-style-details">
-										<a href="/request/detail?id=1"> 查看详情</a>
-									</div>
-									<div class="list-style-viewtime">
-										<i class="iconfont i-view" > &#xe60d;</i>
-										<span class="span-view">13021</span>
-										<i class="iconfont i-times">&#xe75f;</i>
-										<span class="span-times">2018-03-31 23:59:59</span>
-									</div>
-								</div></div>
 						</div>
 
 					</div>
@@ -1322,41 +229,34 @@
 		    ,indicator:"none"
 		  });
 
-		carousel.on('change(contentBox-body-list1)', function(obj){
-//			  console.log(obj.index); //当前条目的索引
-//			  console.log(obj.prevIndex); //上一个条目的索引
-//			  console.log(obj.item); //当前条目的元素对象
-			  if(obj.index==0){
-			  	$("#contentBox-body-list1 button").eq(0).hide()
-			  }else{
-			  	$("#contentBox-body-list1 button").eq(0).show()
-			  }
+		var pageNo = '${personalQuery.pageNo}';
+		var pageCount = '${personalQuery.pageCount}';
+		var pageSize = '${personalQuery.pageSize}';
+		if(pageNo > 1){
+            $("#contentBox-body-list1 button").eq(0).show()
+		}else{
+            $("#contentBox-body-list1 button").eq(0).hide()
+		}
+		if(pageNo*pageSize < pageCount){
+            $("#contentBox-body-list1 button").eq(1).show()
+		}else{
+            $("#contentBox-body-list1 button").eq(1).hide()
+		}
 
+        var epageNo = '${enterpriseQuery.pageNo}';
+        var epageCount = '${enterpriseQuery.pageCount}';
+        var epageSize = '${enterpriseQuery.pageSize}';
+        if(epageNo > 1){
+            $("#contentBox-body-list2 button").eq(0).show()
+        }else{
+            $("#contentBox-body-list2 button").eq(0).hide()
+        }
+        if(epageNo*epageSize < epageCount){
+            $("#contentBox-body-list2 button").eq(1).show()
+        }else{
+            $("#contentBox-body-list2 button").eq(1).hide()
+        }
 
-			  if(obj.index==$("#contentBox-body-list1 .carousel-item").length-1){
-			  	$("#contentBox-body-list1 button").eq(1).hide()
-			  }else{
-			  	$("#contentBox-body-list1 button").eq(1).show()
-			  }
-		});
-
-		carousel.on('change(contentBox-body-list2)', function(obj){
-//			  console.log(obj.index); //当前条目的索引
-//			  console.log(obj.prevIndex); //上一个条目的索引
-//			  console.log(obj.item); //当前条目的元素对象
-			  if(obj.index==0){
-			  	$("#contentBox-body-list2 button").eq(0).hide()
-			  }else{
-			  	$("#contentBox-body-list2 button").eq(0).show()
-			  }
-
-
-			  if(obj.index==$("#contentBox-body-list2 .carousel-item").length-1){
-			  	$("#contentBox-body-list2 button").eq(1).hide()
-			  }else{
-			  	$("#contentBox-body-list2 button").eq(1).show()
-			  }
-		});
 
 })
   	</script>

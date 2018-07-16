@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+
+<urlrewrite>
+
+    <!-- 需求大厅 -->
+    <rule>
+        <from>^/request.html</from>
+        <to>/request/list/0/0/4/1.html</to>
+    </rule>
+
+    <!-- 需求大厅 -->
+    <rule>
+        <from>^/helpCenter.html</from>
+        <to>/helpCenter</to>
+    </rule>
+
+
+
+</urlrewrite>

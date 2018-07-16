@@ -10,6 +10,8 @@ public class Pager {
 
     private int pageStart;
 
+    private int pageCount;
+
     public Integer getPageSize() {
         return pageSize;
     }
@@ -34,4 +36,11 @@ public class Pager {
         return pageStart;
     }
 
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
 }

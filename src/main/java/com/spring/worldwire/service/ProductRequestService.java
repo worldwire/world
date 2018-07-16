@@ -10,5 +10,18 @@ public interface ProductRequestService {
 
     int save(ProductRequest productRequest);
 
-    List<ProductRequest> selectByQuery(ProductRequestQuery query);
+    /**
+     * 分页查询需求详情
+     * @param query
+     * @param userInfo true表示会带上用户详细信息
+     * @return
+     */
+    List<ProductRequest> selectByQuery(ProductRequestQuery query, boolean userInfo);
+
+    /**
+     * 条件查询需求的总条数
+     * @param query
+     * @return
+     */
+    int selectCountByQuery(ProductRequestQuery query);
 }

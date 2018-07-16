@@ -6,7 +6,6 @@ import com.spring.worldwire.enums.RequestTypeEnum;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings("unused")
 public class ProductRequest implements Serializable {
@@ -47,10 +46,13 @@ public class ProductRequest implements Serializable {
 
     private Long userId;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
 
     private Date updateTime;
+
+    private UserInfo userInfo;
+
+    private Long viewCount;
 
     public Long getId() {
         return id;
@@ -204,6 +206,22 @@ public class ProductRequest implements Serializable {
         this.linkedIn = linkedIn;
     }
 
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
+
+    public Long getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(Long viewCount) {
+        this.viewCount = viewCount;
+    }
+
     /**
      * 克隆一个新语种的翻译
      * @param languageType 转变成的语言类型
@@ -252,6 +270,8 @@ public class ProductRequest implements Serializable {
                 ", userId=" + userId +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", userInfo=" + userInfo +
+                ", viewCount=" + viewCount +
                 '}';
     }
 
