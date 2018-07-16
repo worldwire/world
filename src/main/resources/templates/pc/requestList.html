@@ -36,7 +36,7 @@
 									<#list personalList as personal>
 										<div class="list-style">
 											<div class="list-style-title" >
-												个人<#if personal.requestType == 1>服务<#else>需求</#if>
+												个人<#if personal.requestType.code == 1>服务<#else>需求</#if>
 												<img class="list-style-title-img1" src="/images/demandHall1.png"/>
 												<div class="list-style-title-img2">
 													<img src="/images/demandHall2.png"/>
@@ -46,10 +46,10 @@
 												<img src="${personal.userInfo.showImg!''}"/>
 											</div>
 											<div class="list-style-name">
-												${personal.userInfo.nickName}
+												${personal.userInfo.nickName!''}
 											</div>
 											<div class="list-style-explain">
-												<#if personal.requestType == 1>我能提供国际人才或资源<#else>我要找国际人才或资源</#if>
+												<#if personal.requestType.code == 1>我能提供国际人才或资源<#else>我要找国际人才或资源</#if>
 											</div>
 											<div class="list-style-place">
 												现所在地
@@ -77,10 +77,10 @@
 
 											</div>
 											<div class="list-style-PerTitle">
-												${personal.title}
+												${personal.title!''}
 											</div>
 											<div class="list-style-PerContent">
-												${personal.content}
+												${personal.content!''}
 											</div>
 											<div class="list-style-details">
 												<a href="/request/detail?id=1"> 查看详情</a>
@@ -119,7 +119,7 @@
                                                 ${enterprise.userInfo.companyName!''}
                                             </div>
                                             <div class="list-style-explain">
-                                                <#if enterprise.requestType == 1>我能提供国际人才或资源<#else>我要找国际人才或资源</#if>
+                                                <#if enterprise.requestType.code == 1>我能提供国际人才或资源<#else>我要找国际人才或资源</#if>
                                             </div>
                                             <div class="list-style-place">
                                                 现所在地
