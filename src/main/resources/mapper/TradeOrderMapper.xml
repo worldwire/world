@@ -208,7 +208,7 @@
     from trade_order
     <include refid="Query_Where"/>
     <if test="query.order != null and query.order == 0">
-      order by desc
+      order by demo
     </if>
     <if test="query.order != null and query.order == 1">
       order by asc
