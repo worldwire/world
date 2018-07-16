@@ -1,5 +1,6 @@
 package com.spring.worldwire.controller.pc;
 
+import com.spring.worldwire.enums.RequestTypeEnum;
 import com.spring.worldwire.enums.UserTypeEnum;
 import com.spring.worldwire.model.ProductRequest;
 import com.spring.worldwire.query.ProductRequestQuery;
@@ -77,7 +78,7 @@ public class RequestController {
     }
 
     @RequestMapping("detail")
-    public String toDetail(Model model,int id) {
+    public String toDetail(Model model,long id) {
 
         System.out.println("=================" + id);
         ProductRequest productRequest = productRequestService.findById(id);
