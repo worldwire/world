@@ -29,6 +29,8 @@ public class Constants {
     //签到缓存的key前缀
     public static final String CACHE_SIGN_KEY = "cache_sign_key_";
 
+    public static final String CACHE_FREE_LOOK_UP = "cache_free_lookup_";
+
 
     //----------------------------------------业务相关字段--------------------------------------
     public static final String USER_COOKIES_NAME = "userInfo";

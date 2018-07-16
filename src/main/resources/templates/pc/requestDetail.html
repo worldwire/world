@@ -87,48 +87,51 @@
 				</div>
 			</div>
 			<div class="right-box">
-				<!-- 未登录/注册 -->
-				<div class="reg">
-					<p>获取项目发起者联系方式请先</p>
-					<p><a href="./login.html">登陆</a>或<a href="./register.html">注册</a></p>
-					<form action="javascript:void(0)" id="login-form" class="layui-form" method="post">
-						<div class="layui-form-item">
-							<div class="layui-input-block">
-								<input name="email" type="text" id="email" placeholder="请输入邮箱" class="layui-input">
-							</div>
+				<#if userInfo??>
+					<!-- 已登陆 -->
+					<div class="login">
+						<p class="login-title">获取项目发起者联系方式</p>
+						<button class="layui-btn">点击获取</button>
+						<div class="login-msg">
+							<p>您每天有一次免费查看<span>${userInfo.nickName}</span></p>
+							<p>联系方式的权限</p>
 						</div>
-						<div class="layui-form-item">
-							<div class="layui-input-block">
-								<input name="passwd" type="password" id="passwd" placeholder="请输入密码" class="layui-input">
-							</div>
-						</div>
-						<button type="submit" class="layui-btn subBtn">登 陆</button>
-					</form>
-				</div>
-
-				<!-- 已登陆 -->
-				<div class="login" style="display: none;">
-					<p class="login-title">获取项目发起者联系方式</p>
-					<button class="layui-btn">点击获取</button>
-					<div class="login-msg">
-						<p>您每天有一次免费查看<span>张大大</span></p>
-						<p>联系方式的权限</p>
 					</div>
-				</div>
 
-				<div class="contact">
-					<p>联系方式</p>
-					<ul>
-						<li style="margin-top: 27px;">手机号:<span>*****</span></li>
-						<li>座机号:<span>*****</span></li>
-						<li>我的网站:<span>*****</span></li>
-						<li>微信号:<span>*****</span></li>
-						<li>联系邮箱:<span>*****</span></li>
-						<li>Facebook:<span>*****</span></li>
-						<li>LikedIn:<span>*****</span></li>
-						<li>WhatsApp:<span>*****</span></li>
-					</ul>
-				</div>
+					<div class="contact">
+						<p>联系方式</p>
+						<ul>
+							<li style="margin-top: 27px;">手机号:<span>${productRequest.userInfo.mobile!'无'}</span></li>
+							<li>座机号:<span>${productRequest.userInfo.mobile!'无'}</span></li>
+							<li>我的网站:<span>${productRequest.userInfo.website!'无'}</span></li>
+							<li>微信号:<span>${productRequest.userInfo.wechat!'无'}</span></li>
+							<li>联系邮箱:<span>${productRequest.userInfo.email!'无'}</span></li>
+							<li>Facebook:<span>${productRequest.userInfo.facebook!'无'}</span></li>
+							<li>LikedIn:<span>${productRequest.userInfo.linkedin!'无'}</span></li>
+							<li>WhatsApp:<span>${productRequest.userInfo.whatsapp!'无'}</span></li>
+						</ul>
+					</div>
+				<#else>
+					<!-- 未登录/注册 -->
+					<div class="reg">
+						<p>获取项目发起者联系方式请先</p>
+						<p><a href="./login.html">登陆</a>或<a href="./register.html">注册</a></p>
+						<form action="javascript:void(0)" id="login-form" class="layui-form" method="post">
+							<div class="layui-form-item">
+								<div class="layui-input-block">
+									<input name="email" type="text" id="email" placeholder="请输入邮箱" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-form-item">
+								<div class="layui-input-block">
+									<input name="passwd" type="password" id="passwd" placeholder="请输入密码" class="layui-input">
+								</div>
+							</div>
+							<button type="submit" class="layui-btn subBtn">登 陆</button>
+						</form>
+					</div>
+				</#if>
+
 				<div class="ewm">
 					<img src="/images/ewm.png" alt="二维码">
 					<span>微信二维码</span>
@@ -178,21 +181,35 @@
                     contactBox = $(".contact:eq(0)"), // 联系方式的盒子
                     email = $("#email").val(),// 邮箱输入框值
                     passwd = $("#passwd").val();// 密码输入框值
-
-
-                if(email == "admin" && passwd == "1") {
-                    regBox.hide(); // 未登录盒子隐藏
-                    loginBox.show();// 登陆后的盒子显示
-
-                    var getInfoBtn = $(".login button:eq(0)").click(function () {
+					$.ajax({
+                        type: "POST",
+                        url: "/login/ajaxLogin",
+                        data: {email:$("#email").val(), password:$("#passwd").val()},
+                        dataType: "json",
+                        success: function(data){
+							alert(data);
+							window.href.reload();
+                        },
+						error: function (data) {
+							alert("网络出错，请稍后重试");
+                        }
+					});
+            });
+            var getInfoBtn = $(".login button:eq(0)").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/login/showContracts",
+                    data: {userId:'${userInfo.id}',productRequestId:'${productRequest.id}'},
+                    dataType: "json",
+                    success: function(data){
                         loginBox.hide(); // 获取资料后隐藏信息
                         contactBox.css("marginTop","140px"); // 添加距离
                         contactBox.find("li span").text("12345678910");
-                    });
-
-                } else {
-                    alert("登陆失败");
-                }
+                    },
+                    error: function (data) {
+                        alert("网络出错，请稍后重试");
+                    }
+				});
             });
         })
     </script>

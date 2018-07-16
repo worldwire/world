@@ -30,8 +30,8 @@ body .demand .demand-box .demand-list .demand-personal .demand-personal-list:nth
 body .demand .demand-box .demand-list .demand-personal .demand-personal-list div { float: left; }
 body .demand .demand-box .demand-list .demand-personal .demand-personal-list .demand-personal-list-img { width: 88px; height: 88px; border-radius: 50px; border: 2px solid #F1F1F1; overflow: hidden; margin: 15px 0 0 15px; }
 body .demand .demand-box .demand-list .demand-personal .demand-personal-list .list-conten { position: relative; }
-body .demand .demand-box .demand-list .demand-personal .demand-personal-list .list-conten p { position: absolute; top: 19px; left: 15px; width: 400px; font-size: 18px;  color: #333333; }
-body .demand .demand-box .demand-list .demand-personal .demand-personal-list .list-conten div { position: absolute; top: 60px; left: 15px; width: 400px; max-height: 40px; font-size: 14px; color: #838383; }
+body .demand .demand-box .demand-list .demand-personal .demand-personal-list .list-conten p { position: absolute; top: 19px; left: 15px; width: 400px; font-size: 18px;  color: #333333; text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+body .demand .demand-box .demand-list .demand-personal .demand-personal-list .list-conten div { position: absolute; top: 60px; left: 15px; width: 400px; max-height: 40px; font-size: 14px; color: #838383; display: -moz-box; display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;-moz-line-clamp: 2;overflow: hidden;}
 body .demand .demand-box .demand-list .demand-personal .demand-personal-btn { float: right; color: #838383; cursor: pointer; margin-top: 40px; font-size: 14px; }
 body .demand .demand-box .demand-list .demand-personal .demand-personal-btn:hover { color: #D42026; }
 body .demand .demand-box .demand-list .demand-enterprise { width: 580px; float: left; margin-left: 36px; }
@@ -40,8 +40,8 @@ body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list
 body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list div { float: left; }
 body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list .demand-enterprise-list-img { width: 88px; height: 88px; border-radius: 50px; border: 2px solid #F1F1F1; overflow: hidden; margin: 15px 0 0 15px; }
 body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list .list-conten { position: relative; }
-body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list .list-conten p { position: absolute; top: 19px; left: 15px; width: 400px; font-size: 18px;  }
-body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list .list-conten div { position: absolute; top: 60px; left: 15px; width: 400px; max-height: 40px; font-size: 14px; color: #838383; }
+body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list .list-conten p { position: absolute; top: 19px; left: 15px; width: 400px; font-size: 18px; text-overflow: ellipsis;white-space: nowrap;overflow: hidden; }
+body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list .list-conten div { position: absolute; top: 60px; left: 15px; width: 400px; max-height: 40px; font-size: 14px; color: #838383; display: -moz-box; display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;-moz-line-clamp: 2;overflow: hidden;}
 body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-btn { float: right; color: #838383; cursor: pointer; margin-top: 40px; font-size: 14px; }
 body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-btn:hover { color: #D42026; }
 body .demand .demand-box .demand-list .dpt { text-align: center; font-size: 18px; color: #333333; padding: 20px 0 20px 0; font-weight: 500; }
