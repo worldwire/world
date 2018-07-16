@@ -1,7 +1,12 @@
 package com.spring.worldwire.model;
 
-import java.io.Serializable;
+import com.spring.worldwire.enums.CurrencyEnum;
+import com.spring.worldwire.enums.ProductTypeEnum;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+@SuppressWarnings("unused")
 public class ProductInfo implements Serializable{
 
     private static final long serialVersionUID = 3453425989173545796L;
@@ -10,11 +15,13 @@ public class ProductInfo implements Serializable{
 
     private String productName;
 
-    private Integer amount;
+    private BigDecimal amount;
 
-    private Integer payType;
+    private CurrencyEnum payType;
 
-    private Integer type;
+    private ProductTypeEnum type;
+
+    private Integer times;
 
     public Long getId() {
         return id;
@@ -29,37 +36,38 @@ public class ProductInfo implements Serializable{
     }
 
     public void setProductName(String productName) {
-        this.productName = productName == null ? null : productName.trim();
+        this.productName = productName;
     }
 
-    public Integer getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
-    public Integer getPayType() {
+    public CurrencyEnum getPayType() {
         return payType;
     }
 
-    public void setPayType(Integer payType) {
+    public void setPayType(CurrencyEnum payType) {
         this.payType = payType;
     }
 
-    public Integer getType() {
+    public ProductTypeEnum getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(ProductTypeEnum type) {
         this.type = type;
     }
 
-	@Override
-	public String toString() {
-		return "ProductInfo [id=" + id + ", productName=" + productName + ", amount=" + amount + ", payType=" + payType
-				+ ", type=" + type + "]";
-	}
-    
+    public Integer getTimes() {
+        return times;
+    }
+
+    public void setTimes(Integer times) {
+        this.times = times;
+    }
 }

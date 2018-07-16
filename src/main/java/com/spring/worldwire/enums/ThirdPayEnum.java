@@ -8,6 +8,7 @@ public enum ThirdPayEnum implements INumericEnum {
 
 	PAY_PAL(1,"paypal支付"),
 	ALIPAY(2,"支付宝"),
+	WEI_CHAT(3,"微信"),
 	;
 
 	private int code;

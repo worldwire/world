@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>充值</title>
+		<#include "../public/common.html" encoding="utf-8"/>
+		<link rel="stylesheet" href="/css/recharge.css">
+	</head>
+	<body>
+        <#include "../public/head.html" encoding="utf-8">
+        <#include "../public/navigator.html" encoding="utf-8">
+		<div class="container">
+			<div class="title"><p>充值</p></div>
+			<div class="tip"><span>1</span>选择支付币种</div>
+			<div class="money-type">
+				<a href="###" name="china" class="selected hv">￥&nbsp;人民币</a>
+				<a href="###" name="english" class="hv">$&nbsp;&nbsp;美金</a>
+			</div>
+			<div class="tip"><span>2</span>选购买次数</div>
+			<div class="money-type" id="times">
+			</div>
+			<div class="tip"><span>3</span>选择支付方式</div>
+			<div class="money-type" id="thirdPay">
+				<a href="###" id="ALIPAY" class="hv hide"><img src="/images/wx.png" width="30" style="vertical-align: -6px">微信支付</a>
+				<a href="###" id="WEI_CHAT" class="hv hide"><img src="/images/zfb.png" width="30" style="vertical-align: -7px;">支付宝支付</a>
+				<a href="###" id="PAY_PAL" class="hv hide"><img src="/images/paypal.jpg" width="150" height="50"></a>
+			</div>
+			<hr/>
+			<form action="/pay/recharge" method="post">
+				<div class="settlement">
+					<div><button class="layui-btn">立即充值</button></div>
+					<div class="msg"><span>实付金额人民币</span>￥50.00</div>
+				</div>
+			</form>
+		</div>
+        <#include "../public/foot.html" encoding="utf-8">
+
+	</body>
+	<script>
+
+			var rmbPay = ["ALIPAY","WEI_CHAT"];
+			var usdPay = ["PAY_PAL"];
+
+			function getProduct(code){
+
+				$("#thirdPay a").addClass("hide");
+
+				$.ajax({
+						url:"/pay/product?code="+code,
+						dataType:'json',
+						success:function(data){
+							var thirdPay;
+							if(code==1){
+								thirdPay = rmbPay;
+							}else if(code ==2){
+								thirdPay = usdPay;
+							}
+
+							thirdPay.foreach(function(val){
+								$("#"+val).removeClass("hide")
+							});
+
+							$("#times").empty();
+
+							data.foreach(function(val){
+								var text = '<a href="###" class="hv">￥'+val.amount+'/'+val.times+'次</a>';
+								$("#times").append(text);
+							});
+							flushClick();
+						}
+					});
+			}
+
+
+			function flushClick(){
+				$(".container a").on("click", function (e) {
+					var target = $(this),
+						parentBox = target.parent(),
+						allA = $(parentBox).find("a");
+
+					allA.removeClass("selected");
+					target.addClass("selected");
+
+					var name = $(this).attr("name");
+					if(name=='china'){
+						getProduct(1);
+					}
+					if(name=='english'){
+						getProduct(2);
+					}
+
+					return false;
+				})
+			}
+
+				flushClick();
+
+    </script>
+</html>

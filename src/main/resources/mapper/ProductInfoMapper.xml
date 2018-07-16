@@ -5,11 +5,12 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="product_name" property="productName" jdbcType="VARCHAR" />
     <result column="amount" property="amount" jdbcType="INTEGER" />
-    <result column="pay_type" property="payType" jdbcType="INTEGER" />
-    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="pay_type" property="payType" jdbcType="INTEGER" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.CurrencyEnum" />
+    <result column="type" property="type" jdbcType="INTEGER" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.ProductTypeEnum" />
+    <result column="times" property="times" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, product_name, amount, pay_type, type
+    id, product_name, amount, pay_type, type, times
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -22,10 +23,11 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.spring.worldwire.model.ProductInfo" >
-    insert into product_info (id, product_name, amount, 
-      pay_type, type)
-    values (#{id,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR}, #{amount,jdbcType=INTEGER}, 
-      #{payType,jdbcType=INTEGER}, #{type,jdbcType=INTEGER})
+    insert into product_info (id, product_name, amount,
+      pay_type, type, times)
+    values (#{id,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR}, #{amount,jdbcType=INTEGER},
+      #{payType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{type,typeHandler=com.spring.worldwire.extent.NumericEnumHandler} ,
+      #{times,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.spring.worldwire.model.ProductInfo" >
     insert into product_info
@@ -74,10 +76,13 @@
         amount = #{amount,jdbcType=INTEGER},
       </if>
       <if test="payType != null" >
-        pay_type = #{payType,jdbcType=INTEGER},
+        pay_type = #{payType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="type != null" >
-        type = #{type,jdbcType=INTEGER},
+        type = #{type,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+      </if>
+      <if test="time != null" >
+        times = #{times,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -86,8 +91,15 @@
     update product_info
     set product_name = #{productName,jdbcType=VARCHAR},
       amount = #{amount,jdbcType=INTEGER},
-      pay_type = #{payType,jdbcType=INTEGER},
-      type = #{type,jdbcType=INTEGER}
+      pay_type = #{payType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+      type = #{type,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+      times = #{times,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectCheckProductList" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from product_info
+    where pay_type = #{code}
+  </select>
 </mapper>

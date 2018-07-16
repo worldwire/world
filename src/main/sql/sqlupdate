@@ -1,0 +1,12 @@
+alter table product_info ADD times INT(11) Default 0 COMMENT '购买物品换算成的次数，如果是查看次数就是相应的次数，如果是翻译就是1';
+
+INSERT INTO `product_info` (`id`, `product_name`, `amount`, `pay_type`, `type`, `times`) VALUES ('1', '10圆优惠', '10', '1', '1', '10');
+
+INSERT INTO `product_info` (`id`, `product_name`, `amount`, `pay_type`, `type`, `times`) VALUES ('2', '50元促销', '50', '1', '1', '80');
+
+INSERT INTO `product_info` (`id`, `product_name`, `amount`, `pay_type`, `type`, `times`) VALUES ('3', '100元活动', '100', '1', '1', '200');
+
+INSERT INTO `product_info` (`id`, `product_name`, `amount`, `pay_type`, `type`, `times`) VALUES ('4', '1美元活动', '1', '2', '1', '6');
+
+INSERT INTO `product_info` (`id`, `product_name`, `amount`, `pay_type`, `type`, `times`) VALUES ('5', '5美元优惠', '5', '2', '1', '50');
+
