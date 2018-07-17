@@ -11,6 +11,8 @@ public interface UserInfoService {
 
     UserInfo selectByLoginId(Long id);
 
+    UserInfo selectById(Long id);
+
     int update(UserInfo userInfo);
 
     UserInfo selectSimpleById(long l);

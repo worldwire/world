@@ -2,14 +2,14 @@ package com.spring.worldwire.controller.pc;
 
 import com.alibaba.fastjson.JSONObject;
 import com.spring.worldwire.constants.Constants;
+import com.spring.worldwire.manager.LoginManager;
 import com.spring.worldwire.model.LoginInfo;
 import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.query.LoginInfoQuery;
 import com.spring.worldwire.service.LoginInfoService;
+import com.spring.worldwire.service.UserAccountService;
 import com.spring.worldwire.service.UserInfoService;
-import com.spring.worldwire.utils.DateUtil;
 import com.spring.worldwire.utils.RedisUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,6 +39,10 @@ public class LoginController {
     private UserInfoService userInfoService;
     @Autowired
     private RedisUtils redisUtils;
+    @Autowired
+    private UserAccountService userAccountService;
+    @Autowired
+    private LoginManager loginManager;
 
     public LoginController(LoginInfoService loginInfoService, UserInfoService userInfoService) {
         this.loginInfoService = loginInfoService;
@@ -106,18 +109,11 @@ public class LoginController {
 
     @RequestMapping("/showContracts")
     @ResponseBody
-    public String showContracts(Long loginId, Long productRequestId) {
-        if (Objects.isNull(loginId) || NumberUtils.isNumber(loginId.toString())) {
+    public String showContracts(Long userId, Long productRequestId) {
+        if (Objects.isNull(userId) || Objects.isNull(productRequestId)) {
             return "error";
         }
-        if (redisUtils.isCacheExists(Constants.CACHE_FREE_LOOK_UP + loginId)) {
-            return "false";
-        }
-
-        UserInfo info = userInfoService.selectByLoginId(loginId);
-        long remains = DateUtil.getTimeInterval(new Date());
-        redisUtils.set(Constants.CACHE_FREE_LOOK_UP + loginId, productRequestId, remains);
-        return JSONObject.toJSONString(info);
+        return loginManager.viewRequestContract(userId, productRequestId);
     }
 
 }

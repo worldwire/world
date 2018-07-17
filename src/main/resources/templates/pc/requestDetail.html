@@ -121,14 +121,14 @@
                 <div class="contact">
                     <p>联系方式</p>
                     <ul>
-                        <li style="margin-top: 27px;">手机号:<span>******</span></li>
-                        <li>座机号:<span>******</span></li>
-                        <li>我的网站:<span>******</span></li>
-                        <li>微信号:<span>******</span></li>
-                        <li>联系邮箱:<span>******</span></li>
-                        <li>Facebook:<span>******</span></li>
-                        <li>LikedIn:<span>******</span></li>
-                        <li>WhatsApp:<span>******</span></li>
+                        <li style="margin-top: 27px;">手机号:<span name="mobile">******</span></li>
+                        <li>座机号:<span name="phone">******</span></li>
+                        <li>我的网站:<span name="website">******</span></li>
+                        <li>微信号:<span name="wechat">******</span></li>
+                        <li>联系邮箱:<span name="email">******</span></li>
+                        <li>Facebook:<span name="facebook">******</span></li>
+                        <li>LikedIn:<span name="linkedin">******</span></li>
+                        <li>WhatsApp:<span name="whatsapp">******</span></li>
                     </ul>
                 </div>
 				<div class="ewm">
@@ -183,6 +183,21 @@
                         success: function(data){
 							alert(data);
 							window.location.reload();
+							if(data == "error"){
+								alert("参数错误");
+							}
+							if(data == "false"){
+							    alert("没有查看次数，请充值后再查看");
+							}
+							var userInfo = JSON.parse(data);
+							$("[name='mobile']").text(userInfo.mobile);
+                            $("[name='phone']").text(userInfo.phone);
+                            $("[name='wechat']").text(userInfo.wechat);
+                            $("[name='email']").text(userInfo.email);
+                            $("[name='facebook']").text(userInfo.facebook);
+                            $("[name='linkedin']").text(userInfo.linkedin);
+                            $("[name='whatsapp']").text(userInfo.whatsapp);
+
                         },
 						error: function (data) {
 							alert("网络出错，请稍后重试");
@@ -192,10 +207,22 @@
             $(".login button:eq(0)").click(function () {
                 var loginBox = $(".login:eq(0)"),// 登陆后的盒子
                 contactBox = $(".contact:eq(0)"); // 联系方式的盒子
-                loginBox.hide(); // 获取资料后隐藏信息
+//              loginBox.hide(); // 获取资料后隐藏信息
+				$.ajax({
+                    type: "POST",
+                    url: "/login/ajaxLogin",
+                    data: {email:$("#email").val(), password:$("#passwd").val()},
+                    dataType: "json",
+                    success: function(data){
+                        
+                    },
+					error: function (data) {
+						
+                    }
+				});
                 contactBox.css("marginTop","140px"); // 添加距离
                 contactBox.find("li span").text("12345678910");
             });
-        })
+        });
     </script>
 </html>

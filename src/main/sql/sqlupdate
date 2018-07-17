@@ -10,3 +10,12 @@ INSERT INTO `product_info` (`id`, `product_name`, `amount`, `pay_type`, `type`, 
 
 INSERT INTO `product_info` (`id`, `product_name`, `amount`, `pay_type`, `type`, `times`) VALUES ('5', '5美元优惠', '5', '2', '1', '50');
 
+CREATE TABLE `request_views` (
+  `id` bigint(11) NOT NULL DEFAULT '0' COMMENT '主键id',
+  `request_id` varchar(255) DEFAULT NULL COMMENT '需求id',
+  `user_id` bigint(11) DEFAULT NULL COMMENT '用户id',
+  `login_id` bigint(11) DEFAULT NULL COMMENT '登录id',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

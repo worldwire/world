@@ -32,6 +32,11 @@ public class UserInfoServiceImpl implements UserInfoService {
     }
 
     @Override
+    public UserInfo selectById(Long id) {
+        return userInfoDao.selectByPrimaryKey(id);
+    }
+
+    @Override
     public int update(UserInfo userInfo) {
         return userInfoDao.updateByPrimaryKeySelective(userInfo);
     }
