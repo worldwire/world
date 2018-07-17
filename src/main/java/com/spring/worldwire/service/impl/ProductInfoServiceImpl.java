@@ -19,4 +19,12 @@ public class ProductInfoServiceImpl implements ProductInfoService {
     public List<ProductInfo> selectCheckProductList(int code) {
         return productInfoDao.selectCheckProductList(code);
     }
+
+    @Override
+    public ProductInfo findById(long id) {
+        return productInfoDao.selectByPrimaryKey(id);
+
+    }
+
+
 }

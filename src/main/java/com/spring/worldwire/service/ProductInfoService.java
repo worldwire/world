@@ -8,4 +8,5 @@ import java.util.List;
 public interface ProductInfoService {
 
     List<ProductInfo> selectCheckProductList(int code);
+    ProductInfo findById(long id);
 }
