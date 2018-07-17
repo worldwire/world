@@ -4,6 +4,7 @@ import com.spring.worldwire.dao.RequestViewsDao;
 import com.spring.worldwire.model.RequestViews;
 import com.spring.worldwire.service.RequestViewsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * Desc: Desc
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Date: 2018/7/17 11:01
  * To change this template use File | Settings | File and Code Templates | Includes | File Header.
  */
+@Service
 public class RequestViewsServiceImpl implements RequestViewsService {
 
     @Autowired
