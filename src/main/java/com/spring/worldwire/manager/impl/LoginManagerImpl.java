@@ -66,6 +66,11 @@ public class LoginManagerImpl implements LoginManager {
 
     }
 
+    @Override
+    public void login(String email, String password) {
+
+    }
+
     /**
      * 处理付费查看次数
      *
