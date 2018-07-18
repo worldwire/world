@@ -1,17 +1,19 @@
 package com.spring.worldwire.service.impl.login;
 
 import com.alibaba.fastjson.JSONObject;
+import com.spring.worldwire.config.login.LinkedInConfig;
+import com.spring.worldwire.config.login.LinkedInHelper;
 import com.spring.worldwire.enums.ThirdLoginTypeEnum;
+import com.spring.worldwire.manager.LoginManager;
 import com.spring.worldwire.model.LoginInfo;
 import com.spring.worldwire.model.UserAccount;
 import com.spring.worldwire.model.UserInfo;
+import com.spring.worldwire.query.LoginInfoQuery;
 import com.spring.worldwire.service.LoginInfoService;
 import com.spring.worldwire.service.UserAccountService;
 import com.spring.worldwire.service.UserInfoService;
 import com.spring.worldwire.service.hander.AbstractThirdLoginServiceHandler;
 import com.spring.worldwire.utils.HttpUtils;
-import com.spring.worldwire.config.login.LinkedInConfig;
-import com.spring.worldwire.config.login.LinkedInHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +22,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.Objects;
 
@@ -43,6 +44,8 @@ public class LinkedInServiceImpl extends AbstractThirdLoginServiceHandler {
     private UserInfoService userInfoService;
     @Autowired
     private UserAccountService userAccountService;
+    @Autowired
+    private LoginManager loginManager;
 
     private static Logger log = LoggerFactory.getLogger(LinkedInServiceImpl.class);
 
@@ -52,7 +55,7 @@ public class LinkedInServiceImpl extends AbstractThirdLoginServiceHandler {
     }
 
     @Override
-    public LoginInfo callback(HttpServletRequest request, HttpServletResponse response) {
+    public UserInfo callback(HttpServletRequest request, HttpServletResponse response) {
 
         String code = request.getParameter("code");
         String state = request.getParameter("state");
@@ -88,26 +91,22 @@ public class LinkedInServiceImpl extends AbstractThirdLoginServiceHandler {
                     return null;
                 } else {
                     // 获取信息成功,保存用户
-                    LoginInfo user = new LoginInfo();
-                    LoginInfo info = handleLoginCheck(warpLoginUser(userInfo),request,response);
+                    LoginInfo info = handleLoginCheck(warpLoginUser(userInfo));
                     if (Objects.isNull(info)) {//用户不存在则创建一个新用户
-                        user = createNewUser(userInfo);
-                    }else{
-                        user = info;
+                        createNewUser(userInfo);
                     }
-                    try {
-                        //登录操作
-                        handleHttpParams(request,response, user.getId());
-                        handleSignUp(user.getId());
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    return user;
+                    return loginManager.thirdLogin(userInfo.getString("id"), ThirdLoginTypeEnum.LINKEDIN.getCode(), response);
                 }
             }
         }
     }
 
+    /**
+     * 添加一个新用户
+     *
+     * @param info
+     * @return
+     */
     private LoginInfo createNewUser(JSONObject info) {
         LoginInfo loginInfo = new LoginInfo();
         loginInfo.setCreateTime(new Date());
@@ -128,17 +127,15 @@ public class LinkedInServiceImpl extends AbstractThirdLoginServiceHandler {
             account.setViewingTimes(0);
             account.setCreateTime(new Date());
             userAccountService.insert(account);
-
         }
         return loginInfo;
     }
 
-    private LoginInfo warpLoginUser(JSONObject userInfo) {
-        LoginInfo loginInfo = new LoginInfo();
-        loginInfo.setThirdType(ThirdLoginTypeEnum.LINKEDIN.getCode());
-        loginInfo.setThirdKey(userInfo.getString("id"));
-//        loginInfo.setUserName(userInfo.getString("lastName") + userInfo.getString("firstName"));
-        return loginInfo;
+    private LoginInfoQuery warpLoginUser(JSONObject userInfo) {
+        LoginInfoQuery query = new LoginInfoQuery();
+        query.setThirdType(ThirdLoginTypeEnum.LINKEDIN.getCode());
+        query.setThirdKey(userInfo.getString("id"));
+        return query;
     }
 
 }

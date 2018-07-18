@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../css/login.css">
     <script src="../js/layui-v2.2.6/layui/layui.js"></script>
     <script src="../js/layui-v2.2.6/layui/layui.js"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.js" integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU=" crossorigin="anonymous"></script>
+
 </head>
 <body>
 <#include "../public/head.html" encoding="utf-8">
@@ -18,7 +18,7 @@
 <div class="container">
     <div class="title">登陆</div>
     <div class="main">
-        <form class="layui-form layui-form-pane" method="post" action="/login/login">
+        <form class="layui-form layui-form-pane" method="post">
             <div class="layui-form-item">
                 <div class="bord">
                     <label class="layui-form-label"><i class="iconfont">&#xe757;</i></label>
@@ -42,7 +42,7 @@
                 <p href="###" class="msg" style="display: none"><span class="disc"></span>邮箱或密码错误</p>
             </div>
             <div>
-                <button class="layui-btn nextBtn">立即提交</button>
+                <input class="layui-btn nextBtn" type="button" value="立即提交">
             </div>
             <div class="login">
                 <div class="login-title">
@@ -72,4 +72,37 @@
 
     <#include "../public/foot.html" encoding="utf-8">
 </body>
+<script>
+    layui.use(['form', 'layedit', 'laydate','carousel'], function() {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , carousel = layui.carousel
+            , $ = layui.jquery;
+        var lastUrl = document.referrer;
+        $(".nextBtn").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "/login/ajaxLogin",
+                data: {email:$("[name=email]").val(), password:$("#passwd").val()},
+                dataType: "json",
+                success: function (data) {
+                    if(data == null){
+                        $('.msg').show();
+                        return false;
+                    }
+                    if(lastUrl == ''){
+                        window.location.href = "/"
+                    }else{
+                        window.location.href = lastUrl;
+                    }
+                },
+                error: function () {
+                    
+                }
+            });
+        });
+    });
+</script>
 </html>

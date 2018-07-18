@@ -1,6 +1,7 @@
 package com.spring.worldwire.controller.login;
 
 import com.spring.worldwire.model.LoginInfo;
+import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.service.LoginService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -44,12 +45,11 @@ public class LinkedInController {
     @RequestMapping(value = "/callback")
     @ResponseBody
     public String callback(HttpServletRequest request, HttpServletResponse response) {
-        LoginInfo loginInfo = loginService.callback(request, response);
-        if (Objects.isNull(loginInfo)) {
+        UserInfo userInfo = loginService.callback(request, response);
+        if (Objects.isNull(userInfo)) {
             return "redirect:login";
         }
-        String fromURL = request.getHeader("Referer");
-        return "redirect:" + fromURL;  //登录成功跳转到登录前页面
+        return "redirect:/";  //登录成功跳转到登录前页面
     }
 
 

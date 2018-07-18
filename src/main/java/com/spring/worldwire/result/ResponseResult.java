@@ -69,7 +69,4 @@ public class ResponseResult<T> {
         return sb.toString();
     }
 
-    public static void main(String[] args) {
-        System.out.println(new ResponseResult(null, StatusCodeEnum.EMPTY, "测试一下"));
-    }
 }

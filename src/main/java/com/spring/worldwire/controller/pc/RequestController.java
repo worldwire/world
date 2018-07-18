@@ -5,12 +5,13 @@ import com.spring.worldwire.enums.UserTypeEnum;
 import com.spring.worldwire.model.ProductRequest;
 import com.spring.worldwire.query.ProductRequestQuery;
 import com.spring.worldwire.service.ProductRequestService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/request")
@@ -19,34 +20,8 @@ public class RequestController {
     @Autowired
     private ProductRequestService productRequestService;
 
-//    @RequestMapping("")
-//    public String toIndex(Model model) {
-//
-//        ProductRequestQuery personalQuery = new ProductRequestQuery();
-//        personalQuery.setPageSize(4);
-//        personalQuery.setPageNo(1);
-//        personalQuery.setUserType(UserTypeEnum.PERSONAL.getCode());
-//        personalQuery.setPageCount(productRequestService.selectCountByQuery(personalQuery));
-//        List<ProductRequest> personalList = productRequestService.selectByQuery(personalQuery, true);
-//
-//        ProductRequestQuery enterpriseQuery = new ProductRequestQuery();
-//        enterpriseQuery.setPageSize(4);
-//        enterpriseQuery.setPageNo(1);
-//        enterpriseQuery.setUserType(UserTypeEnum.ENTERPRISE.getCode());
-//        enterpriseQuery.setPageCount(productRequestService.selectCountByQuery(enterpriseQuery));
-//        List<ProductRequest> enterpriseList = productRequestService.selectByQuery(enterpriseQuery, true);
-//
-//        model.addAttribute("personalQuery", personalQuery);
-//        model.addAttribute("personalList", personalList);
-//
-//        model.addAttribute("enterpriseQuery", enterpriseQuery);
-//        model.addAttribute("enterpriseList", enterpriseList);
-//
-//        return "pc/demandHall";
-//    }
-
     @RequestMapping("/list/{userType}/{requestType}/{pageSize}/{pageNo}.html")
-    public String productRequestList(Model model,@PathVariable int userType, @PathVariable int requestType, @PathVariable int pageSize, @PathVariable int pageNo) {
+    public String productRequestList(Model model, @PathVariable int userType, @PathVariable int requestType, @PathVariable int pageSize, @PathVariable int pageNo) {
         {
 
             ProductRequestQuery personalQuery = new ProductRequestQuery();
@@ -88,10 +63,10 @@ public class RequestController {
 
 
     @RequestMapping("myDetail")
-    public String toMyDetail(Model model,long id) {
+    public String toMyDetail(Model model, long id) {
         ProductRequest productRequest = productRequestService.findById(id);
 
-        model.addAttribute("productRequest",productRequest);
+        model.addAttribute("productRequest", productRequest);
 
         return "pc/myDetail";
     }
@@ -103,12 +78,12 @@ public class RequestController {
     }
 
     @RequestMapping("releaseCommit")
-    public String releaseCommit(Model model,Integer requestType) {
+    public String releaseCommit(Model model, Integer requestType) {
 
         ProductRequest productRequest = new ProductRequest();
 
         RequestTypeEnum requestTypeEnum = RequestTypeEnum.getNameByCode(requestType);
-        if(requestTypeEnum==null){
+        if (requestTypeEnum == null) {
             return "/";
         }
 

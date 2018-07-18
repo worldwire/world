@@ -1,21 +1,27 @@
 package com.spring.worldwire.manager.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.spring.worldwire.constants.Constants;
 import com.spring.worldwire.manager.LoginManager;
-import com.spring.worldwire.model.RequestViews;
+import com.spring.worldwire.model.LoginInfo;
 import com.spring.worldwire.model.UserAccount;
 import com.spring.worldwire.model.UserInfo;
+import com.spring.worldwire.query.LoginInfoQuery;
 import com.spring.worldwire.service.LoginInfoService;
-import com.spring.worldwire.service.RequestViewsService;
 import com.spring.worldwire.service.UserAccountService;
 import com.spring.worldwire.service.UserInfoService;
+import com.spring.worldwire.utils.Base64;
 import com.spring.worldwire.utils.DateUtil;
-import com.spring.worldwire.utils.RedisUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -27,87 +33,91 @@ import java.util.Objects;
 @Service
 public class LoginManagerImpl implements LoginManager {
 
+    private static Logger logger = LoggerFactory.getLogger(LoginManagerImpl.class);
+
     @Autowired
     private LoginInfoService loginInfoService;
     @Autowired
     private UserInfoService userInfoService;
     @Autowired
-    private RedisUtils redisUtils;
-    @Autowired
     private UserAccountService userAccountService;
-    @Autowired
-    private RequestViewsService requestViewsService;
 
     @Override
-    public String viewRequestContract(Long userId, Long productRequestId) {
+    public UserInfo login(String email, String password, HttpServletResponse response) {
 
-        RequestViews views = requestViewsService.selectByUserId(userId);
-        //已经查看过该需求，直接显示即可
-        if (Objects.nonNull(views)) {
-            return JSONObject.toJSONString(userInfoService.selectById(userId));
+        LoginInfoQuery query = new LoginInfoQuery();
+        query.setEmail(email);
+        query.setPassword(password);
+        List<LoginInfo> list = loginInfoService.selectByQuery(query);
+        if (CollectionUtils.isEmpty(list)) {
+            return null;
         }
-
-        // 未查看过需求且当天免费查看尚未使用
-        boolean noFreeView = redisUtils.isCacheExists(Constants.CACHE_FREE_LOOK_UP + userId);
-        if (!noFreeView) {
-            processFreeViews(userId, productRequestId);
-            return JSONObject.toJSONString(userInfoService.selectById(userId));
+        UserInfo userInfo = userInfoService.selectByLoginId(list.get(0).getId());
+        if (Objects.isNull(userInfo)) {
+            return null;
         }
-
-        // 未查看过需求且免费查看已经被使用
-        UserAccount userAccount = userAccountService.selectByUserId(userId);
-        if (userAccount.getViewingTimes() <= 0) {//没有付费查看次数
-            return "false";
-        }
-
-        // 有付费查看次数，次数减一，并增加查看记录
-        processChargeViews(userId, productRequestId, userAccount);
-        return JSONObject.toJSONString(userInfoService.selectById(userId));
-
+        // 登录保存cookie
+        processCookie(response, userInfo);
+        // 处理签到
+        handleSignUp(userInfo.getId());
+        return userInfo;
     }
 
     @Override
-    public void login(String email, String password) {
-
+    public UserInfo thirdLogin(String thirdKey, Integer thirdType, HttpServletResponse response) {
+        LoginInfoQuery query = new LoginInfoQuery();
+        query.setThirdKey(thirdKey);
+        query.setThirdType(thirdType);
+        List<LoginInfo> list = loginInfoService.selectByQuery(query);
+        if (CollectionUtils.isEmpty(list)) {
+            return null;
+        }
+        UserInfo userInfo = userInfoService.selectByLoginId(list.get(0).getId());
+        if (Objects.isNull(userInfo)) {
+            return null;
+        }
+        // 登录保存cookie
+        processCookie(response, userInfo);
+        // 处理签到
+        handleSignUp(userInfo.getId());
+        return userInfo;
     }
 
     /**
-     * 处理付费查看次数
+     * 登陆之后处理cookie
      *
-     * @param userId
-     * @param productRequestId
+     * @param response
+     * @param userInfo
      */
-    private void processChargeViews(Long userId, Long productRequestId, UserAccount userAccount) {
+    private void processCookie(HttpServletResponse response, UserInfo userInfo) {
 
-        userAccount.setViewingTimes(userAccount.getViewingTimes() - 1);
-        userAccountService.updateUserAccount(userAccount);
+        String encryptedCookie = Base64.encode(userInfo.cookiesValue().getBytes());
+        Cookie userIdCookie = new Cookie(Constants.USER_COOKIES_NAME, encryptedCookie);
+        userIdCookie.setPath("/");
+        userIdCookie.setMaxAge(3600);
 
-        // 增加一条查看记录
-        RequestViews requestViews = new RequestViews();
-        requestViews.setUserId(userId);
-        requestViews.setRequestId(productRequestId);
-        requestViews.setCreateTime(new Date());
-        requestViews.setUpdateTime(new Date());
-        requestViewsService.insertRequestViews(requestViews);
-
+        response.addCookie(userIdCookie);
     }
 
     /**
-     * 处理免费次数的使用情况
+     * 处理登录的连续签到
      *
      * @param userId
-     * @param productRequestId
      */
-    private void processFreeViews(Long userId, Long productRequestId) {
-        // 缓存中增加已使用的记录
-        long remains = DateUtil.getTimeInterval(new Date());
-        redisUtils.set(Constants.CACHE_FREE_LOOK_UP + userId, productRequestId, remains);
-        // 增加一条查看记录
-        RequestViews requestViews = new RequestViews();
-        requestViews.setUserId(userId);
-        requestViews.setRequestId(productRequestId);
-        requestViews.setCreateTime(new Date());
-        requestViews.setUpdateTime(new Date());
-        requestViewsService.insertRequestViews(requestViews);
+    private void handleSignUp(Long userId) {
+        UserAccount account = userAccountService.selectByUserId(userId);
+        if (Objects.isNull(account)) {
+            return;
+        }
+        try {
+            if (DateUtil.dateInterval(account.getLastSignTime(), new Date()) > 1) {
+                account.setSignNum(0);//上次签到时间比当前时间大于一天
+                userAccountService.updateUserAccount(account);
+            }
+        } catch (ParseException e) {
+            String message = String.format("time parse error, lastSignTime:%s, now:%s ", account.getLastSignTime(), new Date());
+            logger.error(message, e);
+            throw new RuntimeException(message);
+        }
     }
 }

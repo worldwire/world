@@ -1,5 +1,9 @@
 package com.spring.worldwire.manager;
 
+import com.spring.worldwire.model.UserInfo;
+
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * Desc: Desc
  * User: luxun
@@ -8,7 +12,7 @@ package com.spring.worldwire.manager;
  */
 public interface LoginManager {
 
-    String viewRequestContract(Long userId, Long productRequestId);
+    public UserInfo login(String email, String password, HttpServletResponse response);
 
-    public void login(String email, String password);
+    public UserInfo thirdLogin(String thirdKey, Integer thirdType, HttpServletResponse response);
 }

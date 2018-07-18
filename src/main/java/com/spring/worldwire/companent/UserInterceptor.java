@@ -6,6 +6,8 @@ import java.util.Arrays;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.spring.worldwire.utils.Base64;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,7 +30,7 @@ public class UserInterceptor implements HandlerInterceptor {
     private void setCookie(HttpServletRequest httpServletRequest, Cookie cookie) {
         if(Constants.USER_COOKIES_NAME.equalsIgnoreCase(cookie.getName())) {
             UserInfo userInfo = new UserInfo();
-            userInfo.analysisCookiesValue(cookie.getValue());
+            userInfo.analysisCookiesValue(new String(Base64.decode(cookie.getValue())));
             if(userInfo.getId()!=null) {
                 httpServletRequest.setAttribute(Constants.USER_ID_SESSION, userInfo.getId());
                 httpServletRequest.setAttribute(Constants.USER_SESSION, userInfo);

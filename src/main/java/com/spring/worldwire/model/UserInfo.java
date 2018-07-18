@@ -3,7 +3,7 @@ package com.spring.worldwire.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserInfo implements Serializable{
+public class UserInfo implements Serializable {
 
     private static final long serialVersionUID = 4091704691107509862L;
 
@@ -447,49 +447,49 @@ public class UserInfo implements Serializable{
         this.businessBankImg = businessBankImg == null ? null : businessBankImg.trim();
     }
 
-	@Override
-	public String toString() {
-		return "UserInfo [id=" + id + ", loginId=" + loginId + ", type=" + type + ", isForeign=" + isForeign
-				+ ", showImg=" + showImg + ", brithday=" + brithday + ", nickName=" + nickName + ", language="
-				+ language + ", briNationality=" + briNationality + ", nowNationality=" + nowNationality
-				+ ", localAddr=" + localAddr + ", occupation=" + occupation + ", email=" + email + ", mobile=" + mobile
-				+ ", website=" + website + ", publicPlatform=" + publicPlatform + ", wechatQrcode=" + wechatQrcode
-				+ ", wechat=" + wechat + ", facebook=" + facebook + ", whatsapp=" + whatsapp + ", linkedin=" + linkedin
-				+ ", communication=" + communication + ", idcardOnImg=" + idcardOnImg + ", idcardDownImg="
-				+ idcardDownImg + ", idcardHandImg=" + idcardHandImg + ", realName=" + realName + ", idcard=" + idcard
-				+ ", companyName=" + companyName + ", companyTime=" + companyTime + ", companyNum=" + companyNum
-				+ ", companyAddr=" + companyAddr + ", companyTel=" + companyTel + ", companyMobile=" + companyMobile
-				+ ", companyPostCode=" + companyPostCode + ", companyFax=" + companyFax + ", companyEmail="
-				+ companyEmail + ", companyMainBusiness=" + companyMainBusiness + ", companyMainContry="
-				+ companyMainContry + ", businessLicenseImg=" + businessLicenseImg + ", businessSpecialLicenseImg="
-				+ businessSpecialLicenseImg + ", businessBank=" + businessBank + ", businessBankName="
-				+ businessBankName + ", businessBankAddr=" + businessBankAddr + ", businessBankImg=" + businessBankImg
-				+ "]";
-	}
+    @Override
+    public String toString() {
+        return "UserInfo [id=" + id + ", loginId=" + loginId + ", type=" + type + ", isForeign=" + isForeign
+                + ", showImg=" + showImg + ", brithday=" + brithday + ", nickName=" + nickName + ", language="
+                + language + ", briNationality=" + briNationality + ", nowNationality=" + nowNationality
+                + ", localAddr=" + localAddr + ", occupation=" + occupation + ", email=" + email + ", mobile=" + mobile
+                + ", website=" + website + ", publicPlatform=" + publicPlatform + ", wechatQrcode=" + wechatQrcode
+                + ", wechat=" + wechat + ", facebook=" + facebook + ", whatsapp=" + whatsapp + ", linkedin=" + linkedin
+                + ", communication=" + communication + ", idcardOnImg=" + idcardOnImg + ", idcardDownImg="
+                + idcardDownImg + ", idcardHandImg=" + idcardHandImg + ", realName=" + realName + ", idcard=" + idcard
+                + ", companyName=" + companyName + ", companyTime=" + companyTime + ", companyNum=" + companyNum
+                + ", companyAddr=" + companyAddr + ", companyTel=" + companyTel + ", companyMobile=" + companyMobile
+                + ", companyPostCode=" + companyPostCode + ", companyFax=" + companyFax + ", companyEmail="
+                + companyEmail + ", companyMainBusiness=" + companyMainBusiness + ", companyMainContry="
+                + companyMainContry + ", businessLicenseImg=" + businessLicenseImg + ", businessSpecialLicenseImg="
+                + businessSpecialLicenseImg + ", businessBank=" + businessBank + ", businessBankName="
+                + businessBankName + ", businessBankAddr=" + businessBankAddr + ", businessBankImg=" + businessBankImg
+                + "]";
+    }
 
-	private static String BLANK_STRING = "null";
+    private static String BLANK_STRING = "null";
 
 
-	public String cookiesValue(){
+    public String cookiesValue() {
 
-      return String.join("$$", id.toString(), type!=null?type.toString():BLANK_STRING, nickName!=null?nickName:BLANK_STRING, showImg!=null?showImg:BLANK_STRING);
-  }
+        return String.join("$$", id.toString(), type != null ? type.toString() : BLANK_STRING, nickName != null ? nickName : BLANK_STRING, showImg != null ? showImg : BLANK_STRING);
+    }
 
-  public void analysisCookiesValue(String cookiesValue){
-      if(cookiesValue.contains("$$")) {
-          String[] split = cookiesValue.split("\\$\\$");
-          setId(Long.parseLong(split[0]));
-          if(!BLANK_STRING.equals(split[1])) {
-              setType(Integer.parseInt(split[1]));
-          }
-          if(!BLANK_STRING.equals(split[2])) {
-              setNickName(split[2]);
-          }
-          if(!BLANK_STRING.equals(split[3])) {
-              setShowImg(split[3]);
-          }
+    public void analysisCookiesValue(String cookiesValue) {
+        if (cookiesValue.contains("$$")) {
+            String[] split = cookiesValue.split("\\$\\$");
+            setId(Long.parseLong(split[0]));
+            if (!BLANK_STRING.equals(split[1])) {
+                setType(Integer.parseInt(split[1]));
+            }
+            if (!BLANK_STRING.equals(split[2])) {
+                setNickName(split[2]);
+            }
+            if (!BLANK_STRING.equals(split[3])) {
+                setShowImg(split[3]);
+            }
 
-      }
-  }
+        }
+    }
 
 }

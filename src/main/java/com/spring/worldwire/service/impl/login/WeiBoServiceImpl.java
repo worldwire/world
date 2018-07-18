@@ -1,9 +1,11 @@
 package com.spring.worldwire.service.impl.login;
 
 import com.spring.worldwire.enums.ThirdLoginTypeEnum;
+import com.spring.worldwire.manager.LoginManager;
 import com.spring.worldwire.model.LoginInfo;
 import com.spring.worldwire.model.UserAccount;
 import com.spring.worldwire.model.UserInfo;
+import com.spring.worldwire.query.LoginInfoQuery;
 import com.spring.worldwire.service.LoginInfoService;
 import com.spring.worldwire.service.UserAccountService;
 import com.spring.worldwire.service.UserInfoService;
@@ -37,6 +39,8 @@ public class WeiBoServiceImpl extends AbstractThirdLoginServiceHandler {
     private UserInfoService userInfoService;
     @Autowired
     private UserAccountService userAccountService;
+    @Autowired
+    private LoginManager loginManager;
 
     private static Logger log = LoggerFactory.getLogger(WeiBoServiceImpl.class);
 
@@ -52,7 +56,7 @@ public class WeiBoServiceImpl extends AbstractThirdLoginServiceHandler {
     }
 
     @Override
-    public LoginInfo callback(HttpServletRequest request, HttpServletResponse response) {
+    public UserInfo callback(HttpServletRequest request, HttpServletResponse response) {
         String code = request.getParameter("code");
         Oauth oauth = new Oauth();
         String token = "";
@@ -64,17 +68,12 @@ public class WeiBoServiceImpl extends AbstractThirdLoginServiceHandler {
             String uid = str1[0].split("=")[1];
             Users users = new Users();
             users.client.setToken(accessToken);
-            User weiboUser = users.showUserById(uid);
-            LoginInfo info = handleLoginCheck(warpLoginUser(weiboUser),request,response);
-            LoginInfo user = new LoginInfo();
+            User user = users.showUserById(uid);
+            LoginInfo info = handleLoginCheck(warpLoginUser(user));
             if (Objects.isNull(info)) {
-                user = createNewUser(weiboUser);
-            } else {
-                user = info;
+                createNewUser(user);
             }
-            //登录操作
-            handleHttpParams(request,response, user.getId());
-            handleSignUp(user.getId());
+            return loginManager.thirdLogin(user.getId(), ThirdLoginTypeEnum.WEIBO.getCode(), response);
         } catch (Exception e) {
             log.error("callback exception", e);
         }
@@ -106,10 +105,10 @@ public class WeiBoServiceImpl extends AbstractThirdLoginServiceHandler {
         return loginInfo;
     }
 
-    private LoginInfo warpLoginUser(User weiboUser) {
-        LoginInfo loginInfo = new LoginInfo();
-        loginInfo.setThirdType(ThirdLoginTypeEnum.WEIBO.getCode());
-        loginInfo.setThirdKey(weiboUser.getId());
-        return loginInfo;
+    private LoginInfoQuery warpLoginUser(User user) {
+        LoginInfoQuery query = new LoginInfoQuery();
+        query.setThirdType(ThirdLoginTypeEnum.WEIBO.getCode());
+        query.setThirdKey(user.getId());
+        return query;
     }
 }

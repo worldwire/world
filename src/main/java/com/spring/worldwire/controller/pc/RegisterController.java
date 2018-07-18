@@ -9,6 +9,8 @@ import java.util.Date;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.spring.worldwire.utils.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -70,8 +72,8 @@ public class RegisterController {
         userInfo.setType(i);
         userInfoService.update(userInfo);
 
-
-        Cookie userIdCookie = new Cookie(Constants.USER_COOKIES_NAME,userInfo.cookiesValue());
+        String encruptedCookie = Base64.encode(userInfo.cookiesValue().getBytes());
+        Cookie userIdCookie = new Cookie(Constants.USER_COOKIES_NAME,encruptedCookie);
         userIdCookie.setPath("/");
         userIdCookie.setMaxAge(3600);
         response.addCookie(userIdCookie);

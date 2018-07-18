@@ -1,6 +1,7 @@
 package com.spring.worldwire.controller.login;
 
 import com.spring.worldwire.model.LoginInfo;
+import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.service.LoginService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -40,8 +41,8 @@ public class WeiBoLoginController {
 
     @RequestMapping("/callback")
     public String authCallback(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        LoginInfo loginInfo = loginService.callback(request, response);
-        if (Objects.isNull(loginInfo)) {
+        UserInfo userInfo = loginService.callback(request, response);
+        if (Objects.isNull(userInfo)) {
             return "redirect:login";
         }
         String fromURL = request.getHeader("Referer");

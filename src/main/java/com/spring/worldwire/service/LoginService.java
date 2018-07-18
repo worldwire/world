@@ -1,6 +1,7 @@
 package com.spring.worldwire.service;
 
 import com.spring.worldwire.model.LoginInfo;
+import com.spring.worldwire.model.UserInfo;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,10 +16,10 @@ public interface LoginService {
 
     public int register(LoginInfo info);
 
-    public LoginInfo login(LoginInfo info,HttpServletResponse response,HttpServletRequest request);
+    public UserInfo login(LoginInfo info, HttpServletResponse response, HttpServletRequest request);
 
     public abstract String auth();
 
-    public abstract LoginInfo callback(HttpServletRequest request, HttpServletResponse response);
+    public abstract UserInfo callback(HttpServletRequest request, HttpServletResponse response);
 
 }
