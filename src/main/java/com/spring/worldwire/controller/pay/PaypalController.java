@@ -2,17 +2,17 @@ package com.spring.worldwire.controller.pay;
 
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
-import com.spring.worldwire.enums.PayStatusEnum;
 import com.spring.worldwire.enums.ThirdPayEnum;
 import com.spring.worldwire.model.TradeOrder;
+import com.spring.worldwire.service.TradeOrderService;
 import com.spring.worldwire.utils.pay.paypal.PaypalCore;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,6 +23,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class PaypalController extends BaseResultController {
 
   private static Logger logger = LoggerFactory.getLogger(PaypalController.class);
+
+  @Autowired
+  private TradeOrderService tradeOrderservice;
 
   @RequestMapping("/webCallBack")
   @ResponseBody
@@ -47,7 +50,7 @@ public class PaypalController extends BaseResultController {
       logger.info("[paypal回调] payment"+payment.toJSON());
       if(payment.getState().equals("approved")){
         TradeOrder tradeOrder = tradeOrderservice.getByThirdTradeNum(paymentId,ThirdPayEnum.PAY_PAL);
-        super.complateOrder(tradeOrder);
+        super.completeOrder(tradeOrder);
         return "success";
       }
     } catch (PayPalRESTException e) {

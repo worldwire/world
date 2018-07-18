@@ -1,54 +1,42 @@
 package com.spring.worldwire.controller.pay;
 
-import com.spring.worldwire.enums.PayStatusEnum;
-import com.spring.worldwire.enums.ThirdPayEnum;
+import com.spring.worldwire.manager.PayManager;
 import com.spring.worldwire.model.TradeOrder;
-import com.spring.worldwire.service.TradeOrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Date;
-
 /**
  * 处理公共的业务逻辑区域
  */
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class BaseResultController {
-  private static Logger logger = LoggerFactory.getLogger(BaseResultController.class);
-  @Autowired
-  TradeOrderService tradeOrderservice;
+    private static Logger logger = LoggerFactory.getLogger(BaseResultController.class);
 
-  void complateOrder(TradeOrder tradeOrder){
+    @Autowired
+    private PayManager payManager;
 
-    tradeOrder.setStatus(PayStatusEnum.SUCCESS);
-    tradeOrder.setSuccessTime(new Date());
-    logger.info("[支付完成] 查找数据修改状态 orderNum={}",tradeOrder.getOrderNum());
-    int i = tradeOrderservice.updateByPrimaryKeySelective(tradeOrder);
-    if(i>0){
-      logger.info("[支付完成] 支付完成更新数据库 orderNum = {}" ,tradeOrder.getOrderNum());
-      complateOrder(tradeOrder.getOrderNum(),null,tradeOrder.getThirdType());
+
+    void completeOrder(TradeOrder tradeOrder) {
+
+        payManager.completeOrder(tradeOrder);
+
     }
-  }
-
-  //todo 执行支付之后的逻辑
-  void complateOrder(String thirdOrderNum,String orderNum,ThirdPayEnum thirdPayEnum){
-
-  }
 
 
-  String notifyOrder(){
+    String notifyOrder() {
 
 
-    return "index";
-  }
+        return "index";
+    }
 
-  String cancel(){
-    return "cancel";
-  }
+    String cancel() {
+        return "cancel";
+    }
 
 
-  String saveThirdPay(){
-    return "";
-  }
+    String saveThirdPay() {
+        return "";
+    }
 
 }

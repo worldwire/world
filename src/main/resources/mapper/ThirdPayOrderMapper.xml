@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spring.worldwire.dao.ThirdPayOrder">
+    <resultMap id="BaseResultMap" type="com.spring.worldwire.model.ThirdPayOrder">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="foreign_id" property="foreignId" jdbcType="BIGINT"/>
+        <result column="payment_no" property="paymentNo" jdbcType="VARCHAR"/>
+        <result column="amount" property="amount" jdbcType="DECIMAL"/>
+        <result column="product_type" property="productType"
+                typeHandler="com.spring.worldwire.extent.NumericEnumHandler"
+                javaType="com.spring.worldwire.enums.ProductTypeEnum"/>
+        <result column="pay_status" property="payStatus" typeHandler="com.spring.worldwire.extent.NumericEnumHandler"
+                javaType="com.spring.worldwire.enums.PayStatusEnum"/>
+        <result column="third_type" property="thirdType" typeHandler="com.spring.worldwire.extent.NumericEnumHandler"
+                javaType="com.spring.worldwire.enums.ThirdPayEnum"/>
+        <result column="currency" property="currency" jdbcType="VARCHAR"
+                typeHandler="com.spring.worldwire.extent.NumericEnumHandler"
+                javaType="com.spring.worldwire.enums.CurrencyEnum"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, user_id, foreign_id, payment_no, third_type, product_type, amount, currency, pay_status, create_time,
+        update_time
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from third_pay_order
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from third_pay_order
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.spring.worldwire.model.ThirdPayOrder" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into third_pay_order
+        (id, user_id, foreign_id, payment_no
+        , third_type, product_type
+        , amount, currency, pay_status
+        , create_time, update_time)
+        values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{foreignId,jdbcType=BIGINT},
+        #{paymentNo,jdbcType=VARCHAR},
+        #{thirdType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},#{productType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+        #{amount,jdbcType=DECIMAL},
+        #{currency,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},#{payStatus,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+        #{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.spring.worldwire.model.ThirdPayOrder">
+        update third_pay_order
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="foreignId != null">
+                foreign_id = #{foreignId,jdbcType=BIGINT},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="paymentNo != null">
+                payment_no = #{paymentNo,jdbcType=VARCHAR},
+            </if>
+            <if test="thirdType != null">
+                third_type = #{thirdType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="currency != null">
+                currency = #{currency,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+            </if>
+            <if test="pay_status != null">
+                pay_status = #{payStatus,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.spring.worldwire.model.ThirdPayOrder">
+        update third_pay_order
+        set user_id = #{userId,jdbcType=BIGINT},
+        foreign_id = #{foreignId,jdbcType=BIGINT},
+        payment_no = #{paymentNo,jdbcType=VARCHAR},
+        product_type = #{productType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+        third_type = #{thirdType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+        amount = #{amount,jdbcType=DECIMAL},
+        currency = #{currency,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+        pay_status = #{payStatus,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="successByOrderNum" parameterType="com.spring.worldwire.model.ThirdPayOrder">
+        update third_pay_order
+        set
+        third_type = #{thirdType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+        pay_status = #{payStatus,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        where paymentNo = #{paymentNo,jdbcType=VARCHAR} and pay_status = 0
+    </update>
+
+</mapper>

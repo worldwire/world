@@ -21,8 +21,8 @@
 			</div>
 			<div class="tip"><span>3</span>选择支付方式</div>
 			<div class="money-type" id="thirdPay">
-				<a href="###" id="ALIPAY" name="ALIPAY" class="hv"><img src="/images/wx.png" width="30" style="vertical-align: -6px">微信支付</a>
-				<a href="###" id="WEI_CHAT" name="WEI_CHAT" class="hv"><img src="/images/zfb.png" width="30" style="vertical-align: -7px;">支付宝支付</a>
+				<a href="###" id="WEI_CHAT" name="WEI_CHAT" class="hv"><img src="/images/wx.png" width="30" style="vertical-align: -6px">微信支付</a>
+				<a href="###" id="ALIPAY" name="ALIPAY" class="hv"><img src="/images/zfb.png" width="30" style="vertical-align: -7px;">支付宝支付</a>
 				<a href="###" id="PAY_PAL" name="PAY_PAL" class="hv"><img src="/images/paypal.jpg" width="150" height="50"></a>
 			</div>
 			<hr/>
@@ -156,8 +156,10 @@
         })
 
         	function payRecharge(){
-				if(thirdPayType!=0)
-				location.href='/pay/payRecharge?id='+productId+'&payCode='+thirdPayType;
-				alert('请选择支付方式！');
+				if(thirdPayType!=0){
+					window.open('/pay/payRecharge?id='+productId+'&payCode='+thirdPayType);
+				}else{
+				    alert('请选择支付方式！');
+				}
 			}
     </script>
