@@ -18,10 +18,15 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
         return new UserInterceptor();
     }
 
+    @Bean
+    public HandlerInterceptor getLoginHandlerInterceptor(){
+        return new LoginInterceptor();
+    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(getHandlerInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(getLoginHandlerInterceptor()).addPathPatterns("**/lc/**");
         super.addInterceptors(registry);
     }
 }

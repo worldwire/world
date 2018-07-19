@@ -1,6 +1,7 @@
 package com.spring.worldwire.controller.pc;
 
 import com.alibaba.fastjson.JSONObject;
+import com.spring.worldwire.constants.Constants;
 import com.spring.worldwire.enums.StatusCodeEnum;
 import com.spring.worldwire.manager.LoginManager;
 import com.spring.worldwire.manager.ProductReuestManager;
@@ -105,11 +106,17 @@ public class LoginController {
      */
     @RequestMapping("/showContracts")
     @ResponseBody
-    public String showContracts(Long userId, Long productRequestId) {
+    public String showContracts(Long productRequestId,HttpServletRequest request) {
+
+        Object userId = request.getAttribute(Constants.USER_ID_SESSION);
+        if (Objects.isNull(userId)) {
+            return "login";
+        }
+
         if (Objects.isNull(userId) || Objects.isNull(productRequestId)) {
             return "error";
         }
-        UserInfo userInfo = productReuestManager.viewRequestContract(userId, productRequestId);
+        UserInfo userInfo = productReuestManager.viewRequestContract(Long.parseLong(userId.toString()), productRequestId);
         if (Objects.isNull(userInfo)) {
             return null;
         }

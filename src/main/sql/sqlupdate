@@ -24,3 +24,5 @@ CREATE TABLE `request_views` (
 alter TABLE third_pay_order CHANGE pay_type product_type  INT;
 alter table third_pay_order DROP COLUMN order_id;
 alter table third_pay_order ADD foreign_id INT(11) Default 0 COMMENT '翻译需求的ID，只有当是翻译的时候有值，查看为空,如果是其他的 也会有其他的id';
+
+alter table third_pay_order add column pay_detail varchar(255) comment '支付描述' after third_type;

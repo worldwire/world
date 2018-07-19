@@ -6,6 +6,7 @@ import com.spring.worldwire.query.ProductRequestQuery;
 import java.util.List;
 
 public interface ProductRequestService {
+
     ProductRequest findById(Long id);
 
     int save(ProductRequest productRequest);

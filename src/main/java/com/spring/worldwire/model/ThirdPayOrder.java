@@ -14,7 +14,7 @@ import java.util.Date;
  * @Date create in 21:39 2018/7/18
  */
 @SuppressWarnings("unused")
-public class ThirdPayOrder  implements Serializable {
+public class ThirdPayOrder implements Serializable {
 
     private Long id;
     private Long userId;
@@ -27,6 +27,7 @@ public class ThirdPayOrder  implements Serializable {
     private Long foreignId;
     private Date createTime;
     private Date updateTime;
+    private String payDetail;
 
     public Long getId() {
         return id;
@@ -114,5 +115,13 @@ public class ThirdPayOrder  implements Serializable {
 
     public void setForeignId(Long foreignId) {
         this.foreignId = foreignId;
+    }
+
+    public String getPayDetail() {
+        return payDetail;
+    }
+
+    public void setPayDetail(String payDetail) {
+        this.payDetail = payDetail;
     }
 }

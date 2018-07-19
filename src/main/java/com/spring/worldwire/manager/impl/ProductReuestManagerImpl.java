@@ -2,10 +2,11 @@ package com.spring.worldwire.manager.impl;
 
 import com.spring.worldwire.constants.Constants;
 import com.spring.worldwire.manager.ProductReuestManager;
+import com.spring.worldwire.model.ProductRequest;
 import com.spring.worldwire.model.RequestViews;
 import com.spring.worldwire.model.UserAccount;
 import com.spring.worldwire.model.UserInfo;
-import com.spring.worldwire.service.LoginInfoService;
+import com.spring.worldwire.service.ProductRequestService;
 import com.spring.worldwire.service.RequestViewsService;
 import com.spring.worldwire.service.UserAccountService;
 import com.spring.worldwire.service.UserInfoService;
@@ -34,21 +35,25 @@ public class ProductReuestManagerImpl implements ProductReuestManager {
     private UserAccountService userAccountService;
     @Autowired
     private RequestViewsService requestViewsService;
+    @Autowired
+    private ProductRequestService productRequestService;
 
     @Override
     public UserInfo viewRequestContract(Long userId, Long productRequestId) {
 
+        ProductRequest request = productRequestService.findById(productRequestId);
+
         RequestViews views = requestViewsService.selectByUserId(userId);
         //已经查看过该需求，直接显示即可
         if (Objects.nonNull(views)) {
-            return userInfoService.selectById(userId);
+            return userInfoService.selectById(request.getUserId());
         }
 
         // 未查看过需求且当天免费查看尚未使用
         boolean noFreeView = redisUtils.isCacheExists(Constants.CACHE_FREE_LOOK_UP + userId);
         if (!noFreeView) {
             processFreeViews(userId, productRequestId);
-            return userInfoService.selectById(userId);
+            return userInfoService.selectById(request.getUserId());
         }
 
         // 未查看过需求且免费查看已经被使用
@@ -59,7 +64,8 @@ public class ProductReuestManagerImpl implements ProductReuestManager {
 
         // 有付费查看次数，次数减一，并增加查看记录
         processChargeViews(userId, productRequestId, userAccount);
-        return userInfoService.selectById(userId);
+
+        return userInfoService.selectById(request.getUserId());
 
     }
 

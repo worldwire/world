@@ -1,6 +1,10 @@
 package com.spring.worldwire.dao;
 
 import com.spring.worldwire.model.ThirdPayOrder;
+import com.spring.worldwire.query.ThirdPayOrderQuery;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @Auther pg
@@ -11,15 +15,13 @@ public interface ThirdPayOrderDao {
 
     int insert(ThirdPayOrder record);
 
-    int insertSelective(ThirdPayOrder record);
-
     ThirdPayOrder selectByPrimaryKey(Long id);
 
     int updateByPrimaryKeySelective(ThirdPayOrder record);
 
     int updateByPrimaryKey(ThirdPayOrder record);
 
-    ThirdPayOrder selectByUserId(Long userId);
+    List<ThirdPayOrder> selectByUserId(@Param("query") ThirdPayOrderQuery query);
 
     int successByOrderNum(ThirdPayOrder thirdPayOrder);
 }

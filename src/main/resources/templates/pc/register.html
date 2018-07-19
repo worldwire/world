@@ -58,29 +58,6 @@
                 ,laydate = layui.laydate
                 ,$ = layui.jquery;
 
-             $(".language-btns").click(function(){
-                if(!$(".span-div").is(':hidden')){//如果当前不隐藏
-                    $('.span-div').hide();//就隐藏div
-                    $(".language-icon").html("&#xe61a;")
-                }else{//否则
-					$('.userbox').hide();//就隐藏div
-					$(".user-icon").html("&#xe61a;")
-                    $('.span-div').show();//那么就显示div
-                    $(".language-icon").html("&#xe619;")
-                }
-            })
-
-            $(".user-btn").click(function(){
-                if(!$(".userbox").is(':hidden')){//如果当前不隐藏
-                    $('.userbox').hide();//就隐藏div
-                    $(".user-icon").html("&#xe61a;")
-                }else{//否则
- 					$('.span-div').hide();//就隐藏div
- 					$(".language-icon").html("&#xe61a;")
-                    $('.userbox').show();//那么就显示div
-                    $(".user-icon").html("&#xe619;")
-                }
-            });
 
 
 

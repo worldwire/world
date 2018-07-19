@@ -21,9 +21,7 @@ public class RequestController {
     private ProductRequestService productRequestService;
 
     @RequestMapping("/list/{userType}/{requestType}/{pageSize}/{pageNo}.html")
-    public String productRequestList(Model model, @PathVariable int userType, @PathVariable int requestType, @PathVariable int pageSize, @PathVariable int pageNo) {
-        {
-
+    public String productRequestList(Model model, @PathVariable int userType, @PathVariable int requestType, @PathVariable int pageSize, @PathVariable int pageNo) {{
             ProductRequestQuery personalQuery = new ProductRequestQuery();
             personalQuery.setPageSize(pageSize);
             personalQuery.setPageNo(pageNo);
@@ -92,5 +90,10 @@ public class RequestController {
         productRequestService.save(productRequest);
 
         return "pc/releaseRequest";
+    }
+
+    @RequestMapping("/history")
+    public String releaseHistory() {
+        return "pc/releaseHistory";
     }
 }

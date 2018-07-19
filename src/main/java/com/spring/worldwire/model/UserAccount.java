@@ -27,6 +27,8 @@ public class UserAccount implements Serializable{
 
     private Integer oldVersion;
 
+    private boolean addFreeTranslate;
+
     public Long getId() {
         return id;
     }
@@ -105,6 +107,14 @@ public class UserAccount implements Serializable{
 
     public void setOldVersion(Integer oldVersion) {
         this.oldVersion = oldVersion;
+    }
+
+    public boolean isAddFreeTranslate() {
+        return addFreeTranslate;
+    }
+
+    public void setAddFreeTranslate(boolean addFreeTranslate) {
+        this.addFreeTranslate = addFreeTranslate;
     }
 
     @Override
