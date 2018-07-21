@@ -83,6 +83,15 @@ public class LoginManagerImpl implements LoginManager {
         return userInfo;
     }
 
+    @Override
+    public void logout(HttpServletResponse response) {
+
+        Cookie userIdCookie = new Cookie(Constants.USER_COOKIES_NAME, null);
+        userIdCookie.setPath("/");
+        userIdCookie.setMaxAge(0);
+        response.addCookie(userIdCookie);
+    }
+
     /**
      * 登陆之后处理cookie
      *

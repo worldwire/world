@@ -4,6 +4,12 @@
 
 <urlrewrite>
 
+    <!-- 首页 -->
+    <rule>
+        <from>^/index</from>
+        <to>/</to>
+    </rule>
+
     <!-- 需求大厅 -->
     <rule>
         <from>^/request.html</from>

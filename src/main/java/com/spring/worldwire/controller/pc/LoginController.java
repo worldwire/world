@@ -74,6 +74,14 @@ public class LoginController {
         return "pc/blank";
     }
 
+    @RequestMapping("/logout")
+    public String logout(HttpServletResponse response) {
+
+        loginManager.logout(response);
+
+        return "redirect:/";
+    }
+
     /**
      * 异步登陆
      *
@@ -100,7 +108,6 @@ public class LoginController {
     /**
      * 查看联系方式
      *
-     * @param userId
      * @param productRequestId
      * @return
      */

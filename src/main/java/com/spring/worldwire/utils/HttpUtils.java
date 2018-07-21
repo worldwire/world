@@ -1,5 +1,6 @@
 package com.spring.worldwire.utils;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.Cookie;
@@ -16,6 +17,9 @@ public class HttpUtils {
             return null;
         }
         Cookie[] cookies = request.getCookies();
+        if(ArrayUtils.isEmpty(cookies)){
+            return null;
+        }
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals(key)) {
                 return cookie.getValue();

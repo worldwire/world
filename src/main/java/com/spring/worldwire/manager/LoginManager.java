@@ -15,4 +15,6 @@ public interface LoginManager {
     public UserInfo login(String email, String password, HttpServletResponse response);
 
     public UserInfo thirdLogin(String thirdKey, Integer thirdType, HttpServletResponse response);
+
+    public void logout(HttpServletResponse response);
 }

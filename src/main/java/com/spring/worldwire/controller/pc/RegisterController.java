@@ -1,7 +1,7 @@
 package com.spring.worldwire.controller.pc;
 
 import com.spring.worldwire.constants.Constants;
-import com.spring.worldwire.model.LoginInfo;
+import com.spring.worldwire.manager.RegisterManager;
 import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.service.LoginInfoService;
 import com.spring.worldwire.service.UserInfoService;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
 
 @SuppressWarnings("unused")
 @Controller
@@ -24,6 +23,8 @@ public class RegisterController {
     private LoginInfoService loginInfoService;
     @Autowired
     private UserInfoService userInfoService;
+    @Autowired
+    private RegisterManager registerManager;
 
     public RegisterController(LoginInfoService loginInfoService, UserInfoService userInfoService) {
         this.loginInfoService = loginInfoService;
@@ -38,15 +39,9 @@ public class RegisterController {
     }
 
     @RequestMapping("/save")
-    public String save(LoginInfo loginInfo) {
+    public String save(String userName, String email, String password) {
 
-        loginInfo.setCreateTime(new Date());
-        loginInfo.setStatus((byte) 1);
-        loginInfoService.insert(loginInfo);
-        UserInfo userInfo = new UserInfo();
-        userInfo.setLoginId(loginInfo.getId());
-
-        userInfoService.insert(userInfo);
+        registerManager.register(userName, email, password);
 
         return "pc/login";
     }

@@ -12,7 +12,7 @@
             </div>
         </div>
 
-        <div class="layui-btn layui-btn-sm fabu-btn">发&nbsp;&nbsp;布</div>
+        <div class="layui-btn layui-btn-sm fabu-btn" onclick="redirectClick('/head/lc/publish')">发&nbsp;&nbsp;布</div>
         <div class="btns">
 					<span class="language-btns">
 						<#if lan?? && lan== 'en'>
@@ -40,12 +40,10 @@
                             <img src="${userInfo.showImg!'/images/1/10.png'}"/>
                             <span class="userbox-usename">${userInfo.nickName!''}</span>
                             <span class="userbox-usertype">
-                                <#if loginInfo??>
-                                    <#if loginInfo.type && loginInfo.type == 2>
-                                        企业用户
-                                    <#else>
-                                        个人用户
-                                    </#if>
+                                <#if loginInfo?? && loginInfo.type && loginInfo.type == 2>
+                                    企业用户
+                                <#else>
+                                    个人用户
                                 </#if>
                             </span>
                         </div>
@@ -62,7 +60,7 @@
             <#else>
                 <span class="login-btn" onclick="redirectClick('/login/')">登录</span>
                 <span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-                <span class="register-btn">注册</span>
+                <span class="register-btn" onclick="redirectClick('/register/')">注册</span>
             </#if>
 
         </div>

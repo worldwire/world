@@ -2,8 +2,10 @@ package com.spring.worldwire.companent;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
@@ -26,7 +28,15 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(getHandlerInterceptor()).addPathPatterns("/**");
-        registry.addInterceptor(getLoginHandlerInterceptor()).addPathPatterns("**/lc/**");
+        registry.addInterceptor(getLoginHandlerInterceptor()).addPathPatterns("/**/lc/**");
         super.addInterceptors(registry);
     }
+
+//    @Override
+//    public void addViewControllers(ViewControllerRegistry registry) {
+//        registry.addViewController("/").setViewName("forward:/index.html");
+//        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+//        super.addViewControllers(registry);
+//    }
+
 }

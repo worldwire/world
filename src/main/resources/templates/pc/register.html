@@ -13,7 +13,7 @@
 <div class="container">
     <div class="title">注册</div>
     <div class="main">
-        <form class="layui-form layui-form-pane" method="post" action="/register/save">
+        <form class="layui-form layui-form-pane" method="post" action="/register/save" onsubmit="checkParam()">
             <div class="layui-form-item">
                 <label class="layui-form-label"><i class="iconfont">&#xe757;</i></label>
                 <div class="layui-input-block">
@@ -58,8 +58,18 @@
                 ,laydate = layui.laydate
                 ,$ = layui.jquery;
 
-
-
+            function checkParam() {
+                var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
+                if(reg.test($("[name='email']").val())){
+                    alert("邮箱格式不正确");
+                    return false;
+                }
+                if($("[name=password]").val().length < 6){
+                    alert("密码位数太少！");
+                    return false;
+                }
+            }
+            return true;
 
         })
     </script>
