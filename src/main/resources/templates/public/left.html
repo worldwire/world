@@ -1,41 +1,71 @@
-
 <link rel="stylesheet" type="text/css" href="/css/left_style.css"/>
 
   <div class="left-nav">
-    <div class="left-userhead">
-      <img src="/images/1/10.png"/>
-    </div>
-    <div class="left-username">
-      Manty
-    </div>
-    <!--发布需求-->
-    <div class="left-demand left-btn-style" style="margin-top:20px ;">
-      <i class="iconfont">&#xe75e;</i>
-      <span class="" onclick="redirectClick('/request/release')">发布需求</span>
-    </div>
-    <!--发布历史-->
-    <div class="left-history left-btn-style">
-      <i class="iconfont">&#xe75f;</i>
-      <span class="" onclick="redirectClick('/request/history')">发布历史</span>
-    </div>
-    <!--交易记录-->
-    <div class="left-record left-btn-style">
-      <i class="iconfont">&#xe762;</i>
-      <span class="" onclick="redirectClick('/')">交易记录</span>
-    </div>
-    <!--我的资料-->
-    <div class="left-data left-btn-style">
-      <i class="iconfont">&#xe760;</i>
-      <span class="">我的资料</span>
-    </div>
-    <!--修改密码-->
-    <div class="left-password left-btn-style">
-      <i class="iconfont">&#xe762;</i>
-      <span class="" onclick="redirectClick('/usercenter/passwd/edit')">修改密码</span>
-    </div>
-    <!--签到-->
-    <div class="left-sign">
-      <span class="left-sign-span">已连续签到2天</span>
-      <div class="left-sign-btn">签到</div>
-    </div>
+      <div class="left-userhead">
+          <img src="/images/1/10.png"/>
+      </div>
+      <div class="left-username">
+          Manty
+      </div>
+      <!--发布需求-->
+      <div class="left-demand left-btn-style" style="margin-top:20px ;">
+          <i class="iconfont">&#xe75e;</i>
+          <span class="" onclick="redirectClick('/request/release')">发布需求</span>
+      </div>
+      <!--发布历史-->
+      <div class="left-history left-btn-style">
+          <i class="iconfont">&#xe75f;</i>
+          <span class="" onclick="redirectClick('/request/history')">发布历史</span>
+      </div>
+      <!--交易记录-->
+      <div class="left-record left-btn-style">
+          <i class="iconfont">&#xe762;</i>
+          <span class="" onclick="redirectClick('/usercenter/')">交易记录</span>
+      </div>
+      <!--我的资料-->
+      <div class="left-data left-btn-style">
+          <i class="iconfont">&#xe760;</i>
+          <span class="">我的资料</span>
+      </div>
+      <!--修改密码-->
+      <div class="left-password left-btn-style">
+          <i class="iconfont">&#xe762;</i>
+          <span class="" onclick="redirectClick('/usercenter/passwd/edit')">修改密码</span>
+      </div>
+      <!--签到-->
+      <div class="left-sign">
+          <span class="left-sign-span">已连续签到<#if account??>${account.signNum!'0'}<#else>0</#if>天</span>
+          <div class="left-sign-btn">签到</div>
+      </div>
   </div>
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'carousel'], function () {
+        var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate
+                , carousel = layui.carousel
+                , $ = layui.jquery;
+        $(".left-sign-btn").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "/usercenter/sign",
+                data: '',
+                dataType: "json",
+                success: function (data) {
+                    if (data == null) {
+                        alert("签到失败");
+                        return false;
+                    }
+                    alert("签到成功");
+                    $(".left-sign-span").text("已连续签到"+($(".left-sign-span").val() + 1)+"天");
+
+                },
+                error: function () {
+                    alert("签到失败，您今天已经签到或者登录超时");
+                }
+            });
+        });
+    });
+
+</script>

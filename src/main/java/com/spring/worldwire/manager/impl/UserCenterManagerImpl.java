@@ -64,9 +64,9 @@ public class UserCenterManagerImpl implements UserCenterManager {
             //连续签到7天增加一次免费翻译次数,但只有一次
             account.setFreeTranslate(account.getFreeTranslate() + 1);
             account.setAddFreeTranslate(true);
-            userAccountService.updateUserAccount(account);
             //todo 这里没有增加交易记录，以后如果有需要可以加上
         }
+        userAccountService.updateUserAccount(account);
         redisUtils.set(Constants.CACHE_SIGN_KEY + userId, true, DateUtil.getTimeInterval(new Date()));//存入redis
         return account;
     }

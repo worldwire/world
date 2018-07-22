@@ -20,8 +20,8 @@
 
 					<div class="contentbox-list" style="margin-top: 0px;">
 						<div class="list-tt">
-							<span class="list-tt-title">${productRequest.title}</span>
-							<span class="list-tt-time">发布时间：${productRequest.createTime?date("yyyy-MM-dd")}</span>
+							<span class="list-tt-title">${productRequest.title!''}</span>
+							<span class="list-tt-time">发布时间：<#if productRequest.createTime??>${productRequest.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span>
 						</div>
 						<div class="list-cont">
 							${productRequest.content?substring(30)}
@@ -29,7 +29,7 @@
 						<div class="list-btn">
 							<div class="list-btn-state">
 								<div class="list-btn-d"></div>
-								<span class="list-btn-state-span">${productRequest.status.name}</span>
+								<span class="list-btn-state-span"><#if productRequest.status??>${productRequest.status.getName()!''}</#if></span>
 							</div>
 							<div class="list-btn-btns">
 								<div class="list-btn-btns-style list-btn-btns-translation">翻译</div>
@@ -101,30 +101,6 @@
 			layer.closeAll()
 			layer.msg("这里是翻译英文按钮")
 		});
-
-		 $(".language-btns").click(function(){
-                if(!$(".span-div").is(':hidden')){//如果当前不隐藏
-                    $('.span-div').hide();//就隐藏div
-                    $(".language-icon").html("&#xe61a;")
-                }else{//否则
-					$('.userbox').hide();//就隐藏div
-					$(".user-icon").html("&#xe61a;")
-                    $('.span-div').show();//那么就显示div
-                    $(".language-icon").html("&#xe619;")
-                }
-            })
-
-            $(".user-btn").click(function(){
-                if(!$(".userbox").is(':hidden')){//如果当前不隐藏
-                    $('.userbox').hide();//就隐藏div
-                    $(".user-icon").html("&#xe61a;")
-                }else{//否则
- 					$('.span-div').hide();//就隐藏div
- 					$(".language-icon").html("&#xe61a;")
-                    $('.userbox').show();//那么就显示div
-                    $(".user-icon").html("&#xe619;")
-                }
-            });
 
 
 })

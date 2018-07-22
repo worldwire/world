@@ -1,12 +1,16 @@
 package com.spring.worldwire.controller.pc;
 
+import com.alibaba.fastjson.JSONObject;
 import com.spring.worldwire.constants.Constants;
 import com.spring.worldwire.enums.StatusCodeEnum;
 import com.spring.worldwire.manager.UserCenterManager;
 import com.spring.worldwire.model.LoginInfo;
+import com.spring.worldwire.model.TradeOrder;
 import com.spring.worldwire.model.UserAccount;
+import com.spring.worldwire.query.TradeOrderQuery;
 import com.spring.worldwire.result.ResponseResult;
 import com.spring.worldwire.service.LoginInfoService;
+import com.spring.worldwire.service.TradeOrderService;
 import com.spring.worldwire.service.UserAccountService;
 import com.spring.worldwire.utils.HttpUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -32,13 +37,13 @@ import java.util.Objects;
 public class UserCenterController {
 
     @Autowired
-    private UserCenterManager userCentrManager;
-    @Autowired
     private LoginInfoService loginInfoService;
     @Autowired
     private UserAccountService userAccountService;
     @Autowired
     private UserCenterManager userCenterManager;
+    @Autowired
+    private TradeOrderService tradeOrderService;
 
     @RequestMapping("/")
     public String toUserCenter(HttpServletRequest request, Model model) {
@@ -47,7 +52,7 @@ public class UserCenterController {
         if (Objects.isNull(userId) || !NumberUtils.isNumber(userId.toString())) {
             return "redirect:/login/";
         }
-        Map<String, Object> map = userCentrManager.getUserDetailInfo((Long) userId);
+        Map<String, Object> map = userCenterManager.getUserDetailInfo((Long) userId);
         model.addAllAttributes(map);
         return "pc/userCenter";
     }
@@ -100,5 +105,6 @@ public class UserCenterController {
         }
         return new ResponseResult(null, StatusCodeEnum.FAIL, "修改失败");
     }
+
 
 }
