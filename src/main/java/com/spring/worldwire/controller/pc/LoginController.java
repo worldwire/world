@@ -69,7 +69,10 @@ public class LoginController {
             return "pc/blank";
         }
         if (userInfo.getType() == null) {
-            return "pc/registerAfter";
+            return "pc/fillType";
+        }
+        if (userInfo.getIsForeign() == null) {
+            return "pc/fillForeign";
         }
         return "pc/blank";
     }

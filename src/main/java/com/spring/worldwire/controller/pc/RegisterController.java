@@ -1,13 +1,16 @@
 package com.spring.worldwire.controller.pc;
 
 import com.spring.worldwire.constants.Constants;
+import com.spring.worldwire.enums.UserTypeEnum;
 import com.spring.worldwire.manager.RegisterManager;
+import com.spring.worldwire.manager.RegisterUserInfoManager;
 import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.service.LoginInfoService;
 import com.spring.worldwire.service.UserInfoService;
 import com.spring.worldwire.utils.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
@@ -22,14 +25,9 @@ public class RegisterController {
     @Autowired
     private LoginInfoService loginInfoService;
     @Autowired
-    private UserInfoService userInfoService;
-    @Autowired
     private RegisterManager registerManager;
-
-    public RegisterController(LoginInfoService loginInfoService, UserInfoService userInfoService) {
-        this.loginInfoService = loginInfoService;
-        this.userInfoService = userInfoService;
-    }
+    @Autowired
+    private RegisterUserInfoManager registerUserInfoManager;
 
 
     @RequestMapping("/")
@@ -46,30 +44,28 @@ public class RegisterController {
         return "pc/login";
     }
 
-    @RequestMapping("/company")
-    public String company(HttpServletRequest request, HttpServletResponse response) {
-        saveUser(request, response, 0);
-        return "pc/blank";
+    @RequestMapping("fillType")
+    public String fillType(){
+        return "pc/fillType";
     }
 
-
-    @RequestMapping("/person")
-    public String person(HttpServletRequest request, HttpServletResponse response) {
-        saveUser(request, response, 1);
-        return "pc/blank";
+    @RequestMapping("fillForeign")
+    public String fillForeign(){
+        return "pc/fillForeign";
     }
 
-    private void saveUser(HttpServletRequest request, HttpServletResponse response, int i) {
+    @RequestMapping("/completeType/{type}")
+    public String company(HttpServletRequest request, HttpServletResponse response,@PathVariable("type") int type) {
+        UserTypeEnum nameByCode = UserTypeEnum.getNameByCode(type);
+        registerUserInfoManager.registerUserType(request, response, nameByCode);
+        return "pc/fillForeign";
+    }
+
+    @RequestMapping("/completeForeign/{type}")
+    public String completeForeign(HttpServletRequest request, HttpServletResponse response,@PathVariable("type")int type) {
         String userIdStr = request.getAttribute(Constants.USER_ID_SESSION).toString();
-        UserInfo userInfo = new UserInfo();
-        userInfo.setId(Long.parseLong(userIdStr));
-        userInfo.setType(i);
-        userInfoService.update(userInfo);
-
-        String encruptedCookie = Base64.encode(userInfo.cookiesValue().getBytes());
-        Cookie userIdCookie = new Cookie(Constants.USER_COOKIES_NAME, encruptedCookie);
-        userIdCookie.setPath("/");
-        userIdCookie.setMaxAge(3600);
-        response.addCookie(userIdCookie);
+        registerUserInfoManager.registerUserForeign(Long.parseLong(userIdStr),type);
+        return "pc/blank";
     }
+
 }

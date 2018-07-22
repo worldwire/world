@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+
+    <#include "../public/common.html" encoding="utf-8">
+    <link rel="stylesheet" href="/css/register.css">
+</head>
+<body>
+<#include "../public/head.html" encoding="utf-8">
+
+<div class="container">
+    <div class="title">注册</div>
+    <div class="main">
+        <form class="layui-form layui-form-pane" action="/register/completeForeign/1">
+            <div class="btnbox">
+                <button class="layui-btn nextBtn">我是中国人</button>
+            </div>
+        </form>
+
+        <form class="layui-form layui-form-pane" action="/register/completeForeign/2">
+            <div class="btnbox">
+                <button class="layui-btn nextBtn">I am a non Chinese</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <#include "../public/foot.html" encoding="utf-8">
+</body>
+<script>
+        layui.use(['form', 'layedit', 'laydate'], function(){
+            var form = layui.form
+                ,layer = layui.layer
+                ,layedit = layui.layedit
+                ,laydate = layui.laydate
+                ,$ = layui.jquery;
+
+
+        })
+    </script>
+</html>

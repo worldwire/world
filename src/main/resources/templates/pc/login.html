@@ -82,17 +82,19 @@
             , $ = layui.jquery;
         var lastUrl = document.referrer;
         $(".nextBtn").click(function () {
+            var em = $("[name=email]").val();
+            var psw = $("[name=password]").val();
             $.ajax({
                 type: "POST",
                 url: "/login/ajaxLogin",
-                data: {email:$("[name=email]").val(), password:$("[name=password]").val()},
+                data: {email:em, password:psw},
                 dataType: "json",
                 success: function (data) {
                     if(data == null){
                         $('.msg').show();
                         return false;
                     }
-                    window.location.href = "/"
+                    window.location.href = "/login/login?email="+em+"&password="+psw;
                 },
                 error: function () {
                     
