@@ -20,6 +20,7 @@ public class ThirdPayOrder implements Serializable {
     private Long userId;
     private String paymentNo;
     private BigDecimal amount;
+    private Long productId;
     private ProductTypeEnum productType;
     private ThirdPayEnum thirdType;
     private CurrencyEnum currency;
@@ -59,6 +60,14 @@ public class ThirdPayOrder implements Serializable {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
     public ProductTypeEnum getProductType() {

@@ -7,6 +7,7 @@
         <result column="foreign_id" property="foreignId" jdbcType="BIGINT"/>
         <result column="payment_no" property="paymentNo" jdbcType="VARCHAR"/>
         <result column="amount" property="amount" jdbcType="DECIMAL"/>
+        <result column="product_id" property="productId" jdbcType="BIGINT"/>
         <result column="product_type" property="productType"
                 typeHandler="com.spring.worldwire.extent.NumericEnumHandler"
                 javaType="com.spring.worldwire.enums.ProductTypeEnum"/>
@@ -22,7 +23,7 @@
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, user_id, foreign_id, payment_no, third_type, pay_detail,product_type, amount, currency, pay_status, create_time,
+        id, user_id, foreign_id, payment_no, third_type, pay_detail,product_id ,product_type, amount, currency, pay_status, create_time,
         update_time
     </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
@@ -48,12 +49,12 @@
             keyProperty="id">
         insert into third_pay_order
         (id, user_id, foreign_id, payment_no
-        , third_type, pay_detail, product_type
+        , third_type, pay_detail, product_id, product_type
         , amount, currency, pay_status
         , create_time, update_time)
         values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{foreignId,jdbcType=BIGINT},
         #{paymentNo,jdbcType=VARCHAR},
-        #{thirdType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},#{payDetail,jdbcType=VARCHAR}
+        #{thirdType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},#{payDetail,jdbcType=VARCHAR},#{productId,jdbcType=BIGINT},
         #{productType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},#{amount,jdbcType=DECIMAL},
         #{currency,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},#{payStatus,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
         #{createTime,jdbcType=TIMESTAMP},#{updateTime,jdbcType=TIMESTAMP})
@@ -121,5 +122,12 @@
         update_time = #{updateTime,jdbcType=TIMESTAMP},
         where paymentNo = #{paymentNo,jdbcType=VARCHAR} and pay_status = 0
     </update>
+
+    <select id="selectByOrderNum" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM third_pay_order WHERE payment_no = #{orderNum}
+
+    </select>
 
 </mapper>

@@ -27,6 +27,16 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public int updateUserAccount(UserAccount record) {
+        Integer version = record.getVersion();
+        updateByVersion(record, version);
         return userAccountDao.updateByPrimaryKeySelective(record);
+    }
+
+    private void updateByVersion(UserAccount record, Integer version) {
+        if(version==null){
+            throw new RuntimeException("you need a version recordId ="+record.getId());
+        }
+        record.setOldVersion(record.getVersion());
+        record.setVersion(record.getVersion()+1);
     }
 }

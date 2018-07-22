@@ -15,7 +15,7 @@ public class TradeOrder implements Serializable{
 
   private Integer id;
   private String orderNum;
-  private Integer userId;
+  private Long userId;
   private BigDecimal amount;
   private Integer total;
   private String tradeName;
@@ -33,7 +33,7 @@ public class TradeOrder implements Serializable{
   }
 
 
-  public TradeOrder(String orderNum, Integer userId, BigDecimal amount, String tradeDetail,ThirdPayEnum thirdType,CurrencyEnum currency) {
+  public TradeOrder(String orderNum, Long userId, BigDecimal amount, String tradeDetail,ThirdPayEnum thirdType,CurrencyEnum currency) {
     this.orderNum = orderNum;
     this.userId = userId;
     this.amount = amount;
@@ -74,11 +74,11 @@ public class TradeOrder implements Serializable{
     this.orderNum = orderNum;
   }
 
-  public Integer getUserId() {
+  public Long getUserId() {
     return userId;
   }
 
-  public void setUserId(Integer userId) {
+  public void setUserId(Long userId) {
     this.userId = userId;
   }
 

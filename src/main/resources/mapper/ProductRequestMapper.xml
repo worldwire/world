@@ -32,7 +32,7 @@
       <if test="query.userType != null and query.userType > 0">
         user_type = #{query.userType,jdbcType=INTEGER} and
       </if>
-      <if test="query.requestType != null and query.requestType > 0">
+      <if test="query.requestType != null">
         request_type = #{query.requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler} and
       </if>
       status = 1
@@ -82,7 +82,7 @@
       #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{linkedIn,jdbcType=VARCHAR},
       #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{languageId,jdbcType=BIGINT}, #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
-      #{languageLevel,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel},
+      #{languageLevel,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       #{userType,jdbcType=INTEGER},#{userId,jdbcType=BIGINT},#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.spring.worldwire.model.ProductRequest" >
@@ -172,7 +172,7 @@
         #{languageId,jdbcType=BIGINT},
       </if>
       <if test="status != null" >
-        #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}},
+        #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="userType != null" >
         #{userType,jdbcType=INTEGER},
@@ -222,7 +222,7 @@
         language_id = #{languageId,jdbcType=BIGINT},
       </if>
       <if test="status != null" >
-        status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}},
+        status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="userType != null" >
         user_type = #{userType,jdbcType=INTEGER},
@@ -253,12 +253,20 @@
       linkedIn = #{linkedIn,jdbcType=VARCHAR},
       language_type = #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       language_id = #{languageId,jdbcType=BIGINT},
-      status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}},
-      language_level = #{languageLevel,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel},
+      status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+      language_level = #{languageLevel,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       user_type = #{userType,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <update id="updateStatus" parameterType="com.spring.worldwire.model.ProductRequest" >
+    update product_request  set
+    status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+    update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
 </mapper>

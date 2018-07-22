@@ -24,4 +24,6 @@ public interface ThirdPayOrderDao {
     List<ThirdPayOrder> selectByUserId(@Param("query") ThirdPayOrderQuery query);
 
     int successByOrderNum(ThirdPayOrder thirdPayOrder);
+
+    ThirdPayOrder selectByOrderNum(String orderNum);
 }

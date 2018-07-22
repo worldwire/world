@@ -38,4 +38,9 @@ public class ThirdPayOrderServiceImpl implements ThirdPayOrderService {
     public List<ThirdPayOrder> selectByUserId(ThirdPayOrderQuery query) {
         return thirdPayOrderDao.selectByUserId(query);
     }
+
+    @Override
+    public ThirdPayOrder selectByOrderNum(String orderNum) {
+        return thirdPayOrderDao.selectByOrderNum(orderNum);
+    }
 }

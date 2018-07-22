@@ -1,12 +1,14 @@
 package com.spring.worldwire.enums;
 
+import com.spring.worldwire.extent.INumericEnum;
+
 /**
  * Desc: Desc
  * User: luxun
  * Date: 2018/5/21 16:59
  * To change this template use File | Settings | File and Code Templates | Includes | File Header.
  */
-public enum ThirdLoginTypeEnum {
+public enum ThirdLoginTypeEnum implements INumericEnum {
 
     LINKEDIN(1,"领英"),
     QQ(2,"qq"),
@@ -35,5 +37,10 @@ public enum ThirdLoginTypeEnum {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    @Override
+    public int getNumericValue() {
+        return code;
     }
 }

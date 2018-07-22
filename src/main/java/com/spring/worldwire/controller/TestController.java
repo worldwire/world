@@ -72,7 +72,7 @@ public class TestController {
 	@ResponseBody
 	public String payTest(String pay,int payCode,int currencyCode){
 
-		TradeOrder tradeOrder = new TradeOrder("123"+System.currentTimeMillis()/1000,10,new BigDecimal(pay),"test",ThirdPayEnum.getThirdPayByCode(payCode),CurrencyEnum.getCurrencyByCode(currencyCode));
+		TradeOrder tradeOrder = new TradeOrder("123"+System.currentTimeMillis()/1000,10L,new BigDecimal(pay),"test",ThirdPayEnum.getThirdPayByCode(payCode),CurrencyEnum.getCurrencyByCode(currencyCode));
 		String s = payService.doPayWay(tradeOrder);
 		System.out.println(s);
 		return s;
