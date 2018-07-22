@@ -1,5 +1,8 @@
 package com.spring.worldwire.controller;
 
+import com.spring.worldwire.constants.Constants;
+import com.spring.worldwire.enums.LanguageEnum;
+import com.spring.worldwire.enums.LevelEnum;
 import com.spring.worldwire.enums.StatusCodeEnum;
 import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.result.ResponseResult;
@@ -8,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by luxun on 2018/4/27.
  */
+@SuppressWarnings("unused")
 @Controller
 @RequestMapping("/info")
 public class UserInfoController {
@@ -26,11 +29,30 @@ public class UserInfoController {
         try{
             int status = userInfoService.insert(userInfo);
             if(status == 1){
-                return new ResponseResult(null,StatusCodeEnum.SUCCESS,"添加成功");
+                return new ResponseResult<>(null, StatusCodeEnum.SUCCESS, "添加成功");
             }
-            return new ResponseResult(null,StatusCodeEnum.FAIL,"添加返回码错误");
+            return new ResponseResult<>(null, StatusCodeEnum.FAIL, "添加返回码错误");
         }catch (Exception e){
-            return new ResponseResult(null,StatusCodeEnum.ERROR,"添加操作系统异常:");
+            return new ResponseResult<>(null, StatusCodeEnum.ERROR, "添加操作系统异常:");
         }
     }
+
+
+    @RequestMapping("detail")
+    public String detail(){
+        return "";
+    }
+
+    @RequestMapping("modify")
+    public String modify(HttpServletRequest request){
+        String userIdStr = request.getAttribute(Constants.USER_ID_SESSION).toString();
+        UserInfo userInfo = userInfoService.selectById(Long.parseLong(userIdStr));
+
+
+        request.setAttribute("userInfo",userInfo);
+        request.setAttribute("languageValues",LanguageEnum.values());
+        request.setAttribute("levelValues",LevelEnum.values());
+        return "pc/personData";
+    }
+
 }

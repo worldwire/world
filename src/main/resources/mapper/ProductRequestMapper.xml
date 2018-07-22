@@ -17,7 +17,7 @@
     <result column="language_id" property="languageId" jdbcType="BIGINT" />
     <result column="status" property="status" jdbcType="INTEGER"  typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.ProductRequestStatusEnum" />
     <result column="language_level" property="languageLevel" jdbcType="VARCHAR"  typeHandler="com.spring.worldwire.model.typeHandler.LanguageLevelHandel" javaType="com.spring.worldwire.model.LanguageLevel" />
-    <result column="user_type" property="userType" jdbcType="INTEGER"  typeHandler="com.spring.worldwire.model.typeHandler.LanguageLevelHandel" javaType="com.spring.worldwire.enums.UserTypeEnum" />
+    <result column="user_type" property="userType" jdbcType="INTEGER"  typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.UserTypeEnum" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />

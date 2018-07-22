@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.spring.worldwire.model.UserInfo" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="login_id" property="loginId" jdbcType="BIGINT" />
-    <result column="type" property="type" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.UserTypeEnum" />
+    <result column="type" property="type" jdbcType="INTEGER" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.UserTypeEnum"/>
     <result column="is_foreign" property="isForeign" jdbcType="INTEGER" />
     <result column="show_img" property="showImg" jdbcType="VARCHAR" />
     <result column="brithday" property="brithday" jdbcType="TIMESTAMP" />
@@ -48,7 +48,7 @@
     <result column="business_bank_img" property="businessBankImg" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, login_id, type, is_foreign, show_img, brithday, nick_name, language, bri_nationality, 
+    id, login_id, `type`, is_foreign, show_img, brithday, nick_name, language, bri_nationality,
     now_nationality, local_addr, occupation, email, mobile, website, public_platform, 
     wechat_qrcode, wechat, facebook, whatsapp, linkedin, communication, idcard_on_img, 
     idcard_down_img, idcard_hand_img, real_name, idcard, company_name, company_time, 
@@ -64,7 +64,7 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <select id="selectByLoginId" resultType="com.spring.worldwire.model.UserInfo">
+  <select id="selectByLoginId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user_info
