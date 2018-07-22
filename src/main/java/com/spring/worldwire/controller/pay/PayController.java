@@ -24,13 +24,6 @@ public class PayController {
     @Autowired
     private PayManager payManager;
 
-
-    @RequestMapping("")
-    public String toRecharge(Model model) {
-
-        return "pc/recharge";
-    }
-
     @RequestMapping("recharge")
     public String recharge(Model model) {
 

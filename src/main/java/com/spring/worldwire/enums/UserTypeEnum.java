@@ -12,7 +12,7 @@ public enum UserTypeEnum implements INumericEnum {
     PERSONAL(1, "个人需求"),
     ENTERPRISE(2, "企业需求");
 
-    private Integer code;
+    private int code;
 
     private String name;
 
@@ -21,11 +21,11 @@ public enum UserTypeEnum implements INumericEnum {
         this.name = name;
     }
 
-    public Integer getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(int code) {
         this.code = code;
     }
 

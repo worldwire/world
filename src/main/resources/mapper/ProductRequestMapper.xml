@@ -17,7 +17,7 @@
     <result column="language_id" property="languageId" jdbcType="BIGINT" />
     <result column="status" property="status" jdbcType="INTEGER"  typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.ProductRequestStatusEnum" />
     <result column="language_level" property="languageLevel" jdbcType="VARCHAR"  typeHandler="com.spring.worldwire.model.typeHandler.LanguageLevelHandel" javaType="com.spring.worldwire.model.LanguageLevel" />
-    <result column="user_type" property="userType" jdbcType="INTEGER" />
+    <result column="user_type" property="userType" jdbcType="INTEGER"  typeHandler="com.spring.worldwire.model.typeHandler.LanguageLevelHandel" javaType="com.spring.worldwire.enums.UserTypeEnum" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
@@ -29,8 +29,8 @@
 
   <sql id="select_query">
     <trim suffixOverrides="and">
-      <if test="query.userType != null and query.userType > 0">
-        user_type = #{query.userType,jdbcType=INTEGER} and
+      <if test="query.userType != null">
+        user_type = #{query.userType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler} and
       </if>
       <if test="query.requestType != null">
         request_type = #{query.requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler} and
@@ -83,7 +83,7 @@
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{linkedIn,jdbcType=VARCHAR},
       #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{languageId,jdbcType=BIGINT}, #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       #{languageLevel,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
-      #{userType,jdbcType=INTEGER},#{userId,jdbcType=BIGINT},#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+      #{userType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},#{userId,jdbcType=BIGINT},#{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.spring.worldwire.model.ProductRequest" >
     insert into product_request
@@ -175,7 +175,7 @@
         #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="userType != null" >
-        #{userType,jdbcType=INTEGER},
+        #{userType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="userId != null">
         #{userId,jdbcType=BIGINT},
@@ -225,7 +225,7 @@
         status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="userType != null" >
-        user_type = #{userType,jdbcType=INTEGER},
+        user_type = #{userType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="userId != null">
         user_id = #{userId,jdbcType=BIGINT},
@@ -255,7 +255,7 @@
       language_id = #{languageId,jdbcType=BIGINT},
       status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       language_level = #{languageLevel,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
-      user_type = #{userType,jdbcType=INTEGER},
+      user_type = #{userType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       user_id = #{userId,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}

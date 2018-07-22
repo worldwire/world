@@ -475,7 +475,7 @@ public class UserInfo implements Serializable {
 
     public String cookiesValue() {
 
-        return String.join("$$", id.toString(), type != null ? type.getCode().toString() : BLANK_STRING, nickName != null ? nickName : BLANK_STRING, showImg != null ? showImg : BLANK_STRING);
+        return String.join("$$", id.toString(), type != null ? type.getCode()+"" : BLANK_STRING, nickName != null ? nickName : BLANK_STRING, showImg != null ? showImg : BLANK_STRING);
     }
 
     public void analysisCookiesValue(String cookiesValue) {

@@ -1,5 +1,7 @@
 package com.spring.worldwire.query;
 
+import com.spring.worldwire.enums.RequestTypeEnum;
+import com.spring.worldwire.enums.UserTypeEnum;
 import com.spring.worldwire.query.base.Pager;
 
 /**
@@ -10,25 +12,25 @@ import com.spring.worldwire.query.base.Pager;
  */
 public class ProductRequestQuery extends Pager {
     // 用户类型 个人，企业
-    private Integer userType;
+    private UserTypeEnum userType;
     // 需求类型，帮助别人或者寻求帮助
-    private Integer requestType;
+    private RequestTypeEnum requestType;
     // userId
     private Long userId;
 
-    public Integer getUserType() {
+    public UserTypeEnum getUserType() {
         return userType;
     }
 
-    public void setUserType(Integer userType) {
+    public void setUserType(UserTypeEnum userType) {
         this.userType = userType;
     }
 
-    public Integer getRequestType() {
+    public RequestTypeEnum getRequestType() {
         return requestType;
     }
 
-    public void setRequestType(Integer requestType) {
+    public void setRequestType(RequestTypeEnum requestType) {
         this.requestType = requestType;
     }
 

@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 @Controller
 @RequestMapping("/request")
 public class RequestController {
@@ -29,24 +30,29 @@ public class RequestController {
     @Autowired
     private ProductRequestService productRequestService;
 
+    public RequestController(UserCenterManager userCenterManager, ProductRequestService productRequestService) {
+        this.userCenterManager = userCenterManager;
+        this.productRequestService = productRequestService;
+    }
+
     @RequestMapping("/list/{userType}/{requestType}/{pageSize}/{pageNo}.html")
     public String productRequestList(Model model, @PathVariable int userType, @PathVariable int requestType, @PathVariable int pageSize, @PathVariable int pageNo) {
         {
+            //UserTypeEnum userTypeEnum = UserTypeEnum.getNameByCode(userType);
+            RequestTypeEnum requestTypeEnum = RequestTypeEnum.getNameByCode(requestType);
             ProductRequestQuery personalQuery = new ProductRequestQuery();
             personalQuery.setPageSize(pageSize);
             personalQuery.setPageNo(pageNo);
-            personalQuery.setUserType(userType);
-            personalQuery.setRequestType(userType);
-            personalQuery.setUserType(UserTypeEnum.PERSONAL.getCode());
+            personalQuery.setRequestType(requestTypeEnum);
+            personalQuery.setUserType(UserTypeEnum.PERSONAL);
             personalQuery.setPageCount(productRequestService.selectCountByQuery(personalQuery));
             List<ProductRequest> personalList = productRequestService.selectByQuery(personalQuery, true);
 
             ProductRequestQuery enterpriseQuery = new ProductRequestQuery();
             enterpriseQuery.setPageSize(pageSize);
             enterpriseQuery.setPageNo(pageNo);
-            enterpriseQuery.setUserType(userType);
-            enterpriseQuery.setRequestType(userType);
-            enterpriseQuery.setUserType(UserTypeEnum.ENTERPRISE.getCode());
+            enterpriseQuery.setRequestType(requestTypeEnum);
+            enterpriseQuery.setUserType(UserTypeEnum.ENTERPRISE);
             enterpriseQuery.setPageCount(productRequestService.selectCountByQuery(enterpriseQuery));
             List<ProductRequest> enterpriseList = productRequestService.selectByQuery(enterpriseQuery, true);
 
