@@ -36,7 +36,7 @@
         select
         <include refid="Base_Column_List"/>
         from third_pay_order
-        where userId = #{query.userId,,jdbcType=BIGINT}
+        where user_id = #{query.userId,jdbcType=BIGINT}
         <if test="query.pageNo > 0 and query.pageStart > 0">
           limit #{query.pageStart} , #{query.pageSize}
         </if>
