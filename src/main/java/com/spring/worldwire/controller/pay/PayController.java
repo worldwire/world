@@ -24,13 +24,6 @@ public class PayController {
     @Autowired
     private PayManager payManager;
 
-
-    @RequestMapping("")
-    public String toRecharge(Model model) {
-
-        return "pc/recharge";
-    }
-
     @RequestMapping("recharge")
     public String recharge(Model model) {
 
@@ -39,9 +32,9 @@ public class PayController {
 
     @RequestMapping("payRecharge")
     public String payRecharge(Model model,HttpServletRequest request, long id, int payCode) {
-        String userIdStr = request.getAttribute(Constants.USER_ID_SESSION).toString();
+        //String userIdStr = request.getAttribute(Constants.USER_ID_SESSION).toString();
 
-        String nextOperationBody = payManager.createOrder(Long.parseLong(userIdStr),id,payCode);
+        String nextOperationBody = payManager.createOrder(Long.parseLong("1"),id,payCode);
         model.addAttribute("nextOperation",nextOperationBody);
         return "pay/payBlank";
     }

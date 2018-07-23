@@ -50,4 +50,9 @@ public class ProductRequestServiceImpl implements ProductRequestService {
     public int selectCountByQuery(ProductRequestQuery query) {
         return productRequestDao.selectCountByQuery(query);
     }
+
+    @Override
+    public int updateStatus(ProductRequest productRequest) {
+        return productRequestDao.updateStatus(productRequest);
+    }
 }

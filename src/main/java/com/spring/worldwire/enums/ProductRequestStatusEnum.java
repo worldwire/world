@@ -7,7 +7,11 @@ public enum ProductRequestStatusEnum implements INumericEnum {
 	INIT(0,"初始状态"),
 	NORMAL(1,"正常状态"),
 	ON(2,"上架"),
-	OFF(3,"下架");
+	OFF(3,"下架"),
+	NO_PAY(4,"未付费"),
+	WAIT_TRANSLATE(5,"等待翻译"),
+	EXAMINE(6,"等待审核"),
+	;
 
 
 	ProductRequestStatusEnum(int code, String name) {

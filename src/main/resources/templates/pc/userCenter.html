@@ -24,7 +24,7 @@
                     <span class="contentBox-head-view-span1">查看联系方式总次数</span>
                     <span class="contentBox-head-view-num">${account.viewingTimes}</span>
                     <span class="contentBox-head-view-span2">次</span>
-                    <div class="contentBox-head-view-btn">
+                    <div class="contentBox-head-view-btn" onclick="toRecharge()">
                         购买
                     </div>
                 </div>
@@ -80,5 +80,10 @@
             ,$ = layui.jquery;
 
     })
+
+    function toRecharge(){
+        location.href='/pay/recharge';
+    }
+
 </script>
 </html>

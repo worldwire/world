@@ -1,8 +1,11 @@
 package com.spring.worldwire.model;
 
+import com.spring.worldwire.enums.UserTypeEnum;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@SuppressWarnings("unused")
 public class UserInfo implements Serializable {
 
     private static final long serialVersionUID = 4091704691107509862L;
@@ -11,7 +14,7 @@ public class UserInfo implements Serializable {
 
     private Long loginId;
 
-    private Integer type;
+    private UserTypeEnum type;
 
     private Integer isForeign;
 
@@ -111,11 +114,11 @@ public class UserInfo implements Serializable {
         this.loginId = loginId;
     }
 
-    public Integer getType() {
+    public UserTypeEnum getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(UserTypeEnum type) {
         this.type = type;
     }
 
@@ -472,7 +475,7 @@ public class UserInfo implements Serializable {
 
     public String cookiesValue() {
 
-        return String.join("$$", id.toString(), type != null ? type.toString() : BLANK_STRING, nickName != null ? nickName : BLANK_STRING, showImg != null ? showImg : BLANK_STRING);
+        return String.join("$$", id.toString(), type != null ? type.getCode()+"" : BLANK_STRING, nickName != null ? nickName : BLANK_STRING, showImg != null ? showImg : BLANK_STRING);
     }
 
     public void analysisCookiesValue(String cookiesValue) {
@@ -480,7 +483,7 @@ public class UserInfo implements Serializable {
             String[] split = cookiesValue.split("\\$\\$");
             setId(Long.parseLong(split[0]));
             if (!BLANK_STRING.equals(split[1])) {
-                setType(Integer.parseInt(split[1]));
+                setType(UserTypeEnum.getNameByCode(Integer.parseInt(split[1])));
             }
             if (!BLANK_STRING.equals(split[2])) {
                 setNickName(split[2]);

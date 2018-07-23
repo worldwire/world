@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.spring.worldwire.model.UserInfo" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="login_id" property="loginId" jdbcType="BIGINT" />
-    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.UserTypeEnum"/>
     <result column="is_foreign" property="isForeign" jdbcType="INTEGER" />
     <result column="show_img" property="showImg" jdbcType="VARCHAR" />
     <result column="brithday" property="brithday" jdbcType="TIMESTAMP" />
@@ -48,7 +48,7 @@
     <result column="business_bank_img" property="businessBankImg" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, login_id, type, is_foreign, show_img, brithday, nick_name, language, bri_nationality, 
+    id, login_id, `type`, is_foreign, show_img, brithday, nick_name, language, bri_nationality,
     now_nationality, local_addr, occupation, email, mobile, website, public_platform, 
     wechat_qrcode, wechat, facebook, whatsapp, linkedin, communication, idcard_on_img, 
     idcard_down_img, idcard_hand_img, real_name, idcard, company_name, company_time, 
@@ -64,7 +64,7 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <select id="selectByLoginId" resultType="com.spring.worldwire.model.UserInfo">
+  <select id="selectByLoginId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user_info
@@ -75,7 +75,7 @@
     delete from user_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.spring.worldwire.model.UserInfo" keyProperty="id" useGeneratedKeys="true" >
+  <insert id="insert" parameterType="com.spring.worldwire.model.UserInfo" keyProperty="id" useGeneratedKeys="true" keyColumn="id" >
     insert into user_info (id, login_id, type, 
       is_foreign, show_img, brithday, 
       nick_name, language, bri_nationality, 
@@ -92,7 +92,7 @@
       business_license_img, business_special_license_img, 
       business_bank, business_bank_name, business_bank_addr, 
       business_bank_img)
-    values (#{id,jdbcType=BIGINT}, #{loginId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=BIGINT}, #{loginId,jdbcType=BIGINT}, #{type,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, 
       #{isForeign,jdbcType=INTEGER}, #{showImg,jdbcType=VARCHAR}, #{brithday,jdbcType=TIMESTAMP}, 
       #{nickName,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{briNationality,jdbcType=VARCHAR}, 
       #{nowNationality,jdbcType=VARCHAR}, #{localAddr,jdbcType=VARCHAR}, #{occupation,jdbcType=VARCHAR}, 
@@ -109,7 +109,7 @@
       #{businessBank,jdbcType=VARCHAR}, #{businessBankName,jdbcType=VARCHAR}, #{businessBankAddr,jdbcType=VARCHAR}, 
       #{businessBankImg,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.spring.worldwire.model.UserInfo" >
+  <insert id="insertSelective" parameterType="com.spring.worldwire.model.UserInfo" keyProperty="id">
     insert into user_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -253,7 +253,7 @@
         #{loginId,jdbcType=BIGINT},
       </if>
       <if test="type != null" >
-        #{type,jdbcType=INTEGER},
+        #{type,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="isForeign != null" >
         #{isForeign,jdbcType=INTEGER},
@@ -387,7 +387,7 @@
         login_id = #{loginId,jdbcType=BIGINT},
       </if>
       <if test="type != null" >
-        type = #{type,jdbcType=INTEGER},
+        type = #{type,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="isForeign != null" >
         is_foreign = #{isForeign,jdbcType=INTEGER},
@@ -518,7 +518,7 @@
   <update id="updateByPrimaryKey" parameterType="com.spring.worldwire.model.UserInfo" >
     update user_info
     set login_id = #{loginId,jdbcType=BIGINT},
-      type = #{type,jdbcType=INTEGER},
+      type = #{type,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       is_foreign = #{isForeign,jdbcType=INTEGER},
       show_img = #{showImg,jdbcType=VARCHAR},
       brithday = #{brithday,jdbcType=TIMESTAMP},

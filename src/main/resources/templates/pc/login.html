@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../css/fontCss.css">
     <link rel="stylesheet" href="../css/login.css">
     <script src="../js/layui-v2.2.6/layui/layui.js"></script>
-    <script src="../js/layui-v2.2.6/layui/layui.js"></script>
+    <script src="/js/common/common.js" ></script>
 
 </head>
 <body>
@@ -50,9 +50,9 @@
                     <div>
                         <a href="###"><i class="iconfont" style="color: #8dc51c">&#xe6ed;</i></a>
                         <a href="###"><i class="iconfont" style="color: #62a4ee">&#xe64d;</i></a>
-                        <a href="###"><i class="iconfont" style="color: #ec6061">&#xe63c;</i></a>
+                        <a href="###"><i class="iconfont" style="color: #ec6061" onclick="redirectClick('/login/weibo/auth')">&#xe63c;</i></a>
                         <a href="###"><i class="iconfont" style="color: #667eba">&#xe627;</i></a>
-                        <a href="###"><i class="iconfont" style="color: #3aa6d7">&#xe6c1;</i></a>
+                        <a href="###"><i class="iconfont" style="color: #3aa6d7" onclick="redirectClick('/login/linkedin/auth')">&#xe6c1;</i></a>
                         <a href="###"><i class="iconfont" style="color: #5fd4ff">&#xe60a;</i></a>
                         <!--<a href="####"></a>-->
                         <!--<a href="####" style="background-position: -50px 0"></a>-->
@@ -82,21 +82,19 @@
             , $ = layui.jquery;
         var lastUrl = document.referrer;
         $(".nextBtn").click(function () {
+            var em = $("[name=email]").val();
+            var psw = $("[name=password]").val();
             $.ajax({
                 type: "POST",
                 url: "/login/ajaxLogin",
-                data: {email:$("[name=email]").val(), password:$("#passwd").val()},
+                data: {email:em, password:psw},
                 dataType: "json",
                 success: function (data) {
                     if(data == null){
                         $('.msg').show();
                         return false;
                     }
-                    if(lastUrl == ''){
-                        window.location.href = "/"
-                    }else{
-                        window.location.href = lastUrl;
-                    }
+                    window.location.href = "/login/login?email="+em+"&password="+psw;
                 },
                 error: function () {
                     

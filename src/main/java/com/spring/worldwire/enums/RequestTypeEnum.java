@@ -7,6 +7,7 @@ public enum RequestTypeEnum implements INumericEnum {
 
 	CHINESE(1,"chinese"),
 	ENGLISH(2,"english"),
+	FRENCH(3,"french"),
 
 	;
 

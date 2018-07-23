@@ -1,12 +1,14 @@
 package com.spring.worldwire.enums;
 
+import com.spring.worldwire.extent.INumericEnum;
+
 /**
  * Desc: Desc
  * User: luxun
  * Date: 2018/7/9 16:17
  * To change this template use File | Settings | File and Code Templates | Includes | File Header.
  */
-public enum UserTypeEnum {
+public enum UserTypeEnum implements INumericEnum {
     PERSONAL(1, "个人需求"),
     ENTERPRISE(2, "企业需求");
 
@@ -35,11 +37,27 @@ public enum UserTypeEnum {
         this.name = name;
     }
 
+
+    public static UserTypeEnum getNameByCode(int code){
+        UserTypeEnum[] array = UserTypeEnum.values();
+        for (UserTypeEnum value : array) {
+            if(code == value.getCode()){
+                return value;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return "UserTypeEnum{" +
                 "code=" + code +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public int getNumericValue() {
+        return code;
     }
 }

@@ -1,15 +1,12 @@
 package com.spring.worldwire.manager.impl;
 
 import com.spring.worldwire.enums.PayStatusEnum;
+import com.spring.worldwire.enums.ProductRequestStatusEnum;
+import com.spring.worldwire.enums.ProductTypeEnum;
 import com.spring.worldwire.enums.ThirdPayEnum;
 import com.spring.worldwire.manager.PayManager;
-import com.spring.worldwire.model.ProductInfo;
-import com.spring.worldwire.model.ThirdPayOrder;
-import com.spring.worldwire.model.TradeOrder;
-import com.spring.worldwire.service.PayService;
-import com.spring.worldwire.service.ProductInfoService;
-import com.spring.worldwire.service.ThirdPayOrderService;
-import com.spring.worldwire.service.TradeOrderService;
+import com.spring.worldwire.model.*;
+import com.spring.worldwire.service.*;
 import com.spring.worldwire.utils.RandomNum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +31,11 @@ public class PayManagerImpl implements PayManager {
     private PayService payService;
     @Autowired
     private TradeOrderService tradeOrderservice;
+    @Autowired
+    private UserAccountService userAccountService;
+    @Autowired
+    private ProductRequestService productRequestService;
+
 
     public PayManagerImpl(ProductInfoService productInfoService, ThirdPayOrderService thirdPayOrderService, PayService payService) {
         this.productInfoService = productInfoService;
@@ -45,7 +47,7 @@ public class PayManagerImpl implements PayManager {
     public String createOrder(long userId, long productId, int payCode) {
 
         ThirdPayEnum thirdPayByCode = ThirdPayEnum.getThirdPayByCode(payCode);
-        if(thirdPayByCode==null){
+        if (thirdPayByCode == null) {
             return "<script type='text/javascript'>location.href='/';</script>";//todo 错误页面跳转
         }
 
@@ -60,9 +62,16 @@ public class PayManagerImpl implements PayManager {
         thirdPayOrder.setUserId(userId);
         thirdPayOrder.setPayStatus(PayStatusEnum.HAVING);
         thirdPayOrder.setProductType(productInfo.getType());
+        thirdPayOrder.setProductId(productInfo.getId());
+        if (ProductTypeEnum.CHECK_MESSAGE.equals(productInfo.getType())) {
+            thirdPayOrder.setPayDetail("购买查看次数");
+        } else {
+            thirdPayOrder.setPayDetail("购买翻译次数");
+        }
         int i = thirdPayOrderService.save(thirdPayOrder);
 
-        TradeOrder tradeOrder = new TradeOrder("123" + System.currentTimeMillis() / 1000, 10, productInfo.getAmount(), productInfo.getProductName(), thirdPayByCode, productInfo.getPayType());
+        TradeOrder tradeOrder = new TradeOrder(thirdPayOrder.getPaymentNo(), userId,
+                productInfo.getAmount(), productInfo.getProductName(), thirdPayByCode, productInfo.getPayType());
         tradeOrder.setTradeName(productInfo.getProductName());
         return payService.doPayWay(tradeOrder);
     }
@@ -84,9 +93,43 @@ public class PayManagerImpl implements PayManager {
             if (i == 0) {
                 logger.error("[支付完成] 是否有重复支付嫌疑 或没有找到订单 orderNum = {}", tradeOrder.getOrderNum());
             } else {
-                //todo 后续其他逻辑  比如根据状态判断添加查看次数，如果是翻译 直接修改翻译申请订单状态
-                logger.info("[支付完成] 修改状态成功");
+                logger.info("[支付完成] 修改状态成功 orderNum = {}", tradeOrder.getOrderNum());
+                thirdPayOrder = thirdPayOrderService.selectByOrderNum(tradeOrder.getOrderNum());
+                switch (thirdPayOrder.getProductType()) {
+                    case CHECK_MESSAGE:
+                        addCheckMessage(thirdPayOrder);
+                        break;
+                    case TRANSLATE_CHINA_TO_ENGLISH:
+                    case TRANSLATE_ENGLISH_TO_CHINA:
+                        doTranslate(thirdPayOrder);
+                        break;
+                }
+
+
             }
         }
+    }
+
+    private void addCheckMessage(ThirdPayOrder thirdPayOrder) {
+        //增加查看次数
+        UserAccount userAccount = userAccountService.selectByUserId(thirdPayOrder.getUserId());
+        ProductInfo productInfo = productInfoService.findById(thirdPayOrder.getProductId());
+        userAccount.setViewingTimes(userAccount.getViewingTimes() + productInfo.getTimes());
+        userAccountService.updateUserAccount(userAccount);
+    }
+
+    private void doTranslate(ThirdPayOrder thirdPayOrder) {
+        ProductRequest productRequest = productRequestService.findById(thirdPayOrder.getForeignId());
+        if (ProductRequestStatusEnum.NO_PAY.equals(productRequest.getStatus())) {
+            productRequest.setStatus(ProductRequestStatusEnum.WAIT_TRANSLATE);
+            productRequest.setUpdateTime(new Date());
+            productRequestService.updateStatus(productRequest);
+            logger.info("[支付完成] 修改状态 orderNum = {} productRequestId = {} userId ={}",
+                    thirdPayOrder.getPaymentNo(), productRequest.getId(), thirdPayOrder.getUserId());
+        } else {
+            logger.error("[支付完成] 修改状态出现错误状态 orderNum = {} productRequestId = {} userId ={}",
+                    thirdPayOrder.getPaymentNo(), productRequest.getId(), thirdPayOrder.getUserId());
+        }
+
     }
 }

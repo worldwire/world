@@ -46,6 +46,9 @@ public class WeiBoLoginController {
             return "redirect:login";
         }
         String fromURL = request.getHeader("Referer");
+        if(StringUtils.isEmpty(fromURL)){
+            fromURL = "/";
+        }
         return "redirect:" + fromURL;  //登录成功跳转到登录前页面
 
     }

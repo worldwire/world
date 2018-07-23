@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * Created by luxun on 2018/4/28.
@@ -21,6 +22,9 @@ public class DateUtil {
      * @throws ParseException
      */
     public static int dateInterval(Date start, Date end) throws ParseException {
+        if(Objects.isNull(start) || Objects.isNull(end)){
+            return 10000;
+        }
 
         return (int) ((df.parse(df.format(end)).getTime() - df.parse(df.format(start)).getTime())/(3600 * 24 * 1000));
 

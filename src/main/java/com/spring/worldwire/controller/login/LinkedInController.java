@@ -43,13 +43,12 @@ public class LinkedInController {
     }
 
     @RequestMapping(value = "/callback")
-    @ResponseBody
     public String callback(HttpServletRequest request, HttpServletResponse response) {
         UserInfo userInfo = loginService.callback(request, response);
         if (Objects.isNull(userInfo)) {
             return "redirect:login";
         }
-        return "redirect:/";  //登录成功跳转到登录前页面
+        return "redirect:/index";  //登录成功跳转到登录前页面
     }
 
 

@@ -22,4 +22,6 @@ public interface ProductRequestDao {
     List<ProductRequest> selectByQuery(@Param("query") ProductRequestQuery query);
 
     int selectCountByQuery(@Param("query") ProductRequestQuery query);
+
+    int updateStatus(ProductRequest productRequest);
 }

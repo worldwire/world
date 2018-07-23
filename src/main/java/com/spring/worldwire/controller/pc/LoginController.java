@@ -69,9 +69,20 @@ public class LoginController {
             return "pc/blank";
         }
         if (userInfo.getType() == null) {
-            return "pc/registerAfter";
+            return "pc/fillType";
+        }
+        if (userInfo.getIsForeign() == null) {
+            return "pc/fillForeign";
         }
         return "pc/blank";
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpServletResponse response) {
+
+        loginManager.logout(response);
+
+        return "redirect:/";
     }
 
     /**
@@ -100,7 +111,6 @@ public class LoginController {
     /**
      * 查看联系方式
      *
-     * @param userId
      * @param productRequestId
      * @return
      */

@@ -22,8 +22,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public int insert(UserInfo record) {
-
-        return userInfoDao.insertSelective(record);
+        return userInfoDao.insert(record);
     }
 
     @Override
@@ -43,6 +42,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 
     @Override
     public UserInfo selectSimpleById(long id) {
-        return userInfoDao.selectByPrimaryKey(id);
+        return userInfoDao.selectSimpleById(id);
     }
 }

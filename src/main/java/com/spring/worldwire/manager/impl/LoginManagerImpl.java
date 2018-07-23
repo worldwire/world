@@ -31,7 +31,7 @@ import java.util.Objects;
  * To change this template use File | Settings | File and Code Templates | Includes | File Header.
  */
 @Service
-public class LoginManagerImpl implements LoginManager {
+public class LoginManagerImpl extends CookieManager implements LoginManager {
 
     private static Logger logger = LoggerFactory.getLogger(LoginManagerImpl.class);
 
@@ -83,21 +83,15 @@ public class LoginManagerImpl implements LoginManager {
         return userInfo;
     }
 
-    /**
-     * 登陆之后处理cookie
-     *
-     * @param response
-     * @param userInfo
-     */
-    private void processCookie(HttpServletResponse response, UserInfo userInfo) {
+    @Override
+    public void logout(HttpServletResponse response) {
 
-        String encryptedCookie = Base64.encode(userInfo.cookiesValue().getBytes());
-        Cookie userIdCookie = new Cookie(Constants.USER_COOKIES_NAME, encryptedCookie);
+        Cookie userIdCookie = new Cookie(Constants.USER_COOKIES_NAME, null);
         userIdCookie.setPath("/");
-        userIdCookie.setMaxAge(3600);
-
+        userIdCookie.setMaxAge(0);
         response.addCookie(userIdCookie);
     }
+
 
     /**
      * 处理登录的连续签到

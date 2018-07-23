@@ -15,4 +15,6 @@ public interface ThirdPayOrderService {
     int successByOrderNum(ThirdPayOrder thirdPayOrder);
 
     List<ThirdPayOrder> selectByUserId(ThirdPayOrderQuery query);
+
+    ThirdPayOrder selectByOrderNum(String orderNum);
 }
