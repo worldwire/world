@@ -19,7 +19,7 @@
     <div class="main">
         <div class="head-img">
             <div class="head-box">
-                <img src="../img/defaultHeadImg.png"/>
+                <img src="/images/defaultHeadImg.png"/>
             </div>
 
         </div>
@@ -35,7 +35,7 @@
                     <div class="layui-form-item layui-form-text">
                         <label for="userName" class="req">昵 称</label>
                         <div class="layui-input-block">
-                            <input type="text" id="userName" value="${userInfo.nickName}" class="layui-input tiput" placeholder="请输入用户名">
+                            <input type="text" id="userName" value="${userInfo.nickName!}" class="layui-input tiput" placeholder="请输入用户名">
                         </div>
                     </div>
 
@@ -62,7 +62,7 @@
                                 <select name="lang" id="lang">
                                     <option value="">请选择语种</option>
                                     <#list languageValues as language>
-                                        <option value="${language.value}">${language.name}</option>
+                                        <option value="${language.code}">${language.cnName}</option>
                                     </#list>
 
                                 </select>
@@ -72,7 +72,7 @@
                                 <select name="level">
                                     <option value="">请选择熟练程度</option>
                                     <#list levelValues as level>
-                                        <option value="${language.value}">${level.name}</option>
+                                        <option value="${level.code}">${level.cnName}</option>
                                     </#list>
                                 </select>
                             </div>
@@ -156,7 +156,7 @@
                     <div class="layui-form-item layui-form-text">
                         <label>职业</label>
                         <div class="layui-input-block">
-                            <input type="text" class="layui-input tiput" placeholder="我从事的职业标签">
+                            <input type="text" class="layui-input tiput" value="${userInfo.occupation!}" name="occupation" placeholder="我从事的职业标签">
                         </div>
                     </div>
 
@@ -175,13 +175,13 @@
                         <div class="layui-inline">
                             <label class="req">邮箱</label>
                             <div class="layui-input-inline">
-                                <input type="text" class="layui-input" placeholder="user@example.com">
+                                <input type="text" class="layui-input" name="email" value="${userInfo.email!}" placeholder="user@example.com">
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label class="req">电话</label>
                             <div class="layui-input-inline">
-                                <input type="text" class="layui-input" placeholder="我的手机或座机号">
+                                <input type="text" class="layui-input" name="mobile" value="${userInfo.mobile!}" placeholder="我的手机或座机号">
                             </div>
                         </div>
                     </div>
@@ -190,13 +190,13 @@
                         <div class="layui-inline">
                             <label>网站</label>
                             <div class="layui-input-inline">
-                                <input type="text" class="layui-input" placeholder="我自己的网站">
+                                <input type="text" class="layui-input" name="website" value="${userInfo.website!}" placeholder="我自己的网站">
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label>公众号</label>
                             <div class="layui-input-inline">
-                                <input type="text" class="layui-input" placeholder="我自己的公众号">
+                                <input type="text" class="layui-input" name="publicPlatform" value="${userInfo.publicPlatform!}" placeholder="我自己的公众号">
                             </div>
                         </div>
                     </div>
@@ -204,31 +204,32 @@
                         <div class="layui-inline">
                             <div class="click-upload" id="up-ewm">
                                 <p>点击上传<br/>我的微信二维码</p>
+                                <input type="hidden" name="wechatQrcode" value="${userInfo.wechatQrcode!}">
                             </div>
                         </div>
                         <div class="account">
                             <div class="layui-inline">
                                 <label>微信</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" placeholder="我的微信号或绑定的手机号">
+                                    <input type="text" class="layui-input" name="wechat" value="${userInfo.wechat!}" placeholder="我的微信号或绑定的手机号">
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label>Facebook</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" placeholder="我的Facebook账号">
+                                    <input type="text" class="layui-input" name="facebook" value="${userInfo.facebook!}" placeholder="我的Facebook账号">
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label>WhatsApp</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" placeholder="我的WhatsApp">
+                                    <input type="text" class="layui-input" name="whatsapp" value="${userInfo.whatsapp!}" placeholder="我的WhatsApp">
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label>LikedIn</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" placeholder="我的LikedIn">
+                                    <input type="text" class="layui-input" name="linkedin" value="${userInfo.linkedin!}" placeholder="我的LikedIn">
                                 </div>
                             </div>
                         </div>
@@ -284,8 +285,8 @@
                         <div class="layui-inline">
                             <div class="example">
                                 <p>证件照正反面实例：</p>
-                                <div><img src="../img/z.png"/></div>
-                                <div><img src="../img/f.png"/></div>
+                                <div><img src="/images/z.png"/></div>
+                                <div><img src="/images/f.png"/></div>
                             </div>
                         </div>
                     </div>
@@ -303,7 +304,7 @@
                         </div>
 
                         <div class="layui-inline" style="float: left;">
-                            <img src="../img/s.jpg" class="sc">
+                            <img src="/images/s.jpg" class="sc">
                         </div>
                     </div>
 
@@ -311,8 +312,8 @@
                         <label style="float: left;width: 340px">真实姓名</label>
                         <label style="float: left;">身份证号</label>
                         <div class="layui-clear"></div>
-                        <input type="text" class="layui-input" placeholder="我的真实姓名" style="width: 315px;float:left;margin-right: 27px">
-                        <input type="text" class="layui-input" placeholder="请输入正确的身份号" style="width: 315px;;float:left;">
+                        <input type="text" class="layui-input" name="realName" value="${userInfo.realName!}" placeholder="我的真实姓名" style="width: 315px;float:left;margin-right: 27px">
+                        <input type="text" class="layui-input" name="idcard" value="${userInfo.idcard!}" placeholder="请输入正确的身份号" style="width: 315px;;float:left;">
                     </div>
 
                     <div class="layui-form-item">
