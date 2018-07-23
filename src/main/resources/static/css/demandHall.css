@@ -4,7 +4,8 @@ body .content { width: 100%; background: #F2F2F2; padding-top: 1px; }
 body .content .contentBox { width: 1200px; margin: auto; }
 body .content .contentBox .contentBox-choose { width: 1200px; height: 120px; border-radius: 2px; -moz-box-shadow: 0px 1px 15px #33333350; -webkit-box-shadow: 0px 1px 15px #33333350; box-shadow: 0px 1px 15px #33333350; background: #FFFFFF; margin-top: 20px; padding-top: 1px; }
 body .content .contentBox .contentBox-choose ul li { float: left; font-size: 14px; color: #333333; margin-left: 40px; }
-body .content .contentBox .contentBox-choose .li-1 { font-size: 16px; font-weight: 600; }
+body .content .contentBox .contentBox-choose li:nth-of-type(1) { font-size: 16px; font-weight: 600; }
+body .content .contentBox .contentBox-choose .li-selected { color: #D42026; }
 body .content .contentBox .contentBox-choose .contentBox-choose1 { margin-left: 45px; margin-top: 30px; }
 body .content .contentBox .contentBox-choose ul li:hover { cursor: pointer; color: #D42026; }
 body .content .contentBox .contentBox-body { padding-top: 1px; width: 1200px; height: 1339px; background: #FFFFFF; margin-top: 25px; -moz-box-shadow: 0px 1px 15px #33333350; -webkit-box-shadow: 0px 1px 15px #33333350; box-shadow: 0px 1px 15px #33333350; }
@@ -21,7 +22,7 @@ body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .l
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-title .list-style-title-img1 { position: absolute; top: 5px; left: -17px; }
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-title .list-style-title-img2 { position: absolute; top: -5px; right: 10px; width: 24px; height: 24px; border-radius: 12px; overflow: hidden; }
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-headImg { width: 80px; height: 80px; border-radius: 40px; border: 2px solid #DEDEDE; margin: auto; margin-top: 25px; overflow: hidden; }
-body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-headImg img{ width: 80px; height: 80px;}
+body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-headImg img {width: 80px; height: 80px; border-radius: 40px;}
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-name { font-size: 16px; color: #333333; font-weight: 600; text-align: center; margin-top: 21px; }
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-explain { font-size: 14px; color: #838383; text-align: center; margin-top: 11px; }
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-place { height: 40px; line-height: 40px; font-size: 14px; color: #333333; margin-top: 11px; font-weight: 600; position: relative; border-bottom: 1px solid #E0E0E0; border-top: 1px solid #E0E0E0; padding-left: 2px; }
@@ -29,7 +30,8 @@ body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .l
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-place .list-style-place-img { position: absolute; top: 8px; right: 10px; width: 24px; height: 24px; border-radius: 12px; overflow: hidden; line-height: 0; }
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-specialty { margin-top: 20px; overflow: hidden; }
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-specialty .specialty-label-box { display: table; margin: auto; overflow: hidden;}
-body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-specialty .specialty-label-box .specialty-label-style { margin: 0 auto; height: 30px; line-height: 30px; background: #E0E0E0; padding: 0 10px 0 10px; float: left; border-radius: 3px; }
+body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-specialty .specialty-label-box .specialty-label-style { margin: 0 auto; margin-left: 15px;height: 30px; line-height: 30px; background: #E0E0E0; padding: 0 10px 0 10px; float: left; border-radius: 3px; }
+body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-specialty .specialty-label-box .specialty-label-style:nth-of-type(1) {margin-left: 0px}
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-PerTitle { padding: 0 5px; margin-top: 20px; font-weight: 600; max-width: 246px; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-PerContent { height: 115px; padding: 0 5px; margin-top: 10px; word-break: break-all; word-wrap: break-word; color: #838383;   display: -moz-box; display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 6;-moz-line-clamp: 6;overflow: hidden;}
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-details { width: 180px; height: 40px; line-height: 40px; font-size: 16px; color: #333333; text-align: center; margin: auto; border: 1px solid #E0E0E0; border-radius: 2px; margin-top: 6px;}
@@ -54,7 +56,7 @@ body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .l
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-1 .list-style-1-img1 { position: absolute; top: 5px; left: -17px; }
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-1 .list-style-1-img2 { position: absolute; top: -5px; right: 10px; width: 24px; height: 24px; border-radius: 12px; overflow: hidden; }
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-headImg { width: 80px; height: 80px; border-radius: 40px; border: 2px solid #DEDEDE; margin: auto; margin-top: 25px; overflow: hidden; }
-body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-headImg img{ width: 80px; height: 80px;}
+body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-headImg img{width: 80px; height: 80px;border-radius: 40px;}
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-name { font-size: 16px; color: #333333; font-weight: 600; text-align: center; margin-top: 21px; }
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-explain { font-size: 14px; color: #838383; text-align: center; margin-top: 11px; }
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-place { height: 40px; line-height: 40px; font-size: 14px; color: #333333; margin-top: 11px; font-weight: 600; position: relative; border-bottom: 1px solid #E0E0E0; border-top: 1px solid #E0E0E0; padding-left: 2px; }
@@ -62,7 +64,8 @@ body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .l
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-place .list-style-place-img { position: absolute; top: 8px; right: 10px; width: 24px; height: 24px; border-radius: 12px; overflow: hidden; line-height: 0; }
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-specialty { margin-top: 20px; overflow: hidden; }
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-specialty .specialty-label-box { display: table; margin: auto; }
-body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-specialty .specialty-label-box .specialty-label-style { margin: 0 auto; height: 30px; line-height: 30px; background: #E0E0E0; padding: 0 10px 0 10px; float: left; border-radius: 3px; }
+body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-specialty .specialty-label-box .specialty-label-style { margin: 0 auto; height: 30px;margin-left: 15px; line-height: 30px; background: #E0E0E0; padding: 0 10px 0 10px; float: left; border-radius: 3px; }
+body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-specialty .specialty-label-box .specialty-label-style:nth-of-type(1) {margin-left: 0px;}
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-PerTitle { padding: 0 5px; margin-top: 20px; font-weight: 600; max-width: 246px; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-PerContent { height: 115px; padding: 0 5px; margin-top: 10px; word-break: break-all; word-wrap: break-word; color: #838383; display: -moz-box; display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 6;-moz-line-clamp: 6;overflow: hidden;}
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-details { width: 180px; height: 40px; line-height: 40px; font-size: 16px; color: #333333; text-align: center; margin: auto; border: 1px solid #E0E0E0; border-radius: 2px;margin-top: 7px; }
