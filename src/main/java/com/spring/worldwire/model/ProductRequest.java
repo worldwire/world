@@ -3,6 +3,7 @@ package com.spring.worldwire.model;
 import com.spring.worldwire.enums.LanguageEnum;
 import com.spring.worldwire.enums.ProductRequestStatusEnum;
 import com.spring.worldwire.enums.RequestTypeEnum;
+import com.spring.worldwire.enums.UserTypeEnum;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -42,7 +43,7 @@ public class ProductRequest implements Serializable {
 
     private ProductRequestStatusEnum status;
 
-    private Integer userType;
+    private UserTypeEnum userType;
 
     private Long userId;
 
@@ -150,11 +151,11 @@ public class ProductRequest implements Serializable {
         this.status = status;
     }
 
-    public Integer getUserType() {
+    public UserTypeEnum getUserType() {
         return userType;
     }
 
-    public void setUserType(Integer userType) {
+    public void setUserType(UserTypeEnum userType) {
         this.userType = userType;
     }
 
