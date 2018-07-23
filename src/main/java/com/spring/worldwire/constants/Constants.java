@@ -31,10 +31,13 @@ public class Constants {
 
     public static final String CACHE_FREE_LOOK_UP = "cache_free_lookup_";
 
+    public static final String CACHE_SHARE_LOOK_UP = "cache_share_lookup_";
 
     //----------------------------------------业务相关字段--------------------------------------
     public static final String USER_COOKIES_NAME = "userInfo";
 
     public static final String USER_SESSION = "userInfo";
     public static final String USER_ID_SESSION = "userId";
+
+
 }

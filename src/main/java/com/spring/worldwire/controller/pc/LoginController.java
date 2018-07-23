@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.spring.worldwire.constants.Constants;
 import com.spring.worldwire.enums.StatusCodeEnum;
 import com.spring.worldwire.manager.LoginManager;
-import com.spring.worldwire.manager.ProductReuestManager;
+import com.spring.worldwire.manager.ProductRequestManager;
 import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.result.ResponseResult;
 import com.spring.worldwire.service.LoginInfoService;
@@ -46,7 +46,7 @@ public class LoginController {
     @Autowired
     private LoginManager loginManager;
     @Autowired
-    private ProductReuestManager productReuestManager;
+    private ProductRequestManager productRequestManager;
 
     public LoginController(LoginInfoService loginInfoService, UserInfoService userInfoService) {
         this.loginInfoService = loginInfoService;
@@ -116,7 +116,7 @@ public class LoginController {
      */
     @RequestMapping("/showContracts")
     @ResponseBody
-    public String showContracts(Long productRequestId,HttpServletRequest request) {
+    public String showContracts(Long productRequestId, HttpServletRequest request) {
 
         Object userId = request.getAttribute(Constants.USER_ID_SESSION);
         if (Objects.isNull(userId)) {
@@ -126,7 +126,7 @@ public class LoginController {
         if (Objects.isNull(userId) || Objects.isNull(productRequestId)) {
             return "error";
         }
-        UserInfo userInfo = productReuestManager.viewRequestContract(Long.parseLong(userId.toString()), productRequestId);
+        UserInfo userInfo = productRequestManager.viewRequestContract(Long.parseLong(userId.toString()), productRequestId);
         if (Objects.isNull(userInfo)) {
             return null;
         }

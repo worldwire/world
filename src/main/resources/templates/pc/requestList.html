@@ -1,111 +1,115 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>需求大厅</title>
-		<link rel="stylesheet" type="text/css" href="/css/demandHall.css"/>
+<head>
+    <meta charset="UTF-8">
+    <title>需求大厅</title>
+    <link rel="stylesheet" type="text/css" href="/css/demandHall.css"/>
 
-		<#include "../public/common.html" encoding="utf-8">
-	</head>
-	<body>
-        <#include "../public/head.html" encoding="utf-8">
-		<#include "../public/navigator.html" encoding="utf-8">
-		<div class="content">
-			<div class="contentBox">
-				<div class="contentBox-choose">
-					<ul class="contentBox-choose1">
-						<li class="li-1">服务提供</li>
-						<li >全部</li>
-						<li>个人服务</li>
-						<li>公司服务</li>
-					</ul>
-					<br />
-					<ul class="contentBox-choose1">
-						<li class="li-1">需求寻找</li>
-						<li>全部</li>
-						<li>个人需求</li>
-						<li>公司服务</li>
-					</ul>
-				</div>
-				<div class="contentBox-body">
-					<div class="layui-carousel" id="contentBox-body-list1" lay-filter="contentBox-body-list1">
-						<div carousel-item style="background: #FFFFFF;">
-							<!--个人第一页-->
-							<div class="carousel-item" style="width: 1077px;">
-								<#if personalList??>
-									<#list personalList as personal>
-										<div class="list-style">
-											<div class="list-style-title" >
-												个人<#if personal.requestType.code == 1>服务<#else>需求</#if>
-												<img class="list-style-title-img1" src="/images/demandHall1.png"/>
-												<div class="list-style-title-img2">
-													<img src="/images/demandHall2.png"/>
-												</div>
-											</div>
-											<div class="list-style-headImg">
-												<img src="${personal.userInfo.showImg!''}"/>
-											</div>
-											<div class="list-style-name">
-												${personal.userInfo.nickName!''}
-											</div>
-											<div class="list-style-explain">
-												<#if personal.requestType.code == 1>我能提供国际人才或资源<#else>我要找国际人才或资源</#if>
-											</div>
-											<div class="list-style-place">
-												现所在地
-												<span class="list-style-place-span">
+    <#include "../public/common.html" encoding="utf-8">
+        </head>
+<body>
+<#include "../public/head.html" encoding="utf-8">
+    <#include "../public/navigator.html" encoding="utf-8">
+        <div class="content">
+            <div class="contentBox">
+                <div class="contentBox-choose">
+                    <ul class="contentBox-choose1">
+                        <li class="li-1">服务提供</li>
+                        <li onclick="selectType('1','0')">全部</li>
+                        <li onclick="selectType('1','1')">个人服务</li>
+                        <li onclick="selectType('1','2')">公司服务</li>
+                    </ul>
+                    <br/>
+                    <ul class="contentBox-choose1">
+                        <li class="li-1">需求寻找</li>
+                        <li onclick="selectType('2','0')">全部</li>
+                        <li onclick="selectType('2','1')">个人需求</li>
+                        <li onclick="selectType('2','2')">公司需求</li>
+                    </ul>
+                </div>
+                <div class="contentBox-body">
+                    <div class="layui-carousel" id="contentBox-body-list1" lay-filter="contentBox-body-list1">
+                        <div carousel-item style="background: #FFFFFF;">
+                            <!--个人第一页-->
+                            <div class="carousel-item" style="width: 1077px;">
+                                <#if personalVo??&&personalVo.list??>
+                                    <#list personalVo.list as personal>
+                                        <div class="list-style">
+                                            <div class="list-style-title">
+                                                个人
+                                                <#if personal.requestType.code == 1>服务
+                                                    <#else>需求
+                                                </#if>
+                                                <img class="list-style-title-img1" src="/images/demandHall1.png"/>
+                                                <div class="list-style-title-img2">
+                                                    <img src="/images/demandHall2.png"/>
+                                                </div>
+                                            </div>
+                                            <div class="list-style-headImg">
+                                                <img src="${personal.userInfo.showImg!''}"/>
+                                            </div>
+                                            <div class="list-style-name">
+                                                ${personal.userInfo.nickName!''}
+                                            </div>
+                                            <div class="list-style-explain">
+                                                <#if personal.requestType.code == 1>我能提供国际人才或资源
+                                                    <#else>我要找国际人才或资源
+                                                </#if>
+                                            </div>
+                                            <div class="list-style-place">
+                                                现所在地
+                                                <span class="list-style-place-span">
 													<#if personal.userInfo??>
 														${personal.userInfo.localAddr!''}
 													<#else>
 														未知
 													</#if>
 												</span>
-												<div class="list-style-place-img">
-													<img src="/images/demandHall2.png"/>
-												</div>
-											</div>
-											<div class="list-style-specialty">
-												<div class="specialty-label-box">
-													<div class="specialty-label specialty-label-style">
-														钢琴
-													</div>
-													<div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-														LOGO设计萨达萨达所
-													</div>
+                                                <div class="list-style-place-img">
+                                                    <img src="/images/demandHall2.png"/>
+                                                </div>
+                                            </div>
+                                            <div class="list-style-specialty">
+                                                <div class="specialty-label-box">
+                                                    <#list personal.keyWord?split(";") as key>
+                                                        <#if key_index lt 4>
+                                                            <div class="specialty-label specialty-label-style" style="margin-left: 10px;">
+                                                                ${key}
+                                                            </div>
+                                                        </#if>
+                                                    </#list>
+                                                </div>
 
-												</div>
+                                            </div>
+                                            <div class="list-style-PerTitle">
+                                                ${personal.title!''}
+                                            </div>
+                                            <div class="list-style-PerContent">
+                                                ${personal.content!''}
+                                            </div>
+                                            <div class="list-style-details">
+                                                <a href="/request/detail?id=${personal.id}"> 查看详情</a>
+                                            </div>
+                                            <div class="list-style-viewtime">
+                                                <i class="iconfont i-view"> &#xe60d;</i>
+                                                <span class="span-view">${personal.viewCount!'0'}</span>
+                                                <i class="iconfont i-times">&#xe75f;</i>
+                                                <span class="span-times"><#if personal.createTime??>${personal.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span>
+                                            </div>
+                                        </div>
+                                    </#list>
+                                </#if>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-carousel" id="contentBox-body-list2" lay-filter="contentBox-body-list2">
 
-											</div>
-											<div class="list-style-PerTitle">
-												${personal.title!''}
-											</div>
-											<div class="list-style-PerContent">
-												${personal.content!''}
-											</div>
-											<div class="list-style-details">
-												<a href="/request/detail?id=1"> 查看详情</a>
-											</div>
-											<div class="list-style-viewtime">
-												<i class="iconfont i-view" > &#xe60d;</i>
-												<span class="span-view">${personal.viewCount!'0'}</span>
-												<i class="iconfont i-times">&#xe75f;</i>
-												<span class="span-times">${personal.createTime?string("yyyy-MM-dd HH:mm:ss")}</span>
-											</div>
-										</div>
-									</#list>
-								</#if>
-							</div>
-						</div>
-
-					</div>
-					<div class="layui-carousel" id="contentBox-body-list2" lay-filter="contentBox-body-list2">
-
-						<div carousel-item style="background: #FFFFFF;">
-							<div class="carousel-item" style="width: 1077px;">
-								<#if enterpriseList??>
-									<#list enterpriseList as enterprise>
-										<div class="list-style" style="margin-left:0px ;">
-                                            <div class="list-style-1" >
+                        <div carousel-item style="background: #FFFFFF;">
+                            <div class="carousel-item" style="width: 1077px;">
+                                <#if enterpriseVo??&&enterpriseVo.list??>
+                                    <#list enterpriseVo.list as enterprise>
+                                        <div class="list-style" style="margin-left:0px ;">
+                                            <div class="list-style-1">
                                                 公司需求
                                                 <img class="list-style-1-img1" src="/images/demandHall1.png"/>
                                                 <div class="list-style-1-img2">
@@ -119,7 +123,10 @@
                                                 ${enterprise.userInfo.companyName!''}
                                             </div>
                                             <div class="list-style-explain">
-                                                <#if enterprise.requestType.code == 1>我能提供国际人才或资源<#else>我要找国际人才或资源</#if>
+                                                ${enterprise.requestType.code}
+                                                <#if enterprise.requestType.code == 1>我能提供国际人才或资源
+                                                    <#else>我要找国际人才或资源
+                                                </#if>
                                             </div>
                                             <div class="list-style-place">
                                                 现所在地
@@ -136,104 +143,125 @@
                                             </div>
                                             <div class="list-style-specialty">
                                                 <div class="specialty-label-box">
-                                                    <div class="specialty-label specialty-label-style">
-                                                        钢琴
-                                                    </div>
-                                                    <div class="specialty-label specialty-label-style" style="margin-left: 15px;">
-                                                        LOGO设计
-                                                    </div>
+                                                    <#list enterprise.keyWord?split(";") as key>
+                                                        <#if key_index lt 4>
+                                                            <div class="specialty-label specialty-label-style" style="margin-left: 10px;">
+                                                                ${key}
+                                                            </div>
+                                                        </#if>
+                                                    </#list>
                                                 </div>
                                             </div>
                                             <div class="list-style-PerTitle">
-												${enterprise.title!''}
+                                                ${enterprise.title!''}
                                             </div>
                                             <div class="list-style-PerContent">
                                                 ${enterprise.content!''}
                                             </div>
                                             <div class="list-style-details">
-                                                <a href="/request/detail?id=1"> <a href="/request/detail?id=1"> 查看详情</a></a>
+                                                <a href="/request/detail?id=${enterprise.id}"> <a
+                                                        href="/request/detail?id=${enterprise.id}"> 查看详情</a></a>
 
                                             </div>
                                             <div class="list-style-viewtime">
-                                                <i class="iconfont i-view" > &#xe60d;</i>
+                                                <i class="iconfont i-view"> &#xe60d;</i>
                                                 <span class="span-view">${enterprise.viewCount!'0'}</span>
                                                 <i class="iconfont i-times">&#xe75f;</i>
-                                                <span class="span-times">${enterprise.createTime?string("yyyy-MM-dd HH:mm:ss")}</span>
+                                                <span class="span-times"><#if enterprise.createTime??>${enterprise.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span>
                                             </div>
                                         </div>
-									</#list>
-								</#if>
-							</div>
-						</div>
+                                    </#list>
+                                </#if>
+                            </div>
+                        </div>
 
-					</div>
+                    </div>
 
-				</div>
+                </div>
 
-			</div>
-		</div>
+            </div>
+        </div>
         <#include "../public/foot.html" encoding="utf-8">
 
-	</body>
+</body>
 
-	<script>
-	layui.use(['form', 'layedit', 'laydate','carousel'], function(){
-	  var form = layui.form
-	  ,layer = layui.layer
-	  ,layedit = layui.layedit
-	  ,laydate = layui.laydate
-	  ,carousel = layui.carousel
-	  ,$ = layui.jquery;
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'carousel'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , carousel = layui.carousel
+            , $ = layui.jquery;
 
-		//建造实例
-		  carousel.render({
-		    elem: '#contentBox-body-list1'
-		    ,width: '1077px' //设置容器宽度
-		    ,height: " 604px" //高度
-		    ,arrow: 'always' //始终显示箭头
-		    //,anim: 'updown' //切换动画方式
-		    ,autoplay: false
-		    ,indicator:"none"
-		  });
-		  carousel.render({
-		    elem: '#contentBox-body-list2'
-		    ,width: '1077px' //设置容器宽度
-		    ,height: " 604px" //高度
-		    ,arrow: 'always' //始终显示箭头
-		    //,anim: 'updown' //切换动画方式
-		    ,autoplay: false
-		    ,indicator:"none"
-		  });
+        //建造实例
+        carousel.render({
+            elem: '#contentBox-body-list1'
+            , width: '1077px' //设置容器宽度
+            , height: " 604px" //高度
+            , arrow: 'always' //始终显示箭头
+            //,anim: 'updown' //切换动画方式
+            , autoplay: false
+            , indicator: "none"
+        });
+        carousel.render({
+            elem: '#contentBox-body-list2'
+            , width: '1077px' //设置容器宽度
+            , height: " 604px" //高度
+            , arrow: 'always' //始终显示箭头
+            //,anim: 'updown' //切换动画方式
+            , autoplay: false
+            , indicator: "none"
+        });
 
-		var pageNo = '${personalQuery.pageNo}';
-		var pageCount = '${personalQuery.pageCount}';
-		var pageSize = '${personalQuery.pageSize}';
-		if(pageNo > 1){
-            $("#contentBox-body-list1 button").eq(0).show()
-		}else{
-            $("#contentBox-body-list1 button").eq(0).hide()
-		}
-		if(pageNo*pageSize < pageCount){
-            $("#contentBox-body-list1 button").eq(1).show()
-		}else{
-            $("#contentBox-body-list1 button").eq(1).hide()
-		}
+        carousel.on('change(contentBox-body-list1)', function(obj){
+            var pageNo = '${personalVo.query.pageNo}';
+            var pageCount = '${personalVo.query.pageCount}';
+            var pageSize = '${personalVo.query.pageSize}';
+            $("#contentBox-body-list1 button").eq(0).show();
+            if (pageNo > 1) {
+                $("#contentBox-body-list1 button").eq(0).show();
+            } else {
+                $("#contentBox-body-list1 button").eq(0).show();
+            }
+            if (pageNo * pageSize < pageCount) {
+                $("#contentBox-body-list1 button").eq(1).show();
+            } else {
+                $("#contentBox-body-list1 button").eq(1).show();
+            }
+        });
 
-        var epageNo = '${enterpriseQuery.pageNo}';
-        var epageCount = '${enterpriseQuery.pageCount}';
-        var epageSize = '${enterpriseQuery.pageSize}';
-        if(epageNo > 1){
+        carousel.on('change(contentBox-body-list2)', function(obj){
+            var epageNo = '${enterpriseVo.query.pageNo}';
+            var epageCount = '${enterpriseVo.query.pageCount}';
+            var epageSize = '${enterpriseVo.query.pageSize}';
             $("#contentBox-body-list2 button").eq(0).show()
-        }else{
-            $("#contentBox-body-list2 button").eq(0).hide()
-        }
-        if(epageNo*epageSize < epageCount){
-            $("#contentBox-body-list2 button").eq(1).show()
-        }else{
-            $("#contentBox-body-list2 button").eq(1).hide()
+            if (epageNo > 1) {
+                $("#contentBox-body-list2 button").eq(0).show()
+            } else {
+                $("#contentBox-body-list2 button").eq(0).show()
+            }
+            if (epageNo * epageSize < epageCount) {
+                $("#contentBox-body-list2 button").eq(1).show()
+            } else {
+                $("#contentBox-body-list2 button").eq(1).show()
+            }
+        });
+        var selectType = function (requestType, userType) {
+            $.ajax({
+                type: "POST",
+                url: "/request/list/search",
+                data: {userType: userType, requestType: requestType, pageSize: 6, pageNo: 1, key: ''},
+                dataType: "json",
+                success: function (data) {
+                    alert(JSON.stringify(data));
+                },
+                error: function (data) {
+
+                }
+            });
         }
 
-
-})
-  	</script>
+    })
+</script>
 </html>

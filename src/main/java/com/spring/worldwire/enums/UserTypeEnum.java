@@ -9,8 +9,8 @@ import com.spring.worldwire.extent.INumericEnum;
  * To change this template use File | Settings | File and Code Templates | Includes | File Header.
  */
 public enum UserTypeEnum implements INumericEnum {
-    PERSONAL(1, "个人需求"),
-    ENTERPRISE(2, "企业需求");
+    PERSONAL(1, "个人"),
+    ENTERPRISE(2, "企业");
 
     private int code;
 

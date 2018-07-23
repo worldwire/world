@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -47,4 +49,10 @@ public class IndexController {
     public String toHelpCenter(Model model) {
         return "pc/helpCenter";
     }
+
+    @RequestMapping("/requestSearch")
+    public String search(String key) throws UnsupportedEncodingException {
+        return "/request/0/0/10/1?key="+ URLEncoder.encode(key,"utf8");
+    }
+
 }

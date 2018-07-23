@@ -28,3 +28,5 @@ alter table third_pay_order ADD foreign_id INT(11) Default 0 COMMENT '翻译需�
 alter table third_pay_order add column pay_detail varchar(255) comment '支付描述' after third_type;
 
 alter TABLE third_pay_order ADD COLUMN product_id bigint(20) NOT NULL COMMENT '主键id';
+
+alter table product_request add column view_count bigint(20) comment '查看次数' after language_level;

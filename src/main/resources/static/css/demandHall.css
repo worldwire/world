@@ -21,6 +21,7 @@ body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .l
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-title .list-style-title-img1 { position: absolute; top: 5px; left: -17px; }
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-title .list-style-title-img2 { position: absolute; top: -5px; right: 10px; width: 24px; height: 24px; border-radius: 12px; overflow: hidden; }
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-headImg { width: 80px; height: 80px; border-radius: 40px; border: 2px solid #DEDEDE; margin: auto; margin-top: 25px; overflow: hidden; }
+body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-headImg img{ width: 80px; height: 80px;}
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-name { font-size: 16px; color: #333333; font-weight: 600; text-align: center; margin-top: 21px; }
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-explain { font-size: 14px; color: #838383; text-align: center; margin-top: 11px; }
 body .content .contentBox .contentBox-body #contentBox-body-list1 .list-style .list-style-place { height: 40px; line-height: 40px; font-size: 14px; color: #333333; margin-top: 11px; font-weight: 600; position: relative; border-bottom: 1px solid #E0E0E0; border-top: 1px solid #E0E0E0; padding-left: 2px; }
@@ -53,6 +54,7 @@ body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .l
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-1 .list-style-1-img1 { position: absolute; top: 5px; left: -17px; }
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-1 .list-style-1-img2 { position: absolute; top: -5px; right: 10px; width: 24px; height: 24px; border-radius: 12px; overflow: hidden; }
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-headImg { width: 80px; height: 80px; border-radius: 40px; border: 2px solid #DEDEDE; margin: auto; margin-top: 25px; overflow: hidden; }
+body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-headImg img{ width: 80px; height: 80px;}
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-name { font-size: 16px; color: #333333; font-weight: 600; text-align: center; margin-top: 21px; }
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-explain { font-size: 14px; color: #838383; text-align: center; margin-top: 11px; }
 body .content .contentBox .contentBox-body #contentBox-body-list2 .list-style .list-style-place { height: 40px; line-height: 40px; font-size: 14px; color: #333333; margin-top: 11px; font-weight: 600; position: relative; border-bottom: 1px solid #E0E0E0; border-top: 1px solid #E0E0E0; padding-left: 2px; }

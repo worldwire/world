@@ -1,10 +1,13 @@
 package com.spring.worldwire.controller.pc;
 
+import com.alibaba.fastjson.JSONObject;
 import com.spring.worldwire.constants.Constants;
 import com.spring.worldwire.enums.RequestTypeEnum;
 import com.spring.worldwire.enums.UserTypeEnum;
+import com.spring.worldwire.manager.ProductRequestManager;
 import com.spring.worldwire.manager.UserCenterManager;
 import com.spring.worldwire.model.ProductRequest;
+import com.spring.worldwire.model.vo.ProductRequestVo;
 import com.spring.worldwire.query.ProductRequestQuery;
 import com.spring.worldwire.service.ProductRequestService;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -28,6 +32,9 @@ public class RequestController {
     private UserCenterManager userCenterManager;
 
     @Autowired
+    private ProductRequestManager productRequestManager;
+
+    @Autowired
     private ProductRequestService productRequestService;
 
     public RequestController(UserCenterManager userCenterManager, ProductRequestService productRequestService) {
@@ -36,41 +43,40 @@ public class RequestController {
     }
 
     @RequestMapping("/list/{userType}/{requestType}/{pageSize}/{pageNo}.html")
-    public String productRequestList(Model model, @PathVariable int userType, @PathVariable int requestType, @PathVariable int pageSize, @PathVariable int pageNo) {
+    public String productRequestList(Model model, @PathVariable int userType, @PathVariable int requestType, @PathVariable int pageSize, @PathVariable int pageNo, String key) {
         {
-            //UserTypeEnum userTypeEnum = UserTypeEnum.getNameByCode(userType);
-            RequestTypeEnum requestTypeEnum = RequestTypeEnum.getNameByCode(requestType);
-            ProductRequestQuery personalQuery = new ProductRequestQuery();
-            personalQuery.setPageSize(pageSize);
-            personalQuery.setPageNo(pageNo);
-            personalQuery.setRequestType(requestTypeEnum);
-            personalQuery.setUserType(UserTypeEnum.PERSONAL);
-            personalQuery.setPageCount(productRequestService.selectCountByQuery(personalQuery));
-            List<ProductRequest> personalList = productRequestService.selectByQuery(personalQuery, true);
+            ProductRequestVo personalVo = productRequestManager.getRequestByQuery(userType, requestType, UserTypeEnum.PERSONAL, pageSize, pageNo, key);
+            ProductRequestVo enterpriseVo = productRequestManager.getRequestByQuery(userType, requestType, UserTypeEnum.ENTERPRISE, pageSize, pageNo, key);
 
-            ProductRequestQuery enterpriseQuery = new ProductRequestQuery();
-            enterpriseQuery.setPageSize(pageSize);
-            enterpriseQuery.setPageNo(pageNo);
-            enterpriseQuery.setRequestType(requestTypeEnum);
-            enterpriseQuery.setUserType(UserTypeEnum.ENTERPRISE);
-            enterpriseQuery.setPageCount(productRequestService.selectCountByQuery(enterpriseQuery));
-            List<ProductRequest> enterpriseList = productRequestService.selectByQuery(enterpriseQuery, true);
-
-            model.addAttribute("personalQuery", personalQuery);
-            model.addAttribute("personalList", personalList);
-
-            model.addAttribute("enterpriseQuery", enterpriseQuery);
-            model.addAttribute("enterpriseList", enterpriseList);
+            model.addAttribute("personalVo", personalVo);
+            model.addAttribute("enterpriseVo", enterpriseVo);
 
             return "pc/requestList";
         }
     }
 
+    @RequestMapping("/list/search")
+    @ResponseBody
+    public String ajaxProductRequestList(int userType, int requestType, int pageSize, int pageNo, String key) {
+        {
+            ProductRequestVo personalVo = productRequestManager.getRequestByQuery(userType, requestType, UserTypeEnum.PERSONAL, pageSize, pageNo, key);
+            ProductRequestVo enterpriseVo = productRequestManager.getRequestByQuery(userType, requestType, UserTypeEnum.PERSONAL, pageSize, pageNo, key);
+
+            JSONObject obj = new JSONObject();
+            obj.put("personalVo", personalVo);
+            obj.put("enterpriseVo", enterpriseVo);
+
+            return obj.toJSONString();
+        }
+    }
+
+
     @RequestMapping("/detail")
     public String toDetail(Model model, Long id) {
-
-        System.out.println("=================" + id);
         ProductRequest productRequest = productRequestService.findById(id);
+        productRequest.setViewCount(productRequest.getViewCount()+1);
+        productRequestService.update(productRequest);
+
         model.addAttribute("productRequest", productRequest);
         return "pc/requestDetail";
     }

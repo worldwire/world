@@ -41,7 +41,7 @@ public class ProductRequestServiceImpl implements ProductRequestService {
             return list;
         }
         list.stream().forEach(request -> {
-            request.setUserInfo(userInfoDao.selectSimpleById(request.getUserId()));
+            request.setUserInfo(userInfoDao.selectByPrimaryKey(request.getUserId()));
         });
         return list;
     }
@@ -54,5 +54,10 @@ public class ProductRequestServiceImpl implements ProductRequestService {
     @Override
     public int updateStatus(ProductRequest productRequest) {
         return productRequestDao.updateStatus(productRequest);
+    }
+
+    @Override
+    public int update(ProductRequest productRequest) {
+        return productRequestDao.updateByPrimaryKeySelective(productRequest);
     }
 }

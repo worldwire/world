@@ -173,9 +173,6 @@
       <if test="query.thirdKey != null">
         and third_key = #{query.thirdKey,jdbcType=VARCHAR}
       </if>
-      <if test="query.password != null">
-        and password = #{query.password,jdbcType=VARCHAR}
-      </if>
       <if test="query.pageSize != null  and query.pageStart != null">
         limit #{query.pageStart,jdbcType=INTEGER},#{query.pageSize,jdbcType=INTEGER}
       </if>

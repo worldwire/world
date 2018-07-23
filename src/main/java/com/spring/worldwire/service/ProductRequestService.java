@@ -27,4 +27,6 @@ public interface ProductRequestService {
     int selectCountByQuery(ProductRequestQuery query);
 
     int updateStatus(ProductRequest productRequest);
+
+    int update(ProductRequest productRequest);
 }

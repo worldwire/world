@@ -15,13 +15,13 @@
 				<div>
 					<div class="information">
 						<div class="photo">
-							<a href=""><img src="${productRequest.userInfo.showImg!''}" alt="张大大的头像"></a>
+							<a href=""><img src="${productRequest.userInfo.showImg!''}" alt="头像"></a>
 						</div>
 						<div class="info">
 							<p class="name">${productRequest.userInfo.nickName!''}</p>
-							<p class="nat"><i class="iconfont">&#xe611;</i><span>中国 北京</span><img src="/images/gj.png" alt="国籍"></p>
+							<p class="nat"><i class="iconfont">&#xe611;</i><span>${productRequest.userInfo.localAddr!''}</span><img src="/images/gj.png" alt="国籍"></p>
 							<p class="text"><span class="disc"></span>
-								<span><#if productRequest.userType ==1>个人<#else>企业</#if><#if productRequest.requestType.code == 1>服务<#else>需求</#if></span>
+								<span><#if productRequest.userType.code ==1>个人<#else>企业</#if><#if productRequest.requestType.code == 1>服务<#else>需求</#if></span>
 								<#if productRequest.requestType.code == 1>我可以提供国际人才或资源<#else>我要找国际人才或资源</#if></p>
 						</div>
 						<div class="nationality">
@@ -30,12 +30,12 @@
 						</div>
 					</div>
 					<div class="content">
-						<div><h2>${productRequest.title}</h2></div>
+						<div><h2>${productRequest.title!''}</h2></div>
 						<div class="content-main">
-							${productRequest.content}
+							${productRequest.content!''}
 						</div>
 						<div class="time">
-							<p>发布时间: ${productRequest.createTime?string("yyyy-MM-dd HH:mm:ss")}</p>
+							<p>发布时间: <#if productRequest.createTime??>${productRequest.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></p>
 						</div>
 					</div>
 					<div class="level">
@@ -69,19 +69,43 @@
 					</div>
 					<div class="other">
 						<div style="margin-bottom: 50px;">
-							<a href="###">钢 管</a>
-							<a href="###">LED灯设计</a>
-							<a href="###">钢 管</a>
-							<a href="###">LED灯设计</a>
-							<a href="###">钢 管</a>
-							<a href="###">LED灯设计</a>
-							<a href="###">钢 管</a>
-							<a href="###">钢 管</a>
-							<a href="###">LED灯设计</a>
+							<#list productRequest.keyWord?split(";") as key>
+								<a href="###">${key}</a>
+							</#list>
 						</div>
 						<div style="float: right;">
 							<div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_tqf" data-cmd="tqf" title="分享到腾讯朋友"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a></div>
-							<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+							<script>
+                                window._bd_share_config = {
+                                    "common": {
+                                        "bdSnsKey": {},
+                                        "bdText": "",
+                                        "bdMini": "2",
+                                        "bdMiniList": false,
+                                        "bdPic": "",
+                                        "bdStyle": "1",
+                                        "bdSize": "24",
+                                        "onAfterClick": function(cmd){
+                                            //创建异步对象
+                                            var xhr = new XMLHttpRequest();
+											// 设置请求的类型及url
+											// post请求一定要添加请求头才行不然会报错
+                                            xhr.open('get', '/account/lc/share' );
+                                            // xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+											// 发送请求
+                                            xhr.send();
+                                            xhr.onreadystatechange = function () {
+                                                // 这步为判断服务器是否正确响应
+                                                if (xhr.readyState == 4 && xhr.status == 200) {
+                                                    console.log("share success");
+                                                }
+                                            };
+                                        }
+                                    },
+                                    "share": {}
+                                };
+                                with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~ ( - new Date() / 36e5)];
+							</script>
 						</div>
 					</div>
 				</div>
@@ -93,7 +117,7 @@
 						<p class="login-title">获取项目发起者联系方式</p>
 						<button class="layui-btn">点击获取</button>
 						<div class="login-msg">
-							<p>您每天有一次免费查看<span>${userInfo.nickName!''}</span></p>
+							<p>您每天有一次免费查看<span>${productRequest.userInfo.nickName!''}</span></p>
 							<p>联系方式的权限</p>
 						</div>
 					</div>
@@ -157,7 +181,7 @@
                         data: {email:$("#email").val(), password:$("#passwd").val()},
                         dataType: "json",
                         success: function(data){
-							alert(data);
+							alert(JSON.stringify(data));
 							window.location.reload();
 							if(data == "error"){
 								alert("参数错误");
@@ -165,14 +189,7 @@
 							if(data == "false"){
 							    alert("没有查看次数，请充值后再查看");
 							}
-							var userInfo = JSON.parse(data);
-							$("[name='mobile']").text(userInfo.mobile);
-                            $("[name='phone']").text(userInfo.phone);
-                            $("[name='wechat']").text(userInfo.wechat);
-                            $("[name='email']").text(userInfo.email);
-                            $("[name='facebook']").text(userInfo.facebook);
-                            $("[name='linkedin']").text(userInfo.linkedin);
-                            $("[name='whatsapp']").text(userInfo.whatsapp);
+
 
                         },
 						error: function (data) {
@@ -186,18 +203,22 @@
 //              loginBox.hide(); // 获取资料后隐藏信息
 				$.ajax({
                     type: "POST",
-                    url: "/login/ajaxLogin",
-                    data: {email:$("#email").val(), password:$("#passwd").val()},
+                    url: "/login/showContracts",
+					data:{productRequestId: '${productRequest.id}'},
                     dataType: "json",
                     success: function(data){
-                        
+                        $("[name='mobile']").text(data.mobile);
+                        $("[name='phone']").text(data.phone);
+                        $("[name='wechat']").text(data.wechat);
+                        $("[name='email']").text(data.email);
+                        $("[name='facebook']").text(data.facebook);
+                        $("[name='linkedin']").text(data.linkedin);
+                        $("[name='whatsapp']").text(data.whatsapp);
                     },
 					error: function (data) {
-						
+						alert(JSON.stringify(data));
                     }
 				});
-                contactBox.css("marginTop","140px"); // 添加距离
-                contactBox.find("li span").text("12345678910");
             });
         });
     </script>
