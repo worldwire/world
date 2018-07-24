@@ -105,7 +105,7 @@ public class RequestController {
     @RequestMapping("/save")
     public String save(ProductRequest request) {
         System.out.println(request);
-        return "pc/releaseRequest";
+        return "redirect:/request/lc/history";
     }
 
 

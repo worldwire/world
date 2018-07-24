@@ -23,6 +23,7 @@
                         <form method="POST" action="/request/save" name="form">
                             <div class="contentbox-body">
                                 <input type="hidden" name="keyWord">
+                                <input type="hidden" name="requestType" value="${productRequest.requestType}">
                                 <div class="body-tag">
                                     <div class="body-line-style">
                                         <span class="body-line-style-span">您寻找的才能（最多添加八项）</span>
@@ -72,11 +73,11 @@
                                         <div class="body-epsp-ep-phone">
                                             <div class="body-line-style">
                                                 <span class="body-line-style-dot"></span>&nbsp;&nbsp;
-                                                <span class="body-line-style-span">电话</span>
+                                                <span class="body-line-style-span">手机号</span>
                                             </div>
                                             <div class="layui-form">
                                                 <input class="layui-input body-epsp-ep-phone-input" type="text"
-                                                       name="phone"
+                                                       name="mobile"
                                                        value="${userInfo.mobile!''}" placeholder="请输入手机号">
                                             </div>
                                         </div>
@@ -98,7 +99,7 @@
                                             </div>
                                             <div class="layui-form">
                                                 <input class="layui-input body-epsp-sp-public-input" type="text"
-                                                       name="title" value="${userInfo.publicPlatform!''}"
+                                                       name="publicPlatform" value="${userInfo.publicPlatform!''}"
                                                        placeholder="请输入公众号">
                                             </div>
                                         </div>
@@ -151,7 +152,7 @@
                                                 </div>
                                                 <div class="layui-form">
                                                     <input class="layui-input body-details-wl-lin-input" type="text"
-                                                           name="linkedin" value="${userInfo.linkedin!''}"
+                                                           name="linkedIn" value="${userInfo.linkedin!''}"
                                                            placeholder="请输入LinkedIn">
                                                 </div>
                                             </div>
@@ -166,11 +167,10 @@
                                     <div class="body-ComMethods-com">
                                         <i class="iconfont body-ComMethods-com-addbtn">&#xe601;</i>
                                         <div class="layui-form body-ComMethods-com-box">
-                                            <input class="layui-input body-ComMethods-com-name" type="text" name="title"
+                                            <input class="layui-input body-ComMethods-com-name" type="text"
                                                    placeholder="请填写即时通信种类">
                                             <span class="body-ComMethods-com-span">:</span>
                                             <input class="layui-input body-ComMethods-com-content" type="text"
-                                                   name="title"
                                                    placeholder="请填写该通信方式的账号">
                                         </div>
                                     </div>
@@ -246,6 +246,8 @@
             var keyWord = $("[name=keyWord]").val();
             if (!!keyWord) {
                 keyWord = keyWord + ";" + value;
+            }else{
+                keyWord = value
             }
             $("[name=keyWord]").val(keyWord);
 
@@ -276,34 +278,48 @@
                 layer.msg("标题不能超过30个字", {time: 1500});
                 return false;
             }
-            var content = $("[name=content]").html();
+            var content = $("[name=content]").val();
             if (!content) {
                 layer.msg("内容不能为空", {time: 1500});
                 return false;
             }
-            var email = $("[name=email]").html();
+            var email = $("[name=email]").val();
             if (!email) {
                 layer.msg("邮箱不能为空", {time: 1500});
                 return false;
             }
-            var phone = $("[name=phone]").html();
-            if (!phone) {
-                layer.msg("电话不能为空", {time: 1500});
+            var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+            if(!reg.test(email)){
+                layer.msg("请输入正确的邮箱地址", {time: 1500});
+                return false;
+            }
+            var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+            var mobile = $("[name=mobile]").val();
+            if (!mobile) {
+                layer.msg("手机号不能为空", {time: 1500});
+                return false;
+            }
+            if(!myreg.test(mobile)){
+                layer.msg("请输入正确的手机号", {time: 1500});
+                return false;
+            }
+            var agree = $("[name=agreement]:checked").val();
+            if(!agree){
+                layer.msg("请选中同意用户协议按钮", {time: 1500});
                 return false;
             }
             var others = "";
-            $(".body-ComMethods-com").children(".body-ComMethods-com-box").each(arr, function (i, item) {
-                var name = item.child(".layui-input body-ComMethods-com-name").val();
-                var content = item.child(".body-ComMethods-com-content").val();
-                if (!!others) {
-                    others = others + ";" + name + ":" + content;
-                } else {
-                    others = name + ":" + content;
-                }
-                $("[name=others]").val(others);
-                $("[name=form]").submit;
-            });
-
+//            $(".body-ComMethods-com").children(".body-ComMethods-com-box").each(function (i, item) {
+//                var name = item.children(".body-ComMethods-com-name").get(0).val();
+//                var content = item.children(".body-ComMethods-com-content").get(0).val();
+//                if (!!others) {
+//                    others = others + ";" + name + ":" + content;
+//                } else {
+//                    others = name + ":" + content;
+//                }
+//                $("[name=others]").val(others);
+//            });
+            $("[name=form]").submit();
         });
 
         //普通图片上传
@@ -327,7 +343,7 @@
                 }
                 var path = res.path;
                 $("[name=qrcode]").val(path);
-                $(".body-details-ewm").attr("src", result);
+                $(".body-details-ewm").attr("src", path);
                 //上传成功
             }
             , error: function () {			//上传失败的回调
