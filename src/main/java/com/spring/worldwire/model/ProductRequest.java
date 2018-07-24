@@ -4,6 +4,7 @@ import com.spring.worldwire.enums.LanguageEnum;
 import com.spring.worldwire.enums.ProductRequestStatusEnum;
 import com.spring.worldwire.enums.RequestTypeEnum;
 import com.spring.worldwire.enums.UserTypeEnum;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +34,15 @@ public class ProductRequest implements Serializable {
 
     private String wechat;
 
+    private String facebook;
+
+    private String whatsapp;
+
     private String linkedIn;
+
+    private String others;
+
+    private String qrcode;
 
     private LanguageEnum languageType;
 
@@ -225,10 +234,11 @@ public class ProductRequest implements Serializable {
 
     /**
      * 克隆一个新语种的翻译
+     *
      * @param languageType 转变成的语言类型
      * @return 返回一个新的对象 缺少ID 和需要翻译的对象
      */
-    public ProductRequest converFromProduct(LanguageEnum languageType){
+    public ProductRequest converFromProduct(LanguageEnum languageType) {
         ProductRequest fromProductRequest = new ProductRequest();
         fromProductRequest.mobile = this.mobile;
         fromProductRequest.email = this.email;
@@ -244,12 +254,44 @@ public class ProductRequest implements Serializable {
         fromProductRequest.wechat = this.wechat;
         fromProductRequest.linkedIn = this.linkedIn;
         fromProductRequest.languageLevel = this.languageLevel;
-        if(this.languageId==null){
+        if (this.languageId == null) {
             fromProductRequest.languageId = this.id;
-        }else{
+        } else {
             fromProductRequest.languageId = this.languageId;
         }
         return fromProductRequest;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    public String getWhatsapp() {
+        return whatsapp;
+    }
+
+    public void setWhatsapp(String whatsapp) {
+        this.whatsapp = whatsapp;
+    }
+
+    public String getOthers() {
+        return others;
+    }
+
+    public void setOthers(String others) {
+        this.others = others;
+    }
+
+    public String getQrcode() {
+        return qrcode;
+    }
+
+    public void setQrcode(String qrcode) {
+        this.qrcode = qrcode;
     }
 
     @Override
@@ -277,8 +319,8 @@ public class ProductRequest implements Serializable {
     }
 
 
-    public String[] getKeyWordsVeiw(){
-        if(keyWord==null){
+    public String[] getKeyWordsVeiw() {
+        if (keyWord == null) {
             return null;
         }
         return keyWord.split(",");

@@ -108,7 +108,7 @@
                             <div class="carousel-item" style="width: 1077px;">
                                 <#if enterpriseVo??&&enterpriseVo.list??>
                                     <#list enterpriseVo.list as enterprise>
-                                        <div class="list-style" style="margin-left:0px ;">
+                                        <div class="list-style">
                                             <div class="list-style-1">
                                                 公司需求
                                                 <img class="list-style-1-img1" src="/images/demandHall1.png"/>
@@ -213,7 +213,9 @@
             , autoplay: false
             , indicator: "none"
         });
-
+        $(".contentBox-choose1 li").click(function(){
+            $(this).addClass("li-selected").siblings().removeClass("li-selected")
+        });
         carousel.on('change(contentBox-body-list1)', function(obj){
             var pageNo = '${personalVo.query.pageNo}';
             var pageCount = '${personalVo.query.pageCount}';
@@ -251,7 +253,7 @@
             $.ajax({
                 type: "POST",
                 url: "/request/list/search",
-                data: {userType: userType, requestType: requestType, pageSize: 6, pageNo: 1, key: ''},
+                data: {userType: userType, requestType: requestType, pageSize: 4, pageNo: 1, key: ''},
                 dataType: "json",
                 success: function (data) {
                     alert(JSON.stringify(data));

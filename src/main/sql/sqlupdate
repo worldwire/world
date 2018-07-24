@@ -30,3 +30,8 @@ alter table third_pay_order add column pay_detail varchar(255) comment '支付�
 alter TABLE third_pay_order ADD COLUMN product_id bigint(20) NOT NULL COMMENT '主键id';
 
 alter table product_request add column view_count bigint(20) comment '查看次数' after language_level;
+
+alter table product_request add column facebook varchar(255) after wechat;
+alter table product_request add column whatsapp varchar(255) after facebook;
+alter table product_request add column others varchar(255) after linkedin;
+alter table product_request add column qrcode varchar(255);

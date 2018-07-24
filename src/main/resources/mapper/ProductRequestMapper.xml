@@ -1,259 +1,314 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.spring.worldwire.dao.ProductRequestDao" >
-  <resultMap id="BaseResultMap" type="com.spring.worldwire.model.ProductRequest" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="request_type" property="requestType" jdbcType="INTEGER" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.RequestTypeEnum" />
-    <result column="key_word" property="keyWord" jdbcType="VARCHAR" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
-    <result column="email" property="email" jdbcType="VARCHAR" />
-    <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="website" property="website" jdbcType="VARCHAR" />
-    <result column="wechat" property="wechat" jdbcType="VARCHAR" />
-    <result column="linkedIn" property="linkedIn" jdbcType="VARCHAR" />
-    <result column="language_type" property="languageType" jdbcType="INTEGER" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.LanguageEnum"  />
-    <result column="language_id" property="languageId" jdbcType="BIGINT" />
-    <result column="status" property="status" jdbcType="INTEGER"  typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.ProductRequestStatusEnum" />
-    <result column="language_level" property="languageLevel" jdbcType="VARCHAR"  typeHandler="com.spring.worldwire.model.typeHandler.LanguageLevelHandel" javaType="com.spring.worldwire.model.LanguageLevel" />
-    <result column="user_type" property="userType" jdbcType="INTEGER"  typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.UserTypeEnum" />
-    <result column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="view_count" property="viewCount" jdbcType="BIGINT" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.spring.worldwire.dao.ProductRequestDao">
+    <resultMap id="BaseResultMap" type="com.spring.worldwire.model.ProductRequest">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="request_type" property="requestType" jdbcType="INTEGER"
+                typeHandler="com.spring.worldwire.extent.NumericEnumHandler"
+                javaType="com.spring.worldwire.enums.RequestTypeEnum"/>
+        <result column="key_word" property="keyWord" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="website" property="website" jdbcType="VARCHAR"/>
+        <result column="wechat" property="wechat" jdbcType="VARCHAR"/>
+        <result column="linkedIn" property="linkedIn" jdbcType="VARCHAR"/>
+        <result column="language_type" property="languageType" jdbcType="INTEGER"
+                typeHandler="com.spring.worldwire.extent.NumericEnumHandler"
+                javaType="com.spring.worldwire.enums.LanguageEnum"/>
+        <result column="language_id" property="languageId" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="INTEGER"
+                typeHandler="com.spring.worldwire.extent.NumericEnumHandler"
+                javaType="com.spring.worldwire.enums.ProductRequestStatusEnum"/>
+        <result column="language_level" property="languageLevel" jdbcType="VARCHAR"
+                typeHandler="com.spring.worldwire.model.typeHandler.LanguageLevelHandel"
+                javaType="com.spring.worldwire.model.LanguageLevel"/>
+        <result column="user_type" property="userType" jdbcType="INTEGER"
+                typeHandler="com.spring.worldwire.extent.NumericEnumHandler"
+                javaType="com.spring.worldwire.enums.UserTypeEnum"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="view_count" property="viewCount" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="facebook" property="updateTime" jdbcType="VARCHAR"/>
+        <result column="whatsapp" property="updateTime" jdbcType="VARCHAR"/>
+        <result column="others" property="updateTime" jdbcType="VARCHAR"/>
+        <result column="qrcode" property="updateTime" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <sql id="Base_Column_List">
     id, request_type, key_word, title, content, mobile, email, phone, website,wechat,linkedIn, language_type,
-    language_id, status,language_level , user_type,user_id,view_count,create_time,update_time
+    language_id, status,language_level , user_type,user_id,view_count,create_time,update_time,facebook,whatsapp,
+    others,qrcode
   </sql>
 
-  <sql id="select_query">
-    <trim suffixOverrides="and">
-      <if test="query.userType != null">
-        user_type = #{query.userType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler} and
-      </if>
-      <if test="query.requestType != null">
-        request_type = #{query.requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler} and
-      </if>
-      <if test="query.key != null">
-        title like concat("%",#{query.key},"%") or key_word like concat("%",#{query.key},"%")
-      </if>
-      status = 1
-    </trim>
-  </sql>
+    <sql id="select_query">
+        <trim suffixOverrides="and">
+            <if test="query.userType != null">
+                user_type = #{query.userType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler} and
+            </if>
+            <if test="query.requestType != null">
+                request_type = #{query.requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler} and
+            </if>
+            <if test="query.key != null">
+                title like concat("%",#{query.key},"%") or key_word like concat("%",#{query.key},"%")
+            </if>
+            status = 1
+        </trim>
+    </sql>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from product_request
-    where id = #{id,jdbcType=BIGINT}
-  </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from product_request
+        where id = #{id,jdbcType=BIGINT}
+    </select>
 
-  <select id="selectByQuery" resultMap="BaseResultMap" parameterType="com.spring.worldwire.query.ProductRequestQuery">
-    select
-    <include refid="Base_Column_List"/>
-    from product_request
-    <where>
-      <include refid="select_query"/>
-    </where>
-    <if test="query.pageStart != null">
-      limit ${query.pageStart} ,${query.pageSize}
-    </if>
-  </select>
+    <select id="selectByQuery" resultMap="BaseResultMap" parameterType="com.spring.worldwire.query.ProductRequestQuery">
+        select
+        <include refid="Base_Column_List"/>
+        from product_request
+        <where>
+            <include refid="select_query"/>
+        </where>
+        <if test="query.pageStart != null">
+            limit ${query.pageStart} ,${query.pageSize}
+        </if>
+    </select>
 
-  <select id="selectCountByQuery" resultType="java.lang.Integer">
-      select count(*)
-      from product_request
-      <where>
-        <include refid="select_query"/>
-      </where>
+    <select id="selectCountByQuery" resultType="java.lang.Integer">
+        select count(*)
+        from product_request
+        <where>
+            <include refid="select_query"/>
+        </where>
 
-  </select>
+    </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from product_request
     where id = #{id,jdbcType=BIGINT}
   </delete>
 
-  <insert id="insert" parameterType="com.spring.worldwire.model.ProductRequest" keyProperty="id" useGeneratedKeys="true" keyColumn="id" >
+    <insert id="insert" parameterType="com.spring.worldwire.model.ProductRequest" keyProperty="id"
+            useGeneratedKeys="true" keyColumn="id">
     insert into product_request (id, request_type, key_word, 
       title, content, mobile, 
       email, phone, website, wechat, linkedIn,
       language_type, language_id, `status`, language_level,
-      user_type,user_id, view_count, create_time, update_time)
+      user_type,user_id, view_count, create_time, update_time,
+      facebook,whatsapp,others,qrcode)
     values (#{id,jdbcType=BIGINT}, #{requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{keyWord,jdbcType=VARCHAR},
       #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{linkedIn,jdbcType=VARCHAR},
       #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{languageId,jdbcType=BIGINT}, #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       #{languageLevel,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       #{userType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},#{userId,jdbcType=BIGINT},#{viewCount,jdbcType=BIGINT},
-      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},#{facebook,jdbcType=VARCHAR},#{whatsapp,jdbcType=VARCHAR},
+      #{others,jdbcType=VARCHAR},#{qrcode,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.spring.worldwire.model.ProductRequest" >
-    insert into product_request
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="requestType != null" >
-        request_type,
-      </if>
-      <if test="keyWord != null" >
-        key_word,
-      </if>
-      <if test="title != null" >
-        title,
-      </if>
-      <if test="content != null" >
-        content,
-      </if>
-      <if test="mobile != null" >
-        mobile,
-      </if>
-      <if test="email != null" >
-        email,
-      </if>
-      <if test="phone != null" >
-        phone,
-      </if>
-      <if test="website != null" >
-        website,
-      </if>
-      <if test="languageType != null" >
-        language_type,
-      </if>
-      <if test="languageId != null" >
-        language_id,
-      </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="userType != null" >
-        user_type,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="viewCount != null">
-        view_count,
-      </if>
-      <if test="createTime != null" >
-        create_time,
-      </if>
-      <if test="updateTime != null" >
-        update_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="requestType != null" >
-        #{requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
-      </if>
-      <if test="keyWord != null" >
-        #{keyWord,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null" >
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="mobile != null" >
-        #{mobile,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null" >
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null" >
-        #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="website != null" >
-        #{website,jdbcType=VARCHAR},
-      </if>
-      <if test="languageType != null" >
-        #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
-      </if>
-      <if test="languageId != null" >
-        #{languageId,jdbcType=BIGINT},
-      </if>
-      <if test="status != null" >
-        #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
-      </if>
-      <if test="userType != null" >
-        #{userType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="viewCount != null">
-        #{viewCount,jdbcType=BIGINT},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.spring.worldwire.model.ProductRequest" >
-    update product_request
-    <set >
-      <if test="requestType != null" >
-        request_type = #{requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
-      </if>
-      <if test="keyWord != null" >
-        key_word = #{keyWord,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null" >
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null" >
-        content = #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="mobile != null" >
-        mobile = #{mobile,jdbcType=VARCHAR},
-      </if>
-      <if test="email != null" >
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null" >
-        phone = #{phone,jdbcType=VARCHAR},
-      </if>
-      <if test="website != null" >
-        website = #{website,jdbcType=VARCHAR},
-      </if>
-      <if test="languageType != null" >
-        language_type = #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
-      </if>
-      <if test="languageId != null" >
-        language_id = #{languageId,jdbcType=BIGINT},
-      </if>
-      <if test="status != null" >
-        status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
-      </if>
-      <if test="userType != null" >
-        user_type = #{userType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="viewCount != null">
-        view_count = #{viewCount,jdbcType=BIGINT},
-      </if>
-      <if test="createTime != null" >
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null" >
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.spring.worldwire.model.ProductRequest" >
+    <insert id="insertSelective" parameterType="com.spring.worldwire.model.ProductRequest">
+        insert into product_request
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="requestType != null">
+                request_type,
+            </if>
+            <if test="keyWord != null">
+                key_word,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="website != null">
+                website,
+            </if>
+            <if test="languageType != null">
+                language_type,
+            </if>
+            <if test="languageId != null">
+                language_id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="userType != null">
+                user_type,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="viewCount != null">
+                view_count,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="facebook != null">
+                facebook,
+            </if>
+            <if test="whatsapp != null">
+                whatsapp,
+            </if>
+            <if test="others != null">
+                others,
+            </if>
+            <if test="qrcode != null">
+                qrcode,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="requestType != null">
+                #{requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+            </if>
+            <if test="keyWord != null">
+                #{keyWord,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="website != null">
+                #{website,jdbcType=VARCHAR},
+            </if>
+            <if test="languageType != null">
+                #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+            </if>
+            <if test="languageId != null">
+                #{languageId,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+            </if>
+            <if test="userType != null">
+                #{userType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="viewCount != null">
+                #{viewCount,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="facebook != null">
+                #{facebook,jdbcType=VARCHAR},
+            </if>
+            <if test="whatsapp != null">
+                #{whatsapp,jdbcType=VARCHAR},
+            </if>
+            <if test="others != null">
+                #{others,jdbcType=VARCHAR},
+            </if>
+            <if test="qrcode != null">
+                #{qrcode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.spring.worldwire.model.ProductRequest">
+        update product_request
+        <set>
+            <if test="requestType != null">
+                request_type = #{requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+            </if>
+            <if test="keyWord != null">
+                key_word = #{keyWord,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="website != null">
+                website = #{website,jdbcType=VARCHAR},
+            </if>
+            <if test="languageType != null">
+                language_type = #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+            </if>
+            <if test="languageId != null">
+                language_id = #{languageId,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+            </if>
+            <if test="userType != null">
+                user_type = #{userType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="viewCount != null">
+                view_count = #{viewCount,jdbcType=BIGINT},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="facebook != null">
+                facebook = #{facebook,jdbcType=VARCHAR},
+            </if>
+            <if test="whatsapp != null">
+                whatsapp = #{whatsapp,jdbcType=VARCHAR},
+            </if>
+            <if test="others != null">
+                others = #{others,jdbcType=VARCHAR},
+            </if>
+            <if test="qrcode != null">
+                qrcode = #{qrcode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+  <update id="updateByPrimaryKey" parameterType="com.spring.worldwire.model.ProductRequest">
     update product_request
     set request_type = #{requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       key_word = #{keyWord,jdbcType=VARCHAR},
@@ -273,11 +328,15 @@
       user_id = #{userId,jdbcType=BIGINT},
       view_count = #{viewCount,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      facebook = #{facebook,jdbcType=TIMESTAMP},
+      whatsapp = #{whatsapp,jdbcType=TIMESTAMP},
+      others = #{others,jdbcType=TIMESTAMP},
+      qrcode = #{qrcode,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <update id="updateStatus" parameterType="com.spring.worldwire.model.ProductRequest" >
+  <update id="updateStatus" parameterType="com.spring.worldwire.model.ProductRequest">
     update product_request  set
     status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
     update_time = #{updateTime,jdbcType=TIMESTAMP}

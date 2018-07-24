@@ -39,5 +39,8 @@ public class Constants {
     public static final String USER_SESSION = "userInfo";
     public static final String USER_ID_SESSION = "userId";
 
+    //----------------------------------------第三方登录相关字段--------------------------------------
+    public static final String WECHAT_LOGIN_URL = "https://open.weixin.qq.com/connect/qrconnect?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect";
 
+    public static final String WECHAT_STATE = "worldwire";
 }

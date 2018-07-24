@@ -4,7 +4,7 @@ body .content .contentbox { width: 1200px; margin: auto; overflow: hidden; }
 body .content .contentbox .left-nav { float: left; }
 body .content .contentbox .contentbox-right { width: 920px; float: right; margin-top: 5px; margin-right: 5px; -moz-box-shadow: 0px 1px 5px #33333350; -webkit-box-shadow: 0px 1px 5px #33333350; box-shadow: 0px 1px 5px #33333350; }
 body .content .contentbox .contentbox-right .contentbox-body-title { height: 89px; background: #F9F9F9; line-height: 90px; font-size: 30px; color: #333333; font-weight: 500; padding-left: 60px; border-bottom: 1px solid #E0E0E0; }
-body .content .contentbox .contentbox-right .contentbox-body { padding: 0 60px; background: #FFFFFF; }
+body .content .contentbox .contentbox-right .contentbox-body { padding: 50px 60px 0 60px; background: #FFFFFF; }
 body .content .contentbox .contentbox-right .contentbox-body .body-line-style .body-line-style-dot { width: 8px; height: 8px; background: #D42026; border-radius: 4px; display: inline-block; margin-bottom: 2px; }
 body .content .contentbox .contentbox-right .contentbox-body .body-line-style .body-line-style-span { font-size: 14px; color: #858585; }
 body .content .contentbox .contentbox-right .contentbox-body .body-choose-title { font-size: 18px; color: #333333; font-weight: 600; padding: 27px 0; }
@@ -14,7 +14,6 @@ body .content .contentbox .contentbox-right .contentbox-body .body-choose-list d
 body .content .contentbox .contentbox-right .contentbox-body .body-choose-list span { margin-left: 30px; font-size: 16px; font-weight: 500; line-height: 60px; }
 body .content .contentbox .contentbox-right .contentbox-body .body-choose-list .body-choose-list-choose1 { float: left; }
 body .content .contentbox .contentbox-right .contentbox-body .body-choose-list .body-choose-list-choose2 { float: right; }
-body .content .contentbox .contentbox-right .contentbox-body .body-tag { margin-top: 80px; }
 body .content .contentbox .contentbox-right .contentbox-body .body-tag .body-tag-content { margin-top: 8px; }
 body .content .contentbox .contentbox-right .contentbox-body .body-tag .body-tag-content .body-tag-content-list span { width: 120px; font-size: 14px; line-height: 40px; border: 1px solid #E0E0E0; display: inline-block; padding: 0 10px; border-radius: 3px; color: #333333; position: relative; margin-left: 15px; text-align: center; }
 body .content .contentbox .contentbox-right .contentbox-body .body-tag .body-tag-content .body-tag-content-list span .span-i { font-size: 22px; position: absolute; right: -6px; top: -15px; }

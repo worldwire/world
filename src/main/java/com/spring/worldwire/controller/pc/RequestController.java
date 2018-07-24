@@ -7,9 +7,11 @@ import com.spring.worldwire.enums.UserTypeEnum;
 import com.spring.worldwire.manager.ProductRequestManager;
 import com.spring.worldwire.manager.UserCenterManager;
 import com.spring.worldwire.model.ProductRequest;
+import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.model.vo.ProductRequestVo;
 import com.spring.worldwire.query.ProductRequestQuery;
 import com.spring.worldwire.service.ProductRequestService;
+import com.spring.worldwire.service.UserInfoService;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +39,9 @@ public class RequestController {
     @Autowired
     private ProductRequestService productRequestService;
 
+    @Autowired
+    private UserInfoService userInfoService;
+
     public RequestController(UserCenterManager userCenterManager, ProductRequestService productRequestService) {
         this.userCenterManager = userCenterManager;
         this.productRequestService = productRequestService;
@@ -60,7 +65,7 @@ public class RequestController {
     public String ajaxProductRequestList(int userType, int requestType, int pageSize, int pageNo, String key) {
         {
             ProductRequestVo personalVo = productRequestManager.getRequestByQuery(userType, requestType, UserTypeEnum.PERSONAL, pageSize, pageNo, key);
-            ProductRequestVo enterpriseVo = productRequestManager.getRequestByQuery(userType, requestType, UserTypeEnum.PERSONAL, pageSize, pageNo, key);
+            ProductRequestVo enterpriseVo = productRequestManager.getRequestByQuery(userType, requestType, UserTypeEnum.ENTERPRISE, pageSize, pageNo, key);
 
             JSONObject obj = new JSONObject();
             obj.put("personalVo", personalVo);
@@ -74,7 +79,7 @@ public class RequestController {
     @RequestMapping("/detail")
     public String toDetail(Model model, Long id) {
         ProductRequest productRequest = productRequestService.findById(id);
-        productRequest.setViewCount(productRequest.getViewCount()+1);
+        productRequest.setViewCount(productRequest.getViewCount() + 1);
         productRequestService.update(productRequest);
 
         model.addAttribute("productRequest", productRequest);
@@ -91,30 +96,40 @@ public class RequestController {
         return "pc/myDetail";
     }
 
-    @RequestMapping("release")
+    @RequestMapping("/lc/release")
     public String release(Model model) {
 
         return "pc/releaseRequest";
     }
 
-    @RequestMapping("releaseCommit")
-    public String releaseCommit(Model model, Integer requestType) {
+    @RequestMapping("/save")
+    public String save(ProductRequest request) {
+        System.out.println(request);
+        return "pc/releaseRequest";
+    }
+
+
+    @RequestMapping("/lc/releaseCommit")
+    public String releaseCommit(Model model, Integer requestType, HttpServletRequest request) {
+
+        Object userId = request.getAttribute(Constants.USER_ID_SESSION);
 
         ProductRequest productRequest = new ProductRequest();
-
         RequestTypeEnum requestTypeEnum = RequestTypeEnum.getNameByCode(requestType);
         if (requestTypeEnum == null) {
             return "/";
         }
-
         productRequest.setRequestType(requestTypeEnum);
+        productRequest.setUserId((Long) userId);
 
-        productRequestService.save(productRequest);
+        UserInfo userInfo = userInfoService.selectById((Long) userId);
 
-        return "pc/releaseRequest";
+        model.addAttribute("userInfo", userInfo);
+        model.addAttribute("productRequest", productRequest);
+        return "pc/releaseDetailAdd";
     }
 
-    @RequestMapping("/history")
+    @RequestMapping("/lc/history")
     public String releaseHistory(HttpServletRequest request, Model model) {
 
         Object userId = request.getAttribute(Constants.USER_ID_SESSION);
@@ -133,4 +148,5 @@ public class RequestController {
         model.addAttribute("productRequestList", productRequestList);
         return "pc/requestHistory";
     }
+
 }
