@@ -18,13 +18,13 @@
     from request_views
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="selectByLoginId" resultType="com.spring.worldwire.model.RequestViews">
+  <select id="selectByLoginId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from request_views
     where login_id = #{loginId,jdbcType=BIGINT}
   </select>
-  <select id="selectByUserId" resultType="com.spring.worldwire.model.RequestViews">
+  <select id="selectByUserId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from request_views
