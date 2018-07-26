@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @SuppressWarnings("unused")
 @Controller
@@ -105,11 +106,16 @@ public class RequestController {
     @RequestMapping(value = "/save", produces = "text/plain;charset=UTF-8")
     public String save(ProductRequest productRequest, HttpServletRequest request) {
 
-        UserInfo userInfo = (UserInfo) request.getAttribute("userInfo");
-        productRequest.setCreateTime(new Date());
-        productRequest.setUserType(userInfo.getType());
-        productRequest.setStatus(ProductRequestStatusEnum.NORMAL);
-        productRequestService.save(productRequest);
+        if(Objects.isNull(productRequest.getId())){
+            UserInfo userInfo = (UserInfo) request.getAttribute("userInfo");
+            productRequest.setCreateTime(new Date());
+            productRequest.setUserType(userInfo.getType());
+            productRequest.setStatus(ProductRequestStatusEnum.NORMAL);
+            productRequestService.save(productRequest);
+        }else{
+            productRequestService.update(productRequest);
+        }
+
         return "redirect:/request/lc/history";
     }
 
@@ -122,6 +128,8 @@ public class RequestController {
         if (productRequest.getUserId().intValue() != ((Long) userId).intValue()) {
             return "redirect:/login/";
         }
+        model.addAttribute("service",RequestTypeEnum.SERVICE);
+        model.addAttribute("request",RequestTypeEnum.REQUEST);
         model.addAttribute("productRequest", productRequest);
         return "pc/releaseDetailEdit";
     }

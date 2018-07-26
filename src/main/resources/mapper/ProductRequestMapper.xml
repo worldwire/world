@@ -54,7 +54,7 @@
                 request_type = #{query.requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler} and
             </if>
             <if test="query.userId != null">
-                user_id = #{query.userId, jdbcType="BIGINT"} and
+                user_id = #{query.userId, jdbcType=BIGINT} and
             </if>
             <if test="query.key != null">
                 title like concat("%",#{query.key},"%") or key_word like concat("%",#{query.key},"%")
@@ -106,7 +106,7 @@
       facebook,whatsapp,others,qrcode)
     values (#{id,jdbcType=BIGINT}, #{requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{keyWord,jdbcType=VARCHAR},
       #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{linkedIn,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, #{publicPlatform,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{linkedIn,jdbcType=VARCHAR},
       #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{languageId,jdbcType=BIGINT}, #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       #{languageLevel,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       #{userType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},#{userId,jdbcType=BIGINT},#{viewCount,jdbcType=BIGINT},
