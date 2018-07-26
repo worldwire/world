@@ -13,8 +13,9 @@
         <result column="email" property="email" jdbcType="VARCHAR"/>
         <result column="phone" property="phone" jdbcType="VARCHAR"/>
         <result column="website" property="website" jdbcType="VARCHAR"/>
+        <result column="public_platform" property="publicPlatform" jdbcType="VARCHAR"/>
         <result column="wechat" property="wechat" jdbcType="VARCHAR"/>
-        <result column="linkedIn" property="linkedIn" jdbcType="VARCHAR"/>
+        <result column="linkedin" property="linkedIn" jdbcType="VARCHAR"/>
         <result column="language_type" property="languageType" jdbcType="INTEGER"
                 typeHandler="com.spring.worldwire.extent.NumericEnumHandler"
                 javaType="com.spring.worldwire.enums.LanguageEnum"/>
@@ -32,14 +33,14 @@
         <result column="view_count" property="viewCount" jdbcType="BIGINT"/>
         <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
-        <result column="facebook" property="updateTime" jdbcType="VARCHAR"/>
-        <result column="whatsapp" property="updateTime" jdbcType="VARCHAR"/>
-        <result column="others" property="updateTime" jdbcType="VARCHAR"/>
-        <result column="qrcode" property="updateTime" jdbcType="VARCHAR"/>
+        <result column="facebook" property="facebook" jdbcType="VARCHAR"/>
+        <result column="whatsapp" property="whatsapp" jdbcType="VARCHAR"/>
+        <result column="others" property="others" jdbcType="VARCHAR"/>
+        <result column="qrcode" property="qrcode" jdbcType="VARCHAR"/>
 
     </resultMap>
     <sql id="Base_Column_List">
-    id, request_type, key_word, title, content, mobile, email, phone, website,wechat,linkedIn, language_type,
+    id, request_type, key_word, title, content, mobile, email, phone, website, public_platform, wechat,linkedin, language_type,
     language_id, status,language_level , user_type,user_id,view_count,create_time,update_time,facebook,whatsapp,
     others,qrcode
   </sql>
@@ -51,6 +52,9 @@
             </if>
             <if test="query.requestType != null">
                 request_type = #{query.requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler} and
+            </if>
+            <if test="query.userId != null">
+                user_id = #{query.userId, jdbcType="BIGINT"} and
             </if>
             <if test="query.key != null">
                 title like concat("%",#{query.key},"%") or key_word like concat("%",#{query.key},"%")
@@ -96,8 +100,8 @@
             useGeneratedKeys="true" keyColumn="id">
     insert into product_request (id, request_type, key_word, 
       title, content, mobile, 
-      email, phone, website, wechat, linkedIn,
-      language_type, language_id, `status`, language_level,
+      email, phone, website, public_platform, wechat, linkedin,
+      language_type, language_id, status, language_level,
       user_type,user_id, view_count, create_time, update_time,
       facebook,whatsapp,others,qrcode)
     values (#{id,jdbcType=BIGINT}, #{requestType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{keyWord,jdbcType=VARCHAR},
@@ -138,6 +142,15 @@
             </if>
             <if test="website != null">
                 website,
+            </if>
+            <if test="wechat != null">
+                wechat,
+            </if>
+            <if test="linkedIn != null">
+                linkedin,
+            </if>
+            <if test="publicPlatform != null">
+                public_platform,
             </if>
             <if test="languageType != null">
                 language_type,
@@ -204,6 +217,15 @@
             <if test="website != null">
                 #{website,jdbcType=VARCHAR},
             </if>
+            <if test="wechat != null">
+                #{wechat,jdbcType=VARCHAR},
+            </if>
+            <if test="linkedIn != null">
+                #{linkedIn,jdbcType=VARCHAR},
+            </if>
+            <if test="publicPlatform != null">
+                #{publicPlatform,jdbcType=VARCHAR},
+            </if>
             <if test="languageType != null">
                 #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
             </if>
@@ -269,6 +291,15 @@
             <if test="website != null">
                 website = #{website,jdbcType=VARCHAR},
             </if>
+            <if test="wechat != null">
+                wechat = #{wechat,jdbcType=VARCHAR},
+            </if>
+            <if test="linkedIn != null">
+                linkedin = #{linkedIn,jdbcType=VARCHAR},
+            </if>
+            <if test="publicPlatform != null">
+                public_platform = #{publicPlatform,jdbcType=VARCHAR}
+            </if>
             <if test="languageType != null">
                 language_type = #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
             </if>
@@ -319,7 +350,8 @@
       phone = #{phone,jdbcType=VARCHAR},
       wechat = #{wechat,jdbcType=VARCHAR},
       website = #{website,jdbcType=VARCHAR},
-      linkedIn = #{linkedIn,jdbcType=VARCHAR},
+      public_platform = #{publicPlatform,jdbcType=VARCHAR},
+      linkedin = #{linkedIn,jdbcType=VARCHAR},
       language_type = #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       language_id = #{languageId,jdbcType=BIGINT},
       status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},

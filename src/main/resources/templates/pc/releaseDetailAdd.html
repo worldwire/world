@@ -18,16 +18,18 @@
                     <div class="contentbox-right">
                         <div class="contentbox-body-title">
                             添加需求
-                            <input type="hidden" name="id" value="${productRequest.id!''}">
+
                         </div>
-                        <form method="POST" action="/request/save" name="form">
+                        <form method="POST" action="/request/save" name="form" accept-charset="UTF-8" onsubmit="document.charset='UTF-8';">
                             <div class="contentbox-body">
-                                <input type="hidden" name="keyWord">
-                                <input type="hidden" name="requestType" value="${productRequest.requestType}">
+                                <input type="hidden" name="id" value="${productRequest.id!''}">
+                                <input type="hidden" name="userId" value="${userInfo.id!''}">
+                                <input type="hidden" name="requestType" value="${productRequest.requestType.code}">
                                 <div class="body-tag">
                                     <div class="body-line-style">
                                         <span class="body-line-style-span">您寻找的才能（最多添加八项）</span>
                                     </div>
+                                    <input type="hidden" name="keyWord">
                                     <div class="body-tag-content">
                                         <span class="body-tag-content-list">
 
@@ -264,7 +266,6 @@
             var target = $(e.target);
             var parent = target.parent()
             var ch = parent.children("div").first()
-//			alert(ch.target)
             parent.append('<div class="layui-form body-ComMethods-com-box">' + ch.html() + '</div>')
         });
         // 保存按钮
@@ -309,16 +310,16 @@
                 return false;
             }
             var others = "";
-//            $(".body-ComMethods-com").children(".body-ComMethods-com-box").each(function (i, item) {
-//                var name = item.children(".body-ComMethods-com-name").get(0).val();
-//                var content = item.children(".body-ComMethods-com-content").get(0).val();
-//                if (!!others) {
-//                    others = others + ";" + name + ":" + content;
-//                } else {
-//                    others = name + ":" + content;
-//                }
-//                $("[name=others]").val(others);
-//            });
+            $(".body-ComMethods-com").children(".body-ComMethods-com-box").each(function (i, item) {
+                var name = $(this).children(".body-ComMethods-com-name:first").val();
+                var content = $(this).children(".body-ComMethods-com-content:first").val();
+                if (!!others) {
+                    others = others + ";" + name + ":" + content;
+                } else {
+                    others = name + ":" + content;
+                }
+                $("[name=others]").val(others);
+            });
             $("[name=form]").submit();
         });
 
@@ -328,7 +329,7 @@
             , url: '/file/upload'	//上传路径
             , data: {type: 'request'}
             , method: 'POST'	 	//上传的方法
-            , auto: false			//自动上传否？
+            , auto: true			//自动上传否？
             , bindAction: '.body-SaveBtn-btn'		//开启上传的按钮
             , choose: function (obj) {				//选择文件之后
                 //预读本地文件示例，不支持ie8

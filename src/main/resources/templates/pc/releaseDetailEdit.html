@@ -32,33 +32,32 @@
                                     选择想要提供的业务
                                 </div>
                                 <div class="body-choose-list">
-                                    <input type="hidden" name="request_type" value="${productRequest.requestType!''}">
-                                    <div class="body-choose-list-choose1" <#if productRequest.requestType == 1>style="border-bottom:3px solid #D42026"</#if>>
+                                    <input type="hidden" name="requestType" value="${productRequest.requestType!''}">
+                                    <div class="body-choose-list-choose1" <#if productRequest.requestType.code == 1>style="border-bottom:3px solid #D42026"</#if>>
                                     我有才能可以帮助外国人
                                 </div>
                                 <span class="">
                                     或
                                 </span>
-                                <div class="body-choose-list-choose2" <#if productRequest.requestType == 2>style="border-bottom:3px solid #D42026"</#if>>
+                                <div class="body-choose-list-choose2" <#if productRequest.requestType.code == 2>style="border-bottom:3px solid #D42026"</#if>>
                                 我要找国际人才或资源
                         </div>
                     </div>
                     </#if>
                     <div class="body-tag">
                         <div class="body-line-style">
-                            <#if productRequest.keyWord??>
-                                <#list productRequest.keyWord?split(";") as key>
-                                        <span class="">
-										    key
-										<i class="iconfont span-i body-tag-ibtn">&#xe638;</i>
-									</span>
-                                </#list>
-                            </#if>
                             <span class="body-line-style-span">您寻找的才能（最多添加八项）</span>
                         </div>
                         <div class="body-tag-content">
 								<span class="body-tag-content-list">
-
+                                    <#if productRequest.keyWord??>
+                                        <#list productRequest.keyWord?split(";") as key>
+                                                <span class="">
+                                                    ${key}
+                                                <i class="iconfont span-i body-tag-ibtn">&#xe638;</i>
+                                            </span>
+                                        </#list>
+                                    </#if>
 								</span>
                             <span class="body-tag-content-btn">
 									<i class="iconfont span-add">&#xe601;</i>
@@ -81,7 +80,7 @@
                         </div>
                         <div class="layui-form">
                                     <textarea name="content" placeholder="请输入内容"
-                                              class="layui-textarea body-DeContent-textarea">value="${productRequest.content!''}"</textarea>
+                                              class="layui-textarea body-DeContent-textarea">${productRequest.content!''}"</textarea>
                         </div>
                     </div>
                     <!--邮箱电话网站公众号-->
@@ -103,7 +102,7 @@
                                     <span class="body-line-style-span">电话</span>
                                 </div>
                                 <div class="layui-form">
-                                    <input class="layui-input body-epsp-ep-phone-input" type="text" name="phone"
+                                    <input class="layui-input body-epsp-ep-phone-input" type="text" name="mobile"
                                            value="${productRequest.mobile!''}" placeholder="请输入手机号">
                                 </div>
                             </div>
@@ -134,9 +133,7 @@
                         <input type="hidden" name="qrcode">
                         <div class="body-details-img">
                             <p>点击上传<br/>我的微信二维码</p>
-                            <img class="body-details-ewm"
-                            <#if productRequest.qrcode??>src="${productRequest.qrcode}"</#if>
-                            />
+                            <img class="body-details-ewm" <#if productRequest.qrcode??>src="${productRequest.qrcode}"</#if> />
                         </div>
                         <div class="body-details-list">
                             <div class="body-details-vf">
@@ -177,7 +174,7 @@
                                     </div>
                                     <div class="layui-form">
                                         <input class="layui-input body-details-wl-lin-input" type="text"
-                                               name="linkedin" value="${productRequest.linkedin!''}"
+                                               name="linkedin" value="${productRequest.linkedIn!''}"
                                                placeholder="请输入LinkedIn">
                                     </div>
                                 </div>
@@ -193,26 +190,24 @@
                             <#if productRequest.others??>
                                 <#list productRequest.others?split(";") as item>
                                     <#if item??>
-                                        <#list item?split(":") as communicate>
-                                            <div class="layui-form body-ComMethods-com-box">
-                                                <input class="layui-input body-ComMethods-com-name" type="text"
-                                                       name="title"
-                                                       value="${communicate[0]}" placeholder="请填写即时通信种类">
-                                                <span class="body-ComMethods-com-span">:</span>
-                                                <input class="layui-input body-ComMethods-com-content" type="text"
-                                                       name="title"
-                                                       value="${communicate[1]}" placeholder="请填写该通信方式的账号">
-                                            </div>
-                                        </#list>
+                                        <div class="layui-form body-ComMethods-com-box">
+                                            <#list item?split(':') as communicate>
+                                                <#if communicate_index == 0>
+                                                    <input class="layui-input body-ComMethods-com-name" type="text" value="${communicate}" placeholder="请填写即时通信种类">
+                                                    <span class="body-ComMethods-com-span">:</span>
+                                                </#if>
+                                                <#if communicate_index == 1>
+                                                    <input class="layui-input body-ComMethods-com-content" type="text" value="${communicate[1]}" placeholder="请填写该通信方式的账号">
+                                                </#if>
+                                            </#list>
+                                        </div>
                                     </#if>
                                 </#list>
                                 <#else>
                                     <div class="layui-form body-ComMethods-com-box">
-                                        <input class="layui-input body-ComMethods-com-name" type="text" name="title"
-                                               placeholder="请填写即时通信种类">
+                                        <input class="layui-input body-ComMethods-com-name" type="text" placeholder="请填写即时通信种类">
                                         <span class="body-ComMethods-com-span">:</span>
-                                        <input class="layui-input body-ComMethods-com-content" type="text" name="title"
-                                               placeholder="请填写该通信方式的账号">
+                                        <input class="layui-input body-ComMethods-com-content" type="text" placeholder="请填写该通信方式的账号">
                                     </div>
                             </#if>
                         </div>
@@ -305,10 +300,11 @@
 
         $(document).on("click", ".body-ComMethods-com-addbtn", function (e) {
             var target = $(e.target);
-            var parent = target.parent()
-            var ch = parent.children("div").first()
-//			alert(ch.target)
-            parent.append('<div class="layui-form body-ComMethods-com-box">' + ch.html() + '</div>')
+            var parent = target.parent();
+            var appendHtml = "<input class='layui-input body-ComMethods-com-name' type='text'  placeholder='请填写即时通信种类'>"
+                +"<span class='body-ComMethods-com-span'>:</span>"
+                + "<input class='layui-input body-ComMethods-com-content' type='text' placeholder='请填写该通信方式的账号'>";
+            parent.append('<div class="layui-form body-ComMethods-com-box">' + appendHtml + '</div>')
         });
         // 保存按钮
         $(document).on("click", ".body-SaveBtn"), function (e) {

@@ -29,9 +29,6 @@ public class UserAccountController {
     @ResponseBody
     public String thirdShare(HttpServletRequest request) {
         Object userId = request.getAttribute(Constants.USER_ID_SESSION);
-        if (Objects.isNull(userId) || !NumberUtils.isNumber(userId.toString())) {
-            return "";
-        }
         UserAccount account = userAccountService.selectByUserId((Long) userId);
         userAccountService.updateViewCount(account);
         return "";

@@ -45,7 +45,7 @@ public class LoginInterceptor implements HandlerInterceptor {
                 httpServletResponse.sendRedirect(contextPath + "/login/");
                 return false;
             }
-
+            httpServletRequest.setAttribute("userInfo",userInfo);
         } catch (Exception e) {
             httpServletResponse.sendRedirect(contextPath + "/login/");
             return false;

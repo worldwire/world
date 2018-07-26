@@ -32,6 +32,8 @@ public class ProductRequest implements Serializable {
 
     private String website;
 
+    private String publicPlatform;
+
     private String wechat;
 
     private String facebook;
@@ -225,11 +227,19 @@ public class ProductRequest implements Serializable {
     }
 
     public Long getViewCount() {
-        return viewCount;
+        return viewCount == null ? 0 : viewCount;
     }
 
     public void setViewCount(Long viewCount) {
         this.viewCount = viewCount;
+    }
+
+    public String getPublicPlatform() {
+        return publicPlatform;
+    }
+
+    public void setPublicPlatform(String publicPlatform) {
+        this.publicPlatform = publicPlatform;
     }
 
     /**
@@ -246,13 +256,17 @@ public class ProductRequest implements Serializable {
         fromProductRequest.phone = this.phone;
         fromProductRequest.status = ProductRequestStatusEnum.INIT;
         fromProductRequest.website = this.website;
+        fromProductRequest.publicPlatform = this.publicPlatform;
         fromProductRequest.userType = this.userType;
         fromProductRequest.requestType = this.requestType;
         fromProductRequest.createTime = new Date();
         fromProductRequest.userId = this.userId;
         fromProductRequest.website = this.website;
         fromProductRequest.wechat = this.wechat;
+        fromProductRequest.facebook = this.facebook;
+        fromProductRequest.whatsapp = this.whatsapp;
         fromProductRequest.linkedIn = this.linkedIn;
+        fromProductRequest.others = this.others;
         fromProductRequest.languageLevel = this.languageLevel;
         if (this.languageId == null) {
             fromProductRequest.languageId = this.id;
@@ -306,6 +320,12 @@ public class ProductRequest implements Serializable {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", website='" + website + '\'' +
+                ", publicPlatform='" + publicPlatform + '\'' +
+                ", wechat='" + wechat + '\'' +
+                ", facebook='" + facebook + '\'' +
+                ", whatsapp='" + whatsapp + '\'' +
+                ", linkedIn='" + linkedIn + '\'' +
+                ", others='" + others + '\'' +
                 ", languageType=" + languageType +
                 ", languageId=" + languageId +
                 ", status=" + status +

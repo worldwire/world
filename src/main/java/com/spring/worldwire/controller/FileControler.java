@@ -2,10 +2,7 @@ package com.spring.worldwire.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.spring.worldwire.utils.FileUtil;
-import org.apache.log4j.lf5.util.DateFormatManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,7 +20,7 @@ import java.util.Date;
  */
 @RestController
 @RequestMapping("/file")
-public class FileControler{
+public class FileControler {
 
     @Value("${file.basedir}")
     private String baseFilePath;
@@ -34,16 +31,16 @@ public class FileControler{
     @ResponseBody
     public JSONObject fileUpload(MultipartFile file, String type) throws IOException {
         JSONObject object = new JSONObject();
-        if(StringUtils.isEmpty(type)){
+        if (StringUtils.isEmpty(type)) {
             type = "default";
         }
-        if(!baseFilePath.endsWith("\\")){
+        if (!baseFilePath.endsWith(File.separator)) {
             baseFilePath = baseFilePath + File.separator;
         }
-        String relativePath = type + File.separator + df.format(new Date()) + File.separator + file.getOriginalFilename();
+        String relativePath = File.separator + type + File.separator + df.format(new Date()) + File.separator + file.getOriginalFilename();
         String fullPath = baseFilePath + relativePath;
-        if(FileUtil.upload(file,fullPath)){
-            object.put("path",relativePath);
+        if (FileUtil.upload(file, fullPath)) {
+            object.put("path", relativePath);
         }
         return object;
     }
