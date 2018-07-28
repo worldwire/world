@@ -7,7 +7,7 @@
     <result column="type" property="type" jdbcType="INTEGER" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.UserTypeEnum"/>
     <result column="is_foreign" property="isForeign" jdbcType="INTEGER" />
     <result column="show_img" property="showImg" jdbcType="VARCHAR" />
-    <result column="brithday" property="brithday" jdbcType="TIMESTAMP" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
     <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
     <result column="language" property="language" jdbcType="VARCHAR" />
     <result column="bri_nationality" property="briNationality" jdbcType="VARCHAR" />
@@ -48,7 +48,7 @@
     <result column="business_bank_img" property="businessBankImg" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, login_id, `type`, is_foreign, show_img, brithday, nick_name, language, bri_nationality,
+    id, login_id, `type`, is_foreign, show_img, birthday, nick_name, language, bri_nationality,
     now_nationality, local_addr, occupation, email, mobile, website, public_platform, 
     wechat_qrcode, wechat, facebook, whatsapp, linkedin, communication, idcard_on_img, 
     idcard_down_img, idcard_hand_img, real_name, idcard, company_name, company_time, 
@@ -77,7 +77,7 @@
   </delete>
   <insert id="insert" parameterType="com.spring.worldwire.model.UserInfo" keyProperty="id" useGeneratedKeys="true" keyColumn="id" >
     insert into user_info (id, login_id, type, 
-      is_foreign, show_img, brithday, 
+      is_foreign, show_img, birthday,
       nick_name, language, bri_nationality, 
       now_nationality, local_addr, occupation, 
       email, mobile, website, 
@@ -93,7 +93,7 @@
       business_bank, business_bank_name, business_bank_addr, 
       business_bank_img)
     values (#{id,jdbcType=BIGINT}, #{loginId,jdbcType=BIGINT}, #{type,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, 
-      #{isForeign,jdbcType=INTEGER}, #{showImg,jdbcType=VARCHAR}, #{brithday,jdbcType=TIMESTAMP}, 
+      #{isForeign,jdbcType=INTEGER}, #{showImg,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP},
       #{nickName,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{briNationality,jdbcType=VARCHAR}, 
       #{nowNationality,jdbcType=VARCHAR}, #{localAddr,jdbcType=VARCHAR}, #{occupation,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, 
@@ -127,8 +127,8 @@
       <if test="showImg != null" >
         show_img,
       </if>
-      <if test="brithday != null" >
-        brithday,
+      <if test="birthday != null" >
+        birthday,
       </if>
       <if test="nickName != null" >
         nick_name,
@@ -261,8 +261,8 @@
       <if test="showImg != null" >
         #{showImg,jdbcType=VARCHAR},
       </if>
-      <if test="brithday != null" >
-        #{brithday,jdbcType=TIMESTAMP},
+      <if test="birthday != null" >
+        #{birthday,jdbcType=TIMESTAMP},
       </if>
       <if test="nickName != null" >
         #{nickName,jdbcType=VARCHAR},
@@ -395,8 +395,8 @@
       <if test="showImg != null" >
         show_img = #{showImg,jdbcType=VARCHAR},
       </if>
-      <if test="brithday != null" >
-        brithday = #{brithday,jdbcType=TIMESTAMP},
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=TIMESTAMP},
       </if>
       <if test="nickName != null" >
         nick_name = #{nickName,jdbcType=VARCHAR},
@@ -521,7 +521,7 @@
       type = #{type,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       is_foreign = #{isForeign,jdbcType=INTEGER},
       show_img = #{showImg,jdbcType=VARCHAR},
-      brithday = #{brithday,jdbcType=TIMESTAMP},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
       nick_name = #{nickName,jdbcType=VARCHAR},
       language = #{language,jdbcType=VARCHAR},
       bri_nationality = #{briNationality,jdbcType=VARCHAR},

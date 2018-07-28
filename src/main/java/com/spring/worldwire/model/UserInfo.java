@@ -20,7 +20,7 @@ public class UserInfo implements Serializable {
 
     private String showImg;
 
-    private Date brithday;
+    private Date birthday;
 
     private String nickName;
 
@@ -138,12 +138,12 @@ public class UserInfo implements Serializable {
         this.showImg = showImg == null ? null : showImg.trim();
     }
 
-    public Date getBrithday() {
-        return brithday;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setBrithday(Date brithday) {
-        this.brithday = brithday;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     public String getNickName() {
@@ -453,7 +453,7 @@ public class UserInfo implements Serializable {
     @Override
     public String toString() {
         return "UserInfo [id=" + id + ", loginId=" + loginId + ", type=" + type + ", isForeign=" + isForeign
-                + ", showImg=" + showImg + ", brithday=" + brithday + ", nickName=" + nickName + ", language="
+                + ", showImg=" + showImg + ", birthday=" + birthday + ", nickName=" + nickName + ", language="
                 + language + ", briNationality=" + briNationality + ", nowNationality=" + nowNationality
                 + ", localAddr=" + localAddr + ", occupation=" + occupation + ", email=" + email + ", mobile=" + mobile
                 + ", website=" + website + ", publicPlatform=" + publicPlatform + ", wechatQrcode=" + wechatQrcode

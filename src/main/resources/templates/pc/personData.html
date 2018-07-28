@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,313 +20,340 @@
     <div class="main">
         <div class="head-img">
             <div class="head-box">
-                <img src="/images/defaultHeadImg.png"/>
+                <img src="${userInfo.showImg!'/images/defaultHeadImg.png'}"/>
+                <input type="hidden" name="showImg" value="${userInfo.showImg!}" id="showImg" />
             </div>
 
         </div>
         <div class="wrap">
-            <div class="title">
-                <p>基本资料</p>
-            </div>
-            <div class="base">
-                <form class="layui-form layui-form-pane">
-                    <div class="layui-form-item">
-                        <button type="button" class="layui-btn">保存</button>
-                    </div>
-                    <div class="layui-form-item layui-form-text">
-                        <label for="userName" class="req">昵 称</label>
-                        <div class="layui-input-block">
-                            <input type="text" id="userName" value="${userInfo.nickName!}" class="layui-input tiput" placeholder="请输入用户名">
-                        </div>
-                    </div>
+            <form class="layui-form layui-form-pane" id="userBasic" action="/info/modify" method="post">
+                <div class="title">
+                    <p>基本资料</p>
+                </div>
+                <div class="base">
 
-                    <div class="layui-form-item">
-                        <label for="year" class="req">出生年月日</label>
-                        <div class="layui-input-inline">
-                            <input type="text"  class="layui-input" id = "year" name="year" placeholder="年"/>
+                        <!--<div class="layui-form-item">
+                            <button type="button" class="layui-btn">保存</button>
+                        </div>-->
+                        <input type="hidden" name="id" value="${userInfo.id}">
+                        <div class="layui-form-item layui-form-text">
+                            <label for="userName" class="req">昵 称</label>
+                            <div class="layui-input-block">
+                                <input type="text" id="userName" value="${userInfo.nickName!}" class="layui-input tiput" placeholder="请输入用户名">
+                            </div>
                         </div>
 
-                        <div class="layui-input-inline">
-                            <input type="text"  class="layui-input" id = "month" name="month"  placeholder="月"/>
+                        <div class="layui-form-item">
+                            <label for="year" class="req">出生年月日</label>
+                            <div class="layui-input-inline">
+                                <input type="text"  class="layui-input" id = "year" name="year" value="${(userInfo.birthday?string('YYYY'))!}" placeholder="年"/>
+                            </div>
+
+                            <div class="layui-input-inline">
+                                <input type="text"  class="layui-input" id = "month" name="month"  value="${(userInfo.birthday?string('MM'))!}"  placeholder="月"/>
+                            </div>
+
+                            <div class="layui-input-inline">
+                                <input type="text"  class="layui-input" id = "day" name="day"  value="${(userInfo.birthday?string('dd'))!}" placeholder="日"/>
+                            </div>
+                            <input type="hidden" name="birthday" id="birthday" />
                         </div>
 
-                        <div class="layui-input-inline">
-                            <input type="text"  class="layui-input" id = "day" name="day" placeholder="日"/>
+                        <div class="layui-form-item item2-wrap">
+                            <label for="lang" class="req">可通讯语言种类及水平</label>
+                            <div class="item2-box">
+                                <div class="layui-input-inline item2">
+                                    <select name="lang" id="lang">
+                                        <option value="">请选择语种</option>
+                                        <#list languageValues as language>
+                                            <option value="${language.code}">${language.cnName}</option>
+                                        </#list>
+
+                                    </select>
+                                </div>
+
+                                <div class="layui-input-inline item2">
+                                    <select name="level">
+                                        <option value="">请选择熟练程度</option>
+                                        <#list levelValues as level>
+                                            <option value="${level.code}">${level.cnName}</option>
+                                        </#list>
+                                    </select>
+                                </div>
+                            </div>
+                            <i class="iconfont plus-btn">&#xe601;</i>
                         </div>
-                    </div>
 
 
-                    <div class="layui-form-item item2-wrap">
-                        <label for="lang" class="req">可通讯语言种类及水平</label>
-                        <div class="item2-box">
-                            <div class="layui-input-inline item2">
-                                <select name="lang" id="lang">
-                                    <option value="">请选择语种</option>
-                                    <#list languageValues as language>
-                                        <option value="${language.code}">${language.cnName}</option>
-                                    </#list>
-
+                        <div class="layui-form-item">
+                            <label for="nationality" class="req">本人出生地</label>
+                            <div class="layui-input-inline">
+                                <select name="nationality" id="nationality">
+                                    <option value="">国籍</option>
+                                    <option value="">中国</option>
+                                    <option value="">美国</option>
+                                    <option value="">俄罗斯</option>
                                 </select>
                             </div>
 
-                            <div class="layui-input-inline item2">
-                                <select name="level">
-                                    <option value="">请选择熟练程度</option>
-                                    <#list levelValues as level>
-                                        <option value="${level.code}">${level.cnName}</option>
-                                    </#list>
+                            <div class="layui-input-inline">
+                                <select name="">
+                                    <option value="">省</option>
+                                </select>
+                            </div>
+
+                            <div class="layui-input-inline">
+                                <select name="">
+                                    <option value="">市</option>
                                 </select>
                             </div>
                         </div>
-                        <i class="iconfont plus-btn">&#xe601;</i>
-                    </div>
 
-
-                    <div class="layui-form-item">
-                        <label for="nationality" class="req">本人出生地</label>
-                        <div class="layui-input-inline">
-                            <select name="nationality" id="nationality">
-                                <option value="">国籍</option>
-                                <option value="">中国</option>
-                                <option value="">美国</option>
-                                <option value="">俄罗斯</option>
-                            </select>
-                        </div>
-
-                        <div class="layui-input-inline">
-                            <select name="">
-                                <option value="">省</option>
-                            </select>
-                        </div>
-
-                        <div class="layui-input-inline">
-                            <select name="">
-                                <option value="">市</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item">
-                        <label class="req">本人现有国籍</label>
-                        <div class="layui-input-inline">
-                            <select name="" >
-                                <option value="">国籍</option>
-                                <option value="">中国</option>
-                                <option value="">美国</option>
-                                <option value="">俄罗斯</option>
-                            </select>
-                        </div>
-
-                        <div class="layui-input-inline">
-                            <select name="">
-                                <option value="">省</option>
-                            </select>
-                        </div>
-
-                        <div class="layui-input-inline">
-                            <select name="">
-                                <option value="">省</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item">
-                        <label class="req">县居住城市</label>
-                        <div class="layui-input-inline">
-                            <select name="nationality">
-                                <option value="">国籍</option>
-                                <option value="">中国</option>
-                                <option value="">美国</option>
-                                <option value="">俄罗斯</option>
-                            </select>
-                        </div>
-
-                        <div class="layui-input-inline">
-                            <select name="">
-                                <option value="">省</option>
-                            </select>
-                        </div>
-
-                        <div class="layui-input-inline">
-                            <select name="">
-                                <option value="">市</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item layui-form-text">
-                        <label>职业</label>
-                        <div class="layui-input-block">
-                            <input type="text" class="layui-input tiput" value="${userInfo.occupation!}" name="occupation" placeholder="我从事的职业标签">
-                        </div>
-                    </div>
-
-                </form>
-            </div>
-
-            <div class="title">
-                <p>联系方式</p>
-            </div>
-            <div class="contact">
-                <form class="layui-form layui-form-pane">
-                    <div class="layui-form-item">
-                        <button type="button" class="layui-btn" id="contact-btn">保存</button>
-                    </div>
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="req">邮箱</label>
+                        <div class="layui-form-item">
+                            <label class="req">本人现有国籍</label>
                             <div class="layui-input-inline">
-                                <input type="text" class="layui-input" name="email" value="${userInfo.email!}" placeholder="user@example.com">
+                                <select name="" >
+                                    <option value="">国籍</option>
+                                    <option value="">中国</option>
+                                    <option value="">美国</option>
+                                    <option value="">俄罗斯</option>
+                                </select>
                             </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="req">电话</label>
+
                             <div class="layui-input-inline">
-                                <input type="text" class="layui-input" name="mobile" value="${userInfo.mobile!}" placeholder="我的手机或座机号">
+                                <select name="">
+                                    <option value="">省</option>
+                                </select>
                             </div>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <div></div>
-                        <div class="layui-inline">
-                            <label>网站</label>
+
                             <div class="layui-input-inline">
-                                <input type="text" class="layui-input" name="website" value="${userInfo.website!}" placeholder="我自己的网站">
+                                <select name="">
+                                    <option value="">省</option>
+                                </select>
                             </div>
                         </div>
-                        <div class="layui-inline">
-                            <label>公众号</label>
+
+                        <div class="layui-form-item">
+                            <label class="req">现居住城市</label>
                             <div class="layui-input-inline">
-                                <input type="text" class="layui-input" name="publicPlatform" value="${userInfo.publicPlatform!}" placeholder="我自己的公众号">
+                                <select name="nationality">
+                                    <option value="">国籍</option>
+                                    <option value="">中国</option>
+                                    <option value="">美国</option>
+                                    <option value="">俄罗斯</option>
+                                    <option value="">法国</option>
+                                    <option value="">德国</option>
+                                    <option value="">新西兰</option>
+                                    <option value="">瑞士</option>
+                                    <option value="">加拿大</option>
+                                    <option value="">印度</option>
+                                </select>
+                            </div>
+
+                            <div class="layui-input-inline">
+                                <select name="">
+                                    <option value="">省</option>
+                                </select>
+                            </div>
+
+                            <div class="layui-input-inline">
+                                <select name="">
+                                    <option value="">市</option>
+                                </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <div class="click-upload" id="up-ewm">
-                                <p>点击上传<br/>我的微信二维码</p>
-                                <input type="hidden" name="wechatQrcode" value="${userInfo.wechatQrcode!}">
+
+                        <div class="layui-form-item layui-form-text">
+                            <label>职业</label>
+                            <div class="layui-input-block">
+                                <input type="text" class="layui-input tiput" value="${userInfo.occupation!}" name="occupation" placeholder="我从事的职业标签">
                             </div>
                         </div>
-                        <div class="account">
+
+                </div>
+
+                <div class="title">
+                    <p>联系方式</p>
+                </div>
+                <div class="contact">
+                        <!--<div class="layui-form-item">
+                            <button type="button" class="layui-btn" id="contact-btn">保存</button>
+                        </div>-->
+                        <div class="layui-form-item">
                             <div class="layui-inline">
-                                <label>微信</label>
+                                <label class="req">邮箱</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" name="wechat" value="${userInfo.wechat!}" placeholder="我的微信号或绑定的手机号">
+                                    <input type="text" class="layui-input" name="email" value="${userInfo.email!}" placeholder="user@example.com" />
                                 </div>
                             </div>
                             <div class="layui-inline">
-                                <label>Facebook</label>
+                                <label class="req">电话</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" name="facebook" value="${userInfo.facebook!}" placeholder="我的Facebook账号">
+                                    <input type="text" class="layui-input" name="mobile" value="${userInfo.mobile!}" placeholder="我的手机或座机号" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div></div>
+                            <div class="layui-inline">
+                                <label>网站</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" name="website" value="${userInfo.website!}" placeholder="我自己的网站" />
                                 </div>
                             </div>
                             <div class="layui-inline">
-                                <label>WhatsApp</label>
+                                <label>公众号</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" name="whatsapp" value="${userInfo.whatsapp!}" placeholder="我的WhatsApp">
+                                    <input type="text" class="layui-input" name="publicPlatform" value="${userInfo.publicPlatform!}" placeholder="我自己的公众号" />
                                 </div>
                             </div>
+                        </div>
+                        <div class="layui-form-item">
                             <div class="layui-inline">
-                                <label>LikedIn</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" name="linkedin" value="${userInfo.linkedin!}" placeholder="我的LikedIn">
+                                <div class="click-upload" id="up-ewm">
+                                    <p>点击上传<br/>我的微信二维码</p>
+                                    <input type="hidden" name="wechatQrcode" value="${userInfo.wechatQrcode!}" id="wechatQrcode" />
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item item2-wrap">
-                        <label>其他即使通信方式（例，QQ：1656269536）</label>
-                        <div class="item2-box">
-                            <div class="layui-input-inline item2" style="width: 195px;">
-                                <input type="text" class="layui-input" placeholder="请填写即时通信种类">
-                            </div>
-                            <div class="layui-form-mid">：</div>
-                            <div class="layui-input-inline" style="width: 434px;">
-                                <input type="text" class="layui-input" placeholder="请填写该通信方式的账号">
-                            </div>
-                        </div>
-                        <i class="iconfont plus-btn">&#xe601;</i>
-                    </div>
-
-                    <div class="layui-form-item item2-wrap">
-                        <label>展示照片（最多上传六张）</label>
-                        <div></div>
-                        <div class="preview" id="preview"></div>
-                        <button type="button" id="upload-btn" class="layui-btn">+</button>
-
-                    </div>
-
-                </form>
-            </div>
-
-            <div class="title">
-                <p>相关证件</p>
-            </div>
-            <div class="certificates">
-                <form class="layui-form layui-form-pane">
-                    <div class="layui-form-item">
-                        <label>身份证或外国人许可证正反面照片 <a href="###" class="upload-a">我要上传护照</a></label>
-                        <div class="layui-inline">
-                            <div class="layui-input-inline" id="up-face">
-                                <div class="msg-box">
-                                    <p><i class="layui-icon" style="font-size: 56px">&#xe654;</i></p>
-                                    <p class="cer-msg">上传身份证(人脸面)</p>
+                            <div class="account">
+                                <div class="layui-inline">
+                                    <label>微信</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="wechat" value="${userInfo.wechat!}" placeholder="我的微信号或绑定的手机号" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="layui-input-inline" id="up-badge">
-                                <div class="msg-box">
-                                    <p><i class="layui-icon" style="font-size: 56px">&#xe654;</i></p>
-                                    <p class="cer-msg">上传身份证(国徽面)</p>
+                                <div class="layui-inline">
+                                    <label>Facebook</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="facebook" value="${userInfo.facebook!}" placeholder="我的Facebook账号" />
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label>WhatsApp</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="whatsapp" value="${userInfo.whatsapp!}" placeholder="我的WhatsApp" />
+                                    </div>
+                                </div>
+                                <div class="layui-inline">
+                                    <label>LikedIn</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" class="layui-input" name="linkedin" value="${userInfo.linkedin!}" placeholder="我的LikedIn" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="layui-inline">
-                            <div class="example">
-                                <p>证件照正反面实例：</p>
-                                <div><img src="/images/z.png"/></div>
-                                <div><img src="/images/f.png"/></div>
+                        <div class="layui-form-item item2-wrap">
+                            <label>其他即使通信方式（例，QQ：1656269536）</label>
+                            <div class="item2-box">
+                                <div class="layui-input-inline item2" style="width: 195px;">
+                                    <input type="text" class="layui-input" placeholder="请填写即时通信种类" name="communicationName">
+                                </div>
+                                <div class="layui-form-mid">：</div>
+                                <div class="layui-input-inline" style="width: 434px;">
+                                    <input type="text" class="layui-input" placeholder="请填写该通信方式的账号" name="communicationValue">
+                                </div>
                             </div>
+                            <i class="iconfont plus-btn">&#xe601;</i>
                         </div>
-                    </div>
+                        <input type="hidden" name="communication" id="communication" />
 
-                    <div class="layui-form-item">
-                        <label style="float: left;width: 255px">手持证件照</label>
-                        <label style="float: left;">手持证件照</label>
-                        <div class="layui-inline" style="float: left;clear: both">
-                            <div class="layui-input-inline" id="up-take">
-                                <div class="msg-box">
-                                    <p><i class="layui-icon" style="font-size: 56px">&#xe654;</i></p>
-                                    <p class="cer-msg">上传手持身份证(</p>
+                        <div class="layui-form-item item2-wrap">
+                            <label>展示照片（最多上传六张）</label>
+                            <div></div>
+                            <div class="preview" id="preview"></div>
+                            <button type="button" id="upload-btn" class="layui-btn">+</button>
+                            <input type="hidden" name="exhibition" />
+                        </div>
+
+
+                </div>
+
+                <div class="title">
+                    <p>相关证件</p>
+                </div>
+                <div class="certificates">
+                        <div class="layui-form-item">
+                            <label>身份证或外国人许可证正反面照片 <a href="###" class="upload-a">我要上传护照</a></label>
+                            <div class="layui-inline">
+                                <div class="layui-input-inline" id="up-face">
+                                    <#if (userInfo.idcardOnImg)??>
+                                        <img src="${userInfo.idcardOnImg}">
+                                    <#else>
+                                        <div class="msg-box">
+                                            <p><i class="layui-icon" style="font-size: 56px">&#xe654;</i></p>
+                                            <p class="cer-msg">上传身份证(人脸面)</p>
+                                        </div>
+                                    </#if>
+                                </div>
+                                <input type="hidden" name="idcardOnImg" value="${userInfo.idcardOnImg!}" id="idcardOnImg" />
+                                <div class="layui-input-inline" id="up-badge">
+                                    <div class="msg-box">
+                                        <p><i class="layui-icon" style="font-size: 56px">&#xe654;</i></p>
+                                        <p class="cer-msg">上传身份证(国徽面)</p>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="idcardDownImg" value="${userInfo.idcardDownImg!}" id="idcardDownImg" />
+                            </div>
+
+                            <div class="layui-inline">
+                                <div class="example">
+                                    <p>证件照正反面实例：</p>
+                                    <div><img src="/images/z.png"/></div>
+                                    <div><img src="/images/f.png"/></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="layui-inline" style="float: left;">
-                            <img src="/images/s.jpg" class="sc">
+                        <div class="layui-form-item">
+                            <label style="float: left;width: 255px">手持证件照</label>
+                            <label style="float: left;">手持证件照</label>
+                            <div class="layui-inline" style="float: left;clear: both">
+                                <div class="layui-input-inline" id="up-take">
+                                    <div class="msg-box">
+                                        <p><i class="layui-icon" style="font-size: 56px">&#xe654;</i></p>
+                                        <p class="cer-msg">上传手持身份证(</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" name="idcardHandImg" value="${userInfo.idcardHandImg!}" id="idcardHandImg" />
+
+                            <div class="layui-inline" style="float: left;">
+                                <img src="/images/s.jpg" class="sc">
+                            </div>
                         </div>
-                    </div>
+
+                        <div class="layui-form-item">
+                            <label style="float: left;width: 340px">真实姓名</label>
+                            <label style="float: left;">身份证号</label>
+                            <div class="layui-clear"></div>
+                            <input type="text" class="layui-input" name="realName" value="${userInfo.realName!}" placeholder="我的真实姓名" style="width: 315px;float:left;margin-right: 27px" />
+                            <input type="text" class="layui-input" name="idcard" value="${userInfo.idcard!}" placeholder="请输入正确的身份号" style="width: 315px;;float:left;" />
+                        </div>
+
 
                     <div class="layui-form-item">
-                        <label style="float: left;width: 340px">真实姓名</label>
-                        <label style="float: left;">身份证号</label>
-                        <div class="layui-clear"></div>
-                        <input type="text" class="layui-input" name="realName" value="${userInfo.realName!}" placeholder="我的真实姓名" style="width: 315px;float:left;margin-right: 27px">
-                        <input type="text" class="layui-input" name="idcard" value="${userInfo.idcard!}" placeholder="请输入正确的身份号" style="width: 315px;;float:left;">
+                        <button type="button" class="layui-btn" id="save"  lay-submit lay-filter="*" >保存</button>
                     </div>
-
-                    <div class="layui-form-item">
-                        <button type="button" class="layui-btn" id="save">保存</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
     <#include "../public/foot.html" encoding="utf-8"/>
 </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
 <script>
     layui.use(['form', 'layedit', 'laydate','upload'], function(){
         var form = layui.form
@@ -382,7 +410,8 @@
         //展示照片上传
         var uploadList = upload.render({
             elem: '#upload-btn'
-            ,url: uploadUrl
+            ,url: '/file/upload'
+            ,data: {type: 'request'}
             ,method: "post"
             ,auto: false
             ,bindAction: "#contact-btn"
@@ -430,20 +459,21 @@
             }
         });
 
-
-
-
-        var uploadIdCard = function (el, url,prevBox,subBtn) {
+        var uploadIdCard = function (el, type,prevBox,subBtn,inputId) {
             upload.render({
-                elem: el,
-                url: url,
-                method: 'POST',
-                auto: false,
-                bindAction: subBtn || "#save",
-                accept: "images",
-                multiple: false,
-                number: 1,
-                choose: function(obj) {
+                elem:el
+                , url: '/file/upload'
+                , method: 'POST'
+                , data: {type: type}
+                , auto: true
+                , bindAction: subBtn
+                , multiple: false
+                , number: 1
+                , accept: 'images'
+                , acceptMime: 'image/*'
+                , exts: 'jpg|png|gif|bmp|jpeg'
+                , before: function(obj) {
+                    console.log("upload img start")
                     obj.preview(function(index, file, result){
                         var box = $(prevBox).empty().attr('title','替换照片');
                         var pre = $('<img src="' + result + '">');
@@ -451,26 +481,66 @@
 
                     })
                 },
-                done: function (response) {
-
+                done: function (res) {
+                    console.log("upload img done");
+                    //如果上传失败
+                    if (res.code > 0) {
+                        return layer.msg('上传失败');
+                    }
+                    var path = res.path;
+                    $("#"+inputId).val(path);
+                    console.log("upload img path:"+path)
                 },
                 error: function (index, upload) {
+                    console.log("upload img error");
                 }
             });
         }
 
         // 人脸面
-        uploadIdCard('#up-face', uploadUrl, '#up-face');
+        uploadIdCard('#up-face', 'identity', '#up-face','idcardOnImg');
         // 国徽面
-        uploadIdCard('#up-badge', uploadUrl, '#up-badge');
+        uploadIdCard('#up-badge', 'identity', '#up-badge','idcardDownImg');
         // 手持面
-        uploadIdCard('#up-take', uploadUrl, '#up-take');
+        uploadIdCard('#up-take', 'identity', '#up-take','idcardHandImg');
         // 二维码
-        uploadIdCard('#up-ewm', uploadUrl, '#up-ewm', '#contact-btn');
+        uploadIdCard('#up-ewm', 'user', '#up-ewm', '#contact-btn','wechatQrcode');
         // 上传头像
-        uploadIdCard('.head-box', uploadUrl, '.head-box');
+        uploadIdCard('.head-box', 'avatar', '.head-box','showImg');
 
 
+        //提交表单
+        form.on('submit(*)', function(data){
+            var year = $("#year").val();
+            var month = $("#month").val();
+            var day = $("#day").val();
+            if(year!=null&&month!=null&&day!=null){
+                $("#birthday").val(year+"-"+month+"-"+day);
+            }
+
+            var communicationName=$("[name='communicationName']");
+            var communicationValue=$("[name='communicationValue']");
+            var communication = "[";
+            for(var i=0;i<communicationName.length;i++){
+                if(i!=0){
+                    communication+=",";
+                }
+                communication+="{";
+                var value1 = $(communicationName[i]).val();
+                communication+="\""+value1+"\""+":";
+                var value2 = $(communicationValue[i]).val();
+                communication+="\""+value2+"\"";
+                communication+="}";
+            }
+            communication += "]";
+            $("#communication").val(communication);
+
+            console.log("communication:"+communication);
+
+
+            $("[name=form]").submit();
+
+        });
 
 				laydate.render({
 				  elem: '#year'
@@ -490,4 +560,3 @@
 
     })
 </script>
-</html>

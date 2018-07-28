@@ -43,8 +43,8 @@ public class UserInfoController {
         return "";
     }
 
-    @RequestMapping("modify")
-    public String modify(HttpServletRequest request){
+    @RequestMapping("toModify")
+    public String toModify(HttpServletRequest request){
         String userIdStr = request.getAttribute(Constants.USER_ID_SESSION).toString();
         UserInfo userInfo = userInfoService.selectById(Long.parseLong(userIdStr));
 
@@ -52,7 +52,17 @@ public class UserInfoController {
         request.setAttribute("userInfo",userInfo);
         request.setAttribute("languageValues",LanguageEnum.values());
         request.setAttribute("levelValues",LevelEnum.values());
+
         return "pc/personData";
     }
+
+    @RequestMapping("modify")
+    public String modify(UserInfo userInfo){
+        System.out.println(userInfo);
+
+        return "pc/";
+
+    }
+
 
 }

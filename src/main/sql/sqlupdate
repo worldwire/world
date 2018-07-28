@@ -35,3 +35,8 @@ alter table product_request add column facebook varchar(255) after wechat;
 alter table product_request add column whatsapp varchar(255) after facebook;
 alter table product_request add column others varchar(255) after linkedin;
 alter table product_request add column qrcode varchar(255);
+
+
+alter TABLE user_info ADD exhibition VARCHAR(1024) NOT NULL;
+alter TABLE user_info CHANGE brithday birthday  datetime DEFAULT NULL COMMENT '生日';
+
