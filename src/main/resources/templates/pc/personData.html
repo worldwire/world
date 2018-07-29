@@ -18,15 +18,16 @@
 
     <!-- 主体 -->
     <div class="main">
-        <div class="head-img">
+        <form class="layui-form layui-form-pane" id="userBasic" action="/info/modify" method="post" accept-charset="UTF-8"
+              onsubmit="document.charset='UTF-8';">
+            <div class="head-img">
             <div class="head-box">
                 <img src="${userInfo.showImg!'/images/defaultHeadImg.png'}"/>
                 <input type="hidden" name="showImg" value="${userInfo.showImg!}" id="showImg" />
             </div>
 
         </div>
-        <div class="wrap">
-            <form class="layui-form layui-form-pane" id="userBasic" action="/info/modify" method="post">
+            <div class="wrap">
                 <div class="title">
                     <p>基本资料</p>
                 </div>
@@ -245,15 +246,29 @@
 
                         <div class="layui-form-item item2-wrap">
                             <label>其他即使通信方式（例，QQ：1656269536）</label>
-                            <div class="item2-box">
-                                <div class="layui-input-inline item2" style="width: 195px;">
-                                    <input type="text" class="layui-input" placeholder="请填写即时通信种类" name="communicationName">
+                            <#if (userInfo.communication)?? >
+                                <#list userInfo.communication as commun >
+                                    <div class="item2-box" style="clear:both">
+                                        <div class="layui-input-inline item2" style="width: 195px;">
+                                            <input type="text" class="layui-input" placeholder="请填写即时通信种类" name="name" value="${commun.name!}">
+                                        </div>
+                                        <div class="layui-form-mid">：</div>
+                                        <div class="layui-input-inline" style="width: 434px;">
+                                            <input type="text" class="layui-input" placeholder="请填写该通信方式的账号" name="value" value="${commun.value!}">
+                                        </div>
+                                    </div>
+                                </#list>
+                            <#else>
+                                <div class="item2-box">
+                                    <div class="layui-input-inline item2" style="width: 195px;">
+                                        <input type="text" class="layui-input" placeholder="请填写即时通信种类" name="name">
+                                    </div>
+                                    <div class="layui-form-mid">：</div>
+                                    <div class="layui-input-inline" style="width: 434px;">
+                                        <input type="text" class="layui-input" placeholder="请填写该通信方式的账号" name="value">
+                                    </div>
                                 </div>
-                                <div class="layui-form-mid">：</div>
-                                <div class="layui-input-inline" style="width: 434px;">
-                                    <input type="text" class="layui-input" placeholder="请填写该通信方式的账号" name="communicationValue">
-                                </div>
-                            </div>
+                            </#if>
                             <i class="iconfont plus-btn">&#xe601;</i>
                         </div>
                         <input type="hidden" name="communication" id="communication" />
@@ -288,10 +303,14 @@
                                 </div>
                                 <input type="hidden" name="idcardOnImg" value="${userInfo.idcardOnImg!}" id="idcardOnImg" />
                                 <div class="layui-input-inline" id="up-badge">
+                                    <#if (userInfo.idcardDownImg)??>
+                                    <img src="${userInfo.idcardDownImg}">
+                                    <#else>
                                     <div class="msg-box">
                                         <p><i class="layui-icon" style="font-size: 56px">&#xe654;</i></p>
                                         <p class="cer-msg">上传身份证(国徽面)</p>
                                     </div>
+                                    </#if>
                                 </div>
                                 <input type="hidden" name="idcardDownImg" value="${userInfo.idcardDownImg!}" id="idcardDownImg" />
                             </div>
@@ -305,15 +324,20 @@
                             </div>
                         </div>
 
-                        <div class="layui-form-item">
+                <div class="layui-form-item">
                             <label style="float: left;width: 255px">手持证件照</label>
                             <label style="float: left;">手持证件照</label>
                             <div class="layui-inline" style="float: left;clear: both">
                                 <div class="layui-input-inline" id="up-take">
+                                    <#if (userInfo.idcardHandImg)??>
+                                    <img src="${userInfo.idcardHandImg}">
+                                    <#else>
                                     <div class="msg-box">
                                         <p><i class="layui-icon" style="font-size: 56px">&#xe654;</i></p>
                                         <p class="cer-msg">上传手持身份证(</p>
                                     </div>
+                                    </#if>
+
                                 </div>
                             </div>
                             <input type="hidden" name="idcardHandImg" value="${userInfo.idcardHandImg!}" id="idcardHandImg" />
@@ -323,7 +347,7 @@
                             </div>
                         </div>
 
-                        <div class="layui-form-item">
+                <div class="layui-form-item">
                             <label style="float: left;width: 340px">真实姓名</label>
                             <label style="float: left;">身份证号</label>
                             <div class="layui-clear"></div>
@@ -332,25 +356,17 @@
                         </div>
 
 
-                    <div class="layui-form-item">
+                <div class="layui-form-item">
                         <button type="button" class="layui-btn" id="save"  lay-submit lay-filter="*" >保存</button>
                     </div>
-                </div>
-            </form>
-        </div>
+
+            </div>
+        </form>
     </div>
 </div>
     <#include "../public/foot.html" encoding="utf-8"/>
 </body>
 </html>
-
-
-
-
-
-
-
-
 
 
 
@@ -498,15 +514,15 @@
         }
 
         // 人脸面
-        uploadIdCard('#up-face', 'identity', '#up-face','idcardOnImg');
+        uploadIdCard('#up-face', 'identity', '#up-face','#up-face','idcardOnImg');
         // 国徽面
-        uploadIdCard('#up-badge', 'identity', '#up-badge','idcardDownImg');
+        uploadIdCard('#up-badge', 'identity', '#up-badge', '#up-badge','idcardDownImg');
         // 手持面
-        uploadIdCard('#up-take', 'identity', '#up-take','idcardHandImg');
+        uploadIdCard('#up-take', 'identity', '#up-take', '#up-take','idcardHandImg');
         // 二维码
         uploadIdCard('#up-ewm', 'user', '#up-ewm', '#contact-btn','wechatQrcode');
         // 上传头像
-        uploadIdCard('.head-box', 'avatar', '.head-box','showImg');
+        uploadIdCard('.head-box', 'avatar', '.head-box', '.head-box','showImg');
 
 
         //提交表单
@@ -518,17 +534,17 @@
                 $("#birthday").val(year+"-"+month+"-"+day);
             }
 
-            var communicationName=$("[name='communicationName']");
-            var communicationValue=$("[name='communicationValue']");
+            var name=$("[name='name']");
+            var value=$("[name='value']");
             var communication = "[";
-            for(var i=0;i<communicationName.length;i++){
+            for(var i=0;i<name.length;i++){
                 if(i!=0){
                     communication+=",";
                 }
                 communication+="{";
-                var value1 = $(communicationName[i]).val();
+                var value1 = $(name[i]).val();
                 communication+="\""+value1+"\""+":";
-                var value2 = $(communicationValue[i]).val();
+                var value2 = $(value[i]).val();
                 communication+="\""+value2+"\"";
                 communication+="}";
             }
@@ -537,8 +553,7 @@
 
             console.log("communication:"+communication);
 
-
-            $("[name=form]").submit();
+            $("#userBasic").submit();
 
         });
 

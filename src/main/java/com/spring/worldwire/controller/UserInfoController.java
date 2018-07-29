@@ -57,10 +57,13 @@ public class UserInfoController {
     }
 
     @RequestMapping("modify")
-    public String modify(UserInfo userInfo){
-        System.out.println(userInfo);
+    public String modify(HttpServletRequest request,UserInfo userInfo){
+        String userIdStr = request.getAttribute(Constants.USER_ID_SESSION).toString();
 
-        return "pc/";
+        userInfo.setId(Long.parseLong(userIdStr));
+        userInfoService.update(userInfo);
+
+        return "redirect:/usercenter/";
 
     }
 

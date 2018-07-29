@@ -1,9 +1,11 @@
 package com.spring.worldwire.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.spring.worldwire.enums.UserTypeEnum;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @SuppressWarnings("unused")
 public class UserInfo implements Serializable {
@@ -52,7 +54,7 @@ public class UserInfo implements Serializable {
 
     private String linkedin;
 
-    private String communication;
+    private List<Communication> communication;
 
     private String idcardOnImg;
 
@@ -266,14 +268,6 @@ public class UserInfo implements Serializable {
         this.linkedin = linkedin == null ? null : linkedin.trim();
     }
 
-    public String getCommunication() {
-        return communication;
-    }
-
-    public void setCommunication(String communication) {
-        this.communication = communication == null ? null : communication.trim();
-    }
-
     public String getIdcardOnImg() {
         return idcardOnImg;
     }
@@ -448,6 +442,14 @@ public class UserInfo implements Serializable {
 
     public void setBusinessBankImg(String businessBankImg) {
         this.businessBankImg = businessBankImg == null ? null : businessBankImg.trim();
+    }
+
+    public List<Communication> getCommunication() {
+        return communication;
+    }
+
+    public void setCommunication(List<Communication> communication) {
+        this.communication = communication;
     }
 
     @Override

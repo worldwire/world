@@ -23,7 +23,9 @@
     <result column="facebook" property="facebook" jdbcType="VARCHAR" />
     <result column="whatsapp" property="whatsapp" jdbcType="VARCHAR" />
     <result column="linkedin" property="linkedin" jdbcType="VARCHAR" />
-    <result column="communication" property="communication" jdbcType="VARCHAR" />
+    <result column="communication" property="communication" jdbcType="VARCHAR"
+            typeHandler="com.spring.worldwire.model.typeHandler.CommunicationHandel"
+            javaType="com.spring.worldwire.model.Communication" />
     <result column="idcard_on_img" property="idcardOnImg" jdbcType="VARCHAR" />
     <result column="idcard_down_img" property="idcardDownImg" jdbcType="VARCHAR" />
     <result column="idcard_hand_img" property="idcardHandImg" jdbcType="VARCHAR" />
@@ -99,7 +101,7 @@
       #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, 
       #{publicPlatform,jdbcType=VARCHAR}, #{wechatQrcode,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, 
       #{facebook,jdbcType=VARCHAR}, #{whatsapp,jdbcType=VARCHAR}, #{linkedin,jdbcType=VARCHAR}, 
-      #{communication,jdbcType=VARCHAR}, #{idcardOnImg,jdbcType=VARCHAR}, #{idcardDownImg,jdbcType=VARCHAR}, 
+      #{communication,typeHandler=com.spring.worldwire.model.typeHandler.CommunicationHandel}, #{idcardOnImg,jdbcType=VARCHAR}, #{idcardDownImg,jdbcType=VARCHAR},
       #{idcardHandImg,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
       #{companyName,jdbcType=VARCHAR}, #{companyTime,jdbcType=TIMESTAMP}, #{companyNum,jdbcType=VARCHAR}, 
       #{companyAddr,jdbcType=VARCHAR}, #{companyTel,jdbcType=VARCHAR}, #{companyMobile,jdbcType=VARCHAR}, 
@@ -310,7 +312,7 @@
         #{linkedin,jdbcType=VARCHAR},
       </if>
       <if test="communication != null" >
-        #{communication,jdbcType=VARCHAR},
+        #{communication,typeHandler=com.spring.worldwire.model.typeHandler.CommunicationHandel},
       </if>
       <if test="idcardOnImg != null" >
         #{idcardOnImg,jdbcType=VARCHAR},
@@ -444,7 +446,7 @@
         linkedin = #{linkedin,jdbcType=VARCHAR},
       </if>
       <if test="communication != null" >
-        communication = #{communication,jdbcType=VARCHAR},
+        communication = #{communication,typeHandler=com.spring.worldwire.model.typeHandler.CommunicationHandel},
       </if>
       <if test="idcardOnImg != null" >
         idcard_on_img = #{idcardOnImg,jdbcType=VARCHAR},
@@ -537,7 +539,7 @@
       facebook = #{facebook,jdbcType=VARCHAR},
       whatsapp = #{whatsapp,jdbcType=VARCHAR},
       linkedin = #{linkedin,jdbcType=VARCHAR},
-      communication = #{communication,jdbcType=VARCHAR},
+      communication = #{communication,typeHandler=com.spring.worldwire.model.typeHandler.CommunicationHandel},
       idcard_on_img = #{idcardOnImg,jdbcType=VARCHAR},
       idcard_down_img = #{idcardDownImg,jdbcType=VARCHAR},
       idcard_hand_img = #{idcardHandImg,jdbcType=VARCHAR},

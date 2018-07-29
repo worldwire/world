@@ -108,7 +108,7 @@
       #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, #{publicPlatform,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{linkedIn,jdbcType=VARCHAR},
       #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{languageId,jdbcType=BIGINT}, #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
-      #{languageLevel,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+      #{languageLevel,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel},
       #{userType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},#{userId,jdbcType=BIGINT},#{viewCount,jdbcType=BIGINT},
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},#{facebook,jdbcType=VARCHAR},#{whatsapp,jdbcType=VARCHAR},
       #{others,jdbcType=VARCHAR},#{qrcode,jdbcType=VARCHAR})
@@ -355,7 +355,7 @@
       language_type = #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       language_id = #{languageId,jdbcType=BIGINT},
       status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
-      language_level = #{languageLevel,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+      language_level = #{languageLevel,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel},
       user_type = #{userType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       user_id = #{userId,jdbcType=BIGINT},
       view_count = #{viewCount,jdbcType=BIGINT},
