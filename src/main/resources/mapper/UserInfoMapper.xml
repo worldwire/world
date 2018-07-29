@@ -9,7 +9,9 @@
     <result column="show_img" property="showImg" jdbcType="VARCHAR" />
     <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
     <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
-    <result column="language" property="language" jdbcType="VARCHAR" />
+    <result column="language" property="language" jdbcType="VARCHAR"
+            typeHandler="com.spring.worldwire.model.typeHandler.LanguageLevelHandel"
+            javaType="com.spring.worldwire.model.LanguageLevel"/>
     <result column="bri_nationality" property="briNationality" jdbcType="VARCHAR" />
     <result column="now_nationality" property="nowNationality" jdbcType="VARCHAR" />
     <result column="local_addr" property="localAddr" jdbcType="VARCHAR" />
@@ -96,7 +98,7 @@
       business_bank_img)
     values (#{id,jdbcType=BIGINT}, #{loginId,jdbcType=BIGINT}, #{type,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, 
       #{isForeign,jdbcType=INTEGER}, #{showImg,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP},
-      #{nickName,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{briNationality,jdbcType=VARCHAR}, 
+      #{nickName,jdbcType=VARCHAR}, #{language,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel}, #{briNationality,jdbcType=VARCHAR},
       #{nowNationality,jdbcType=VARCHAR}, #{localAddr,jdbcType=VARCHAR}, #{occupation,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, 
       #{publicPlatform,jdbcType=VARCHAR}, #{wechatQrcode,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, 
@@ -270,7 +272,7 @@
         #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="language != null" >
-        #{language,jdbcType=VARCHAR},
+        #{language,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel},
       </if>
       <if test="briNationality != null" >
         #{briNationality,jdbcType=VARCHAR},
@@ -404,7 +406,7 @@
         nick_name = #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="language != null" >
-        language = #{language,jdbcType=VARCHAR},
+        language = #{language,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel},
       </if>
       <if test="briNationality != null" >
         bri_nationality = #{briNationality,jdbcType=VARCHAR},
@@ -525,7 +527,7 @@
       show_img = #{showImg,jdbcType=VARCHAR},
       birthday = #{birthday,jdbcType=TIMESTAMP},
       nick_name = #{nickName,jdbcType=VARCHAR},
-      language = #{language,jdbcType=VARCHAR},
+      language = #{language,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel},
       bri_nationality = #{briNationality,jdbcType=VARCHAR},
       now_nationality = #{nowNationality,jdbcType=VARCHAR},
       local_addr = #{localAddr,jdbcType=VARCHAR},

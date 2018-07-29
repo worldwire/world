@@ -1,6 +1,5 @@
 package com.spring.worldwire.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.spring.worldwire.enums.UserTypeEnum;
 
 import java.io.Serializable;
@@ -26,7 +25,7 @@ public class UserInfo implements Serializable {
 
     private String nickName;
 
-    private String language;
+    private List<LanguageLevel> language;
 
     private String briNationality;
 
@@ -156,12 +155,12 @@ public class UserInfo implements Serializable {
         this.nickName = nickName == null ? null : nickName.trim();
     }
 
-    public String getLanguage() {
+    public List<LanguageLevel> getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
-        this.language = language == null ? null : language.trim();
+    public void setLanguage(List<LanguageLevel> language) {
+        this.language = language;
     }
 
     public String getBriNationality() {
