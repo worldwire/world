@@ -2,6 +2,8 @@ package com.spring.worldwire.dao;
 
 import com.spring.worldwire.model.AdminUser;
 
+import java.util.List;
+
 public interface AdminUserDao {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +16,8 @@ public interface AdminUserDao {
     int updateByPrimaryKeySelective(AdminUser record);
 
     int updateByPrimaryKey(AdminUser record);
+
+    AdminUser selectAdmin(AdminUser adminUser);
+
+    List<AdminUser> findByUser(AdminUser adminUser);
 }

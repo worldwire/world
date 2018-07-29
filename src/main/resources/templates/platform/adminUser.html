@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>控制台</title>
+
+    <#include "../public/luaOut.html" encoding="utf-8"/>
+</head>
+<body>
+
+<table id="userAdmin" lay-filter="test"></table>
+
+
+</body>
+<script>
+layui.use('table', function(){
+  var table = layui.table;
+
+  //第一个实例
+  table.render({
+    elem: '#userAdmin'
+    ,height: 500
+    ,url: '/adminUser/list' //数据接口
+    ,page: false //开启分页
+    ,cols: [[ //表头
+        {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
+      ,{field: 'userName', title: '用户名', width:80}
+      ,{field: 'status', title: '状态', width:80}
+    ]]
+  });
+
+});
+</script>
+</html>

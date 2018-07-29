@@ -40,3 +40,6 @@ alter table product_request add column qrcode varchar(255);
 alter TABLE user_info ADD exhibition VARCHAR(1024) NOT NULL;
 alter TABLE user_info CHANGE brithday birthday  datetime DEFAULT NULL COMMENT '生日';
 
+alter TABLE admin_user ADD `status` INT(11) NOT NULL COMMENT '0申请中 1 通过 2找回密码';
+
+alter TABLE admin_user ADD `type` INT(11) NOT NULL COMMENT '1管理员 2用户';

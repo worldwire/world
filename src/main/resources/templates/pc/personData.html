@@ -62,7 +62,29 @@
 
                         <div class="layui-form-item item2-wrap">
                             <label for="lang" class="req">可通讯语言种类及水平</label>
-                            <div class="item2-box">
+                            <#if (userInfo.language)?? >
+                                <#list userInfo.language as userLanguage>
+                                <div class="item2-box"  style="clear:both">
+                                    <div class="layui-input-inline item2">
+                                        <select name="lang" id="lang">
+                                            <#list languageValues as language>
+                                            <option value="${language.code}"  <#if userLanguage.languageEnum.code == language.code>selected="selected"</#if> >${language.cnName}</option>
+                                            </#list>
+
+                                        </select>
+                                    </div>
+
+                                    <div class="layui-input-inline item2">
+                                        <select name="level">
+                                            <#list levelValues as level>
+                                                <option value="${level.code}" <#if userLanguage.level.code == level.code>selected="selected"</#if>>${level.cnName}</option>
+                                            </#list>
+                                        </select>
+                                    </div>
+                                </div>
+                                </#list>
+                            <#else>
+                            <div class="item2-box" >
                                 <div class="layui-input-inline item2">
                                     <select name="lang" id="lang">
                                         <option value="">请选择语种</option>
@@ -82,8 +104,10 @@
                                     </select>
                                 </div>
                             </div>
+                            </#if>
                             <i class="iconfont plus-btn">&#xe601;</i>
                         </div>
+                        <input type="hidden" name="language" id="language">
 
 
                         <div class="layui-form-item">
@@ -250,22 +274,22 @@
                                 <#list userInfo.communication as commun >
                                     <div class="item2-box" style="clear:both">
                                         <div class="layui-input-inline item2" style="width: 195px;">
-                                            <input type="text" class="layui-input" placeholder="请填写即时通信种类" name="name" value="${commun.name!}">
+                                            <input type="text" class="layui-input" placeholder="请填写即时通信种类" name="communicationName" value="${commun.name!}">
                                         </div>
                                         <div class="layui-form-mid">：</div>
                                         <div class="layui-input-inline" style="width: 434px;">
-                                            <input type="text" class="layui-input" placeholder="请填写该通信方式的账号" name="value" value="${commun.value!}">
+                                            <input type="text" class="layui-input" placeholder="请填写该通信方式的账号" name="communicationValue" value="${commun.value!}">
                                         </div>
                                     </div>
                                 </#list>
                             <#else>
                                 <div class="item2-box">
                                     <div class="layui-input-inline item2" style="width: 195px;">
-                                        <input type="text" class="layui-input" placeholder="请填写即时通信种类" name="name">
+                                        <input type="text" class="layui-input" placeholder="请填写即时通信种类" name="communicationName">
                                     </div>
                                     <div class="layui-form-mid">：</div>
                                     <div class="layui-input-inline" style="width: 434px;">
-                                        <input type="text" class="layui-input" placeholder="请填写该通信方式的账号" name="value">
+                                        <input type="text" class="layui-input" placeholder="请填写该通信方式的账号" name="communicationValue">
                                     </div>
                                 </div>
                             </#if>
@@ -534,24 +558,42 @@
                 $("#birthday").val(year+"-"+month+"-"+day);
             }
 
-            var name=$("[name='name']");
-            var value=$("[name='value']");
+            var communicationName=$("[name='communicationName']");
+            var communicationValue=$("[name='communicationValue']");
             var communication = "[";
-            for(var i=0;i<name.length;i++){
+            for(var i=0;i<communicationName.length;i++){
                 if(i!=0){
                     communication+=",";
                 }
                 communication+="{";
-                var value1 = $(name[i]).val();
+                var value1 = $(communicationName[i]).val();
                 communication+="\""+value1+"\""+":";
-                var value2 = $(value[i]).val();
+                var value2 = $(communicationValue[i]).val();
                 communication+="\""+value2+"\"";
                 communication+="}";
             }
             communication += "]";
             $("#communication").val(communication);
 
+            var lang=$("[name='lang']");
+            var level=$("[name='level']");
+            var language = "[";
+            for(var i=0;i<lang.length;i++){
+                if(i!=0){
+                    language+=",";
+                }
+                language+="{";
+                var value1 = $(lang[i]).val();
+                language+="\""+value1+"\""+":";
+                var value2 = $(level[i]).val();
+                language+="\""+value2+"\"";
+                language+="}";
+            }
+            language += "]";
+            $("#language").val(language);
+
             console.log("communication:"+communication);
+            console.log("language:"+language);
 
             $("#userBasic").submit();
 

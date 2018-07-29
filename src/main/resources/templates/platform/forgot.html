@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>重置LAU密码</title>
+
+    <script>(window.top === window.self) || (window.top.location.href = window.self.location.href);</script>
+    <#include "../public/luaOut.html" encoding="utf-8"/>
+</head>
+<body class="layui-unselect lau-sign-body">
+
+<div class="layui-form layui-form-pane lau-sign-form">
+    <h1 class="lau-sign-title">RESET PASS</h1>
+    <p class="lau-sign-subtitle">忘记密码</p>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon layui-icon-username"></i> 账　号</label>
+        <div class="layui-input-block">
+            <input type="text" name="phone" placeholder="姓  名" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon layui-icon-vercode"></i> 验证码</label>
+        <div class="layui-input-block lau-sign-code">
+            <input type="text" name="captcha" placeholder="请输入图形验证码" autocomplete="off" class="layui-input">
+            <img src="https://www.oschina.net/action/user/captcha" alt="图形验证码" class="lau-sign-captcha">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon layui-icon-password"></i> 密　码</label>
+        <div class="layui-input-block">
+            <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon layui-icon-password"></i> 密　码</label>
+        <div class="layui-input-block">
+            <input type="password" name="repassword" placeholder="请再次输入密码" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <button type="button" class="layui-btn layui-btn-fluid" lay-submit lay-filter="forgot">重 置</button>
+    </div>
+</div>
+
+<#include "../public/luaFoot.html" encoding="utf-8"/>
+
+</body>
+<script>
+    layui.config({base: '/js/platform/'}).use('forgot');
+</script>
+</html>
