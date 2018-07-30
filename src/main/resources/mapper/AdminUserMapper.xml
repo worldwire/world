@@ -79,7 +79,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="selectAdmin" parameterType="com.spring.worldwire.model.AdminUser">
+  <select id="selectAdmin" parameterType="com.spring.worldwire.model.AdminUser" resultMap="BaseResultMap">
     select <include refid="Base_Column_List" /> from admin_user
     where user_name = #{userName} and password = #{password} and `status` = 2
 
@@ -100,4 +100,8 @@
 
   </select>
 
+
+  <update id="adopt" >
+    update admin_user set status = 2 where  id = #{id}
+  </update>
 </mapper>

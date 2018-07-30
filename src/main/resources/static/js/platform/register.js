@@ -19,37 +19,6 @@ layui.define(['layer', 'form', 'tips'], function(exports) {
         }
     });
 
-    //获取手机验证码
-    $('.lau-sign-sms').click(function () {
-        var phone = $('input[name="phone"]').val();
-        if (!/^1\d{10}$/.test(phone)) {
-            return tips.warning('请输入正确的手机号码');
-        }
-
-        var that = $(this);
-        that.attr('disabled', true).addClass('layui-btn-disabled');
-        $.post('/json/sms.json', {phone: phone}, function (json) {
-            if (json.errcode == 0) {
-                tips.success(json.errmsg);
-                var expire = json.data.expire;
-                var handle = setInterval(function () {
-                    if (expire) {
-                        that.text('重新获取 (' + expire + ')');
-                        expire--;
-                    } else {
-                        that.text('获取验证码');
-                        that.attr('disabled', false).removeClass('layui-btn-disabled');
-                        clearInterval(handle);
-                    }
-                }, 1000);
-            } else {
-                tips.error(json.errmsg, function () {
-                    that.attr('disabled', false).removeClass('layui-btn-disabled');
-                });
-            }
-        }, 'json');
-    });
-
     //弹出用户注册协议
     $('.lau-sign-lic').click(function () {
         var license = $('input[name="license"]');
@@ -99,10 +68,10 @@ layui.define(['layer', 'form', 'tips'], function(exports) {
         tips.loading('注册中...', 0, -1);
 
         //发送注册表单
-        $.post('/json/register.json', data.field, function (json) {
-            if (json.errcode == 0) {
+        $.post('/adminUser/register', data.field, function (json) {
+            if (json.code == 0) {
                 tips.success(json.errmsg, function () {
-                    location.href = '/html/login.html';
+                    location.href = '/platform/toLogin';
                 });
             } else {
                 tips.error(json.errmsg, function () {

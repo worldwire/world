@@ -36,10 +36,10 @@ layui.define(['layer', 'form', 'tips'], function(exports) {
         tips.loading('登陆中...', 0, -1);
 
         //发送登陆表单
-        $.post('/json/login.json', data.field, function (json) {
-            if (json.errcode == 0) {
+        $.post('/adminUser/login', data.field, function (json) {
+            if (json.code == 0) {
                 tips.success(json.errmsg, function () {
-                    location.href = '/';
+                    location.href = '/platform';
                 });
             } else {
                 tips.error(json.errmsg, function () {

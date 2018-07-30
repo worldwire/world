@@ -20,4 +20,6 @@ public interface AdminUserDao {
     AdminUser selectAdmin(AdminUser adminUser);
 
     List<AdminUser> findByUser(AdminUser adminUser);
+
+    int adopt(long id);
 }

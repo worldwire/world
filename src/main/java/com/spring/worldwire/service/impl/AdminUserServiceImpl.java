@@ -33,4 +33,16 @@ public class AdminUserServiceImpl implements AdminUserService {
     public List<AdminUser> findByUser(AdminUser adminUser) {
         return adminUserDao.findByUser(adminUser);
     }
+
+    @Override
+    public int del(long id) {
+        return adminUserDao.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int adopt(long id) {
+        return adminUserDao.adopt(id);
+    }
+
+
 }

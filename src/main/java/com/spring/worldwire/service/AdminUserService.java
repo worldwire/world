@@ -22,4 +22,8 @@ public interface AdminUserService {
     int save(AdminUser adminUser);
 
     List<AdminUser> findByUser(AdminUser adminUser);
+
+    int del(long id);
+
+    int adopt(long id);
 }
