@@ -8,7 +8,8 @@
     "title": "用户管理",
     "href": "/adminUser/toList"
   }, {
-    "title": "缓存配置"
+    "title": "翻译申请",
+    "href":"/platTranslation/toList"
   }, {
     "title": "短信配置"
   }, {

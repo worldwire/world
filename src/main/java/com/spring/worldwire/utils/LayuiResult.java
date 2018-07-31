@@ -1,7 +1,7 @@
 package com.spring.worldwire.utils;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.spring.worldwire.model.TranslationApply;
 
 import java.util.List;
 
@@ -53,4 +53,14 @@ public  class LayuiResult {
         return result.toJSONString();
     }
 
+    public static String formatPageResult(List<TranslationApply> list, int count) {
+        JSONObject result = new JSONObject();
+        JSONObject page = new JSONObject();
+        page.put("count",count);
+        result.put("page",page);
+        result.put("data",list);
+        result.put("code", 0);
+        result.put("msg", "");
+        return result.toJSONString();
+    }
 }

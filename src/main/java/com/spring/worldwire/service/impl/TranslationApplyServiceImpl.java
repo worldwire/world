@@ -7,6 +7,7 @@ import com.spring.worldwire.enums.TranslationApplyStatusEnum;
 import com.spring.worldwire.model.ProductRequest;
 import com.spring.worldwire.model.TranslationApply;
 import com.spring.worldwire.model.vo.TranslationApplyVO;
+import com.spring.worldwire.query.TranslationApplyQuery;
 import com.spring.worldwire.service.TranslationApplyService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by pg on 2018/4/28.
@@ -97,5 +99,15 @@ public class TranslationApplyServiceImpl implements TranslationApplyService {
         translationApply.setId(id);
         translationApply.setStatus(TranslationApplyStatusEnum.NORMAL);
         return translationApplyDao.updateByPrimaryKeySelective(translationApply);
+    }
+
+    @Override
+    public int pageCount(TranslationApplyQuery translationApplyQuery) {
+        return translationApplyDao.pageCount(translationApplyQuery);
+    }
+
+    @Override
+    public List<TranslationApply> page(TranslationApplyQuery translationApplyQuery) {
+        return translationApplyDao.page(translationApplyQuery);
     }
 }

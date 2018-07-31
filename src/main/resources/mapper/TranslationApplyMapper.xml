@@ -4,10 +4,17 @@
   <resultMap id="BaseResultMap" type="com.spring.worldwire.model.TranslationApply" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="req_id" property="reqId" jdbcType="BIGINT" />
-    <result column="orig_type" property="origType" jdbcType="INTEGER" />
+    <result column="orig_type" property="origType"
+            typeHandler="com.spring.worldwire.extent.NumericEnumHandler"
+            javaType="com.spring.worldwire.enums.LanguageEnum"/>
     <result column="from_req_id" property="fromReqId" jdbcType="BIGINT" />
-    <result column="from_type" property="fromType" jdbcType="INTEGER" />
-    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="from_type" property="fromType"
+            typeHandler="com.spring.worldwire.extent.NumericEnumHandler"
+            javaType="com.spring.worldwire.enums.LanguageEnum"/>
+    <result column="status" property="status"
+            typeHandler="com.spring.worldwire.extent.NumericEnumHandler"
+            javaType="com.spring.worldwire.enums.TranslationApplyStatusEnum"/>
+    <result column="title" property="status" jdbcType="VARCHAR" />
     <result column="operator_id" property="operatorId" jdbcType="BIGINT" />
     <result column="operator_time" property="operatorTime" jdbcType="TIMESTAMP" />
     <result column="auditor_id" property="auditorId" jdbcType="BIGINT" />
@@ -18,7 +25,7 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, req_id, orig_type, from_req_id, from_type, status, operator_id, operator_time, 
+    id, req_id, orig_type, from_req_id, from_type, status, title, operator_id, operator_time,
     auditor_id, auditor_time, auditor_msg,user_id , create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
@@ -33,11 +40,11 @@
   </delete>
   <insert id="insert" parameterType="com.spring.worldwire.model.TranslationApply" >
     insert into translation_apply (id, req_id, orig_type, 
-      from_req_id, from_type, status, 
+      from_req_id, from_type, status, title,
       operator_id, operator_time, auditor_id, 
       auditor_time, auditor_msg,user_id , create_time, update_time)
-    values (#{id,jdbcType=BIGINT}, #{reqId,jdbcType=BIGINT}, #{origType,jdbcType=INTEGER}, 
-      #{fromReqId,jdbcType=BIGINT}, #{fromType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=BIGINT}, #{reqId,jdbcType=BIGINT}, #{origType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+      #{fromReqId,jdbcType=BIGINT}, #{fromType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},#{title},
       #{operatorId,jdbcType=BIGINT}, #{operatorTime,jdbcType=TIMESTAMP}, #{auditorId,jdbcType=BIGINT}, 
       #{auditorTime,jdbcType=TIMESTAMP}, #{auditorMsg,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT},
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
@@ -62,6 +69,9 @@
       </if>
       <if test="status != null" >
         status,
+      </if>
+      <if test="title != null" >
+        title,
       </if>
       <if test="operatorId != null" >
         operator_id,
@@ -96,16 +106,19 @@
         #{reqId,jdbcType=BIGINT},
       </if>
       <if test="origType != null" >
-        #{origType,jdbcType=INTEGER},
+        #{origType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="fromReqId != null" >
         #{fromReqId,jdbcType=BIGINT},
       </if>
       <if test="fromType != null" >
-        #{fromType,jdbcType=INTEGER},
+        #{fromType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=INTEGER},
+        #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+      </if>
+      <if test="title != null" >
+        #{title},
       </if>
       <if test="operatorId != null" >
         #{operatorId,jdbcType=BIGINT},
@@ -140,16 +153,16 @@
         req_id = #{reqId,jdbcType=BIGINT},
       </if>
       <if test="origType != null" >
-        orig_type = #{origType,jdbcType=INTEGER},
+        orig_type = #{origType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="fromReqId != null" >
         from_req_id = #{fromReqId,jdbcType=BIGINT},
       </if>
       <if test="fromType != null" >
-        from_type = #{fromType,jdbcType=INTEGER},
+        from_type = #{fromType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
+        status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
       <if test="operatorId != null" >
         operator_id = #{operatorId,jdbcType=BIGINT},
@@ -181,10 +194,11 @@
   <update id="updateByPrimaryKey" parameterType="com.spring.worldwire.model.TranslationApply" >
     update translation_apply
     set req_id = #{reqId,jdbcType=BIGINT},
-      orig_type = #{origType,jdbcType=INTEGER},
+      orig_type = #{origType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       from_req_id = #{fromReqId,jdbcType=BIGINT},
-      from_type = #{fromType,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
+      from_type = #{fromType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+      status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+      title = #{title},
       operator_id = #{operatorId,jdbcType=BIGINT},
       operator_time = #{operatorTime,jdbcType=TIMESTAMP},
       auditor_id = #{auditorId,jdbcType=BIGINT},
@@ -195,4 +209,15 @@
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+
+  <select id="pageCount" parameterType="com.spring.worldwire.query.TranslationApplyQuery" resultType="INTEGER">
+    select count(*) from translation_apply
+
+  </select>
+
+  <select id="page" parameterType="com.spring.worldwire.query.TranslationApplyQuery" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from translation_apply order by id desc
+
+  </select>
 </mapper>

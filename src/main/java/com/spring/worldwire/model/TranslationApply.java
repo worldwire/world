@@ -22,6 +22,8 @@ public class TranslationApply implements Serializable{
 
     private TranslationApplyStatusEnum status;
 
+    private String title;
+
     private Long operatorId;
 
     private Date operatorTime;
@@ -148,6 +150,14 @@ public class TranslationApply implements Serializable{
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
