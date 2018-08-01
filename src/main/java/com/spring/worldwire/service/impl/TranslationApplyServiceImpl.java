@@ -2,10 +2,12 @@ package com.spring.worldwire.service.impl;
 
 import com.spring.worldwire.dao.ProductRequestDao;
 import com.spring.worldwire.dao.TranslationApplyDao;
+import com.spring.worldwire.dao.UserAccountDao;
 import com.spring.worldwire.enums.LanguageEnum;
 import com.spring.worldwire.enums.TranslationApplyStatusEnum;
 import com.spring.worldwire.model.ProductRequest;
 import com.spring.worldwire.model.TranslationApply;
+import com.spring.worldwire.model.UserAccount;
 import com.spring.worldwire.model.vo.TranslationApplyVO;
 import com.spring.worldwire.query.TranslationApplyQuery;
 import com.spring.worldwire.service.TranslationApplyService;
@@ -26,6 +28,7 @@ public class TranslationApplyServiceImpl implements TranslationApplyService {
 
     private TranslationApplyDao translationApplyDao;
     private ProductRequestDao productRequestDao;
+    private UserAccountDao userAccountDao;
 
     @Autowired
     public TranslationApplyServiceImpl(TranslationApplyDao translationApplyDao, ProductRequestDao productRequestDao) {
@@ -35,35 +38,11 @@ public class TranslationApplyServiceImpl implements TranslationApplyService {
 
 
     @Override
-    @Transactional
-    public TranslationApply applyTranslation(ProductRequest productRequest,LanguageEnum fromType) throws Exception {
-
-        ProductRequest converFromProduct = productRequest.converFromProduct(fromType);
-        if(productRequestDao.insert(converFromProduct)>0){
-            TranslationApply translationApply = new TranslationApply();
-            translationApply.setReqId(productRequest.getId());
-            translationApply.setOrigType(productRequest.getLanguageType());
-            translationApply.setFromType(fromType);
-            translationApply.setStatus(TranslationApplyStatusEnum.INIT);
-            translationApply.setCreateTime(new Date());
-            translationApply.setFromReqId(converFromProduct.getId());
-            translationApply.setUserId(converFromProduct.getUserId());
-            if(translationApplyDao.insert(translationApply)>0){
-                return translationApply;
-            }else{
-                throw new Exception("[翻译] 插入数据库出问题");
-            }
-        }
-        return null;
-    }
-
-    @Override
     public TranslationApply getById(Long id) {
         return translationApplyDao.selectByPrimaryKey(id);
     }
 
     @Override
-    @Transactional
     public int translation(TranslationApplyVO translationApplyVO) {
         ProductRequest fromProduct = productRequestDao.selectByPrimaryKey(translationApplyVO.getFromReqId());
         TranslationApply translationApply = translationApplyDao.selectByPrimaryKey(translationApplyVO.getId());
@@ -109,5 +88,28 @@ public class TranslationApplyServiceImpl implements TranslationApplyService {
     @Override
     public List<TranslationApply> page(TranslationApplyQuery translationApplyQuery) {
         return translationApplyDao.page(translationApplyQuery);
+    }
+
+    @Override
+    @Transactional
+    public int applyFreeTranslation(TranslationApply translationApply, UserAccount userAccount) {
+        int i = userAccountDao.updateByPrimaryKey(userAccount);
+        if(i>0){
+            int save = translationApplyDao.insert(translationApply);
+            if(save==0){
+                throw new RuntimeException("插入translationApply异常");
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public int save(TranslationApply translationApply) {
+        return translationApplyDao.insert(translationApply);
+    }
+
+    @Override
+    public TranslationApply findReqIdAndFrom(Long reqId, LanguageEnum fromType) {
+        return translationApplyDao.findReqIdAndFrom(reqId,fromType);
     }
 }

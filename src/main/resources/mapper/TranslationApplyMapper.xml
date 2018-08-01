@@ -14,7 +14,7 @@
     <result column="status" property="status"
             typeHandler="com.spring.worldwire.extent.NumericEnumHandler"
             javaType="com.spring.worldwire.enums.TranslationApplyStatusEnum"/>
-    <result column="title" property="status" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="operator_id" property="operatorId" jdbcType="BIGINT" />
     <result column="operator_time" property="operatorTime" jdbcType="TIMESTAMP" />
     <result column="auditor_id" property="auditorId" jdbcType="BIGINT" />
@@ -220,4 +220,11 @@
     select <include refid="Base_Column_List"/> from translation_apply order by id desc
 
   </select>
+
+  <select id="findReqIdAndFrom" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from translation_apply
+    WHERE req_id = #{param1,jdbcType=BIGINT} AND from_type = #{param2,typeHandler=com.spring.worldwire.extent.NumericEnumHandler} limit 1
+
+  </select>
+
 </mapper>

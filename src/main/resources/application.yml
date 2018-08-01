@@ -47,7 +47,7 @@ spring:
     name: worldwire
     url: jdbc:mysql://127.0.0.1:3306/worldwire
     username: root
-    password: 123456aA!!
+    password: root
     driver-class-name: com.mysql.jdbc.Driver
 file:
   basedir: /data/worldwire/file/

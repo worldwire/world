@@ -1,4 +1,4 @@
-package com.spring.worldwire.utils;
+package com.spring.worldwire.result;
 
 import com.alibaba.fastjson.JSONObject;
 import com.spring.worldwire.model.TranslationApply;

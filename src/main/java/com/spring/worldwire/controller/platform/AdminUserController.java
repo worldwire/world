@@ -3,7 +3,7 @@ package com.spring.worldwire.controller.platform;
 import com.spring.worldwire.constants.Constants;
 import com.spring.worldwire.model.AdminUser;
 import com.spring.worldwire.service.AdminUserService;
-import com.spring.worldwire.utils.LayuiResult;
+import com.spring.worldwire.result.LayuiResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

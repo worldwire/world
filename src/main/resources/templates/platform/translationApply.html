@@ -53,7 +53,11 @@ layui.use('table', function(){
     var tr = obj.tr; //获得当前行 tr 的DOM对象
     if(layEvent === 'detail'){ //查看
     //do somehing
-
+         layer.open({
+          title: '在线调试'
+          ,content: ['/platTranslation/',"no"]
+        });
+        //location.href = '/platTranslation/';
     }
   });
 

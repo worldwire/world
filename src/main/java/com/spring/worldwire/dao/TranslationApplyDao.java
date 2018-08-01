@@ -1,5 +1,6 @@
 package com.spring.worldwire.dao;
 
+import com.spring.worldwire.enums.LanguageEnum;
 import com.spring.worldwire.model.TranslationApply;
 import com.spring.worldwire.query.TranslationApplyQuery;
 
@@ -21,4 +22,6 @@ public interface TranslationApplyDao {
     int pageCount(TranslationApplyQuery translationApplyQuery);
 
     List<TranslationApply> page(TranslationApplyQuery translationApplyQuery);
+
+    TranslationApply findReqIdAndFrom(Long reqId, LanguageEnum fromType);
 }

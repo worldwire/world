@@ -6,7 +6,7 @@ import com.spring.worldwire.model.vo.TranslationApplyVO;
 import com.spring.worldwire.query.TranslationApplyQuery;
 import com.spring.worldwire.service.ProductRequestService;
 import com.spring.worldwire.service.TranslationApplyService;
-import com.spring.worldwire.utils.LayuiResult;
+import com.spring.worldwire.result.LayuiResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +31,11 @@ public class PlatTranslationController {
 	@RequestMapping("toList")
 	public String toList(){
 		return "platform/translationApply";
+	}
+
+	@RequestMapping("toDetail")
+	public String toDetail(){
+		return "platform/translationApplyDetail";
 	}
 
 	@RequestMapping("list")

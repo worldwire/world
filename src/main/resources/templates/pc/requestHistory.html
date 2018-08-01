@@ -32,7 +32,7 @@
 								<span class="list-btn-state-span"><#if productRequest.status??>${productRequest.status.getName()!''}</#if></span>
 							</div>
 							<div class="list-btn-btns">
-								<div class="list-btn-btns-style list-btn-btns-translation">翻译</div>
+								<div class="list-btn-btns-style list-btn-btns-translation" value="${productRequest.id}" >翻译</div>
 								<div class="list-btn-btns-style" onclick="redirectClick('/request/lc/edit?id=${productRequest.id}')">修改</div>
 								<div class="list-btn-btns-style">关闭</div>
 							</div>
@@ -48,17 +48,28 @@
 
 	</body>
 
-	<script>
+</html>
+
+
+
+
+
+<script>
+
+	var toReqId = '0';
+
 	layui.use(['form', 'layedit', 'laydate','layer'], function(){
 	  var form = layui.form
 	  ,layer = layui.layer
 	  ,layedit = layui.layedit
 	  ,laydate = layui.laydate
+	  ,tips = layui.tips
 	  ,$ = layui.jquery;
 
 
 		//翻译弹出层
 		$(".list-btn-btns-translation").click(function(){
+			toReqId = $(this).attr("value");
 			layer.open({
 			  type: 1,
 			  skin: 'layer-div',
@@ -93,16 +104,20 @@
 		});
 		//翻译中文按钮
 		$(document).on('click', '.choose-CN', function() {
+			$.post('/translation/apply', {reqId:toReqId,fromType:1}, function (json) {
+				layer.msg(json.desc);
+			}, 'json');
 			layer.closeAll()
-			layer.msg("这里是翻译中文按钮")
 		});
 		//翻译英文按钮
 		$(document).on('click', '.choose-ENG', function() {
+			$.post('/translation/apply', {reqId:toReqId,fromType:2}, function (json) {
+				layer.msg(json.desc);
+			}, 'json');
 			layer.closeAll()
-			layer.msg("这里是翻译英文按钮")
+
 		});
 
 
 })
   	</script>
-</html>
