@@ -112,4 +112,5 @@ public class TranslationApplyServiceImpl implements TranslationApplyService {
     public TranslationApply findReqIdAndFrom(Long reqId, LanguageEnum fromType) {
         return translationApplyDao.findReqIdAndFrom(reqId,fromType);
     }
+
 }

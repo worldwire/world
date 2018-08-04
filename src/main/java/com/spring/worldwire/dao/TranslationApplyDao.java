@@ -3,6 +3,7 @@ package com.spring.worldwire.dao;
 import com.spring.worldwire.enums.LanguageEnum;
 import com.spring.worldwire.model.TranslationApply;
 import com.spring.worldwire.query.TranslationApplyQuery;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,5 +24,5 @@ public interface TranslationApplyDao {
 
     List<TranslationApply> page(TranslationApplyQuery translationApplyQuery);
 
-    TranslationApply findReqIdAndFrom(Long reqId, LanguageEnum fromType);
+    TranslationApply findReqIdAndFrom(@Param("reqId") Long reqId, @Param("fromType") LanguageEnum fromType);
 }

@@ -31,5 +31,6 @@ public interface TranslationApplyService {
 
     int save(TranslationApply translationApply);
 
-    TranslationApply findReqIdAndFrom(@Param("reqId") Long reqId, @Param("fromType") LanguageEnum fromType);
+    TranslationApply findReqIdAndFrom(Long reqId,LanguageEnum fromType);
+
 }

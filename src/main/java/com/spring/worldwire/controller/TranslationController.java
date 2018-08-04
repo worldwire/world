@@ -1,6 +1,7 @@
 package com.spring.worldwire.controller;
 
 import com.spring.worldwire.config.BaseConfig;
+import com.spring.worldwire.constants.Constants;
 import com.spring.worldwire.enums.LanguageEnum;
 import com.spring.worldwire.enums.StatusCodeEnum;
 import com.spring.worldwire.enums.TranslationApplyStatusEnum;
@@ -8,6 +9,7 @@ import com.spring.worldwire.manager.TranslationApplyManager;
 import com.spring.worldwire.model.ProductRequest;
 import com.spring.worldwire.model.TranslationApply;
 import com.spring.worldwire.model.UserAccount;
+import com.spring.worldwire.query.TranslationApplyQuery;
 import com.spring.worldwire.result.ResponseResult;
 import com.spring.worldwire.service.ProductRequestService;
 import com.spring.worldwire.service.TranslationApplyService;
@@ -17,8 +19,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @SuppressWarnings("unused")
 @Controller
@@ -41,6 +47,22 @@ public class TranslationController {
 		this.productRequestService = productRequestService;
 		this.userAccountService = userAccountService;
 		this.translationApplyManager = translationApplyManager;
+	}
+
+	@RequestMapping("list")
+	public String showHistory(Model model, HttpServletRequest request, TranslationApplyQuery translationApplyQuery){
+
+		Long userId = (Long)request.getAttribute(Constants.USER_ID_SESSION);
+		translationApplyQuery.setUserId(userId);
+
+
+		int translationCount = translationApplyService.pageCount(translationApplyQuery);
+		List<TranslationApply> translationApplyList = translationApplyService.page(translationApplyQuery);
+
+		model.addAttribute("translationCount",translationCount);
+		model.addAttribute("translationApplyList",translationApplyList);
+
+		return "pc/translationList";
 	}
 
 

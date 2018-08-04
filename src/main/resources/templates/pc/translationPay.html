@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>充值</title>
+		<#include "../public/common.html" encoding="utf-8"/>
+		<link rel="stylesheet" href="/css/recharge.css">
+	</head>
+	<body>
+		<div class="container">
+			<div class="title"><p>充值</p></div>
+			<div class="tip"><span>1</span>选择支付币种</div>
+			<div class="money-type">
+				<a href="###" name="china" class="hv" id="china">￥&nbsp;人民币</a>
+				<a href="###" name="english" class="hv" id="english">$&nbsp;&nbsp;美金</a>
+			</div>
+			<div class="tip"><span>3</span>选择支付方式</div>
+			<div class="money-type" id="thirdPay">
+				<a href="###" id="WEI_CHAT" name="WEI_CHAT" class="hv"><img src="/images/wx.png" width="30" style="vertical-align: -6px">微信支付</a>
+				<a href="###" id="ALIPAY" name="ALIPAY" class="hv"><img src="/images/zfb.png" width="30" style="vertical-align: -7px;">支付宝支付</a>
+				<a href="###" id="PAY_PAL" name="PAY_PAL" class="hv"><img src="/images/paypal.jpg" width="150" height="50"></a>
+			</div>
+			<hr/>
+			<div class="settlement">
+				<div><button class="layui-btn" onclick="payRecharge()">立即充值</button></div>
+				<div class="msg" id="payAmount"></div>
+			</div>
+		</div>
+
+	</body>
+</html>
+
+
+<script>
+
+		var thirdPayType = 0;
+
+        layui.use(['form', 'layedit', 'laydate'], function(){
+            var form = layui.form
+                ,layer = layui.layer
+                ,layedit = layui.layedit
+                ,laydate = layui.laydate
+                ,$ = layui.jquery;
+
+			var rmbPay = ["ALIPAY","WEI_CHAT"];
+			var usdPay = ["PAY_PAL"];
+
+
+			function getProduct(code){
+
+				$("#thirdPay a").hide();
+				$("#thirdPay a").removeClass("selected");
+				$("#payAmount").empty();
+
+				if(code==1){
+					$("#WEI_CHAT").show();
+					$("#ALIPAY").show();
+					$("#payAmount").text("<span>实付金额人民币</span>￥"+${rmbAmount})
+				}else if(code ==2){
+					$("#PAY_PAL").show();
+					$("#payAmount").append("<span>实付金额美元</span>$"+${usdAmount});
+				}
+			}
+
+
+			function flushClick(){
+				$(".container a").on("click", function (e) {
+					var target = $(this),
+						parentBox = target.parent(),
+						allA = $(parentBox).find("a");
+
+					allA.removeClass("selected");
+					target.addClass("selected");
+
+					var name = $(this).attr("name");
+					if(name=='china'){
+						getProduct(1);
+					}else if(name=='english'){
+						getProduct(2);
+					}else if(name=='ALIPAY'){
+						thirdPayType = 2;
+					}else if(name=='WEI_CHAT'){
+						thirdPayType = 3;
+					}else if(name=='PAY_PAL'){
+						thirdPayType = 1;
+					}
+
+
+					return false;
+				})
+			}
+
+				//刷新
+				flushClick();
+				//隐藏
+				$("#thirdPay a").hide();
+				$("#currency a").hide();
+        })
+
+        	function payRecharge(){
+				if(thirdPayType!=0){
+					window.open('/pay/payTranslation?id='+ ${translationId}+'&payCode='+thirdPayType);
+				}else{
+				    alert('请选择支付方式！');
+				}
+			}
+    </script>

@@ -7,7 +7,9 @@ import com.spring.worldwire.model.TradeOrder;
  * @Date create in 21:55 2018/7/18
  */
 public interface PayManager {
-    String createOrder(long userId, long productId, int payCode);
+    String createRecharge(long userId, long productId, int payCode);
 
     void completeOrder(TradeOrder tradeOrder);
+
+    String createTranslation(long userId, long id, int payCode);
 }

@@ -30,11 +30,17 @@ public class PayController {
         return "pc/recharge";
     }
 
+    @RequestMapping("translation")
+    public String translation(Model model) {
+
+        return "pc/translationPay";
+    }
+
     @RequestMapping("payRecharge")
     public String payRecharge(Model model,HttpServletRequest request, long id, int payCode) {
-        //String userIdStr = request.getAttribute(Constants.USER_ID_SESSION).toString();
+        String userIdStr = request.getAttribute(Constants.USER_ID_SESSION).toString();
 
-        String nextOperationBody = payManager.createOrder(Long.parseLong("1"),id,payCode);
+        String nextOperationBody = payManager.createRecharge(Long.parseLong(userIdStr),id,payCode);
         model.addAttribute("nextOperation",nextOperationBody);
         return "pay/payBlank";
     }
@@ -43,8 +49,18 @@ public class PayController {
     @RequestMapping("product")
     @ResponseBody
     public String productList(Model model,int code) {
-        List<ProductInfo> productInfoList = productInfoService.selectCheckProductList(code);
+        int type = 1;//只是充值产品查看次数的
+        List<ProductInfo> productInfoList = productInfoService.selectCheckProductList(code,type);
 
         return JSONObject.toJSONString(productInfoList);
+    }
+
+    @RequestMapping("payTranslation")
+    public String payTranslation(Model model,HttpServletRequest request, long id, int payCode){
+        String userIdStr = request.getAttribute(Constants.USER_ID_SESSION).toString();
+
+        String nextOperationBody = payManager.createTranslation(Long.parseLong(userIdStr),id,payCode);
+        model.addAttribute("nextOperation",nextOperationBody);
+        return "pay/payBlank";
     }
 }
