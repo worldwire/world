@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ProductInfoService {
 
-    List<ProductInfo> selectCheckProductList(int code);
+    List<ProductInfo> selectCheckProductList(int code,int type);
     ProductInfo findById(long id);
 }

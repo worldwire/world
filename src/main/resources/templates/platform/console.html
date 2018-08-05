@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>控制台</title>
+
+    <#include "../public/luaOut.html" encoding="utf-8"/>
+</head>
+<body>
+
+<div class="layui-row layui-col-space15">
+    <!--快捷入口开始-->
+    <h2>欢迎光临</h2>
+</div>
+
+</body>
+<script>
+    layui.config({base: '/js/platform'}).extend({common: '/common'}).use(['table', 'common', 'carousel', 'element'], function() {
+        var common = layui.common,
+            $ = layui.$,
+            layer = layui.layer,
+            carousel = layui.carousel,
+            element = layui.element,
+            table = layui.table;
+
+    });
+</script>
+</html>

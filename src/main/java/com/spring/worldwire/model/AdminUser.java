@@ -10,6 +10,8 @@ public class AdminUser implements Serializable{
     private String userName;
 
     private String password;
+    private Integer status;
+    private Integer type;
 
     public Long getId() {
         return id;
@@ -35,9 +37,31 @@ public class AdminUser implements Serializable{
         this.password = password == null ? null : password.trim();
     }
 
-	@Override
-	public String toString() {
-		return "AdminUser [id=" + id + ", userName=" + userName + ", password=" + password + "]";
-	}
-    
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("AdminUser{");
+        sb.append("id=").append(id);
+        sb.append(", userName='").append(userName).append('\'');
+        sb.append(", password='").append(password).append('\'');
+        sb.append(", status=").append(status);
+        sb.append('}');
+        return sb.toString();
+    }
+
 }

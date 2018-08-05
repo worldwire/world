@@ -96,10 +96,10 @@
       times = #{times,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectCheckProductList" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectCheckProductList" resultMap="BaseResultMap" >
     select
     <include refid="Base_Column_List" />
     from product_info
-    where pay_type = #{code}
+    where pay_type = #{code} and type = #{type}
   </select>
 </mapper>

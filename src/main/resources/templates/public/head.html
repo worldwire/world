@@ -5,14 +5,14 @@
         <div class="head-search layui-form">
             <i class="layui-icon layui-icon-face-smile search-icon">&#xe615;</i>
             <div class="layui-input-inline head-search-input">
-                <select name="modules" lay-verify="required" lay-search="">
-                    <option value="">寻找人才</option>
-                    <option value="1">人才1号</option>
+                <select name="modules" lay-verify="required" lay-search="" onkeyup="openRequireList(this)">
+                    <option value="1">个人需求</option>
+                    <option value="2">企业需求</option>
                 </select>
             </div>
         </div>
 
-        <div class="layui-btn layui-btn-sm fabu-btn" onclick="redirectClick('/head/lc/publish')">发&nbsp;&nbsp;布</div>
+        <div class="layui-btn layui-btn-sm fabu-btn" onclick="redirectClick('/request/lc/release')">发&nbsp;&nbsp;布</div>
         <div class="btns">
 					<span class="language-btns">
 						<#if lan?? && lan== 'en'>
@@ -98,7 +98,10 @@
                 $(".user-icon").html("&#xe619;")
             }
         });
-
+        var openRequireList = function (that) {
+            var selected = that.value;
+            window.location.href = "/request/list/"+selected+"/2/4/1.html";
+        }
 
 
 

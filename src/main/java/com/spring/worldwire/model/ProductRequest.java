@@ -3,6 +3,8 @@ package com.spring.worldwire.model;
 import com.spring.worldwire.enums.LanguageEnum;
 import com.spring.worldwire.enums.ProductRequestStatusEnum;
 import com.spring.worldwire.enums.RequestTypeEnum;
+import com.spring.worldwire.enums.UserTypeEnum;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -30,9 +32,19 @@ public class ProductRequest implements Serializable {
 
     private String website;
 
+    private String publicPlatform;
+
     private String wechat;
 
+    private String facebook;
+
+    private String whatsapp;
+
     private String linkedIn;
+
+    private String others;
+
+    private String qrcode;
 
     private LanguageEnum languageType;
 
@@ -42,7 +54,7 @@ public class ProductRequest implements Serializable {
 
     private ProductRequestStatusEnum status;
 
-    private Integer userType;
+    private UserTypeEnum userType;
 
     private Long userId;
 
@@ -150,11 +162,11 @@ public class ProductRequest implements Serializable {
         this.status = status;
     }
 
-    public Integer getUserType() {
+    public UserTypeEnum getUserType() {
         return userType;
     }
 
-    public void setUserType(Integer userType) {
+    public void setUserType(UserTypeEnum userType) {
         this.userType = userType;
     }
 
@@ -215,19 +227,28 @@ public class ProductRequest implements Serializable {
     }
 
     public Long getViewCount() {
-        return viewCount;
+        return viewCount == null ? 0 : viewCount;
     }
 
     public void setViewCount(Long viewCount) {
         this.viewCount = viewCount;
     }
 
+    public String getPublicPlatform() {
+        return publicPlatform;
+    }
+
+    public void setPublicPlatform(String publicPlatform) {
+        this.publicPlatform = publicPlatform;
+    }
+
     /**
      * 克隆一个新语种的翻译
+     *
      * @param languageType 转变成的语言类型
      * @return 返回一个新的对象 缺少ID 和需要翻译的对象
      */
-    public ProductRequest converFromProduct(LanguageEnum languageType){
+    public ProductRequest converFromProduct(LanguageEnum languageType) {
         ProductRequest fromProductRequest = new ProductRequest();
         fromProductRequest.mobile = this.mobile;
         fromProductRequest.email = this.email;
@@ -235,20 +256,56 @@ public class ProductRequest implements Serializable {
         fromProductRequest.phone = this.phone;
         fromProductRequest.status = ProductRequestStatusEnum.INIT;
         fromProductRequest.website = this.website;
+        fromProductRequest.publicPlatform = this.publicPlatform;
         fromProductRequest.userType = this.userType;
         fromProductRequest.requestType = this.requestType;
         fromProductRequest.createTime = new Date();
         fromProductRequest.userId = this.userId;
         fromProductRequest.website = this.website;
         fromProductRequest.wechat = this.wechat;
+        fromProductRequest.facebook = this.facebook;
+        fromProductRequest.whatsapp = this.whatsapp;
         fromProductRequest.linkedIn = this.linkedIn;
+        fromProductRequest.others = this.others;
         fromProductRequest.languageLevel = this.languageLevel;
-        if(this.languageId==null){
+        if (this.languageId == null) {
             fromProductRequest.languageId = this.id;
-        }else{
+        } else {
             fromProductRequest.languageId = this.languageId;
         }
         return fromProductRequest;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    public String getWhatsapp() {
+        return whatsapp;
+    }
+
+    public void setWhatsapp(String whatsapp) {
+        this.whatsapp = whatsapp;
+    }
+
+    public String getOthers() {
+        return others;
+    }
+
+    public void setOthers(String others) {
+        this.others = others;
+    }
+
+    public String getQrcode() {
+        return qrcode;
+    }
+
+    public void setQrcode(String qrcode) {
+        this.qrcode = qrcode;
     }
 
     @Override
@@ -263,6 +320,12 @@ public class ProductRequest implements Serializable {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", website='" + website + '\'' +
+                ", publicPlatform='" + publicPlatform + '\'' +
+                ", wechat='" + wechat + '\'' +
+                ", facebook='" + facebook + '\'' +
+                ", whatsapp='" + whatsapp + '\'' +
+                ", linkedIn='" + linkedIn + '\'' +
+                ", others='" + others + '\'' +
                 ", languageType=" + languageType +
                 ", languageId=" + languageId +
                 ", status=" + status +
@@ -276,8 +339,8 @@ public class ProductRequest implements Serializable {
     }
 
 
-    public String[] getKeyWordsVeiw(){
-        if(keyWord==null){
+    public String[] getKeyWordsVeiw() {
+        if (keyWord == null) {
             return null;
         }
         return keyWord.split(",");

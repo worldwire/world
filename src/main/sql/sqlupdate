@@ -28,3 +28,24 @@ alter table third_pay_order ADD foreign_id INT(11) Default 0 COMMENT '翻译需�
 alter table third_pay_order add column pay_detail varchar(255) comment '支付描述' after third_type;
 
 alter TABLE third_pay_order ADD COLUMN product_id bigint(20) NOT NULL COMMENT '主键id';
+
+alter table product_request add column view_count bigint(20) comment '查看次数' after language_level;
+
+alter table product_request add column facebook varchar(255) after wechat;
+alter table product_request add column whatsapp varchar(255) after facebook;
+alter table product_request add column others varchar(255) after linkedin;
+alter table product_request add column qrcode varchar(255);
+
+
+alter TABLE user_info ADD exhibition VARCHAR(1024) NOT NULL;
+alter TABLE user_info CHANGE brithday birthday  datetime DEFAULT NULL COMMENT '生日';
+
+alter TABLE admin_user ADD `status` INT(11) NOT NULL COMMENT '0申请中 1 通过 2找回密码';
+
+alter TABLE admin_user ADD `type` INT(11) NOT NULL COMMENT '1管理员 2用户';
+alter TABLE translation_apply ADD `title` VARCHAR(128) NOT NULL COMMENT '标题';
+
+
+
+INSERT INTO `product_info` (`id`, `product_name`, `amount`, `pay_type`, `type`, `times`) VALUES ('6', '翻译(页/rmb)', '200', '1', '2', '1');
+INSERT INTO `product_info` (`id`, `product_name`, `amount`, `pay_type`, `type`, `times`) VALUES ('7', '翻译(页/usb)', '50', '2', '2', '1');

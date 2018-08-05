@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <#if productRequest.id??>修改需求
+            <#else>添加需求
+        </#if>
+    </title>
+    <#include "../public/common.html" encoding="utf-8">
+        <link rel="stylesheet" type="text/css" href="/css/modify.css"/>
+        </head>
+<body>
+<!--头部-->
+<#include "../public/head.html" encoding="utf-8">
+    <!--导航-->
+    <#include "../public/navigator.html" encoding="utf-8">
+        <!--内容-->
+        <form method="post" name="form" accept-charset="UTF-8" onsubmit="document.charset='UTF-8';" action="/request/save">
+            <div class="content">
+                <div class="contentbox">
+                <#include "../public/left.html" encoding="utf-8">
+                    <div class="contentbox-right">
+                        <div class="contentbox-body-title">
+                            <#if productRequest.id??>修改需求
+                                <#else>添加需求
+                            </#if>
+                            <input type="hidden" name="id" value="${productRequest.id!''}">
+                        </div>
+                        <div class="contentbox-body">
+                            <#if productRequest.id??>
+                                <div class="body-choose-title">
+                                    选择想要提供的业务
+                                </div>
+                                <div class="body-choose-list">
+                                    <input type="hidden" name="requestType" value="${productRequest.requestType!''}">
+                                    <div class="body-choose-list-choose1" <#if productRequest.requestType.code == 1>style="border-bottom:3px solid #D42026"</#if> >
+                                        我有才能可以帮助外国人
+                                    </div>
+                                    <span class="">
+                                        或
+                                    </span>
+                                    <div class="body-choose-list-choose2" <#if productRequest.requestType.code == 2>style="border-bottom:3px solid #D42026"</#if>>
+                                    我要找国际人才或资源
+                                    </div>
+                                </div>
+                            </#if>
+                    <div class="body-tag">
+                        <div class="body-line-style">
+                            <span class="body-line-style-span">您寻找的才能（最多添加八项）</span>
+                        </div>
+                        <input type="hidden" name="keyWord" value="${productRequest.keyWord}">
+                        <div class="body-tag-content">
+								<span class="body-tag-content-list">
+                                    <#if productRequest.keyWord??>
+                                        <#list productRequest.keyWord?split(";") as key>
+                                                <span class="">
+                                                    ${key}
+                                                <i class="iconfont span-i body-tag-ibtn">&#xe638;</i>
+                                            </span>
+                                        </#list>
+                                    </#if>
+								</span>
+                            <span class="body-tag-content-btn">
+									<i class="iconfont span-add">&#xe601;</i>
+									添加才能
+								</span>
+                        </div>
+                    </div>
+                    <div class="body-DeTitle">
+                        <div class="body-line-style">
+                            <span class="body-line-style-span">需求标题(30字)</span>
+                        </div>
+                        <div class="layui-form">
+                            <input class="layui-input body-DeTitle-input" type="text" name="title"
+                                   value="${productRequest.title!''}" placeholder="请输入标题">
+                        </div>
+                    </div>
+                    <div class="body-DeContent">
+                        <div class="body-line-style">
+                            <span class="body-line-style-span">详细补充需求内容</span>
+                        </div>
+                        <div class="layui-form">
+                                    <textarea name="content" placeholder="请输入内容"
+                                              class="layui-textarea body-DeContent-textarea">${productRequest.content!''}"</textarea>
+                        </div>
+                    </div>
+                    <!--邮箱电话网站公众号-->
+                    <div class="body-epsp">
+                        <div class="body-epsp-ep">
+                            <div class="body-epsp-ep-email">
+                                <div class="body-line-style">
+                                    <span class="body-line-style-dot"></span>&nbsp;&nbsp;
+                                    <span class="body-line-style-span">邮箱</span>
+                                </div>
+                                <div class="layui-form">
+                                    <input class="layui-input body-epsp-ep-email-input" type="text" name="email"
+                                           value="${productRequest.email!''}" placeholder="请输入邮箱">
+                                </div>
+                            </div>
+                            <div class="body-epsp-ep-phone">
+                                <div class="body-line-style">
+                                    <span class="body-line-style-dot"></span>&nbsp;&nbsp;
+                                    <span class="body-line-style-span">电话</span>
+                                </div>
+                                <div class="layui-form">
+                                    <input class="layui-input body-epsp-ep-phone-input" type="text" name="mobile"
+                                           value="${productRequest.mobile!''}" placeholder="请输入手机号">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="body-epsp-sp">
+                            <div class="body-epsp-sp-site">
+                                <div class="body-line-style">
+                                    <span class="body-line-style-span">网站</span>
+                                </div>
+                                <div class="layui-form">
+                                    <input class="layui-input body-epsp-ep-site-input" type="text"
+                                           name="website" value="${productRequest.website!''}" placeholder="请输入网站地址">
+                                </div>
+                            </div>
+                            <div class="body-epsp-sp-public">
+                                <div class="body-line-style">
+                                    <span class="body-line-style-span">公众号</span>
+                                </div>
+                                <div class="layui-form">
+                                    <input class="layui-input body-epsp-sp-public-input" type="text"
+                                           name="publicPlatform" value="${productRequest.publicPlatform!''}"
+                                           placeholder="请输入公众号">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="body-details">
+                        <input type="hidden" name="qrcode" value="${productRequest.qrcode!''}">
+                        <div class="body-details-img">
+                            <p>点击上传<br/>我的微信二维码</p>
+                            <img class="body-details-ewm" <#if productRequest.qrcode??>src="${productRequest.qrcode}"</#if> />
+                        </div>
+                        <div class="body-details-list">
+                            <div class="body-details-vf">
+                                <div class="body-details-vf-vx">
+                                    <div class="body-line-style">
+                                        <span class="body-line-style-span">微信</span>
+                                    </div>
+                                    <div class="layui-form">
+                                        <input class="layui-input body-details-vf-vx-input" type="text"
+                                               name="wechat" value="${productRequest.wechat!''}" placeholder="请输入微信号">
+                                    </div>
+                                </div>
+                                <div class="body-details-vf-facebook">
+                                    <div class="body-line-style">
+                                        <span class="body-line-style-span">Facebook</span>
+                                    </div>
+                                    <div class="layui-form">
+                                        <input class="layui-input body-details-vf-facebook-input" type="text"
+                                               name="facebook" value="${productRequest.facebook!''}"
+                                               placeholder="请输入Facebook帐号">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="body-details-wl">
+                                <div class="body-details-wl-wapp">
+                                    <div class="body-line-style">
+                                        <span class="body-line-style-span">WhatsApp</span>
+                                    </div>
+                                    <div class="layui-form">
+                                        <input class="layui-input body-details-wl-wapp-input" type="text"
+                                               name="whatsapp" value="${productRequest.whatsapp!''}"
+                                               placeholder="请输入WhatsApp">
+                                    </div>
+                                </div>
+                                <div class="body-details-wl-lin">
+                                    <div class="body-line-style">
+                                        <span class="body-line-style-span">LinkedIn</span>
+                                    </div>
+                                    <div class="layui-form">
+                                        <input class="layui-input body-details-wl-lin-input" type="text"
+                                               name="linkedIn" value="${productRequest.linkedIn!''}"
+                                               placeholder="请输入LinkedIn">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="body-ComMethods">
+                        <input type="hidden" name="others">
+                        <div class="body-line-style">
+                            <span class="body-line-style-span">其他即时通讯方式（例，QQ：1652669536）</span>
+                        </div>
+                        <div class="body-ComMethods-com">
+                            <i class="iconfont body-ComMethods-com-addbtn">&#xe601;</i>
+                            <#if productRequest.others??>
+                                <#list productRequest.others?split(";") as item>
+                                    <#if item??>
+                                        <div class="layui-form body-ComMethods-com-box">
+                                            <#list item?split(':') as communicate>
+                                                <#if communicate_index == 0>
+                                                    <input class="layui-input body-ComMethods-com-name" type="text" value="${communicate}" placeholder="请填写即时通信种类">
+                                                    <span class="body-ComMethods-com-span">:</span>
+                                                </#if>
+                                                <#if communicate_index == 1>
+                                                    <input class="layui-input body-ComMethods-com-content" type="text" value="${communicate[1]}" placeholder="请填写该通信方式的账号">
+                                                </#if>
+                                            </#list>
+                                        </div>
+                                    </#if>
+                                </#list>
+                                <#else>
+                                    <div class="layui-form body-ComMethods-com-box">
+                                        <input class="layui-input body-ComMethods-com-name" type="text" placeholder="请填写即时通信种类">
+                                        <span class="body-ComMethods-com-span">:</span>
+                                        <input class="layui-input body-ComMethods-com-content" type="text" placeholder="请填写该通信方式的账号">
+                                    </div>
+                            </#if>
+                        </div>
+                    </div>
+                    <div class="body-userAgreement">
+                        <div class="layui-form">
+                            <input name="agreement" type="radio" value="nan" title="同意用户电子协议">
+                        </div>
+
+                    </div>
+                    <div class="body-SaveBtn">
+                        <div class="body-SaveBtn-btn">
+                            保存
+                        </div>
+                    </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        </form>
+        <#include "../public/foot.html" encoding="utf-8">
+</body>
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'upload'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , $ = layui.jquery
+            , upload = layui.upload;
+
+        $(document).on("click", ".body-tag-ibtn", function (e) {
+            var target = $(e.target);
+            var parent = target.parent()
+            var data = parent[0].firstChild.data.replace(/(^\s*)|(\s*$)/g, "");
+            parent.remove();
+            var keyWord = $("[name=keyWord]").val();
+            keyWord = keyWord.replace(data, "").replace("\;\;", "\;");
+            if (keyWord.indexOf(";") == 0) {
+                keyWord = keyWord.substr(1, keyWord.length);
+            }
+            if (keyWord.indexOf(";") == keyWord.length - 1) {
+                keyWord = keyWord.substr(0, keyWord.length - 1);
+            }
+            $("[name=keyWord]").val(keyWord);
+
+            var list = $(".body-tag-content-list span")
+            if (list.length == 4) {
+                $(".body-tag-content-btn").css("margin-top", "0px");
+                $(".body-tag-content-btn").css("margin-left", "15px");
+            }
+            if (list.length == 5) {
+                $(".body-tag-content-btn").css("margin-left", "0px");
+            }
+        })
+        $(".body-choose-list-choose1").click(function () {
+            $(".body-choose-list-choose1").css("border-bottom", "3px solid #D42026")
+            $(".body-choose-list-choose2").css("border-bottom", "3px solid #ffffff")
+            $("[name=requestType]").val("${service}");
+        })
+        $(".body-choose-list-choose2").click(function () {
+            $(".body-choose-list-choose2").css("border-bottom", "3px solid #D42026")
+            $(".body-choose-list-choose1").css("border-bottom", "3px solid #ffffff")
+            $("[name=requestType]").val("${request}");
+        })
+        //添加才能
+        $(document).on("click", ".body-tag-content-btn", function (e) {
+            //询问框
+            layer.open({
+                title: '请添加一个才能',
+                type: 1,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['360px', '120px'], //宽高
+                content: '<div class="layer-from"><input type="text" name="line3-value"  placeholder="点击输入8个字以内" " class="layui-input  line3-label"/></div><div class="layui-btn add-btn" style="width: 100px;float: right">确定</div>'
+            });
+        })
+
+        //添加才能
+        $(document).on("click", ".add-btn", function (e) {
+            var value = $("input[type=text][name=line3-value]").val();
+            if (!value) {
+                layer.msg("才能内容不能为空", {time: 1500});
+                return false;
+            }
+            var list = $(".body-tag-content-list span")
+            if (list.length < 8) {
+                $(".body-tag-content-list ").append('<span class="">' + value + '<i class="iconfont span-i body-tag-ibtn">&#xe638;</i></span>')
+                layer.closeAll();
+            } else {
+                layer.closeAll();
+                layer.msg("你添加的才能已经上限")
+            }
+            var keyWord = $("[name=keyWord]").val();
+            if (!!keyWord) {
+                keyWord = keyWord + ";" + value;
+            } else {
+                keyWord = value
+            }
+            $("[name=keyWord]").val(keyWord);
+
+
+            if (list.length == 4) {
+                $(".body-tag-content-btn").css("margin-top", "20px");
+                $(".body-tag-content-btn").css("margin-left", "0px");
+            } else {
+                $(".body-tag-content-btn").css("margin-left", "15px");
+            }
+        })
+
+
+        $(document).on("click", ".body-ComMethods-com-addbtn", function (e) {
+            var target = $(e.target);
+            var parent = target.parent();
+            var appendHtml = "<input class='layui-input body-ComMethods-com-name' type='text'  placeholder='请填写即时通信种类'>"
+                +"<span class='body-ComMethods-com-span'>:</span>"
+                + "<input class='layui-input body-ComMethods-com-content' type='text' placeholder='请填写该通信方式的账号'>";
+            parent.append('<div class="layui-form body-ComMethods-com-box">' + appendHtml + '</div>')
+        });
+        // 保存按钮
+        $(document).on("click", ".body-SaveBtn", function (e) {
+            var title = $("[name=title]").val();
+            if (!title) {
+                layer.msg("标题不能为空", {time: 1500});
+                return false;
+            }
+            if (title.length > 30) {
+                layer.msg("标题不能超过30个字", {time: 1500});
+                return false;
+            }
+            var content = $("[name=content]").val();
+            if (!content) {
+                layer.msg("内容不能为空", {time: 1500});
+                return false;
+            }
+            var email = $("[name=email]").val();
+            if (!email) {
+                layer.msg("邮箱不能为空", {time: 1500});
+                return false;
+            }
+            var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+            if (!reg.test(email)) {
+                layer.msg("请输入正确的邮箱地址", {time: 1500});
+                return false;
+            }
+            var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+            var mobile = $("[name=mobile]").val();
+            if (!mobile) {
+                layer.msg("手机号不能为空", {time: 1500});
+                return false;
+            }
+            if (!myreg.test(mobile)) {
+                layer.msg("请输入正确的手机号", {time: 1500});
+                return false;
+            }
+            var agree = $("[name=agreement]:checked").val();
+            if (!agree) {
+                layer.msg("请选中同意用户协议按钮", {time: 1500});
+                return false;
+            }
+            var others = "";
+            $(".body-ComMethods-com").children(".body-ComMethods-com-box").each(function (i, item) {
+                var name = $(this).children(".body-ComMethods-com-name:first").val();
+                var content = $(this).children(".body-ComMethods-com-content:first").val();
+                if (!!others) {
+                    others = others + ";" + name + ":" + content;
+                } else {
+                    others = name + ":" + content;
+                }
+                $("[name=others]").val(others);
+            });
+            $("[name=form]").submit();
+        });
+
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '.body-details-img' //操作对象
+            , url: '/file/upload'	//上传路径
+            , data: {type: 'request'}
+            , method: 'POST'	 	//上传的方法
+            , auto: true			//自动上传否？
+            , accept: 'images'
+            , acceptMime: 'image/*'
+            , exts: 'jpg|png|gif|bmp|jpeg'
+            , choose: function (obj) {				//选择文件之后
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $(".body-details-ewm").attr("src", result);
+                });
+            }
+            , done: function (res) {		//上传成功的回调
+                //如果上传失败
+                if (res.code > 0) {
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+                $("[name=qrcode]").val(res.data())
+            }
+            , error: function () {			//上传失败的回调
+                //演示失败状态，并实现重传
+                //    var demoText = $('#demoText');
+                //    demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
+                //    demoText.find('.demo-reload').on('click', function(){
+                //      uploadInst.upload();
+                //    });
+            }
+        });
+
+
+    })
+</script>
+</html>

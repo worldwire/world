@@ -1,5 +1,7 @@
 server:
   port: 80
+  tomcat:
+    uri-encoding: UTF-8
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.spring.worldwire.model
@@ -25,6 +27,11 @@ spring:
     max-idle: 8
     min-idle: 0
     timeout: 0
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 multipart:
   maxFileSize: 50Mb
 qq:
@@ -40,18 +47,18 @@ spring:
     name: worldwire
     url: jdbc:mysql://127.0.0.1:3306/worldwire
     username: root
-    password: 123456aA!!
+    password: root
     driver-class-name: com.mysql.jdbc.Driver
 file:
-  basedir: data\worldwire\file\
+  basedir: /data/worldwire/file/
 ---
 spring:
   profiles: test
   datasource:
     name: worldwire
-    url: jdbc:mysql://127.0.0.1:3306/worldwire
+    url: jdbc:mysql://47.104.201.53:3306/worldwire
     username: root
-    password: root
+    password: 123456
     driver-class-name: com.mysql.jdbc.Driver
 file:
   basedir: D:\data\worldwire\file\

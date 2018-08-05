@@ -1,6 +1,7 @@
 package com.spring.worldwire.dao;
 
 import com.spring.worldwire.model.ProductInfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,5 +18,5 @@ public interface ProductInfoDao {
 
     int updateByPrimaryKey(ProductInfo record);
 
-    List<ProductInfo> selectCheckProductList(int code);
+    List<ProductInfo> selectCheckProductList(@Param("code") int code,@Param("type") int type);
 }

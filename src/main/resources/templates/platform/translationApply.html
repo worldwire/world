@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>控制台</title>
+
+    <#include "../public/luaOut.html" encoding="utf-8"/>
+</head>
+<body>
+
+<table id="translationApply" lay-filter="test"></table>
+
+
+</body>
+<script>
+layui.use('table', function(){
+  var table = layui.table,
+        $ = layui.$;
+
+  //第一个实例
+  table.render({
+    elem: '#translationApply'
+    ,height: 500
+    ,url: '/platTranslation/list' //数据接口
+    ,page: false //开启分页
+    ,cols: [[ //表头
+        {field: 'id', title: 'ID', width:'20%', sort: true, fixed: 'left'}
+      ,{field: 'origType', title: '原始语言', width:'30%'}
+      ,{field: 'fromType', title: '需翻译语言', width:'30%'}
+      ,{field: 'status', title: '状态', width:'20%' ,templet: function (d) {linkedInController
+                    if(d.status==1)
+                        return "需翻译";
+                    if(d.status==2)
+                        return "需审核";
+                    if(d.status==3)
+                        return "审核通过";
+
+                    return d.status;
+
+                }}
+      ,{ title: '操作', width:'20%' ,toolbar:'#barDemo'}
+    ]]
+  });
+
+
+
+
+  table.on('tool(test)', function(obj){
+    var data = obj.data; //获得当前行数据
+    var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+    var tr = obj.tr; //获得当前行 tr 的DOM对象
+    if(layEvent === 'detail'){ //查看
+    //do somehing
+         layer.open({
+          title: '在线调试'
+          ,content: ['/platTranslation/',"no"]
+        });
+        //location.href = '/platTranslation/';
+    }
+  });
+
+});
+</script>
+
+
+<script type="text/html" id="barDemo">
+    <!-- 这里同样支持 laytpl 语法，如： -->
+    <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+</script>
+</html>

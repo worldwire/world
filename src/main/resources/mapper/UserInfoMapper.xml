@@ -4,12 +4,14 @@
   <resultMap id="BaseResultMap" type="com.spring.worldwire.model.UserInfo" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="login_id" property="loginId" jdbcType="BIGINT" />
-    <result column="type" property="type" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.UserTypeEnum" />
+    <result column="type" property="type" jdbcType="INTEGER" typeHandler="com.spring.worldwire.extent.NumericEnumHandler" javaType="com.spring.worldwire.enums.UserTypeEnum"/>
     <result column="is_foreign" property="isForeign" jdbcType="INTEGER" />
     <result column="show_img" property="showImg" jdbcType="VARCHAR" />
-    <result column="brithday" property="brithday" jdbcType="TIMESTAMP" />
+    <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
     <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
-    <result column="language" property="language" jdbcType="VARCHAR" />
+    <result column="language" property="language" jdbcType="VARCHAR"
+            typeHandler="com.spring.worldwire.model.typeHandler.LanguageLevelHandel"
+            javaType="com.spring.worldwire.model.LanguageLevel"/>
     <result column="bri_nationality" property="briNationality" jdbcType="VARCHAR" />
     <result column="now_nationality" property="nowNationality" jdbcType="VARCHAR" />
     <result column="local_addr" property="localAddr" jdbcType="VARCHAR" />
@@ -23,7 +25,9 @@
     <result column="facebook" property="facebook" jdbcType="VARCHAR" />
     <result column="whatsapp" property="whatsapp" jdbcType="VARCHAR" />
     <result column="linkedin" property="linkedin" jdbcType="VARCHAR" />
-    <result column="communication" property="communication" jdbcType="VARCHAR" />
+    <result column="communication" property="communication" jdbcType="VARCHAR"
+            typeHandler="com.spring.worldwire.model.typeHandler.CommunicationHandel"
+            javaType="com.spring.worldwire.model.Communication" />
     <result column="idcard_on_img" property="idcardOnImg" jdbcType="VARCHAR" />
     <result column="idcard_down_img" property="idcardDownImg" jdbcType="VARCHAR" />
     <result column="idcard_hand_img" property="idcardHandImg" jdbcType="VARCHAR" />
@@ -48,7 +52,7 @@
     <result column="business_bank_img" property="businessBankImg" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, login_id, type, is_foreign, show_img, brithday, nick_name, language, bri_nationality, 
+    id, login_id, `type`, is_foreign, show_img, birthday, nick_name, language, bri_nationality,
     now_nationality, local_addr, occupation, email, mobile, website, public_platform, 
     wechat_qrcode, wechat, facebook, whatsapp, linkedin, communication, idcard_on_img, 
     idcard_down_img, idcard_hand_img, real_name, idcard, company_name, company_time, 
@@ -64,7 +68,7 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
-  <select id="selectByLoginId" resultType="com.spring.worldwire.model.UserInfo">
+  <select id="selectByLoginId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from user_info
@@ -77,7 +81,7 @@
   </delete>
   <insert id="insert" parameterType="com.spring.worldwire.model.UserInfo" keyProperty="id" useGeneratedKeys="true" keyColumn="id" >
     insert into user_info (id, login_id, type, 
-      is_foreign, show_img, brithday, 
+      is_foreign, show_img, birthday,
       nick_name, language, bri_nationality, 
       now_nationality, local_addr, occupation, 
       email, mobile, website, 
@@ -93,13 +97,13 @@
       business_bank, business_bank_name, business_bank_addr, 
       business_bank_img)
     values (#{id,jdbcType=BIGINT}, #{loginId,jdbcType=BIGINT}, #{type,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, 
-      #{isForeign,jdbcType=INTEGER}, #{showImg,jdbcType=VARCHAR}, #{brithday,jdbcType=TIMESTAMP}, 
-      #{nickName,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{briNationality,jdbcType=VARCHAR}, 
+      #{isForeign,jdbcType=INTEGER}, #{showImg,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP},
+      #{nickName,jdbcType=VARCHAR}, #{language,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel}, #{briNationality,jdbcType=VARCHAR},
       #{nowNationality,jdbcType=VARCHAR}, #{localAddr,jdbcType=VARCHAR}, #{occupation,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, 
       #{publicPlatform,jdbcType=VARCHAR}, #{wechatQrcode,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, 
       #{facebook,jdbcType=VARCHAR}, #{whatsapp,jdbcType=VARCHAR}, #{linkedin,jdbcType=VARCHAR}, 
-      #{communication,jdbcType=VARCHAR}, #{idcardOnImg,jdbcType=VARCHAR}, #{idcardDownImg,jdbcType=VARCHAR}, 
+      #{communication,typeHandler=com.spring.worldwire.model.typeHandler.CommunicationHandel}, #{idcardOnImg,jdbcType=VARCHAR}, #{idcardDownImg,jdbcType=VARCHAR},
       #{idcardHandImg,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, 
       #{companyName,jdbcType=VARCHAR}, #{companyTime,jdbcType=TIMESTAMP}, #{companyNum,jdbcType=VARCHAR}, 
       #{companyAddr,jdbcType=VARCHAR}, #{companyTel,jdbcType=VARCHAR}, #{companyMobile,jdbcType=VARCHAR}, 
@@ -127,8 +131,8 @@
       <if test="showImg != null" >
         show_img,
       </if>
-      <if test="brithday != null" >
-        brithday,
+      <if test="birthday != null" >
+        birthday,
       </if>
       <if test="nickName != null" >
         nick_name,
@@ -261,14 +265,14 @@
       <if test="showImg != null" >
         #{showImg,jdbcType=VARCHAR},
       </if>
-      <if test="brithday != null" >
-        #{brithday,jdbcType=TIMESTAMP},
+      <if test="birthday != null" >
+        #{birthday,jdbcType=TIMESTAMP},
       </if>
       <if test="nickName != null" >
         #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="language != null" >
-        #{language,jdbcType=VARCHAR},
+        #{language,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel},
       </if>
       <if test="briNationality != null" >
         #{briNationality,jdbcType=VARCHAR},
@@ -310,7 +314,7 @@
         #{linkedin,jdbcType=VARCHAR},
       </if>
       <if test="communication != null" >
-        #{communication,jdbcType=VARCHAR},
+        #{communication,typeHandler=com.spring.worldwire.model.typeHandler.CommunicationHandel},
       </if>
       <if test="idcardOnImg != null" >
         #{idcardOnImg,jdbcType=VARCHAR},
@@ -395,14 +399,14 @@
       <if test="showImg != null" >
         show_img = #{showImg,jdbcType=VARCHAR},
       </if>
-      <if test="brithday != null" >
-        brithday = #{brithday,jdbcType=TIMESTAMP},
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=TIMESTAMP},
       </if>
       <if test="nickName != null" >
         nick_name = #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="language != null" >
-        language = #{language,jdbcType=VARCHAR},
+        language = #{language,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel},
       </if>
       <if test="briNationality != null" >
         bri_nationality = #{briNationality,jdbcType=VARCHAR},
@@ -444,7 +448,7 @@
         linkedin = #{linkedin,jdbcType=VARCHAR},
       </if>
       <if test="communication != null" >
-        communication = #{communication,jdbcType=VARCHAR},
+        communication = #{communication,typeHandler=com.spring.worldwire.model.typeHandler.CommunicationHandel},
       </if>
       <if test="idcardOnImg != null" >
         idcard_on_img = #{idcardOnImg,jdbcType=VARCHAR},
@@ -521,9 +525,9 @@
       type = #{type,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       is_foreign = #{isForeign,jdbcType=INTEGER},
       show_img = #{showImg,jdbcType=VARCHAR},
-      brithday = #{brithday,jdbcType=TIMESTAMP},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
       nick_name = #{nickName,jdbcType=VARCHAR},
-      language = #{language,jdbcType=VARCHAR},
+      language = #{language,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel},
       bri_nationality = #{briNationality,jdbcType=VARCHAR},
       now_nationality = #{nowNationality,jdbcType=VARCHAR},
       local_addr = #{localAddr,jdbcType=VARCHAR},
@@ -537,7 +541,7 @@
       facebook = #{facebook,jdbcType=VARCHAR},
       whatsapp = #{whatsapp,jdbcType=VARCHAR},
       linkedin = #{linkedin,jdbcType=VARCHAR},
-      communication = #{communication,jdbcType=VARCHAR},
+      communication = #{communication,typeHandler=com.spring.worldwire.model.typeHandler.CommunicationHandel},
       idcard_on_img = #{idcardOnImg,jdbcType=VARCHAR},
       idcard_down_img = #{idcardDownImg,jdbcType=VARCHAR},
       idcard_hand_img = #{idcardHandImg,jdbcType=VARCHAR},

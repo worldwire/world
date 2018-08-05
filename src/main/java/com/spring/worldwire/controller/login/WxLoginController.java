@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.net.URLEncoder;
 
+import static com.spring.worldwire.constants.Constants.WECHAT_LOGIN_URL;
+import static com.spring.worldwire.constants.Constants.WECHAT_STATE;
+
 /**
  * @Author luxun.
  * @Date 2018/5/8 15:55
@@ -17,15 +20,17 @@ import java.net.URLEncoder;
 @Controller
 public class WxLoginController {
 
+    private static String REDIRECT_URL = "http://www.theworldwire.com/login/wechat/callback";
+
     @Value("${wx.appid}")
     private String appId;
 
     @RequestMapping("/auth")
     public String auth(Model model) throws Exception {
 
-        String redirectURI = URLEncoder.encode("http://www.theworldwire.cn/login/wechat/callback", "UTF-8");
-//        return "/pc/wxCodeScan";
-        return "redirect:https://open.weixin.qq.com/connect/qrconnect?appid=" + appId + "&redirect_uri=" + redirectURI + "&response_type=code&scope=snsapi_login&state=worldwire#wechat_redirect";
+        String redirectURI = URLEncoder.encode(REDIRECT_URL, "UTF-8");
+
+        return "redirect:" + WECHAT_LOGIN_URL.replace("APPID", appId).replace("REDIRECT_URI", redirectURI).replace("STATE", WECHAT_STATE);
     }
 
     @RequestMapping("/callback")
@@ -39,6 +44,11 @@ public class WxLoginController {
         //FIXME ： snsapi_userinfo
         System.out.println(takenUrl);
         return "redirect:" + takenUrl;
+    }
+
+    @RequestMapping("/qrcode")
+    public String qrcode(){
+        return "pc/wxCodeScan";
     }
 
     /**

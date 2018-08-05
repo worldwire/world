@@ -32,7 +32,7 @@
         from third_pay_order
         where id = #{id,jdbcType=BIGINT}
     </select>
-    <select id="selectByUserId" resultType="com.spring.worldwire.model.ThirdPayOrder">
+    <select id="selectByUserId" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from third_pay_order
@@ -119,8 +119,8 @@
         set
         third_type = #{thirdType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
         pay_status = #{payStatus,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-        where paymentNo = #{paymentNo,jdbcType=VARCHAR} and pay_status = 0
+        update_time = #{updateTime,jdbcType=TIMESTAMP}
+        where payment_no = #{paymentNo,jdbcType=VARCHAR} and pay_status = 0
     </update>
 
     <select id="selectByOrderNum" resultMap="BaseResultMap">

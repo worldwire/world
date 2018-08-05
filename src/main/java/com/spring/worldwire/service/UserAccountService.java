@@ -14,4 +14,6 @@ public interface UserAccountService {
 
     int updateUserAccount(UserAccount record);
 
+    int updateViewCount(UserAccount record);
+
 }

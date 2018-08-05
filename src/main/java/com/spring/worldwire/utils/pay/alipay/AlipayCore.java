@@ -37,7 +37,7 @@ public class AlipayCore {
     //商品描述，可空
     String body =  alipayBean.getBody();
 
-    if(payCheck(alipayBean)){
+    if(!payCheck(alipayBean)){
       String content = "{\"out_trade_no\":\""+ out_trade_no +"\","
           + "\"total_amount\":\""+ total_amount +"\","
           + "\"subject\":\""+ subject +"\","

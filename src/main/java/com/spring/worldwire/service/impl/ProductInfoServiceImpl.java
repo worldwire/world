@@ -16,8 +16,8 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
 
     @Override
-    public List<ProductInfo> selectCheckProductList(int code) {
-        return productInfoDao.selectCheckProductList(code);
+    public List<ProductInfo> selectCheckProductList(int code,int type) {
+        return productInfoDao.selectCheckProductList(code,type);
     }
 
     @Override

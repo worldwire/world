@@ -2,20 +2,25 @@
 
   <div class="left-nav">
       <div class="left-userhead">
-          <img src="/images/1/10.png"/>
+          <img src="${userInfo.showImg!'/images/1/10.png'}"/>
       </div>
       <div class="left-username">
-          Manty
+          ${userInfo.nickName!''}
       </div>
       <!--发布需求-->
       <div class="left-demand left-btn-style" style="margin-top:20px ;">
           <i class="iconfont">&#xe75e;</i>
-          <span class="" onclick="redirectClick('/request/release')">发布需求</span>
+          <span class="" onclick="redirectClick('/request/lc/release')">发布需求</span>
       </div>
       <!--发布历史-->
       <div class="left-history left-btn-style">
           <i class="iconfont">&#xe75f;</i>
-          <span class="" onclick="redirectClick('/request/history')">发布历史</span>
+          <span class="" onclick="redirectClick('/request/lc/history')">发布历史</span>
+      </div>
+      <!--翻译申请-->
+      <div class="left-history left-btn-style">
+          <i class="iconfont">&#xe75f;</i>
+          <span class="" onclick="redirectClick('/translation/list')">翻译申请</span>
       </div>
       <!--交易记录-->
       <div class="left-record left-btn-style">
@@ -25,7 +30,7 @@
       <!--我的资料-->
       <div class="left-data left-btn-style">
           <i class="iconfont">&#xe760;</i>
-          <span class="">我的资料</span>
+          <span class="" onclick="redirectClick('/info/toModify')">我的资料</span>
       </div>
       <!--修改密码-->
       <div class="left-password left-btn-style">

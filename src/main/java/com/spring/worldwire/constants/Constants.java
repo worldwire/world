@@ -31,10 +31,17 @@ public class Constants {
 
     public static final String CACHE_FREE_LOOK_UP = "cache_free_lookup_";
 
+    public static final String CACHE_SHARE_LOOK_UP = "cache_share_lookup_";
 
     //----------------------------------------业务相关字段--------------------------------------
     public static final String USER_COOKIES_NAME = "userInfo";
 
     public static final String USER_SESSION = "userInfo";
     public static final String USER_ID_SESSION = "userId";
+    public static final String ADMIN_USER_SESSION = "adminUser";
+
+    //----------------------------------------第三方登录相关字段--------------------------------------
+    public static final String WECHAT_LOGIN_URL = "https://open.weixin.qq.com/connect/qrconnect?appid=APPID&redirect_uri=REDIRECT_URI&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect";
+
+    public static final String WECHAT_STATE = "worldwire";
 }

@@ -4,6 +4,7 @@ import com.spring.worldwire.enums.UserTypeEnum;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @SuppressWarnings("unused")
 public class UserInfo implements Serializable {
@@ -20,11 +21,11 @@ public class UserInfo implements Serializable {
 
     private String showImg;
 
-    private Date brithday;
+    private Date birthday;
 
     private String nickName;
 
-    private String language;
+    private List<LanguageLevel> language;
 
     private String briNationality;
 
@@ -52,7 +53,7 @@ public class UserInfo implements Serializable {
 
     private String linkedin;
 
-    private String communication;
+    private List<Communication> communication;
 
     private String idcardOnImg;
 
@@ -138,12 +139,12 @@ public class UserInfo implements Serializable {
         this.showImg = showImg == null ? null : showImg.trim();
     }
 
-    public Date getBrithday() {
-        return brithday;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setBrithday(Date brithday) {
-        this.brithday = brithday;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     public String getNickName() {
@@ -154,12 +155,12 @@ public class UserInfo implements Serializable {
         this.nickName = nickName == null ? null : nickName.trim();
     }
 
-    public String getLanguage() {
+    public List<LanguageLevel> getLanguage() {
         return language;
     }
 
-    public void setLanguage(String language) {
-        this.language = language == null ? null : language.trim();
+    public void setLanguage(List<LanguageLevel> language) {
+        this.language = language;
     }
 
     public String getBriNationality() {
@@ -264,14 +265,6 @@ public class UserInfo implements Serializable {
 
     public void setLinkedin(String linkedin) {
         this.linkedin = linkedin == null ? null : linkedin.trim();
-    }
-
-    public String getCommunication() {
-        return communication;
-    }
-
-    public void setCommunication(String communication) {
-        this.communication = communication == null ? null : communication.trim();
     }
 
     public String getIdcardOnImg() {
@@ -450,10 +443,18 @@ public class UserInfo implements Serializable {
         this.businessBankImg = businessBankImg == null ? null : businessBankImg.trim();
     }
 
+    public List<Communication> getCommunication() {
+        return communication;
+    }
+
+    public void setCommunication(List<Communication> communication) {
+        this.communication = communication;
+    }
+
     @Override
     public String toString() {
         return "UserInfo [id=" + id + ", loginId=" + loginId + ", type=" + type + ", isForeign=" + isForeign
-                + ", showImg=" + showImg + ", brithday=" + brithday + ", nickName=" + nickName + ", language="
+                + ", showImg=" + showImg + ", birthday=" + birthday + ", nickName=" + nickName + ", language="
                 + language + ", briNationality=" + briNationality + ", nowNationality=" + nowNationality
                 + ", localAddr=" + localAddr + ", occupation=" + occupation + ", email=" + email + ", mobile=" + mobile
                 + ", website=" + website + ", publicPlatform=" + publicPlatform + ", wechatQrcode=" + wechatQrcode
@@ -475,7 +476,7 @@ public class UserInfo implements Serializable {
 
     public String cookiesValue() {
 
-        return String.join("$$", id.toString(), type != null ? type.getCode().toString() : BLANK_STRING, nickName != null ? nickName : BLANK_STRING, showImg != null ? showImg : BLANK_STRING);
+        return String.join("$$", id.toString(), type != null ? type.getCode()+"" : BLANK_STRING, nickName != null ? nickName : BLANK_STRING, showImg != null ? showImg : BLANK_STRING);
     }
 
     public void analysisCookiesValue(String cookiesValue) {

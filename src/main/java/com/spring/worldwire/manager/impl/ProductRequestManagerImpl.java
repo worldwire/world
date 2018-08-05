@@ -1,11 +1,15 @@
 package com.spring.worldwire.manager.impl;
 
 import com.spring.worldwire.constants.Constants;
-import com.spring.worldwire.manager.ProductReuestManager;
+import com.spring.worldwire.enums.RequestTypeEnum;
+import com.spring.worldwire.enums.UserTypeEnum;
+import com.spring.worldwire.manager.ProductRequestManager;
 import com.spring.worldwire.model.ProductRequest;
 import com.spring.worldwire.model.RequestViews;
 import com.spring.worldwire.model.UserAccount;
 import com.spring.worldwire.model.UserInfo;
+import com.spring.worldwire.model.vo.ProductRequestVo;
+import com.spring.worldwire.query.ProductRequestQuery;
 import com.spring.worldwire.service.ProductRequestService;
 import com.spring.worldwire.service.RequestViewsService;
 import com.spring.worldwire.service.UserAccountService;
@@ -16,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -25,7 +30,7 @@ import java.util.Objects;
  * To change this template use File | Settings | File and Code Templates | Includes | File Header.
  */
 @Service
-public class ProductReuestManagerImpl implements ProductReuestManager {
+public class ProductRequestManagerImpl implements ProductRequestManager {
 
     @Autowired
     private UserInfoService userInfoService;
@@ -67,6 +72,22 @@ public class ProductReuestManagerImpl implements ProductReuestManager {
 
         return userInfoService.selectById(request.getUserId());
 
+    }
+
+    @Override
+    public ProductRequestVo getRequestByQuery(int userType, int requestType, UserTypeEnum userTypeEnum, int pageSize, int pageNo, String key) {
+        RequestTypeEnum requestTypeEnum = RequestTypeEnum.getNameByCode(requestType);
+        ProductRequestQuery query = new ProductRequestQuery();
+        query.setPageSize(pageSize);
+        query.setPageNo(pageNo);
+        query.setRequestType(requestTypeEnum);
+        query.setUserType(userTypeEnum);
+        query.setPageCount(productRequestService.selectCountByQuery(query));
+        List<ProductRequest> result = productRequestService.selectByQuery(query, true);
+        ProductRequestVo vo = new ProductRequestVo();
+        vo.setList(result);
+        vo.setQuery(query);
+        return vo;
     }
 
     /**

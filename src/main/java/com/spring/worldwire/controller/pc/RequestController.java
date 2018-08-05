@@ -1,24 +1,32 @@
 package com.spring.worldwire.controller.pc;
 
+import com.alibaba.fastjson.JSONObject;
 import com.spring.worldwire.constants.Constants;
+import com.spring.worldwire.enums.ProductRequestStatusEnum;
 import com.spring.worldwire.enums.RequestTypeEnum;
 import com.spring.worldwire.enums.UserTypeEnum;
+import com.spring.worldwire.manager.ProductRequestManager;
 import com.spring.worldwire.manager.UserCenterManager;
 import com.spring.worldwire.model.ProductRequest;
+import com.spring.worldwire.model.UserInfo;
+import com.spring.worldwire.model.vo.ProductRequestVo;
 import com.spring.worldwire.query.ProductRequestQuery;
 import com.spring.worldwire.service.ProductRequestService;
-import org.apache.commons.lang3.math.NumberUtils;
+import com.spring.worldwire.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+@SuppressWarnings("unused")
 @Controller
 @RequestMapping("/request")
 public class RequestController {
@@ -27,44 +35,54 @@ public class RequestController {
     private UserCenterManager userCenterManager;
 
     @Autowired
+    private ProductRequestManager productRequestManager;
+
+    @Autowired
     private ProductRequestService productRequestService;
 
+    @Autowired
+    private UserInfoService userInfoService;
+
+    public RequestController(UserCenterManager userCenterManager, ProductRequestService productRequestService) {
+        this.userCenterManager = userCenterManager;
+        this.productRequestService = productRequestService;
+    }
+
     @RequestMapping("/list/{userType}/{requestType}/{pageSize}/{pageNo}.html")
-    public String productRequestList(Model model, @PathVariable int userType, @PathVariable int requestType, @PathVariable int pageSize, @PathVariable int pageNo) {
+    public String productRequestList(Model model, @PathVariable int userType, @PathVariable int requestType, @PathVariable int pageSize, @PathVariable int pageNo, String key) {
         {
-            ProductRequestQuery personalQuery = new ProductRequestQuery();
-            personalQuery.setPageSize(pageSize);
-            personalQuery.setPageNo(pageNo);
-            personalQuery.setUserType(userType);
-            personalQuery.setRequestType(userType);
-            personalQuery.setUserType(UserTypeEnum.PERSONAL.getCode());
-            personalQuery.setPageCount(productRequestService.selectCountByQuery(personalQuery));
-            List<ProductRequest> personalList = productRequestService.selectByQuery(personalQuery, true);
+            ProductRequestVo personalVo = productRequestManager.getRequestByQuery(userType, requestType, UserTypeEnum.PERSONAL, pageSize, pageNo, key);
+            ProductRequestVo enterpriseVo = productRequestManager.getRequestByQuery(userType, requestType, UserTypeEnum.ENTERPRISE, pageSize, pageNo, key);
 
-            ProductRequestQuery enterpriseQuery = new ProductRequestQuery();
-            enterpriseQuery.setPageSize(pageSize);
-            enterpriseQuery.setPageNo(pageNo);
-            enterpriseQuery.setUserType(userType);
-            enterpriseQuery.setRequestType(userType);
-            enterpriseQuery.setUserType(UserTypeEnum.ENTERPRISE.getCode());
-            enterpriseQuery.setPageCount(productRequestService.selectCountByQuery(enterpriseQuery));
-            List<ProductRequest> enterpriseList = productRequestService.selectByQuery(enterpriseQuery, true);
-
-            model.addAttribute("personalQuery", personalQuery);
-            model.addAttribute("personalList", personalList);
-
-            model.addAttribute("enterpriseQuery", enterpriseQuery);
-            model.addAttribute("enterpriseList", enterpriseList);
+            model.addAttribute("personalVo", personalVo);
+            model.addAttribute("enterpriseVo", enterpriseVo);
 
             return "pc/requestList";
         }
     }
 
+    @RequestMapping("/list/search")
+    @ResponseBody
+    public String ajaxProductRequestList(int userType, int requestType, int pageSize, int pageNo, String key) {
+        {
+            ProductRequestVo personalVo = productRequestManager.getRequestByQuery(userType, requestType, UserTypeEnum.PERSONAL, pageSize, pageNo, key);
+            ProductRequestVo enterpriseVo = productRequestManager.getRequestByQuery(userType, requestType, UserTypeEnum.ENTERPRISE, pageSize, pageNo, key);
+
+            JSONObject obj = new JSONObject();
+            obj.put("personalVo", personalVo);
+            obj.put("enterpriseVo", enterpriseVo);
+
+            return obj.toJSONString();
+        }
+    }
+
+
     @RequestMapping("/detail")
     public String toDetail(Model model, Long id) {
-
-        System.out.println("=================" + id);
         ProductRequest productRequest = productRequestService.findById(id);
+        productRequest.setViewCount(productRequest.getViewCount() + 1);
+        productRequestService.update(productRequest);
+
         model.addAttribute("productRequest", productRequest);
         return "pc/requestDetail";
     }
@@ -79,36 +97,65 @@ public class RequestController {
         return "pc/myDetail";
     }
 
-    @RequestMapping("release")
+    @RequestMapping("/lc/release")
     public String release(Model model) {
 
         return "pc/releaseRequest";
     }
 
-    @RequestMapping("releaseCommit")
-    public String releaseCommit(Model model, Integer requestType) {
+    @RequestMapping(value = "/save", produces = "text/plain;charset=UTF-8")
+    public String save(ProductRequest productRequest, HttpServletRequest request) {
+
+        if(Objects.isNull(productRequest.getId())){
+            UserInfo userInfo = (UserInfo) request.getAttribute("userInfo");
+            productRequest.setCreateTime(new Date());
+            productRequest.setUserType(userInfo.getType());
+            productRequest.setStatus(ProductRequestStatusEnum.NORMAL);
+            productRequestService.save(productRequest);
+        }else{
+            productRequestService.update(productRequest);
+        }
+
+        return "redirect:/request/lc/history";
+    }
+
+    @RequestMapping("/lc/edit")
+    public String edit(Long id, Model model, HttpServletRequest request) {
+
+        Object userId = request.getAttribute(Constants.USER_ID_SESSION);
+
+        ProductRequest productRequest = productRequestService.findById(id);
+        if (productRequest.getUserId().intValue() != ((Long) userId).intValue()) {
+            return "redirect:/login/";
+        }
+        model.addAttribute("service",RequestTypeEnum.SERVICE);
+        model.addAttribute("request",RequestTypeEnum.REQUEST);
+        model.addAttribute("productRequest", productRequest);
+        return "pc/releaseDetailEdit";
+    }
+
+    @RequestMapping("/lc/releaseCommit")
+    public String releaseCommit(Model model, Integer requestType, HttpServletRequest request) {
+
+        Object userId = request.getAttribute(Constants.USER_ID_SESSION);
 
         ProductRequest productRequest = new ProductRequest();
-
         RequestTypeEnum requestTypeEnum = RequestTypeEnum.getNameByCode(requestType);
         if (requestTypeEnum == null) {
             return "/";
         }
-
         productRequest.setRequestType(requestTypeEnum);
+        productRequest.setUserId((Long) userId);
 
-        productRequestService.save(productRequest);
-
-        return "pc/releaseRequest";
+        model.addAttribute("productRequest", productRequest);
+        return "pc/releaseDetailAdd";
     }
 
-    @RequestMapping("/history")
+    @RequestMapping("/lc/history")
     public String releaseHistory(HttpServletRequest request, Model model) {
 
         Object userId = request.getAttribute(Constants.USER_ID_SESSION);
-        if (Objects.isNull(userId) || !NumberUtils.isNumber(userId.toString())) {
-            return "redirect:/login/";
-        }
+
         Map<String, Object> map = userCenterManager.getUserDetailInfo((Long) userId);
         model.addAllAttributes(map);
 
@@ -121,4 +168,5 @@ public class RequestController {
         model.addAttribute("productRequestList", productRequestList);
         return "pc/requestHistory";
     }
+
 }
