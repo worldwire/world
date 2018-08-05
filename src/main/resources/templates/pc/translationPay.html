@@ -4,11 +4,11 @@
 		<meta charset="utf-8" />
 		<title>充值</title>
 		<#include "../public/common.html" encoding="utf-8"/>
-		<link rel="stylesheet" href="/css/recharge.css">
+		<link rel="stylesheet" href="/css/translationPay.css">
 	</head>
 	<body>
 		<div class="container">
-			<div class="title"><p>充值</p></div>
+			<div class="tran-box"><p class="tran-tit">本次翻译字数为 <span>${wordsCount}</span> 字</p></div>
 			<div class="tip"><span>1</span>选择支付币种</div>
 			<div class="money-type">
 				<a href="###" name="china" class="hv" id="china">￥&nbsp;人民币</a>
@@ -26,7 +26,7 @@
 				<div class="msg" id="payAmount"></div>
 			</div>
 		</div>
-
+		<!--<div class="tran-close-btn"><i class="layui-icon" style="font-size: 30px">&#x1006;</i></div>-->
 	</body>
 </html>
 
@@ -34,6 +34,7 @@
 <script>
 
 		var thirdPayType = 0;
+		var productType = 0;
 
         layui.use(['form', 'layedit', 'laydate'], function(){
             var form = layui.form
@@ -41,6 +42,11 @@
                 ,layedit = layui.layedit
                 ,laydate = layui.laydate
                 ,$ = layui.jquery;
+
+				$(".tran-close-btn").click(function() {
+                    layer.closeAll();
+                })
+
 
 			var rmbPay = ["ALIPAY","WEI_CHAT"];
 			var usdPay = ["PAY_PAL"];
@@ -55,7 +61,7 @@
 				if(code==1){
 					$("#WEI_CHAT").show();
 					$("#ALIPAY").show();
-					$("#payAmount").text("<span>实付金额人民币</span>￥"+${rmbAmount})
+					$("#payAmount").append("<span>实付金额人民币</span>￥"+${rmbAmount});
 				}else if(code ==2){
 					$("#PAY_PAL").show();
 					$("#payAmount").append("<span>实付金额美元</span>$"+${usdAmount});
@@ -79,10 +85,13 @@
 						getProduct(2);
 					}else if(name=='ALIPAY'){
 						thirdPayType = 2;
+						productType = 1;
 					}else if(name=='WEI_CHAT'){
 						thirdPayType = 3;
+						productType = 1;
 					}else if(name=='PAY_PAL'){
 						thirdPayType = 1;
+						productType = 2;
 					}
 
 
@@ -99,7 +108,7 @@
 
         	function payRecharge(){
 				if(thirdPayType!=0){
-					window.open('/pay/payTranslation?id='+ ${translationId}+'&payCode='+thirdPayType);
+					window.open('/pay/payTranslation?id='+ ${translationApply.id}+'&payCode='+thirdPayType+ "&payType="+productType);
 				}else{
 				    alert('请选择支付方式！');
 				}

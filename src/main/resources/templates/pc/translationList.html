@@ -52,7 +52,6 @@
 
 
 
-
 <script>
 
 	var toReqId = '0';
@@ -70,13 +69,13 @@
 		$(".list-btn-btns-translation").click(function(){
 			toReqId = $(this).attr("value");
 			layer.open({
-			  type: 1,
+			  type: 2,
 			  skin: 'layer-div',
-			  content:  ['/pay/translation','no']
-			  ,area: ['500px', '300px'] //宽高
+			  content:  ['/pay/translation?id='+toReqId,'no']
+			  ,area: ['700px', '500px'] //宽高
 			  ,title: false
 			  ,shadeClose: true //开启遮罩关闭
-			  ,closeBtn: 0, //不显示关闭按钮
+			  ,closeBtn: 1, //不显示关闭按钮
 			});
 
 		})

@@ -19,4 +19,6 @@ public interface ProductInfoDao {
     int updateByPrimaryKey(ProductInfo record);
 
     List<ProductInfo> selectCheckProductList(@Param("code") int code,@Param("type") int type);
+
+    List<ProductInfo> selectProductByType(@Param("type") int type);
 }

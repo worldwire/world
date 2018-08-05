@@ -99,7 +99,7 @@ public class PayManagerImpl implements PayManager {
     }
 
     @Override
-    public String createTranslation(long userId, long id, int payCode) {
+    public String createTranslation(long userId, long id, int payCode,int payType) {
         ThirdPayEnum thirdPayByCode = ThirdPayEnum.getThirdPayByCode(payCode);
         if (thirdPayByCode == null) {
             return getErroPage();
@@ -108,21 +108,38 @@ public class PayManagerImpl implements PayManager {
         if(translationApply==null){
             return getErroPage();
         }
-        ProductRequest productRequest = productRequestService.findById(translationApply.getReqId());
-        if(productRequest==null){
+        if(translationApply.getUserId()!=userId){
             return getErroPage();
         }
-        String content = productRequest.getContent();
-        int countWord = WordsUtils.countWord(content, productRequest.getLanguageType().getEnName());
-        List<ProductInfo> productInfos = productInfoService.selectCheckProductList(payCode, 2);
+        int countWord = getProductWords(translationApply);
+        if(countWord==0){
+            return getErroPage();
+        }
+
+        List<ProductInfo> productInfos = productInfoService.selectCheckProductList(payType, 2);
         if(productInfos==null||productInfos.size()==0){
             return getErroPage();
         }
         ProductInfo productInfo = productInfos.get(0);
-        Integer times = productInfo.getTimes();
-        int pageNo = countWord / times;
-        BigDecimal amount = new BigDecimal(pageNo).multiply(productInfo.getAmount());
+        BigDecimal amount = wordsToAmount(countWord, productInfo);
         return doPay(userId,thirdPayByCode,productInfo,amount);
+    }
+
+    @Override
+    public BigDecimal wordsToAmount(int countWord, ProductInfo productInfo) {
+        Integer times = productInfo.getTimes();
+        int pageNo = countWord / times + 1;
+        return new BigDecimal(pageNo).multiply(productInfo.getAmount());
+    }
+
+    @Override
+    public int getProductWords(TranslationApply translationApply) {
+        ProductRequest productRequest = productRequestService.findById(translationApply.getReqId());
+        if(productRequest==null){
+            return 0;
+        }
+        String content = productRequest.getContent();
+        return WordsUtils.countWord(content, productRequest.getLanguageType().getEnName());
     }
 
     private void addCheckMessage(ThirdPayOrder thirdPayOrder) {

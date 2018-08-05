@@ -102,4 +102,10 @@
     from product_info
     where pay_type = #{code} and type = #{type}
   </select>
+  <select id="selectProductByType" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from product_info
+    where type = #{type}
+  </select>
 </mapper>

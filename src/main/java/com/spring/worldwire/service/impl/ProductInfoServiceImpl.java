@@ -26,5 +26,10 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
     }
 
+    @Override
+    public List<ProductInfo> selectProductByType(int type) {
+        return productInfoDao.selectProductByType(type);
+    }
+
 
 }
