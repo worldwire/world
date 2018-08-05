@@ -16,8 +16,10 @@
             javaType="com.spring.worldwire.enums.TranslationApplyStatusEnum"/>
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="operator_id" property="operatorId" jdbcType="BIGINT" />
+    <result column="operator_name" property="operatorName" jdbcType="BIGINT" />
     <result column="operator_time" property="operatorTime" jdbcType="TIMESTAMP" />
     <result column="auditor_id" property="auditorId" jdbcType="BIGINT" />
+    <result column="auditor_name" property="auditorName" jdbcType="BIGINT" />
     <result column="auditor_time" property="auditorTime" jdbcType="TIMESTAMP" />
     <result column="auditor_msg" property="auditorMsg" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
@@ -25,8 +27,8 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, req_id, orig_type, from_req_id, from_type, status, title, operator_id, operator_time,
-    auditor_id, auditor_time, auditor_msg,user_id , create_time, update_time
+    id, req_id, orig_type, from_req_id, from_type, status, title, operator_id, operator_name, operator_time,
+    auditor_id, auditor_name, auditor_time, auditor_msg,user_id , create_time, update_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -167,11 +169,17 @@
       <if test="operatorId != null" >
         operator_id = #{operatorId,jdbcType=BIGINT},
       </if>
+      <if test="operatorName != null" >
+        operator_name = #{operatorName,jdbcType=VARCHAR},
+      </if>
       <if test="operatorTime != null" >
         operator_time = #{operatorTime,jdbcType=TIMESTAMP},
       </if>
       <if test="auditorId != null" >
         auditor_id = #{auditorId,jdbcType=BIGINT},
+      </if>
+      <if test="auditorName != null" >
+        auditor_name = #{auditorName,jdbcType=VARCHAR},
       </if>
       <if test="auditorTime != null" >
         auditor_time = #{auditorTime,jdbcType=TIMESTAMP},
@@ -200,8 +208,10 @@
       status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       title = #{title},
       operator_id = #{operatorId,jdbcType=BIGINT},
+      operator_name = #{operatorName,jdbcType=VARCHAR},
       operator_time = #{operatorTime,jdbcType=TIMESTAMP},
       auditor_id = #{auditorId,jdbcType=BIGINT},
+      auditor_name = #{auditorName,jdbcType=VARCHAR},
       auditor_time = #{auditorTime,jdbcType=TIMESTAMP},
       auditor_msg = #{auditorMsg,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=BIGINT},

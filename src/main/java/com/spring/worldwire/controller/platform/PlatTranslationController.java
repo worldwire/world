@@ -1,19 +1,24 @@
 package com.spring.worldwire.controller.platform;
 
+import com.spring.worldwire.constants.Constants;
+import com.spring.worldwire.model.AdminUser;
 import com.spring.worldwire.model.ProductRequest;
 import com.spring.worldwire.model.TranslationApply;
 import com.spring.worldwire.model.vo.TranslationApplyVO;
 import com.spring.worldwire.query.TranslationApplyQuery;
+import com.spring.worldwire.result.LayuiResult;
 import com.spring.worldwire.service.ProductRequestService;
 import com.spring.worldwire.service.TranslationApplyService;
-import com.spring.worldwire.result.LayuiResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 @SuppressWarnings("unused")
@@ -34,7 +39,11 @@ public class PlatTranslationController {
 	}
 
 	@RequestMapping("toDetail")
-	public String toDetail(){
+	public String toDetail(Model model, long id){
+		TranslationApply translationApply = translationApplyService.getById(id);
+		ProductRequest productRequest = productRequestService.findById(translationApply.getReqId());
+		model.addAttribute("translationApply",translationApply);
+		model.addAttribute("productRequest",productRequest);
 		return "platform/translationApplyDetail";
 	}
 
@@ -54,14 +63,14 @@ public class PlatTranslationController {
 		TranslationApply translationApply = translationApplyService.getById(id);
 		if(translationApply!=null){
 			ProductRequest productRequest = productRequestService.findById(translationApply.getReqId());
-			TranslationApplyVO translationApplyVO = new TranslationApplyVO();
+			/*TranslationApplyVO translationApplyVO = new TranslationApplyVO();
 			translationApplyVO.setContext(productRequest.getContent());
 			translationApplyVO.setTitle(productRequest.getTitle());
 			translationApplyVO.setReqId(productRequest.getId());
 			translationApplyVO.setOrigType(productRequest.getLanguageType());
 			translationApplyVO.setFromType(translationApply.getFromType());
 			translationApplyVO.setId(translationApply.getId());
-			translationApplyVO.setFromReqId(translationApply.getFromReqId());
+			translationApplyVO.setFromReqId(translationApply.getFromReqId());*/
 			//返回这个对象给前端
 
 		}
@@ -70,13 +79,14 @@ public class PlatTranslationController {
 	}
 
 	@RequestMapping("/submit")
-	public String apply(TranslationApplyVO translationApplyVO){
-		if(translationApplyVO!=null){
-			translationApplyVO.setOperatorId(0L);
-			int saveFlag = translationApplyService.translation(translationApplyVO);
-			if(saveFlag>0){
-				return "";
-			}
+	public String apply(HttpServletRequest request,TranslationApplyVO translationApplyVO){
+		AdminUser adminUser = (AdminUser) request.getSession().getAttribute(Constants.ADMIN_USER_SESSION);
+		translationApplyVO.setOperatorId(adminUser.getId());
+		translationApplyVO.setOperatorName(adminUser.getUserName());
+		translationApplyVO.setOperatorTime(new Date());
+		int saveFlag = translationApplyService.translation(translationApplyVO);
+		if(saveFlag>0) {
+			return "";
 		}
 		return "";
 	}
@@ -86,14 +96,14 @@ public class PlatTranslationController {
 		TranslationApply translationApply = translationApplyService.getById(id);
 		if(translationApply!=null){
 			ProductRequest productRequest = productRequestService.findById(translationApply.getReqId());
-			TranslationApplyVO translationApplyVO = new TranslationApplyVO();
+			/*TranslationApplyVO translationApplyVO = new TranslationApplyVO();
 			translationApplyVO.setContext(productRequest.getContent());
 			translationApplyVO.setTitle(productRequest.getTitle());
 			translationApplyVO.setReqId(productRequest.getId());
 			translationApplyVO.setOrigType(productRequest.getLanguageType());
 			translationApplyVO.setFromType(translationApply.getFromType());
 			translationApplyVO.setId(translationApply.getId());
-			translationApplyVO.setFromReqId(translationApply.getFromReqId());
+			translationApplyVO.setFromReqId(translationApply.getFromReqId());*/
 			//返回这个对象给前端
 
 		}

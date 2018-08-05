@@ -26,9 +26,13 @@ public class TranslationApply implements Serializable{
 
     private Long operatorId;
 
+    private String operatorName;
+
     private Date operatorTime;
 
     private Long auditorId;
+
+    private String auditorName;
 
     private Date auditorTime;
 
@@ -158,6 +162,22 @@ public class TranslationApply implements Serializable{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getOperatorName() {
+        return operatorName;
+    }
+
+    public void setOperatorName(String operatorName) {
+        this.operatorName = operatorName;
+    }
+
+    public String getAuditorName() {
+        return auditorName;
+    }
+
+    public void setAuditorName(String auditorName) {
+        this.auditorName = auditorName;
     }
 
     @Override

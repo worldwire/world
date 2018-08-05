@@ -1,27 +1,24 @@
 package com.spring.worldwire.model.vo;
 
-import com.spring.worldwire.enums.LanguageEnum;
-import com.spring.worldwire.enums.TranslationApplyStatusEnum;
-
 import java.util.Date;
 
 @SuppressWarnings("unused")
 public class TranslationApplyVO {
     private Long id;
 
-    private Long reqId;
-
-    private LanguageEnum origType;
-
-    private Long fromReqId;
-
-    private LanguageEnum fromType;
-
-    private String title;
-
-    private String context;
-
     private Long operatorId;
+
+    private String operatorName;
+
+    private Date operatorTime;
+
+    private Long auditorId;
+
+    private String auditorName;
+
+    private Date auditorTime;
+
+    private String auditorMsg;
 
     private String translationContext;
 
@@ -35,44 +32,60 @@ public class TranslationApplyVO {
         this.id = id;
     }
 
-    public Long getReqId() {
-        return reqId;
+    public Long getOperatorId() {
+        return operatorId;
     }
 
-    public void setReqId(Long reqId) {
-        this.reqId = reqId;
+    public void setOperatorId(Long operatorId) {
+        this.operatorId = operatorId;
     }
 
-    public LanguageEnum getOrigType() {
-        return origType;
+    public String getOperatorName() {
+        return operatorName;
     }
 
-    public void setOrigType(LanguageEnum origType) {
-        this.origType = origType;
+    public void setOperatorName(String operatorName) {
+        this.operatorName = operatorName;
     }
 
-    public Long getFromReqId() {
-        return fromReqId;
+    public Date getOperatorTime() {
+        return operatorTime;
     }
 
-    public void setFromReqId(Long fromReqId) {
-        this.fromReqId = fromReqId;
+    public void setOperatorTime(Date operatorTime) {
+        this.operatorTime = operatorTime;
     }
 
-    public LanguageEnum getFromType() {
-        return fromType;
+    public Long getAuditorId() {
+        return auditorId;
     }
 
-    public void setFromType(LanguageEnum fromType) {
-        this.fromType = fromType;
+    public void setAuditorId(Long auditorId) {
+        this.auditorId = auditorId;
     }
 
-    public String getContext() {
-        return context;
+    public String getAuditorName() {
+        return auditorName;
     }
 
-    public void setContext(String context) {
-        this.context = context;
+    public void setAuditorName(String auditorName) {
+        this.auditorName = auditorName;
+    }
+
+    public Date getAuditorTime() {
+        return auditorTime;
+    }
+
+    public void setAuditorTime(Date auditorTime) {
+        this.auditorTime = auditorTime;
+    }
+
+    public String getAuditorMsg() {
+        return auditorMsg;
+    }
+
+    public void setAuditorMsg(String auditorMsg) {
+        this.auditorMsg = auditorMsg;
     }
 
     public String getTranslationContext() {
@@ -83,27 +96,11 @@ public class TranslationApplyVO {
         this.translationContext = translationContext;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getTranslationTitle() {
         return translationTitle;
     }
 
     public void setTranslationTitle(String translationTitle) {
         this.translationTitle = translationTitle;
-    }
-
-    public Long getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(Long operatorId) {
-        this.operatorId = operatorId;
     }
 }

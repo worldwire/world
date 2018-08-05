@@ -44,16 +44,21 @@ public class TranslationApplyServiceImpl implements TranslationApplyService {
 
     @Override
     public int translation(TranslationApplyVO translationApplyVO) {
-        ProductRequest fromProduct = productRequestDao.selectByPrimaryKey(translationApplyVO.getFromReqId());
+
         TranslationApply translationApply = translationApplyDao.selectByPrimaryKey(translationApplyVO.getId());
-        if(StringUtils.isNotBlank(translationApplyVO.getContext())){
-            fromProduct.setContent(translationApplyVO.getContext());
-            fromProduct.setTitle(translationApplyVO.getTitle());
+        if(translationApply==null){
+            return 0;
+        }
+        ProductRequest reqProduct = productRequestDao.selectByPrimaryKey(translationApply.getReqId());
+        ProductRequest fromProduct = reqProduct.converFromProduct(translationApply.getFromType());
+        if(StringUtils.isNotBlank(translationApplyVO.getTranslationContext())){
+            fromProduct.setContent(translationApplyVO.getTranslationContext());
+            fromProduct.setTitle(translationApplyVO.getTranslationTitle());
             translationApply.setStatus(TranslationApplyStatusEnum.AUDITION);
             translationApply.setOperatorId(translationApplyVO.getOperatorId());
             translationApply.setUpdateTime(new Date());
             translationApply.setOperatorTime(new Date());
-            int i = productRequestDao.updateByPrimaryKeySelective(fromProduct);
+            int i = productRequestDao.insert(fromProduct);
             if(i>0){
                 i = translationApplyDao.updateByPrimaryKeySelective(translationApply);
             }

@@ -43,9 +43,13 @@ alter TABLE user_info CHANGE brithday birthday  datetime DEFAULT NULL COMMENT '�
 alter TABLE admin_user ADD `status` INT(11) NOT NULL COMMENT '0申请中 1 通过 2找回密码';
 
 alter TABLE admin_user ADD `type` INT(11) NOT NULL COMMENT '1管理员 2用户';
-alter TABLE translation_apply ADD `title` VARCHAR(128) NOT NULL COMMENT '标题';
+alter TABLE translation_apply ADD `title` VARCHAR(128) DEFAULT NULL COMMENT '标题';
 
 
 
 INSERT INTO `product_info` (`id`, `product_name`, `amount`, `pay_type`, `type`, `times`) VALUES ('6', '翻译(页/rmb)', '200', '1', '2', '1');
 INSERT INTO `product_info` (`id`, `product_name`, `amount`, `pay_type`, `type`, `times`) VALUES ('7', '翻译(页/usb)', '50', '2', '2', '1');
+
+
+alter TABLE translation_apply ADD `operator_name` VARCHAR(64) DEFAULT NULL COMMENT '操作人账户';
+alter TABLE translation_apply ADD `auditor_name` VARCHAR(64) DEFAULT NULL COMMENT '审核人账户';

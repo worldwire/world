@@ -17,7 +17,8 @@
 <script>
 layui.use('table', function(){
   var table = layui.table,
-        $ = layui.$;
+        $ = layui.$
+        laytpl = layui.laytpl;;
 
   //第一个实例
   table.render({
@@ -26,21 +27,24 @@ layui.use('table', function(){
     ,url: '/platTranslation/list' //数据接口
     ,page: false //开启分页
     ,cols: [[ //表头
-        {field: 'id', title: 'ID', width:'20%', sort: true, fixed: 'left'}
-      ,{field: 'origType', title: '原始语言', width:'30%'}
-      ,{field: 'fromType', title: '需翻译语言', width:'30%'}
-      ,{field: 'status', title: '状态', width:'20%' ,templet: function (d) {linkedInController
-                    if(d.status==1)
+        {field: 'id', title: 'ID', width:'5%', sort: true, fixed: 'left'}
+      ,{field: 'origType', title: '原始语言', width:'10%'}
+      ,{field: 'fromType', title: '需翻译语言', width:'10%'}
+      ,{field: 'title', title: '标题', width:'30%'}
+      ,{field: 'operatorName', title: '翻译人', width:'10%'}
+      ,{field: 'auditorName', title: '审核人', width:'10%'}
+      ,{field: 'status', title: '状态', width:'10%' ,templet: function (d) {
+                    if(d.status=='NORMAL')
                         return "需翻译";
-                    if(d.status==2)
+                    if(d.status=='AUDITION')
                         return "需审核";
-                    if(d.status==3)
+                    if(d.status=='SUCCESS')
                         return "审核通过";
 
                     return d.status;
 
                 }}
-      ,{ title: '操作', width:'20%' ,toolbar:'#barDemo'}
+      ,{ title: '操作', width:'10%' ,toolbar:'#barDemo'}
     ]]
   });
 
@@ -52,12 +56,14 @@ layui.use('table', function(){
     var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
     var tr = obj.tr; //获得当前行 tr 的DOM对象
     if(layEvent === 'detail'){ //查看
-    //do somehing
          layer.open({
-          title: '在线调试'
-          ,content: ['/platTranslation/',"no"]
+          type: 2
+          ,content: ['/platTranslation/toDetail?id='+data.id]
+          ,scrollbar: true
+          ,area: ['1000px',"500px"] //宽高
+		  ,shadeClose: true //开启遮罩关闭
+		  ,closeBtn: 1, //不显示关闭按钮
         });
-        //location.href = '/platTranslation/';
     }
   });
 
