@@ -1,6 +1,7 @@
 package com.spring.worldwire.model;
 
 import com.spring.worldwire.enums.UserTypeEnum;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -476,7 +477,7 @@ public class UserInfo implements Serializable {
 
     public String cookiesValue() {
 
-        return String.join("$$", id.toString(), type != null ? type.getCode()+"" : BLANK_STRING, nickName != null ? nickName : BLANK_STRING, showImg != null ? showImg : BLANK_STRING);
+        return String.join("$$", id.toString(), type != null ? type.getCode()+"" : BLANK_STRING, StringUtils.isNotEmpty(nickName) ? nickName : BLANK_STRING, StringUtils.isNotEmpty(showImg)  ? showImg : BLANK_STRING);
     }
 
     public void analysisCookiesValue(String cookiesValue) {
