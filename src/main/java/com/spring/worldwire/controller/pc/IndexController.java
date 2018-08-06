@@ -32,13 +32,13 @@ public class IndexController {
         personalQuery.setPageSize(4);
         personalQuery.setPageNo(1);
         personalQuery.setUserType(UserTypeEnum.PERSONAL);
-        List<ProductRequest> personalList = productRequestService.selectByQuery(personalQuery,false);
+        List<ProductRequest> personalList = productRequestService.selectByQuery(personalQuery,true);
 
         ProductRequestQuery enterpriseQuery = new ProductRequestQuery();
         enterpriseQuery.setPageSize(4);
         enterpriseQuery.setPageNo(1);
         enterpriseQuery.setUserType(UserTypeEnum.ENTERPRISE);
-        List<ProductRequest> enterpriseList = productRequestService.selectByQuery(enterpriseQuery,false);
+        List<ProductRequest> enterpriseList = productRequestService.selectByQuery(enterpriseQuery,true);
 
         model.addAttribute("personalList", personalList);
         model.addAttribute("enterpriseList", enterpriseList);
@@ -50,9 +50,5 @@ public class IndexController {
         return "pc/helpCenter";
     }
 
-    @RequestMapping("/requestSearch")
-    public String search(String key) throws UnsupportedEncodingException {
-        return "/request/0/0/10/1?key="+ URLEncoder.encode(key,"utf8");
-    }
 
 }

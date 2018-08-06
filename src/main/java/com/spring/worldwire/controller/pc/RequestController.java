@@ -1,6 +1,6 @@
 package com.spring.worldwire.controller.pc;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
 import com.spring.worldwire.constants.Constants;
 import com.spring.worldwire.enums.ProductRequestStatusEnum;
 import com.spring.worldwire.enums.RequestTypeEnum;
@@ -50,30 +50,25 @@ public class RequestController {
 
     @RequestMapping("/list/{userType}/{requestType}/{pageSize}/{pageNo}.html")
     public String productRequestList(Model model, @PathVariable int userType, @PathVariable int requestType, @PathVariable int pageSize, @PathVariable int pageNo, String key) {
-        {
-            ProductRequestVo personalVo = productRequestManager.getRequestByQuery(userType, requestType, UserTypeEnum.PERSONAL, pageSize, pageNo, key);
-            ProductRequestVo enterpriseVo = productRequestManager.getRequestByQuery(userType, requestType, UserTypeEnum.ENTERPRISE, pageSize, pageNo, key);
 
-            model.addAttribute("personalVo", personalVo);
-            model.addAttribute("enterpriseVo", enterpriseVo);
+        ProductRequestVo personalVo = productRequestManager.getRequestByQuery(UserTypeEnum.PERSONAL, requestType, RequestTypeEnum.getNameByCode(requestType), pageSize, pageNo, key);
+        ProductRequestVo enterpriseVo = productRequestManager.getRequestByQuery(UserTypeEnum.ENTERPRISE, requestType, RequestTypeEnum.getNameByCode(requestType), pageSize, pageNo, key);
 
-            return "pc/requestList";
-        }
+        model.addAttribute("personalVo", personalVo);
+        model.addAttribute("enterpriseVo", enterpriseVo);
+
+        return "pc/requestList";
+
     }
 
     @RequestMapping("/list/search")
     @ResponseBody
     public String ajaxProductRequestList(int userType, int requestType, int pageSize, int pageNo, String key) {
-        {
-            ProductRequestVo personalVo = productRequestManager.getRequestByQuery(userType, requestType, UserTypeEnum.PERSONAL, pageSize, pageNo, key);
-            ProductRequestVo enterpriseVo = productRequestManager.getRequestByQuery(userType, requestType, UserTypeEnum.ENTERPRISE, pageSize, pageNo, key);
 
-            JSONObject obj = new JSONObject();
-            obj.put("personalVo", personalVo);
-            obj.put("enterpriseVo", enterpriseVo);
+        ProductRequestVo request = productRequestManager.getRequestByQuery(UserTypeEnum.getNameByCode(userType), requestType, RequestTypeEnum.getNameByCode(requestType), pageSize, pageNo, key);
 
-            return obj.toJSONString();
-        }
+
+        return JSON.toJSONString(request);
     }
 
 
@@ -106,13 +101,13 @@ public class RequestController {
     @RequestMapping(value = "/save", produces = "text/plain;charset=UTF-8")
     public String save(ProductRequest productRequest, HttpServletRequest request) {
 
-        if(Objects.isNull(productRequest.getId())){
+        if (Objects.isNull(productRequest.getId())) {
             UserInfo userInfo = (UserInfo) request.getAttribute("userInfo");
             productRequest.setCreateTime(new Date());
             productRequest.setUserType(userInfo.getType());
             productRequest.setStatus(ProductRequestStatusEnum.NORMAL);
             productRequestService.save(productRequest);
-        }else{
+        } else {
             productRequestService.update(productRequest);
         }
 
@@ -128,8 +123,8 @@ public class RequestController {
         if (productRequest.getUserId().intValue() != ((Long) userId).intValue()) {
             return "redirect:/login/";
         }
-        model.addAttribute("service",RequestTypeEnum.SERVICE);
-        model.addAttribute("request",RequestTypeEnum.REQUEST);
+        model.addAttribute("service", RequestTypeEnum.SERVICE);
+        model.addAttribute("request", RequestTypeEnum.REQUEST);
         model.addAttribute("productRequest", productRequest);
         return "pc/releaseDetailEdit";
     }

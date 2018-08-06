@@ -31,7 +31,7 @@ public class RegisterManagerImpl implements RegisterManager {
         loginInfo.setEmail(email);
         loginInfo.setPassword(password);
         loginInfo.setCreateTime(new Date());
-        loginInfo.setStatus((byte) 1);
+        loginInfo.setStatus((byte) 0);
         loginInfoService.insert(loginInfo);
 
         UserInfo userInfo = new UserInfo();

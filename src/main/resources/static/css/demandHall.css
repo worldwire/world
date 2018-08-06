@@ -2,11 +2,11 @@ body { background: #F2F2F2; }
 body ul li { list-style: none; }
 body .content { width: 100%; background: #F2F2F2; padding-top: 1px; }
 body .content .contentBox { width: 1200px; margin: auto; }
-body .content .contentBox .contentBox-choose { width: 1200px; height: 120px; border-radius: 2px; -moz-box-shadow: 0px 1px 15px #33333350; -webkit-box-shadow: 0px 1px 15px #33333350; box-shadow: 0px 1px 15px #33333350; background: #FFFFFF; margin-top: 20px; padding-top: 1px; }
+body .content .contentBox .contentBox-choose { width: 1200px; height: 60px; border-radius: 2px; -moz-box-shadow: 0px 1px 15px #33333350; -webkit-box-shadow: 0px 1px 15px #33333350; box-shadow: 0px 1px 15px #33333350; background: #FFFFFF; margin-top: 20px; padding-top: 1px; }
 body .content .contentBox .contentBox-choose ul li { float: left; font-size: 14px; color: #333333; margin-left: 40px; }
 body .content .contentBox .contentBox-choose li:nth-of-type(1) { font-size: 16px; font-weight: 600; }
 body .content .contentBox .contentBox-choose .li-selected { color: #D42026; }
-body .content .contentBox .contentBox-choose .contentBox-choose1 { margin-left: 45px; margin-top: 30px; }
+body .content .contentBox .contentBox-choose .contentBox-choose1 { margin-left: 45px; margin-top: 21px; }
 body .content .contentBox .contentBox-choose ul li:hover { cursor: pointer; color: #D42026; }
 body .content .contentBox .contentBox-body { padding-top: 1px; width: 1200px; height: 1339px; background: #FFFFFF; margin-top: 25px; -moz-box-shadow: 0px 1px 15px #33333350; -webkit-box-shadow: 0px 1px 15px #33333350; box-shadow: 0px 1px 15px #33333350; }
 body .content .contentBox .contentBox-body #contentBox-body-list1 { background: #FFFFFF; margin: 0 auto; position: relative; margin-top: 29px; }

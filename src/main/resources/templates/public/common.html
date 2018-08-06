@@ -2,7 +2,37 @@
 <link rel="stylesheet" type="text/css" href="/css/head_style.css"/>
 <link rel="stylesheet" href="/js/layui-v2.2.6/layui/css/layui.css">
 <link rel="stylesheet" href="/css/fontCss.css">
-<script src="/js/common/common.js" ></script>
+<script src="/js/common/common.js"></script>
 <script src="/js/layui-v2.2.6/layui/layui.js"></script>
 <script src="/js/layui-v2.2.6/layui/lay/modules/jquery.js"></script>
-<script src="/js/foot.js"type="javascript"></script>
+<script src="/js/foot.js" type="javascript"></script>
+<script>
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        var q = window.location.pathname.substr(1).match(reg_rewrite);
+        if (r != null) {
+            return unescape(r[2]);
+        } else if (q != null) {
+            return unescape(q[2]);
+        } else {
+            return null;
+        }
+    }
+
+    function timeTransfer(time) {
+        if (!time) {
+            return "";
+        }
+        var date = new Date(time);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        Y = date.getFullYear() ;
+        M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+        D = date.getDate();
+        h = date.getHours() ;
+        m = date.getMinutes() ;
+        s = date.getSeconds();
+        return Y + "-" + M + "-" + D + " " + h + ":" + m + ":" + s;
+
+    }
+</script>

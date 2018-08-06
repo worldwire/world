@@ -41,7 +41,8 @@ public class RegisterController {
 
         registerManager.register(userName, email, password);
 
-        return "pc/login";
+
+        return "pc/mail";
     }
 
     @RequestMapping("fillType")

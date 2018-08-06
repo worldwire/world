@@ -56,8 +56,8 @@
             <if test="query.userId != null">
                 user_id = #{query.userId, jdbcType=BIGINT} and
             </if>
-            <if test="query.key != null">
-                title like concat("%",#{query.key},"%") or key_word like concat("%",#{query.key},"%")
+            <if test="query.key != null and query.key != '' ">
+                (title like concat("%",#{query.key},"%") or key_word like concat("%",#{query.key},"%")) and
             </if>
             status = 1
         </trim>
