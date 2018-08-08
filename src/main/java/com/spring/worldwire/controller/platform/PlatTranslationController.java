@@ -79,6 +79,7 @@ public class PlatTranslationController {
 	}
 
 	@RequestMapping("/submit")
+	@ResponseBody
 	public String apply(HttpServletRequest request,TranslationApplyVO translationApplyVO){
 		AdminUser adminUser = (AdminUser) request.getSession().getAttribute(Constants.ADMIN_USER_SESSION);
 		translationApplyVO.setOperatorId(adminUser.getId());
@@ -86,9 +87,9 @@ public class PlatTranslationController {
 		translationApplyVO.setOperatorTime(new Date());
 		int saveFlag = translationApplyService.translation(translationApplyVO);
 		if(saveFlag>0) {
-			return "";
+			return LayuiResult.sussceResult();
 		}
-		return "";
+		return LayuiResult.errResult("系统错误");
 	}
 
 	@RequestMapping("/auditDetail")
