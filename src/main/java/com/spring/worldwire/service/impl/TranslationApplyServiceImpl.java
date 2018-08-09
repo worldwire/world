@@ -4,7 +4,9 @@ import com.spring.worldwire.dao.ProductRequestDao;
 import com.spring.worldwire.dao.TranslationApplyDao;
 import com.spring.worldwire.dao.UserAccountDao;
 import com.spring.worldwire.enums.LanguageEnum;
+import com.spring.worldwire.enums.ProductRequestStatusEnum;
 import com.spring.worldwire.enums.TranslationApplyStatusEnum;
+import com.spring.worldwire.model.AdminUser;
 import com.spring.worldwire.model.ProductRequest;
 import com.spring.worldwire.model.TranslationApply;
 import com.spring.worldwire.model.UserAccount;
@@ -43,6 +45,7 @@ public class TranslationApplyServiceImpl implements TranslationApplyService {
     }
 
     @Override
+    @Transactional
     public int translation(TranslationApplyVO translationApplyVO) {
 
         TranslationApply translationApply = translationApplyDao.selectByPrimaryKey(translationApplyVO.getId());
@@ -50,29 +53,28 @@ public class TranslationApplyServiceImpl implements TranslationApplyService {
             return 0;
         }
         ProductRequest reqProduct = productRequestDao.selectByPrimaryKey(translationApply.getReqId());
-        ProductRequest fromProduct = reqProduct.converFromProduct(translationApply.getFromType());
-        if(StringUtils.isNotBlank(translationApplyVO.getTranslationContext())){
+        if(translationApply.getFromReqId()==null){
+            ProductRequest fromProduct = reqProduct.converFromProduct(translationApply.getFromType());
+            if(StringUtils.isNotBlank(translationApplyVO.getTranslationContext())){
+                fromProduct.setContent(translationApplyVO.getTranslationContext());
+                fromProduct.setTitle(translationApplyVO.getTranslationTitle());
+                fromProduct.setStatus(ProductRequestStatusEnum.INIT);
+                productRequestDao.insert(fromProduct);
+                translationApply.setFromReqId(fromProduct.getId());
+            }else{
+                return 0;
+            }
+        }else{
+            ProductRequest fromProduct = productRequestDao.selectByPrimaryKey(translationApply.getFromReqId());
             fromProduct.setContent(translationApplyVO.getTranslationContext());
             fromProduct.setTitle(translationApplyVO.getTranslationTitle());
-            translationApply.setStatus(TranslationApplyStatusEnum.AUDITION);
-            translationApply.setOperatorId(translationApplyVO.getOperatorId());
-            translationApply.setUpdateTime(new Date());
-            translationApply.setOperatorTime(new Date());
-            int i = productRequestDao.insert(fromProduct);
-            if(i>0){
-                i = translationApplyDao.updateByPrimaryKeySelective(translationApply);
-            }
-            return i;
+            productRequestDao.updateByPrimaryKeySelective(fromProduct);
         }
-        return 0;
-    }
 
-    @Override
-    public int updateAudit(Long id, Long auditId) {
-        TranslationApply translationApply = new TranslationApply();
-        translationApply.setId(id);
-        translationApply.setAuditorId(auditId);
-        translationApply.setAuditorTime(new Date());
+        translationApply.setStatus(TranslationApplyStatusEnum.AUDITION);
+        translationApply.setOperatorId(translationApplyVO.getOperatorId());
+        translationApply.setUpdateTime(new Date());
+        translationApply.setOperatorTime(new Date());
         return translationApplyDao.updateByPrimaryKeySelective(translationApply);
 
     }
@@ -116,6 +118,24 @@ public class TranslationApplyServiceImpl implements TranslationApplyService {
     @Override
     public TranslationApply findReqIdAndFrom(Long reqId, LanguageEnum fromType) {
         return translationApplyDao.findReqIdAndFrom(reqId,fromType);
+    }
+
+    @Override
+    @Transactional
+    public int updateAudit(TranslationApply translationApply) {
+        int save = translationApplyDao.updateByPrimaryKeySelective(translationApply);
+        if(save>0){
+            if(TranslationApplyStatusEnum.SUCCESS.equals(translationApply.getStatus())){
+                ProductRequest productRequest = new ProductRequest();
+                productRequest.setId(translationApply.getFromReqId());
+                productRequest.setStatus(ProductRequestStatusEnum.NORMAL);
+                return productRequestDao.updateByPrimaryKeySelective(productRequest);
+            }else{
+                return save;
+            }
+
+        }
+        return 0;
     }
 
 }

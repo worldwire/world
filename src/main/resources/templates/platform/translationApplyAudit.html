@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>翻译申请详情</title>
+
+    <#include "../public/luaOut.html" encoding="utf-8"/>
+</head>
+<body>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 5px;">
+    <legend>翻译页面</legend>
+</fieldset>
+    <label class="layui-form-label">标题</label>
+    <div class="layui-input-block">
+        <input type="text" name="title" required  lay-verify="required" value="${productRequest.title}" disabled="disabled" class="layui-input">
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">翻译原文</label>
+        <div class="layui-input-block"  style="width:800px">
+            <textarea class="layui-textarea" disabled="disabled">${productRequest.content}</textarea>
+        </div>
+    </div>
+
+    <label class="layui-form-label">翻译标题</label>
+    <div class="layui-input-block">
+        <input type="text" name="translationTitle" required  lay-verify="required" value="${newProductRequest.title}" disabled="disabled" autocomplete="off" class="layui-input">
+    </div>
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">翻译原文</label>
+        <div class="layui-input-block"  style="width:800px">
+            <textarea class="layui-textarea" disabled="disabled">${newProductRequest.content}</textarea>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" id="success">通过</button>
+            <button class="layui-btn layui-btn-primary" id="fail">拒绝重翻</button>
+        </div>
+    </div>
+</body>
+<script>
+layui.use(['form', 'layedit', 'laydate'], function(){
+  var form = layui.form
+  ,layer = layui.layer
+  ,$ = layui.$
+  ,layedit = layui.layedit
+  ,laydate = layui.laydate;
+
+        $("#success").bind("click",function(){
+            audit(3);
+        });
+        $("#fail").bind("click",function(){
+            audit(4);
+        });
+
+
+        function audit(code){
+            $.post('/platTranslation/audit', {"id":${translationApply.id},"status":code}, function (json) {
+                if (json.code == 0) {
+                        window.parent.location.reload();
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+                } else {
+                    tips.error(json.errmsg, function () {
+                        captchaImg.attr('src', captchaSrc + '?_t=' + Math.random());
+                    });
+                }
+             }, 'json');
+        }
+  });
+</script>
+
+</html>

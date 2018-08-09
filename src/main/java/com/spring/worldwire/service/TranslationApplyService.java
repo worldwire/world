@@ -1,6 +1,8 @@
 package com.spring.worldwire.service;
 
 import com.spring.worldwire.enums.LanguageEnum;
+import com.spring.worldwire.enums.TranslationApplyStatusEnum;
+import com.spring.worldwire.model.AdminUser;
 import com.spring.worldwire.model.ProductRequest;
 import com.spring.worldwire.model.TranslationApply;
 import com.spring.worldwire.model.UserAccount;
@@ -19,8 +21,6 @@ public interface TranslationApplyService {
 
     int translation(TranslationApplyVO translationApplyVO);
 
-    int updateAudit(Long id, Long auditId);
-
     int payTranslation(Long id);
 
     int pageCount(TranslationApplyQuery translationApplyQuery);
@@ -33,4 +33,5 @@ public interface TranslationApplyService {
 
     TranslationApply findReqIdAndFrom(Long reqId,LanguageEnum fromType);
 
+    int updateAudit(TranslationApply translationApply);
 }

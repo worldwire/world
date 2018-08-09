@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<table id="translationApply" lay-filter="test"></table>
+<table id="translationApply" lay-filter="translationApply"></table>
 
 
 </body>
@@ -18,7 +18,7 @@
 layui.use('table', function(){
   var table = layui.table,
         $ = layui.$
-        laytpl = layui.laytpl;;
+        laytpl = layui.laytpl;
 
   //第一个实例
   table.render({
@@ -40,6 +40,9 @@ layui.use('table', function(){
                         return "需审核";
                     if(d.status=='SUCCESS')
                         return "审核通过";
+                    if(d.status=='FAIL'){
+                        return "重新翻译";
+                    }
 
                     return d.status;
 
@@ -51,7 +54,7 @@ layui.use('table', function(){
 
 
 
-  table.on('tool(test)', function(obj){
+  table.on('tool(translationApply)', function(obj){
     var data = obj.data; //获得当前行数据
     var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
     var tr = obj.tr; //获得当前行 tr 的DOM对象
@@ -65,6 +68,17 @@ layui.use('table', function(){
 		  ,closeBtn: 1, //不显示关闭按钮
         });
     }
+    if(layEvent === 'audit'){
+         layer.open({
+          type: 2
+          ,content: ['/platTranslation/toAudit?id='+data.id]
+          ,scrollbar: true
+          ,area: ['1000px',"500px"] //宽高
+		  ,shadeClose: true //开启遮罩关闭
+		  ,closeBtn: 1, //不显示关闭按钮
+        });
+    }
+
   });
 
 });
@@ -73,6 +87,13 @@ layui.use('table', function(){
 
 <script type="text/html" id="barDemo">
     <!-- 这里同样支持 laytpl 语法，如： -->
-    <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+    {{#  if(d.status == 'NORMAL' || d.status == 'FAIL'){ }}
+        <a class="layui-btn layui-btn-xs" lay-event="detail">翻译</a>
+    {{#  } }}
+    {{#  if(d.status == 'AUDITION'){ }}
+        <a class="layui-btn layui-btn-xs" lay-event="audit">审核</a>
+    {{#  } }}
 </script>
 </html>
+
+

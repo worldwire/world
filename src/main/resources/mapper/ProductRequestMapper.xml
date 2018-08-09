@@ -298,7 +298,7 @@
                 linkedin = #{linkedIn,jdbcType=VARCHAR},
             </if>
             <if test="publicPlatform != null">
-                public_platform = #{publicPlatform,jdbcType=VARCHAR}
+                public_platform = #{publicPlatform,jdbcType=VARCHAR},
             </if>
             <if test="languageType != null">
                 language_type = #{languageType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
@@ -307,7 +307,7 @@
                 language_id = #{languageId,jdbcType=BIGINT},
             </if>
             <if test="status != null">
-                status = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
+                `status` = #{status,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
             </if>
             <if test="userType != null">
                 user_type = #{userType,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},

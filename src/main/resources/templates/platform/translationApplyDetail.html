@@ -19,7 +19,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">翻译原文</label>
         <div class="layui-input-block"  style="width:800px">
-            <textarea class="layui-textarea">${productRequest.content}</textarea>
+            <textarea class="layui-textarea" disabled="disabled">${productRequest.content}</textarea>
         </div>
     </div>
 
@@ -62,7 +62,9 @@ layui.use(['form', 'layedit', 'laydate'], function(){
             var id =  $("input[name='id']").val();
 
             $.post('/platTranslation/submit', {"id":id,"translationContext":translationContext,"translationTitle":translationTitle}, function (json) {
+                console.log("code ==="+json.code)
             if (json.code == 0) {
+                    window.parent.location.reload();
                     var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                     parent.layer.close(index); //再执行关闭
             } else {

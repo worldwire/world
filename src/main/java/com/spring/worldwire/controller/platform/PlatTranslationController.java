@@ -1,6 +1,7 @@
 package com.spring.worldwire.controller.platform;
 
 import com.spring.worldwire.constants.Constants;
+import com.spring.worldwire.enums.TranslationApplyStatusEnum;
 import com.spring.worldwire.model.AdminUser;
 import com.spring.worldwire.model.ProductRequest;
 import com.spring.worldwire.model.TranslationApply;
@@ -92,34 +93,42 @@ public class PlatTranslationController {
 		return LayuiResult.errResult("系统错误");
 	}
 
-	@RequestMapping("/auditDetail")
-	public String auditDetail(Long id){
+	@RequestMapping("/toAudit")
+	public String auditDetail(Long id,Model model){
 		TranslationApply translationApply = translationApplyService.getById(id);
 		if(translationApply!=null){
 			ProductRequest productRequest = productRequestService.findById(translationApply.getReqId());
-			/*TranslationApplyVO translationApplyVO = new TranslationApplyVO();
-			translationApplyVO.setContext(productRequest.getContent());
-			translationApplyVO.setTitle(productRequest.getTitle());
-			translationApplyVO.setReqId(productRequest.getId());
-			translationApplyVO.setOrigType(productRequest.getLanguageType());
-			translationApplyVO.setFromType(translationApply.getFromType());
-			translationApplyVO.setId(translationApply.getId());
-			translationApplyVO.setFromReqId(translationApply.getFromReqId());*/
-			//返回这个对象给前端
-
+			ProductRequest newProductRequest = productRequestService.findById(translationApply.getFromReqId());
+			model.addAttribute("newProductRequest",newProductRequest);
+			model.addAttribute("productRequest",productRequest);
 		}
-
-		return "";
+		model.addAttribute("translationApply",translationApply);
+		return "platform/translationApplyAudit";
 	}
 
 	@RequestMapping("/audit")
-	public String audit(Long id){
-		Long auditId = 0L;
-		int i = translationApplyService.updateAudit(id,auditId);
-		if(i>0){
-			return "";
+	@ResponseBody
+	public String audit(Long id,int status,HttpServletRequest request){
+		AdminUser adminUser = (AdminUser) request.getSession().getAttribute(Constants.ADMIN_USER_SESSION);
+		TranslationApplyStatusEnum auditStatus = TranslationApplyStatusEnum.getNameByCode(status);
+		if(auditStatus==null){
+			return LayuiResult.errResult("状态错误");
 		}
-		return "";
+		if(status!=3&&status!=4){
+			return LayuiResult.errResult("状态错误");
+		}
+		TranslationApply translationApply = translationApplyService.getById(id);
+		if(TranslationApplyStatusEnum.AUDITION.equals(translationApply.getStatus())){
+			translationApply.setStatus(auditStatus);
+			translationApply.setAuditorName(adminUser.getUserName());
+			translationApply.setAuditorId(adminUser.getId());
+			translationApply.setAuditorTime(new Date());
+			translationApplyService.updateAudit(translationApply);
+			return LayuiResult.sussceResult();
+		}else{
+			return LayuiResult.errResult("不可进行审核");
+		}
+
 	}
 
 }
