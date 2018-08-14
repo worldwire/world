@@ -7,6 +7,8 @@ import com.spring.worldwire.query.base.Pager;
  */
 public class LoginInfoQuery extends Pager {
 
+    private String userName;
+
     private String password;
 
     private String email;
@@ -14,6 +16,14 @@ public class LoginInfoQuery extends Pager {
     private Integer thirdType;
 
     private String thirdKey;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String getPassword() {
         return password;

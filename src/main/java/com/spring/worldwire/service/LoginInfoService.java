@@ -19,4 +19,6 @@ public interface LoginInfoService {
 
 	LoginInfo selectByThirdLogin(String thirdKey,Integer thirdType) throws Exception;
 
+
+
 }

@@ -56,9 +56,9 @@ spring:
   profiles: test
   datasource:
     name: worldwire
-    url: jdbc:mysql://47.104.201.53:3306/worldwire
+    url: jdbc:mysql://127.0.0.1:3306/worldwire
     username: root
-    password: 123456
+    password: root
     driver-class-name: com.mysql.jdbc.Driver
 file:
   basedir: D:\data\worldwire\file\

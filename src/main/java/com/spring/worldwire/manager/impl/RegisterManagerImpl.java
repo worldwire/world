@@ -4,7 +4,9 @@ import com.spring.worldwire.manager.RegisterManager;
 import com.spring.worldwire.model.LoginInfo;
 import com.spring.worldwire.model.UserAccount;
 import com.spring.worldwire.model.UserInfo;
+import com.spring.worldwire.query.LoginInfoQuery;
 import com.spring.worldwire.service.LoginInfoService;
+import com.spring.worldwire.service.MailService;
 import com.spring.worldwire.service.UserAccountService;
 import com.spring.worldwire.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class RegisterManagerImpl implements RegisterManager {
     private UserAccountService userAccountService;
     @Autowired
     private LoginInfoService loginInfoService;
+    @Autowired
+    private MailService mailService;
 
 
     @Override
@@ -28,6 +32,7 @@ public class RegisterManagerImpl implements RegisterManager {
 
         LoginInfo loginInfo = new LoginInfo();
         loginInfo.setUserName(userName);
+        loginInfo.setNickName(userName);
         loginInfo.setEmail(email);
         loginInfo.setPassword(password);
         loginInfo.setCreateTime(new Date());
@@ -46,7 +51,15 @@ public class RegisterManagerImpl implements RegisterManager {
         userAccount.setUserId(userInfo.getId());
         userAccountService.insert(userAccount);
 
+        mailService.sendSimpleMail(loginInfo.getId());
 
+    }
+
+    @Override
+    public LoginInfo selectByUserName(String userName) {
+        LoginInfoQuery query = new LoginInfoQuery();
+        query.setUserName(userName);
+        return loginInfoService.selectByQuery(query).stream().findFirst().orElse(null);
     }
 
 }

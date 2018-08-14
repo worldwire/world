@@ -33,7 +33,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label"><i class="iconfont">&#xe757;</i></label>
                 <div class="layui-input-block">
-                    <input type="text" name="password" placeholder="密码不得少于6位" class="layui-input">
+                    <input type="password" name="password" placeholder="密码不得少于6位" class="layui-input">
                     <div class="bord-fa"></div>
                     <!--<p class="msg">密码不得少于6位</p>-->
                 </div>
@@ -61,11 +61,11 @@
             function checkParam() {
                 var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
                 if(reg.test($("[name='email']").val())){
-                    alert("邮箱格式不正确");
+                    layer.msg("邮箱格式不正确",1500);
                     return false;
                 }
                 if($("[name=password]").val().length < 6){
-                    alert("密码位数太少！");
+                    layer.msg("密码位数太少！",1500);
                     return false;
                 }
             }
