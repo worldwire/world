@@ -31,3 +31,7 @@ body .content .contentBox .contentBox-body .contentBox-trading .contentBox-tradi
 body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-table .table-trtd-style td:nth-of-type(1) p:nth-of-type(1) { font-size: 14px; }
 body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-table .table-trtd-style td:nth-of-type(1) p:nth-of-type(2) { font-size: 12px; color: #808080; }
 body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-table .table-trtd-style:last-of-type { border: 0px; }
+body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-table .err-tr{padding: 20px 0 ;}
+body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-btn {padding: 10px 55px;overflow: hidden;}
+body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-btn .ctbtn{ margin:auto;width: 100px;display:block;background: #FFFFFF;color: #333333;}/*-moz-box-shadow:2px 3px 20px #333333; border:1px solid #E0E0E0; -moz-box-shadow:2px 3px 10px #e0e0e0; -webkit-box-shadow:2px 3px 10px #e0e0e0; box-shadow:2px 3px 10px #e0e0e0;*/
+body .content .contentBox .contentBox-body .contentBox-trading .contentBox-trading-btn .page{ float: right;}

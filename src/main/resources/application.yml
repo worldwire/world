@@ -19,9 +19,9 @@ spring:
     template-loader-path: classpath:/templates
   redis:
     database: 0
-    host: 47.104.201.53
+    host: 101.200.137.78
     port: 6379
-    password: 123QWEasd
+    password: 123456QWEasd
     max-active: 8
     max-wait: -1
     max-idle: 8

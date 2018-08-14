@@ -1,0 +1,23 @@
+body {
+  background: #F2F2F2; }
+
+.err {
+  width: 1200px;
+  margin: auto;
+  padding-top: 60px; }
+  .err .err-img {
+    width: 300px;
+    margin: auto; }
+  .err .err-text {
+    width: 100%;
+    text-align: center;
+    color: #333333;
+    margin-top: 20px; }
+  .err .err-btn {
+    width: 100px;
+    margin: auto;
+    margin-top: 20px; }
+    .err .err-btn .err-on {
+      background: #FFFFFF;
+      color: #333333;
+      border: 1px solid #C2C2C2; }

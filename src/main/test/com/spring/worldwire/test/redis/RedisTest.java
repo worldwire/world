@@ -10,7 +10,7 @@ import redis.clients.jedis.Jedis;
  */
 public class RedisTest {
     public static void main(String[] args) {
-        Jedis jedis = new Jedis("47.104.201.53", 6379);
+        Jedis jedis = new Jedis("101.200.137.78", 6379);
         //验证密码，如果没有设置密码这段代码省略
         jedis.auth("123456QWEasd");
         jedis.connect();//连接

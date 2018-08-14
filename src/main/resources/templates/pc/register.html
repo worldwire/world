@@ -58,18 +58,32 @@
                 ,laydate = layui.laydate
                 ,$ = layui.jquery;
 
-            function checkParam() {
+            $(".nextBtn").click(function () {
+
                 var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
                 if(reg.test($("[name='email']").val())){
-                    layer.msg("邮箱格式不正确",1500);
+                    layer.msg("邮箱格式不合法",1500);
                     return false;
                 }
                 if($("[name=password]").val().length < 6){
-                    layer.msg("密码位数太少！",1500);
+                    layer.msg("密码位数不能少于6位！",1500);
                     return false;
                 }
-            }
-            return true;
+                $.ajax({
+                    url: "/register/save",
+                    type: "POST",
+                    data:{userName:$("[name=userName]").val(), email:$("[name=email]").val(), password:$("[name=password]").val()}
+                    dataType: "json",
+                    success:function (data) {
+                        layer.msg(data);
+                    },
+                    error:function(){
+                        layer.msg("网络异常，请稍后重试");
+                    }
+                });
+            })
+
+
 
         })
     </script>

@@ -12,5 +12,6 @@ public class MailServiceImpl implements MailService {
     @Override
     public void sendSimpleMail(Long userId) {
 
+
     }
 }

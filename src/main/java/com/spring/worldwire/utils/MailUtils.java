@@ -6,7 +6,10 @@ import org.springframework.util.CollectionUtils;
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.*;
-import javax.mail.internet.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -27,42 +30,40 @@ public class MailUtils {
 
     static {
         //初始化邮箱信息
-        session = Session.getDefaultInstance(buildDefaultproperties(Constants.MAIL_SENDT_ACCOUNT),new Authenticator() {
+        session = Session.getDefaultInstance(buildDefaultproperties(Constants.MAIL_SENDT_ACCOUNT), new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(Constants.MAIL_SENDT_ACCOUNT, Constants.MAIL_SEND_PASSWORD);
             }
         });
     }
 
-    public static void sendSimpleMail(String receiverEmail,Date date, String url) throws IOException, MessagingException {
+    public static void sendSimpleMail(String receiverEmail, Date date, String url) throws IOException, MessagingException {
 
-        {
-            String mailTemplate = SpringFileUtil.getFileStrFromResource(Constants.MAIL_SEND_TEMPLATE);
+        String mailTemplate = SpringFileUtil.getFileStrFromResource(Constants.MAIL_SEND_TEMPLATE);
 
-            mailTemplate = mailTemplate.replace("date",df.format(date)).replace("url",url);
+        mailTemplate = mailTemplate.replace("##URL##", url);
 
-            sendMail(receiverEmail,Constants.MAIL_SEND_TITLE,mailTemplate,null);
-        }
+        sendMail(receiverEmail, Constants.MAIL_SEND_TITLE, mailTemplate, null);
+
     }
 
-    public static void sendMail(String receiverEmail, String title,String content, List<File> files) throws UnsupportedEncodingException, MessagingException {
-        {
-            MimeMessage msg = createMailMessage(session, receiverEmail, title, content);
+    public static void sendMail(String receiverEmail, String title, String content, List<File> files) throws UnsupportedEncodingException, MessagingException {
 
-            Multipart mp = new MimeMultipart();
-            multiAttatchFileUpload(mp,files);//处理附件
+        MimeMessage msg = createMailMessage(session, receiverEmail, title, content);
 
-            Transport transport = session.getTransport("smtp");
-            transport.connect(Constants.MAIL_SENDT_ACCOUNT, Constants.MAIL_SEND_PASSWORD);
-            transport.sendMessage(msg,msg.getRecipients(Message.RecipientType.TO));
-            transport.close();
+        Multipart mp = new MimeMultipart();
+        multiAttatchFileUpload(mp, files);//处理附件
 
+        Transport transport = session.getTransport("smtp");
+        transport.connect(Constants.MAIL_SENDT_ACCOUNT, Constants.MAIL_SEND_PASSWORD);
+        transport.sendMessage(msg, msg.getRecipients(Message.RecipientType.TO));
+        transport.close();
 
-        }
     }
 
     /**
      * 构造邮件的主体部分
+     *K
      * @param session
      * @param receiveMail
      * @param title
@@ -73,7 +74,7 @@ public class MailUtils {
      */
     public static MimeMessage createMailMessage(Session session, String receiveMail, String title, String content) throws MessagingException, UnsupportedEncodingException {
         MimeMessage msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress(Constants.MAIL_SENDT_ACCOUNT ));        //设置发件人
+        msg.setFrom(new InternetAddress(Constants.MAIL_SENDT_ACCOUNT));        //设置发件人
         msg.addRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress(receiveMail)});  //设置收件人
         msg.setSubject(title); //设置邮件标题
         msg.setContent(content, "text/html;charset=UTF-8");
@@ -84,10 +85,11 @@ public class MailUtils {
 
     /**
      * 构造默认的邮件属性
+     *
      * @param senderEmail
      * @return
      */
-    public static Properties buildDefaultproperties(String senderEmail){
+    public static Properties buildDefaultproperties(String senderEmail) {
         Properties props = System.getProperties();
         // 创建信件服务器
         //code1234
@@ -100,12 +102,13 @@ public class MailUtils {
 
     /**
      * 添加附件
+     *
      * @param files
      * @return
      * @throws MessagingException
      */
     public static Multipart multiAttatchFileUpload(Multipart mp, List<File> files) throws MessagingException {
-        if(CollectionUtils.isEmpty(files)){
+        if (CollectionUtils.isEmpty(files)) {
             return mp;
         }
         files.stream().forEach(item -> {
@@ -125,8 +128,9 @@ public class MailUtils {
         });
         return mp;
     }
+
     public static void main(String[] args) throws IOException, MessagingException {
-        sendSimpleMail("luxun@jd.com",new Date(),"http://wwww.baidu.com");
+        sendSimpleMail("luxun@jd.com", new Date(), "http://wwww.baidu.com");
     }
 
 }

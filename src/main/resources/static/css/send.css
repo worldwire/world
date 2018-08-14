@@ -1,0 +1,27 @@
+body {
+  background: #F2F2F2; }
+
+.send {
+  width: 1200px;
+  margin: auto;
+  padding-top: 60px; }
+  .send .send-box {
+    width: 600px;
+    margin: auto; }
+    .send .send-box div {
+      display: inline;
+      float: left; }
+    .send .send-box .send-text {
+      width: 300px; }
+      .send .send-box .send-text .usermail {
+        color: #333333;
+        padding: 10px; }
+      .send .send-box .send-text .text {
+        color: #848484;
+        padding: 10px; }
+      .send .send-box .send-text .check-btn {
+        background: #FFFFFF;
+        color: #333333;
+        border: 1px solid #C2C2C2;
+        margin-left: 80px;
+        margin-top: 10px; }

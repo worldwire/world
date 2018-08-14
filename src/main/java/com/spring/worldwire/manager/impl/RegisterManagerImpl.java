@@ -1,5 +1,6 @@
 package com.spring.worldwire.manager.impl;
 
+import com.spring.worldwire.constants.Constants;
 import com.spring.worldwire.manager.RegisterManager;
 import com.spring.worldwire.model.LoginInfo;
 import com.spring.worldwire.model.UserAccount;
@@ -9,10 +10,17 @@ import com.spring.worldwire.service.LoginInfoService;
 import com.spring.worldwire.service.MailService;
 import com.spring.worldwire.service.UserAccountService;
 import com.spring.worldwire.service.UserInfoService;
+import com.spring.worldwire.utils.MailUtils;
+import com.spring.worldwire.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+import java.io.IOException;
 import java.util.Date;
+
+import static com.spring.worldwire.constants.Constants.CACHE_MAIL_VALID_PREFIX;
+import static com.spring.worldwire.constants.Constants.MAIL_CODE_INVALIDATE_TIME;
 
 @Service
 public class RegisterManagerImpl implements RegisterManager {
@@ -24,7 +32,7 @@ public class RegisterManagerImpl implements RegisterManager {
     @Autowired
     private LoginInfoService loginInfoService;
     @Autowired
-    private MailService mailService;
+    private RedisUtils redisUtils;
 
 
     @Override
@@ -51,7 +59,21 @@ public class RegisterManagerImpl implements RegisterManager {
         userAccount.setUserId(userInfo.getId());
         userAccountService.insert(userAccount);
 
-        mailService.sendSimpleMail(loginInfo.getId());
+        sendSimpleMail(loginInfo);
+
+    }
+
+    private void sendSimpleMail(LoginInfo loginInfo) {
+
+
+        Date date = new Date();
+        String url = Constants.MAIL_ADDRESS_PREFIX + "/"+loginInfo.getId()+"/"+date.getTime();
+        try {
+            MailUtils.sendSimpleMail(loginInfo.getEmail(), date, url);
+        } catch (Exception e) {
+            throw new RuntimeException("mailSendError");
+        }
+        redisUtils.set(CACHE_MAIL_VALID_PREFIX + loginInfo.getId() + "_" + date.getTime() ,"" ,MAIL_CODE_INVALIDATE_TIME);
 
     }
 
