@@ -71,37 +71,37 @@ public class TranslationController {
 	public ResponseResult<TranslationApply> apply(Long reqId,Integer fromType){
 		if(reqId==null||fromType==null){
 			logger.info("[翻译申请] 请求参数有误");
-			return new ResponseResult<>(null,StatusCodeEnum.FAIL,"请求参数有误");
+			return new ResponseResult<>(null,StatusCodeEnum.FAIL.getCode(),"请求参数有误");
 		}
 		ProductRequest productRequest = productRequestService.findById(reqId);
 		if(productRequest==null){
 			logger.info("[翻译申请] 请求参数有误 reqId = {} fromType = {}",reqId,fromType);
-			return new ResponseResult<>(null,StatusCodeEnum.FAIL,"请求参数有误");
+			return new ResponseResult<>(null,StatusCodeEnum.FAIL.getCode(),"请求参数有误");
 		}
 		if(productRequest.getLanguageType().getCode()==fromType){
-			return new ResponseResult<>(null,StatusCodeEnum.FAIL,"不能翻译成本语言");
+			return new ResponseResult<>(null,StatusCodeEnum.FAIL.getCode(),"不能翻译成本语言");
 		}
 
 		try {
 			TranslationApply translationApply = translationApplyManager.check(productRequest,LanguageEnum.getNameByCode(fromType));
 			if(translationApply!=null){
-				return new ResponseResult<>(null,StatusCodeEnum.FAIL,"已经申请翻译");
+				return new ResponseResult<>(null,StatusCodeEnum.FAIL.getCode(),"已经申请翻译");
 			}
 			translationApply = translationApplyManager.applyTranslation(productRequest, LanguageEnum.getNameByCode(fromType));
 			if(translationApply==null){
 				logger.info("[翻译申请] 报错数据异常 reqId = {} fromType = {}",reqId,fromType);
-				return new ResponseResult<>(null,StatusCodeEnum.FAIL,"请求参数有误");
+				return new ResponseResult<>(null,StatusCodeEnum.FAIL.getCode(),"请求参数有误");
 			}
 			if(translationApply.getStatus().equals(TranslationApplyStatusEnum.INIT)) {
-				return new ResponseResult<>(translationApply, StatusCodeEnum.SUCCESS, "缴费后翻译");
+				return new ResponseResult<>(translationApply, StatusCodeEnum.SUCCESS.getCode(), "缴费后翻译");
 			}else{
-				return new ResponseResult<>(translationApply, StatusCodeEnum.SUCCESS, "请等待翻译");
+				return new ResponseResult<>(translationApply, StatusCodeEnum.SUCCESS.getCode(), "请等待翻译");
 			}
 		} catch (Exception e) {
 			logger.error("[翻译申请] 报错数据异常 reqId = {} fromType = {}",reqId,fromType,e);
 		}
 
-		return new ResponseResult<>(null,StatusCodeEnum.ERROR,"请求出错");
+		return new ResponseResult<>(null,StatusCodeEnum.ERROR.getCode(),"请求出错");
 	}
 
 	/**

@@ -4,7 +4,9 @@ import com.spring.worldwire.model.LoginInfo;
 
 public interface RegisterManager {
 
-    void register(String userName,String email, String password);
+    LoginInfo register(String userName,String email, String password);
 
     LoginInfo selectByUserName(String userName);
+
+    LoginInfo selectByEmail(String email);
 }

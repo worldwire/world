@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>翻译页面</title>
+    <link rel="stylesheet" href="/css/translate.css">
+    <script src="/js/t2.js" type="text/javascript" charset="utf-8"></script>
+    <#include "../public/common.html" encoding="utf-8"/>
+</head>
+<body>
+    <#include "../public/head.html" encoding="utf-8" />
+    <#include "../public/navigator.html" encoding="utf-8" />
+    <!-- 主体内容 -->
+    <div class="container">
+        <div class="left">
+            <#include "../public/left.html" encoding="utf-8" />
+        </div>
+        <div class="main">
+            <div>
+                <div class="information">
+                    <div class="photo">
+                        <a href=""><img src="${productRequest.userInfo.showImg!''}" alt="头像"></a>
+                    </div>
+                    <div class="info">
+                        <p class="name">${productRequest.userInfo.nickName!''}</p>
+                        <p class="nat"><i class="iconfont">&#xe611;</i><span>${productRequest.userInfo.localAddr!''}</span><img src="/images/gj.png" alt="国籍"></p>
+                        <p class="text">
+                            <span><#if productRequest.userType.code ==1>个人<#else>企业</#if><#if productRequest.requestType.code == 1>服务<#else>需求</#if></span>
+                            <#if productRequest.requestType.code == 1>我可以提供国际人才或资源<#else>我要找国际人才或资源</#if>
+                        </p>
+                    </div>
+                    <div class="nationality">
+                        <p>国籍</p>
+                        <p><img src="/images/gj.png" alt="国籍"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div><h2>${productRequest.title!''}</h2></div>
+                <div class="content-main">
+                    ${productRequest.content!''}
+                </div>
+                <div class="time">
+                    <p>发布时间: <#if productRequest.createTime??>${productRequest.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></p>
+                </div>
+            </div>
+            <div class="level">
+                <p>发布者水平</p>
+                <div>
+                    <dl>
+                        <dt>日语</dt>
+                        <dd>不会</dd>
+                    </dl>
+                    <dl>
+                        <dt>韩语</dt>
+                        <dd>不会</dd>
+                    </dl>
+                    <dl>
+                        <dt>中文</dt>
+                        <dd>精通</dd>
+                    </dl>
+                    <dl>
+                        <dt>英文</dt>
+                        <dd>一般</dd>
+                    </dl>
+                    <dl>
+                        <dt>意大利语</dt>
+                        <dd>不会</dd>
+                    </dl>
+                    <dl>
+                        <dt>法语</dt>
+                        <dd>不会</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="other">
+                <div style="margin-bottom: 30px;">
+                    <#if productRequest.keyWord??>
+                        <#list productRequest.keyWord?split(";") as key>
+                            <a href="###">${key}</a>
+                        </#list>
+                    </#if>
+                </div>
+                <div class="contact">
+                    <div style="width: 132px; float: left;margin-right: 20px">
+                        <div class="ewm"><img src="../img/ewm1.jpg" alt="二维码"></div>
+                        <p>微信二维码</p>
+                    </div>
+                    <ul>
+                        <li>手机号：<span>${productRequest.mobile!''}</span></li>
+                        <li>微信号：<span>${productRequest.wechat!''}</span></li>
+                        <li>LinkedIn：<span>${productRequest.linkedin!''}</span></li>
+                    </ul>
+                    <ul>
+                        <li>座机号：<span>${productRequest.phone!''}</span></li>
+                        <li>联系邮箱：<span>${productRequest.email!''}</span></li>
+                        <li>WhatsApp：<span>${productRequest.whatsapp!''}</span></li>
+                    </ul>
+                    <ul>
+                        <li>我的网站：<span>${productRequest.website!''}</span></li>
+                        <li>FaceBook：<span>${productRequest.facebook!''}</span></li>
+                    </ul>
+                </div>
+                <div style="float: right;">
+                    <div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_tqf" data-cmd="tqf" title="分享到腾讯朋友"></a><a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a><a href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a><a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a></div>
+                    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+                </div>
+                <div class="btn-group">
+                    <div style="margin-right: -30px;">
+                        <a href="###" id="tran-btn">翻译</a>
+                        <a href="/request/lc/edit?id=${productRequest.id}">修改</a>
+                        <a href="/request/lc/modify?id=${productRequest.id}">
+                            <#if productRequest.status.code == 2>开启<#elseif productRequest.status.code == 3>关闭<#else>上架</#if>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 尾部版权 -->
+    <#include "../public/foot.html" encoding="utf-8">
+
+    <!-- 翻译弹出层 -->
+    <div class="tran-box" style="display: none;">
+        <div class="tran-tit">
+            <h2>本次翻译次数为<span>365</span>字</h2>
+        </div>
+        <div class="tran-main">
+            <div class="row">
+                <p>选择支付币种</p>
+                <div class="active">￥ 人民币</div>
+                <div>$ 美金</div>
+            </div>
+            <div class="layui-clear"></div>
+            <div class="row">
+                <p>选择支付方式</p>
+                <div><img src="../img/wx.png"/>微信支付</div>
+                <div class="active"><img src="../img/zfb.png"/>支付宝支付</div>
+                <div><img src="../img/paypal.jpg" width="150"/></div>
+            </div>
+            <hr/>
+            <div class="conf">
+                <div><button type="button" class="layui-btn">立即充值</button></div>
+                <div>实付人民币<span>￥50.00</span></div>
+            </div>
+        </div>
+        <div class="tran-close-btn"><i class="layui-icon" style="font-size: 30px">&#x1006;</i></div>
+    </div>
+
+
+    <script>
+        layui.use(['form', 'layedit', 'laydate'], function(){
+            var form = layui.form
+                ,layer = layui.layer
+                ,layedit = layui.layedit
+                ,laydate = layui.laydate
+                ,$ = layui.jquery;
+
+            // 翻译按钮
+            $("#tran-btn").click(function() {
+                layer.open({
+                    type: 1,
+                    content: $('.tran-box'),
+                    area: ['734px', '540px'],
+                    title: false,
+                    closeBtn: 0,
+                });
+
+                $(".tran-close-btn").click(function() {
+                    layer.closeAll();
+                })
+            })
+
+            $(".tran-box div").on("click", function (e) {
+                var target = $(this),
+                    parentBox = target.parent(),
+                    allA = $(parentBox).find("div");
+
+                allA.removeClass("active");
+                target.addClass("active");
+
+                return false;
+            })
+
+
+        })
+    </script>
+</body>
+</html>

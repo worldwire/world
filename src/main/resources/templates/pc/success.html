@@ -1,15 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>成功页</title>
+    <title>激活成功</title>
+    <link rel="stylesheet" type="text/css" href="/css/err404.css"/>
+
+		<#include "../public/common.html" encoding="utf-8">
+
 </head>
 <body>
+        <#include "../public/head.html" encoding="utf-8">
+        <#include "../public/navigator.html" encoding="utf-8">
+<div class="err">
+    <div class="err-img">
+        <img src="/images/err.png" width="300"/>
+    </div>
+    <div class="err-text">
+				${msg}
+    </div>
+    <div class="err-btn" onclick="redirectClick('/login/')">
+        <div class="layui-btn err-on">
+            登录
+        </div>
+    </div>
 
-
-<p style="font-size: large">${msg}</p>
-
-<a href="/login/">跳转</a>
-
+</div>
+       <#include "../public/foot.html" encoding="utf-8">
 </body>
 </html>

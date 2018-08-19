@@ -50,14 +50,30 @@ public class RegisterController {
         try {
             LoginInfo name = registerManager.selectByUserName(userName);
             if (name != null) {
-                return new ResponseResult(null, StatusCodeEnum.EXISTS, "用户名已存在");
+                return new ResponseResult(null, StatusCodeEnum.EXISTS.getCode(), "用户名已存在");
             }
-            registerManager.register(userName, email, password);
-            return new ResponseResult(null, StatusCodeEnum.SUCCESS, StatusCodeEnum.SUCCESS.getMsg());
+            LoginInfo mailInfo = registerManager.selectByEmail(email);
+            if (mailInfo != null) {
+                return new ResponseResult(null, StatusCodeEnum.EXISTS.getCode(), "邮箱已经被注册");
+            }
+            LoginInfo info = registerManager.register(userName, email, password);
+            return new ResponseResult(info, StatusCodeEnum.SUCCESS.getCode(), StatusCodeEnum.SUCCESS.getMsg());
         } catch (Exception e) {
-            return new ResponseResult(null, StatusCodeEnum.ERROR, StatusCodeEnum.ERROR.getMsg());
+            return new ResponseResult(null, StatusCodeEnum.ERROR.getCode(), StatusCodeEnum.ERROR.getMsg());
         }
 
+    }
+
+    @RequestMapping("toSendMail")
+    public String sendMail(Long id,Model model){
+
+        LoginInfo loginInfo = loginInfoService.selectByPrimaryKey(id);
+        if(!Objects.isNull(loginInfo)&&loginInfo.getStatus() ==0){
+            model.addAttribute("mail",loginInfo.getEmail());
+            return "pc/sendmail";
+        }
+        model.addAttribute("msg","用户状态异常");
+        return "pc/error";
     }
 
     @RequestMapping("/active/{loginId}/{timestamp}")
@@ -72,11 +88,11 @@ public class RegisterController {
             model.addAttribute("msg", "该账号不是激活状态，激活失败!");
             return "pc/error";
         }
-        //redis缓存
-        if (!redisUtils.isCacheExists(CACHE_MAIL_VALID_PREFIX + loginInfo.getId() + "_" + timestamp)) {
-            model.addAttribute("msg", "邮箱激活已过期，请重新注册激活！");
-            return "pc/error";
-        }
+//        //redis缓存
+//        if (!redisUtils.isCacheExists(CACHE_MAIL_VALID_PREFIX + loginInfo.getId() + "_" + timestamp)) {
+//            model.addAttribute("msg", "邮箱激活已过期，请重新注册激活！");
+//            return "pc/error";
+//        }
         loginInfo.setStatus((byte)1);
         loginInfoService.update(loginInfo);
         model.addAttribute("msg", "激活成功，请登录");

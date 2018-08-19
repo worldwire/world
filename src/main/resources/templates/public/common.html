@@ -6,7 +6,18 @@
 <script src="/js/layui-v2.2.6/layui/layui.js"></script>
 <script src="/js/layui-v2.2.6/layui/lay/modules/jquery.js"></script>
 <script src="/js/foot.js" type="javascript"></script>
+
 <script>
+
+    layui.use(['jquery'], function(){
+        $ = layui.jquery;
+        if($(window).height()>$(document.body).height()+60){
+            $(".foot").css("position","fixed")
+            $(".foot").css("bottom","0")
+            $(".foot1").css("margin-top","0")
+        }
+    })
+
     function getQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var reg_rewrite = new RegExp("(^|/)" + name + "/([^/]*)(/|$)", "i");

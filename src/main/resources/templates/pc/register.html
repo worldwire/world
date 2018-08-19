@@ -13,7 +13,7 @@
 <div class="container">
     <div class="title">注册</div>
     <div class="main">
-        <form class="layui-form layui-form-pane" method="post" action="/register/save" onsubmit="checkParam()">
+        <div class="layui-form layui-form-pane" name="register">
             <div class="layui-form-item">
                 <label class="layui-form-label"><i class="iconfont">&#xe757;</i></label>
                 <div class="layui-input-block">
@@ -41,7 +41,7 @@
             <div class="btnbox">
                 <button class="layui-btn nextBtn">下一步</button>
             </div>
-        </form>
+        </div>
     </div>
     <div class="footer">
         <p><!--已有账号?--><a href="/login/">登陆</a></p>
@@ -61,21 +61,30 @@
             $(".nextBtn").click(function () {
 
                 var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
-                if(reg.test($("[name='email']").val())){
-                    layer.msg("邮箱格式不合法",1500);
+                if(!reg.test($("[name='email']").val())){
+                    layer.msg("邮箱格式不合法");
                     return false;
                 }
                 if($("[name=password]").val().length < 6){
-                    layer.msg("密码位数不能少于6位！",1500);
+                    layer.msg("密码位数不能少于6位！");
                     return false;
                 }
                 $.ajax({
                     url: "/register/save",
                     type: "POST",
-                    data:{userName:$("[name=userName]").val(), email:$("[name=email]").val(), password:$("[name=password]").val()}
+                    data:{userName:$("[name=userName]").val(), email:$("[name=email]").val(), password:$("[name=password]").val()},
                     dataType: "json",
                     success:function (data) {
-                        layer.msg(data);
+                        if(data.code == 200){
+                            window.location.href = "/register/toSendMail?id="+ data.data.id;
+                        }else{
+                            layer.msg(data.desc);
+                            // layer.open({
+                            //     skin: 'layui-layer-lan',
+                            //     type: 1,
+                            //     content: data.desc //这里content是一个普通的String
+                            // });
+                        }
                     },
                     error:function(){
                         layer.msg("网络异常，请稍后重试");

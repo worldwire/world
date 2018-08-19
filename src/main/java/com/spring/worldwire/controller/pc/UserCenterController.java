@@ -95,15 +95,15 @@ public class UserCenterController {
         }
 
         if (StringUtils.isEmpty(HttpUtils.getCookieByKey("loginKey" + userId, request))) {
-            return new ResponseResult(null, StatusCodeEnum.OUT_OF_DATE, "登录超时");
+            return new ResponseResult(null, StatusCodeEnum.OUT_OF_DATE.getCode(), "登录超时");
         }
         LoginInfo info = loginInfoService.selectByPrimaryKey(Long.parseLong(userId.toString()));
         if (oldPass.equals(info.getPassword())) {
             info.setPassword(newPass);
             loginInfoService.update(info);
-            return new ResponseResult(null, StatusCodeEnum.SUCCESS, "修改成功");
+            return new ResponseResult(null, StatusCodeEnum.SUCCESS.getCode(), "修改成功");
         }
-        return new ResponseResult(null, StatusCodeEnum.FAIL, "修改失败");
+        return new ResponseResult(null, StatusCodeEnum.FAIL.getCode(), "修改失败");
     }
 
 

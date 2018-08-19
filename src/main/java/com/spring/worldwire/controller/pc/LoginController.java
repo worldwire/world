@@ -99,12 +99,12 @@ public class LoginController {
         try {
             UserInfo userInfo = loginManager.login(email, password, response);
             if (Objects.isNull(userInfo)) {
-                return new ResponseResult(null, StatusCodeEnum.EMPTY, "用户名密码不正确");
+                return new ResponseResult(null, StatusCodeEnum.EMPTY.getCode(), "用户名密码不正确");
             }
-            return new ResponseResult(userInfo, StatusCodeEnum.SUCCESS, "登陆成功");
+            return new ResponseResult(userInfo, StatusCodeEnum.SUCCESS.getCode(), "登陆成功");
         } catch (Exception e) {
             logger.error("登陆出错", e);
-            return new ResponseResult(null, StatusCodeEnum.ERROR, "登陆异常");
+            return new ResponseResult(null, StatusCodeEnum.ERROR.getCode(), "登陆异常");
         }
     }
 

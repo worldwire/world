@@ -29,11 +29,11 @@ public class UserInfoController {
         try{
             int status = userInfoService.insert(userInfo);
             if(status == 1){
-                return new ResponseResult<>(null, StatusCodeEnum.SUCCESS, "添加成功");
+                return new ResponseResult<>(null, StatusCodeEnum.SUCCESS.getCode(), "添加成功");
             }
-            return new ResponseResult<>(null, StatusCodeEnum.FAIL, "添加返回码错误");
+            return new ResponseResult<>(null, StatusCodeEnum.FAIL.getCode(), "添加返回码错误");
         }catch (Exception e){
-            return new ResponseResult<>(null, StatusCodeEnum.ERROR, "添加操作系统异常:");
+            return new ResponseResult<>(null, StatusCodeEnum.ERROR.getCode(), "添加操作系统异常:");
         }
     }
 

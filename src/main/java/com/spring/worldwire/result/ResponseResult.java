@@ -12,14 +12,14 @@ public class ResponseResult<T> {
 
     T data;
 
-    StatusCodeEnum code;
+    int code;
 
     String message;
 
     String desc;
 
 
-    public ResponseResult(T data, StatusCodeEnum code, String desc) {
+    public ResponseResult(T data, int code, String desc) {
         this.data = data;
         this.desc = desc;
         this.code = code;
@@ -41,11 +41,11 @@ public class ResponseResult<T> {
         this.message = message;
     }
 
-    public StatusCodeEnum getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(StatusCodeEnum code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
@@ -63,8 +63,7 @@ public class ResponseResult<T> {
         sb.append("{");
         sb.append("data:").append(data).append(",");
         sb.append("desc:").append(desc).append(",");
-        sb.append("message:").append(code.getMsg()).append(",");
-        sb.append("code:").append(code.getCode());
+        sb.append("code:").append(code);
         sb.append("}");
         return sb.toString();
     }

@@ -82,15 +82,15 @@ public class RequestController {
         return "pc/requestDetail";
     }
 
-
-    @RequestMapping("myDetail")
-    public String toMyDetail(Model model, long id) {
-        ProductRequest productRequest = productRequestService.findById(id);
-
-        model.addAttribute("productRequest", productRequest);
-
-        return "pc/myDetail";
-    }
+//
+//    @RequestMapping("myDetail")
+//    public String toMyDetail(Model model, long id) {
+//        ProductRequest productRequest = productRequestService.findById(id);
+//
+//        model.addAttribute("productRequest", productRequest);
+//
+//        return "pc/myDetail";
+//    }
 
     @RequestMapping("/lc/release")
     public String release(Model model) {
@@ -127,6 +127,33 @@ public class RequestController {
         model.addAttribute("request", RequestTypeEnum.REQUEST);
         model.addAttribute("productRequest", productRequest);
         return "pc/releaseDetailEdit";
+    }
+
+    @RequestMapping("/lc/myDetail")
+    public String myRequest(Long id, Model model, HttpServletRequest request) {
+
+        Object userId = request.getAttribute(Constants.USER_ID_SESSION);
+        ProductRequest productRequest = productRequestService.findById(id);
+        if (productRequest.getUserId().intValue() != ((Long) userId).intValue()) {
+            model.addAttribute("msg", "请不要查看非自己发布的需求");
+            return "pc/error";
+        }
+        model.addAttribute("productRequest", productRequest);
+        return "pc/myRequest";
+
+    }
+
+    @RequestMapping("/lc/modify")
+    public String changeStatus(Long id, Model model, HttpServletRequest request) {
+        Object userId = request.getAttribute(Constants.USER_ID_SESSION);
+        ProductRequest productRequest = productRequestService.findById(id);
+        if (productRequest.getUserId().intValue() != ((Long) userId).intValue()) {
+            model.addAttribute("msg", "请不要查看非自己发布的需求");
+            return "pc/error";
+        }
+        productRequest.setStatus(ProductRequestStatusEnum.getNameByCode(5 - productRequest.getStatus().getCode()));
+        productRequestService.update(productRequest);
+        return "redirect:/request/lc/myDetail?id=" + id;
     }
 
     @RequestMapping("/lc/releaseCommit")

@@ -41,7 +41,7 @@ public class MailUtils {
 
         String mailTemplate = SpringFileUtil.getFileStrFromResource(Constants.MAIL_SEND_TEMPLATE);
 
-        mailTemplate = mailTemplate.replace("##URL##", url);
+        mailTemplate = mailTemplate.replaceAll("##URL##", url);
 
         sendMail(receiverEmail, Constants.MAIL_SEND_TITLE, mailTemplate, null);
 

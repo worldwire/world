@@ -7,7 +7,6 @@ import com.spring.worldwire.model.UserAccount;
 import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.query.LoginInfoQuery;
 import com.spring.worldwire.service.LoginInfoService;
-import com.spring.worldwire.service.MailService;
 import com.spring.worldwire.service.UserAccountService;
 import com.spring.worldwire.service.UserInfoService;
 import com.spring.worldwire.utils.MailUtils;
@@ -15,12 +14,7 @@ import com.spring.worldwire.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.mail.MessagingException;
-import java.io.IOException;
 import java.util.Date;
-
-import static com.spring.worldwire.constants.Constants.CACHE_MAIL_VALID_PREFIX;
-import static com.spring.worldwire.constants.Constants.MAIL_CODE_INVALIDATE_TIME;
 
 @Service
 public class RegisterManagerImpl implements RegisterManager {
@@ -36,7 +30,7 @@ public class RegisterManagerImpl implements RegisterManager {
 
 
     @Override
-    public void register(String userName, String email, String password) {
+    public LoginInfo register(String userName, String email, String password) {
 
         LoginInfo loginInfo = new LoginInfo();
         loginInfo.setUserName(userName);
@@ -49,6 +43,7 @@ public class RegisterManagerImpl implements RegisterManager {
 
         UserInfo userInfo = new UserInfo();
         userInfo.setLoginId(loginInfo.getId());
+        userInfo.setShowImg("/images/defaultHeadImg.png");
         userInfoService.insert(userInfo);
 
         UserAccount userAccount = new UserAccount();
@@ -60,6 +55,7 @@ public class RegisterManagerImpl implements RegisterManager {
         userAccountService.insert(userAccount);
 
         sendSimpleMail(loginInfo);
+        return loginInfo;
 
     }
 
@@ -67,13 +63,13 @@ public class RegisterManagerImpl implements RegisterManager {
 
 
         Date date = new Date();
-        String url = Constants.MAIL_ADDRESS_PREFIX + "/"+loginInfo.getId()+"/"+date.getTime();
+        String url = Constants.MAIL_ADDRESS_PREFIX + "/" + loginInfo.getId() + "/" + date.getTime();
         try {
             MailUtils.sendSimpleMail(loginInfo.getEmail(), date, url);
         } catch (Exception e) {
             throw new RuntimeException("mailSendError");
         }
-        redisUtils.set(CACHE_MAIL_VALID_PREFIX + loginInfo.getId() + "_" + date.getTime() ,"" ,MAIL_CODE_INVALIDATE_TIME);
+//        redisUtils.set(CACHE_MAIL_VALID_PREFIX + loginInfo.getId() + "_" + date.getTime() ,"" ,MAIL_CODE_INVALIDATE_TIME);
 
     }
 
@@ -84,4 +80,10 @@ public class RegisterManagerImpl implements RegisterManager {
         return loginInfoService.selectByQuery(query).stream().findFirst().orElse(null);
     }
 
+    @Override
+    public LoginInfo selectByEmail(String email) {
+        LoginInfoQuery query = new LoginInfoQuery();
+        query.setEmail(email);
+        return loginInfoService.selectByQuery(query).stream().findFirst().orElse(null);
+    }
 }
