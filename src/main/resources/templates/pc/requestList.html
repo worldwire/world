@@ -19,13 +19,6 @@
                 <li onclick="selectService('1')">服务</li>
                 <li onclick="selectService('2')">需求</li>
             </ul>
-        <#--<br/>-->
-        <#--<ul class="contentBox-choose1">-->
-        <#--<li class="li-1">需求寻找</li>-->
-        <#--&lt;#&ndash;<li onclick="selectType('2','0')">全部</li>&ndash;&gt;-->
-        <#--<li onclick="selectType('2','1')">个人需求</li>-->
-        <#--<li onclick="selectType('2','2')">公司需求</li>-->
-        <#--</ul>-->
         </div>
         <div class="contentBox-body">
             <div class="layui-carousel" id="contentBox-body-list1" lay-filter="contentBox-body-list1">
@@ -102,6 +95,13 @@
                                     </#list>
                                 </#if>
                     </div>
+                    <div class="leftbtn">
+                        <i class="iconfont">&#xe68a;</i>
+                    </div>
+                    <div class="rightbtn">
+                        <i class="iconfont">&#xe6c6;</i>
+                    </div>
+                </div>
                 </div>
             </div>
             <div class="layui-carousel" id="contentBox-body-list2" lay-filter="contentBox-body-list2">
@@ -148,13 +148,15 @@
                                             </div>
                                             <div class="list-style-specialty">
                                                 <div class="specialty-label-box">
-                                                    <#list enterprise.keyWord?split(";") as key>
-                                                        <#if key_index lt 4>
-                                                            <div class="specialty-label specialty-label-style">
-                                                                ${key}
-                                                            </div>
-                                                        </#if>
-                                                    </#list>
+                                                    <#if enterprise.keyWord??>
+                                                        <#list enterprise.keyWord?split(";") as key>
+                                                            <#if key_index lt 4>
+                                                                <div class="specialty-label specialty-label-style">
+                                                                    ${key}
+                                                                </div>
+                                                            </#if>
+                                                        </#list>
+                                                    </#if>
                                                 </div>
                                             </div>
                                             <div class="list-style-PerTitle">
@@ -179,7 +181,13 @@
                                 </#if>
                     </div>
                 </div>
-
+                <div class="leftbtn">
+                    <i class="iconfont">&#xe68a;</i>
+                </div>
+                <div class="rightbtn">
+                    <i class="iconfont">&#xe6c6;</i>
+                </div>
+            </div>
             </div>
 
         </div>
@@ -199,41 +207,10 @@
                 , carousel = layui.carousel
                 , $ = layui.jquery;
 
-        //建造实例
-        carousel.render({
-            elem: '#contentBox-body-list1'
-            , width: '1077px' //设置容器宽度
-            , height: "604px" //高度
-            , arrow: 'always' //始终显示箭头
-            //,anim: 'updown' //切换动画方式
-            , autoplay: false
-            , indicator: "none"
-        });
-        carousel.render({
-            elem: '#contentBox-body-list2'
-            , width: '1077px' //设置容器宽度
-            , height: "604px" //高度
-            , arrow: 'always' //始终显示箭头
-            //,anim: 'updown' //切换动画方式
-            , autoplay: false
-            , indicator: "none"
-        });
         $(".contentBox-choose1 li").click(function () {
             $(this).addClass("li-selected").siblings().removeClass("li-selected")
         });
-        carousel.on('change(contentBox-body-list1)', function (obj) {
 
-            $("#contentBox-body-list1 button").eq(0).show();
-            $("#contentBox-body-list1 button").eq(1).show();
-
-        });
-
-        carousel.on('change(contentBox-body-list2)', function (obj) {
-
-            $("#contentBox-body-list2 button").eq(0).show();
-            $("#contentBox-body-list2 button").eq(1).show();
-
-        });
         window.selectService = function (requestType) {
             var key = getQueryString("key");
             if (!!key) {
@@ -375,7 +352,6 @@
                 }
             });
         }
-
     })
 </script>
 </html>
