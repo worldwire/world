@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>需求大厅</title>
+    <link rel="stylesheet" type="text/css" href="/css/demandHall.css"/>
+
+    <#include "../public/common.html" encoding="utf-8">
+        </head>
+<body>
+<#include "../public/head.html" encoding="utf-8">
+    <#include "../public/navigator.html" encoding="utf-8">
+        <div class="content">
+            <div class="contentBox">
+                <div class="contentBox-choose">
+                    <ul class="contentBox-choose1">
+                        <li class="li-1">服务提供</li>
+                        <li onclick="selectService('0')">全部</li>
+                        <li onclick="selectService('1')">服务</li>
+                        <li onclick="selectService('2')">需求</li>
+                    </ul>
+                </div>
+                <div class="contentBox-body">
+                    <div class="layui-carousel" id="contentBox-body-list1" lay-filter="contentBox-body-list1">
+                        <div carousel-item style="background: #FFFFFF;">
+                            <!--个人第一页-->
+                            <div class="carousel-item" style="width: 1077px;">
+                                <#if personalVo??&&personalVo.list??>
+                                    <#list personalVo.list as personal>
+                                        <div class="list-style">
+                                            <div class="list-style-title">
+                                                个人
+                                                <#if personal.requestType.code == 1>服务
+                                                    <#else>需求
+                                                </#if>
+                                                <img class="list-style-title-img1" src="/images/demandHall1.png"/>
+                                                <div class="list-style-title-img2">
+                                                    <img src="/images/demandHall2.png"/>
+                                                </div>
+                                            </div>
+                                            <div class="list-style-headImg">
+                                                <img src="${personal.userInfo.showImg!''}"/>
+                                            </div>
+                                            <div class="list-style-name">
+                                                ${personal.userInfo.nickName!''}
+                                            </div>
+                                            <div class="list-style-explain">
+                                                <#if personal.requestType.code == 1>我能提供国际人才或资源
+                                                    <#else>我要找国际人才或资源
+                                                </#if>
+                                            </div>
+                                            <div class="list-style-place">
+                                                现所在地
+                                                <span class="list-style-place-span">
+													<#if personal.userInfo??>
+                                                        ${personal.userInfo.localAddr!''}
+                                                    <#else>
+														未知
+                                                    </#if>
+                                                </span>
+                                                <div class="list-style-place-img">
+                                                    <img src="/images/demandHall2.png"/>
+                                                </div>
+                                            </div>
+                                            <div class="list-style-specialty">
+                                                <div class="specialty-label-box">
+                                                    <#if personal.keyWord??>
+                                                        <#list personal.keyWord?split(";") as key>
+                                                            <#if key_index lt 4>
+                                                                <div class="specialty-label specialty-label-style">
+                                                                    ${key}
+                                                                </div>
+                                                            </#if>
+                                                        </#list>
+                                                    </#if>
+                                                </div>
+
+                                            </div>
+                                            <div class="list-style-PerTitle">
+                                                ${personal.title!''}
+                                            </div>
+                                            <div class="list-style-PerContent">
+                                                ${personal.content!''}
+                                            </div>
+                                            <div class="list-style-details">
+                                                <a href="/request/detail?id=${personal.id}"> 查看详情</a>
+                                            </div>
+                                            <div class="list-style-viewtime">
+                                                <i class="iconfont i-view"> &#xe60d;</i>
+                                                <span class="span-view">${personal.viewCount!'0'}</span>
+                                                <i class="iconfont i-times">&#xe75f;</i>
+                                                <span class="span-times"><#if personal.createTime??>${personal.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span>
+                                            </div>
+                                        </div>
+                                    </#list>
+                                </#if>
+                            </div>
+                            <div class="leftbtn">
+                                <i class="iconfont">&#xe68a;</i>
+                            </div>
+                            <div class="rightbtn">
+                                <i class="iconfont">&#xe6c6;</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-carousel" id="contentBox-body-list2" lay-filter="contentBox-body-list2">
+
+                    <div carousel-item style="background: #FFFFFF;">
+                        <div class="carousel-item" style="width: 1077px;">
+                            <#if enterpriseVo??&&enterpriseVo.list??>
+                                <#list enterpriseVo.list as enterprise>
+                                    <div class="list-style">
+                                        <div class="list-style-1">
+                                            公司
+                                            <#if enterprise.requestType.code == 1>服务
+                                                <#else>需求
+                                            </#if>
+                                            <img class="list-style-1-img1" src="/images/demandHall1.png"/>
+                                            <div class="list-style-1-img2">
+                                                <img src="/images/demandHall2.png"/>
+                                            </div>
+                                        </div>
+                                        <div class="list-style-headImg">
+                                            <img src="${enterprise.userInfo.showImg!''}"/>
+                                        </div>
+                                        <div class="list-style-name">
+                                            ${enterprise.userInfo.companyName!''}
+                                        </div>
+                                        <div class="list-style-explain">
+                                            ${enterprise.requestType.code}
+                                            <#if enterprise.requestType.code == 1>我能提供国际人才或资源
+                                                <#else>我要找国际人才或资源
+                                            </#if>
+                                        </div>
+                                        <div class="list-style-place">
+                                            现所在地
+                                            <span class="list-style-place-span">
+													<#if enterprise.userInfo??>
+                                                        ${enterprise.userInfo.companyAddr!''}
+                                                    <#else>
+														未知
+                                                    </#if>
+                                                </span>
+                                            <div class="list-style-place-img">
+                                                <img src="/images/demandHall2.png"/>
+                                            </div>
+                                        </div>
+                                        <div class="list-style-specialty">
+                                            <div class="specialty-label-box">
+                                                <#if enterprise.keyWord??>
+                                                    <#list enterprise.keyWord?split(";") as key>
+                                                        <#if key_index lt 4>
+                                                            <div class="specialty-label specialty-label-style">
+                                                                ${key}
+                                                            </div>
+                                                        </#if>
+                                                    </#list>
+                                                </#if>
+                                            </div>
+                                        </div>
+                                        <div class="list-style-PerTitle">
+                                            ${enterprise.title!''}
+                                        </div>
+                                        <div class="list-style-PerContent">
+                                            ${enterprise.content!''}
+                                        </div>
+                                        <div class="list-style-details">
+                                            <a href="/request/detail?id=${enterprise.id}"> <a
+                                                    href="/request/detail?id=${enterprise.id}"> 查看详情</a></a>
+
+                                        </div>
+                                        <div class="list-style-viewtime">
+                                            <i class="iconfont i-view"> &#xe60d;</i>
+                                            <span class="span-view">${enterprise.viewCount!'0'}</span>
+                                            <i class="iconfont i-times">&#xe75f;</i>
+                                            <span class="span-times"><#if enterprise.createTime??>${enterprise.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span>
+                                        </div>
+                                    </div>
+                                </#list>
+                            </#if>
+                        </div>
+                    </div>
+                    <div class="leftbtn">
+                        <i class="iconfont">&#xe68a;</i>
+                    </div>
+                    <div class="rightbtn">
+                        <i class="iconfont">&#xe6c6;</i>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+        </div>
+        <#include "../public/foot.html" encoding="utf-8">
+
+</body>
+
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'carousel'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , carousel = layui.carousel
+            , $ = layui.jquery;
+
+        $(".contentBox-choose1 li").click(function () {
+            $(this).addClass("li-selected").siblings().removeClass("li-selected")
+        });
+
+        window.selectService = function (requestType) {
+            var key = getQueryString("key");
+            if (!!key) {
+                window.location.href = "/request/list/0/" + requestType + "/4/1.html?key=" + key;
+            } else {
+                window.location.href = "/request/list/0/" + requestType + "/4/1.html";
+            }
+
+        }
+        window.selectType = function (requestType, userType) {
+            $.ajax({
+                type: "POST",
+                url: "/request/list/search",
+                data: {
+                    userType: userType,
+                    requestType: requestType,
+                    pageSize: 4,
+                    pageNo: 1,
+                    key: getQueryString("key")
+                },
+                dataType: "json",
+                success: function (data) {
+
+                    if (userType == 1) { //个人
+                        $("#contentBox-body-list1 .carousel-item").html('');
+                        var html = "";
+                        for (var i = 0; i < data.list.length; i++) {
+                            var item = data.list[i];
+                            html += '<div class="list-style">';
+                            html += '<div class="list-style-title">';
+                            if (userType == 1) {
+                                html += "个人";
+                            } else {
+                                html += "公司";
+                            }
+                            if (item.requestType.code == 1) {
+                                html += '服务';
+                            } else {
+                                html += '需求';
+                            }
+                            html += '<img class="list-style-title-img1" src="/images/demandHall1.png"/>';
+                            html += '<div class="list-style-title-img2"><img src="/images/demandHall2.png"/></div>';
+                            html += '</div>';
+                            html += '<div class="list-style-headImg"><img src="' + item.userInfo.showImg + '"/></div>';
+                            html += '<div class="list-style-name">' + item.userInfo.nickName + '</div>';
+                            html += '<div class="list-style-explain">';
+                            if (item.requestType.code == 1) {
+                                html += '我能提供国际人才或资源';
+                            } else {
+                                html += '我要找国际人才或资源';
+                            }
+                            html += '</div>';
+                            html += '<div class="list-style-place">现所在地<span class="list-style-place-span">';
+                            html += (!!item.userInfo.localAddr ? item.userInfo.localAddr : '未知');
+                            html += '</span><div class="list-style-place-img"><img src="/images/demandHall2.png"/></div></div>';
+                            html += '<div class="list-style-specialty"><div class="specialty-label-box">';
+                            if (!!item.keyWord) {
+                                var keys = item.keyWord.split(";");
+                                for (var j = 0; j < keys.length; j++) {
+                                    if (j < 4) {
+                                        html += '<div class="specialty-label specialty-label-style">' + keys[i] + '</div>';
+                                    }
+
+                                }
+                            }
+                            html += '</div>\n\n</div>';
+                            html += '<div class="list-style-PerTitle">' + item.title + '</div>';
+                            html += '<div class="list-style-PerContent">' + item.content + '</div>';
+                            html += '<div class="list-style-details"><a href="/request/detail?id=' + item.id + '"> 查看详情</a></div>';
+                            html += '<div class="list-style-viewtime"><i class="iconfont i-view"> &#xe60d;</i>';
+                            html += '<span class="span-view">' + item.viewCount + '</span>';
+                            html += '<i class="iconfont i-times">&#xe75f;</i>';
+                            html += '<span class="span-times">' + timeTransfer(item.createTime) + '</span>';
+                            html += '</div>';
+                            html += '</div>';
+
+                        }
+                        $("#contentBox-body-list1 .carousel-item").append(html);
+
+                    } else {
+                        $("#contentBox-body-list2 .carousel-item").html('');
+                        var html = "";
+                        for (var i = 0; i < data.list.length; i++) {
+                            var item = data.list[i];
+                            html += '<div class="list-style">';
+                            html += '<div class="list-style-1">';
+                            if (userType == 1) {
+                                html += "个人";
+                            } else {
+                                html += "公司";
+                            }
+                            if (item.requestType.code == 1) {
+                                html += '服务';
+                            } else {
+                                html += '需求';
+                            }
+                            html += '<img class="list-style-1-img1" src="/images/demandHall1.png"/>';
+                            html += '<div class="list-style-1-img2"><img src="/images/demandHall2.png"/></div>';
+                            html += '</div>';
+                            html += '<div class="list-style-headImg"><img src="' + item.userInfo.showImg + '"/></div>';
+                            html += '<div class="list-style-name">' + item.userInfo.nickName + '</div>';
+                            html += '<div class="list-style-explain">';
+                            if (item.requestType.code == 1) {
+                                html += '我能提供国际人才或资源';
+                            } else {
+                                html += '我要找国际人才或资源';
+                            }
+                            html += '</div>';
+                            html += '<div class="list-style-place">现所在地<span class="list-style-place-span">';
+                            html += (!!item.userInfo.localAddr ? item.userInfo.localAddr : '未知');
+                            html += '</span><div class="list-style-place-img"><img src="/images/demandHall2.png"/></div></div>';
+                            html += '<div class="list-style-specialty"><div class="specialty-label-box">';
+                            if (!!item.keyWord) {
+                                var keys = item.keyWord.split(";");
+                                for (var j = 0; j < keys.length; j++) {
+                                    if (j < 4) {
+                                        html += '<div class="specialty-label specialty-label-style">' + keys[i] + '</div>';
+                                    }
+
+                                }
+                            }
+                            html += '</div>\n\n</div>';
+                            html += '<div class="list-style-PerTitle">' + item.title + '</div>';
+                            html += '<div class="list-style-PerContent">' + item.content + '</div>';
+                            html += '<div class="list-style-details"><a href="/request/detail?id=' + item.id + '"> 查看详情</a></div>';
+                            html += '<div class="list-style-viewtime"><i class="iconfont i-view"> &#xe60d;</i>';
+                            html += '<span class="span-view">' + item.viewCount + '</span>';
+                            html += '<i class="iconfont i-times">&#xe75f;</i>';
+                            html += '<span class="span-times">' + timeTransfer(item.createTime) + '</span>';
+                            html += '</div>';
+                            html += '</div>';
+
+                        }
+                        $("#contentBox-body-list2 .carousel-item").append(html);
+                    }
+                },
+                error: function (data) {
+                    layer.message("请求异常，请稍后重试!")
+                }
+            });
+        }
+    })
+</script>
+</html>
