@@ -5,7 +5,7 @@
     <title>需求大厅</title>
     <link rel="stylesheet" type="text/css" href="../css/demandHall.css"/>
     <#include "../public/common.html" encoding="utf-8">
-</head>
+        </head>
 <body>
 <!--头部-->
 <#include "../public/head.html" encoding="utf-8">
@@ -29,71 +29,69 @@
                             <div class="carousel-item">
                                 <#if personalVo??&&personalVo.list??>
                                     <#list personalVo.list as personal>
-                                <div class="list-style">
-                                    <div class="list-style-title">
-                                        个人
-                                        <#if personal.requestType.code == 1>服务
-                                            <#else>需求
-                                        </#if>
-                                        <img class="list-style-title-img1" src="../img/demandHall1.png"/>
-                                        <div class="list-style-title-img2">
-                                            <img src="../img/demandHall2.png"/>
-                                        </div>
-                                    </div>
-                                    <div class="list-style-headImg">
-                                        <img src="${personal.userInfo.showImg!''}"/>
-                                    </div>
-                                    <div class="list-style-name">
-                                        ${personal.userInfo.nickName!''}
-                                    </div>
-                                    <div class="list-style-explain">
-                                        <#if personal.requestType.code == 1>我能提供国际人才或资源
-                                            <#else>我要找国际人才或资源
-                                        </#if>
-                                    </div>
-                                    <div class="list-style-place">
-                                        现所在地
-                                        <span class="list-style-place-span">
-                                            <#if personal.userInfo??>
-                                                        ${personal.userInfo.localAddr!''}
-                                                    <#else>
-														未知
+                                        <div class="list-style">
+                                            <div class="list-style-title">
+                                                个人<#if personal.requestType.code == 1>服务<#else>需求</#if>
+                                                <img class="list-style-title-img1" src="/images/demandHall1.png"/>
+                                                <div class="list-style-title-img2">
+                                                    <img src="/images/demandHall2.png"/>
+                                                </div>
+                                            </div>
+                                            <div class="list-style-headImg">
+                                                <img src="${personal.userInfo.showImg!''}"/>
+                                            </div>
+                                            <div class="list-style-name">
+                                                ${personal.userInfo.nickName!''}
+                                            </div>
+                                            <div class="list-style-explain">
+                                                <#if personal.requestType.code == 1>
+                                                    我能提供国际人才或资源
+                                                    <#else>我要找国际人才或资源
+                                                </#if>
+                                            </div>
+                                            <div class="list-style-place">
+                                                现所在地
+                                                <span class="list-style-place-span">
+                                                    <#if personal.userInfo??>
+                                                                ${personal.userInfo.localAddr!''}
+                                                            <#else>
+                                                                未知
                                                     </#if>
-                                        </span>
-                                        <div class="list-style-place-img">
-                                            <img src="../img/demandHall2.png"/>
-                                        </div>
-                                    </div>
-                                    <div class="list-style-specialty">
-                                        <div class="specialty-label-box">
-                                            <#if personal.keyWord??>
-                                                <#list personal.keyWord?split(";") as key>
-                                                    <#if key_index lt 4>
-                                                        <div class="specialty-label specialty-label-style">
-                                                            ${key}
-                                                        </div>
+                                                </span>
+                                                <div class="list-style-place-img">
+                                                    <img src="/images/demandHall2.png"/>
+                                                </div>
+                                            </div>
+                                            <div class="list-style-specialty">
+                                                <div class="specialty-label-box">
+                                                    <#if personal.keyWord??>
+                                                        <#list personal.keyWord?split(";") as key>
+                                                            <#if key_index lt 4>
+                                                                <div class="specialty-label specialty-label-style">
+                                                                    ${key}
+                                                                </div>
+                                                            </#if>
+                                                        </#list>
                                                     </#if>
-                                                </#list>
-                                            </#if>
+                                                </div>
+                                            </div>
+                                            <div class="list-style-PerTitle">
+                                                ${personal.title!''}
+                                            </div>
+                                            <div class="list-style-PerContent">
+                                                ${personal.content!''}
+                                            </div>
+                                            <div class="list-style-details">
+                                                <a href="/request/detail?id=${personal.id}"> <a
+                                                        href="/request/detail?id=${personal.id}">查看详情</a></a>
+                                            </div>
+                                            <div class="list-style-viewtime">
+                                                <i class="iconfont i-view"> &#xe60d;</i>
+                                                <span class="span-view">${personal.viewCount!'0'}</span>
+                                                <i class="iconfont i-times">&#xe75f;</i>
+                                                <span class="span-times"><#if personal.createTime??>${personal.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="list-style-PerTitle">
-                                        ${enterprise.title!''}
-                                    </div>
-                                    <div class="list-style-PerContent">
-                                        ${enterprise.content!''}
-                                    </div>
-                                    <div class="list-style-details">
-                                        <a href="/request/detail?id=${enterprise.id}"> <a
-                                                href="/request/detail?id=${enterprise.id}"> 查看详情</a></a>
-                                    </div>
-                                    <div class="list-style-viewtime">
-                                        <i class="iconfont i-view"> &#xe60d;</i>
-                                        <span class="span-view">${enterprise.viewCount!'0'}</span>
-                                        <i class="iconfont i-times">&#xe75f;</i>
-                                        <span class="span-times"><#if enterprise.createTime??>${enterprise.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span>
-                                    </div>
-                                </div>
                                     </#list>
                                 </#if>
                             </div>
@@ -113,227 +111,69 @@
                             <div class="carousel-item">
                                 <#if enterpriseVo??&&enterpriseVo.list??>
                                     <#list enterpriseVo.list as enterprise>
-                                <div class="list-style">
-                                    <div class="list-style-1">
-                                        公司
-                                        <#if enterprise.requestType.code == 1>服务
-                                            <#else>需求
-                                        </#if>
-                                        <img class="list-style-1-img1" src="../img/demandHall1.png"/>
-                                        <div class="list-style-1-img2">
-                                            <img src="../img/demandHall2.png"/>
-                                        </div>
-                                    </div>
-                                    <div class="list-style-headImg">
-                                        <img src="${enterprise.userInfo.showImg!''}"/>
-                                    </div>
-                                    <div class="list-style-name">
-                                        ${enterprise.userInfo.companyName!''}
-                                    </div>
-                                    <div class="list-style-explain">
-                                        ${enterprise.requestType.code}
-                                        <#if enterprise.requestType.code == 1>我能提供国际人才或资源
-                                            <#else>我要找国际人才或资源
-                                        </#if>
-                                    </div>
-                                    <div class="list-style-place">
-                                        现所在地
-                                        <span class="list-style-place-span">
-                                            <#if enterprise.userInfo??>
-                                                        ${enterprise.userInfo.companyAddr!''}
-                                                    <#else>
-														未知
+                                        <div class="list-style">
+                                            <div class="list-style-1">
+                                                公司<#if enterprise.requestType.code == 1>服务<#else>需求</#if>
+                                                <img class="list-style-1-img1" src="/images/demandHall1.png"/>
+                                                <div class="list-style-1-img2">
+                                                    <img src="/images/demandHall2.png"/>
+                                                </div>
+                                            </div>
+                                            <div class="list-style-headImg">
+                                                <img src="${enterprise.userInfo.showImg!''}"/>
+                                            </div>
+                                            <div class="list-style-name">
+                                                ${enterprise.userInfo.companyName!''}
+                                            </div>
+                                            <div class="list-style-explain">
+                                                ${enterprise.requestType.code}
+                                                <#if enterprise.requestType.code == 1>
+                                                    我能提供国际人才或资源
+                                                    <#else>我要找国际人才或资源
+                                                </#if>
+                                            </div>
+                                            <div class="list-style-place">
+                                                现所在地
+                                                <span class="list-style-place-span">
+                                                    <#if enterprise.userInfo??>${enterprise.userInfo.companyAddr!''}<#else>未知</#if>
+                                                </span>
+                                                <div class="list-style-place-img">
+                                                    <img src="/images/demandHall2.png"/>
+                                                </div>
+                                            </div>
+                                            <div class="list-style-specialty">
+                                                <div class="specialty-label-box">
+                                                    <#if enterprise.keyWord??>
+                                                        <#list enterprise.keyWord?split(";") as key>
+                                                            <#if key_index lt 4>
+                                                                <div class="specialty-label specialty-label-style">
+                                                                    ${key}
+                                                                </div>
+                                                            </#if>
+                                                        </#list>
                                                     </#if>
-                                        </span>
-                                        <div class="list-style-place-img">
-                                            <img src="../img/demandHall2.png"/>
-                                        </div>
-                                    </div>
-                                    <div class="list-style-specialty">
-                                        <div class="specialty-label-box">
-                                            <#if enterprise.keyWord??>
-                                                <#list enterprise.keyWord?split(";") as key>
-                                                    <#if key_index lt 4>
-                                                        <div class="specialty-label specialty-label-style">
-                                                            ${key}
-                                                        </div>
-                                                    </#if>
-                                                </#list>
-                                            </#if>
-                                        </div>
-                                    </div>
-                                    <div class="list-style-PerTitle">
-                                        ${enterprise.title!''}
-                                    </div>
-                                    <div class="list-style-PerContent">
-                                        ${enterprise.content!''}
-                                    </div>
-                                    <div class="list-style-details">
-                                        <a href="/request/detail?id=${enterprise.id}"> <a
-                                                href="/request/detail?id=${enterprise.id}"> 查看详情</a></a>
-                                    </div>
-                                    <div class="list-style-viewtime">
-                                        <i class="iconfont i-view"> &#xe60d;</i>
-                                        <span class="span-view">${enterprise.viewCount!'0'}</span>
-                                        <i class="iconfont i-times">&#xe75f;</i>
-                                        <span class="span-times"><#if enterprise.createTime??>${enterprise.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span>
-                                    </div>
-                                </div>
-                                <div class="list-style">
-                                    <div class="list-style-1">
-                                        公司需求
-                                        <img class="list-style-1-img1" src="../img/demandHall1.png"/>
-                                        <div class="list-style-1-img2">
-                                            <img src="../img/demandHall2.png"/>
-                                        </div>
-                                    </div>
-                                    <div class="list-style-headImg">
-                                        <img src="../img/demandHall3.png"/>
-                                    </div>
-                                    <div class="list-style-name">
-                                        某某某有限公司
-                                    </div>
-                                    <div class="list-style-explain">
-                                        我要找国际人才或资源
-                                    </div>
-                                    <div class="list-style-place">
-                                        现所在地
-                                        <span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-                                        <div class="list-style-place-img">
-                                            <img src="../img/demandHall2.png"/>
-                                        </div>
-                                    </div>
-                                    <div class="list-style-specialty">
-                                        <div class="specialty-label-box">
-                                            <div class="specialty-label specialty-label-style">
-                                                钢琴
+                                                </div>
                                             </div>
-                                            <div class="specialty-label specialty-label-style"
-                                                 style="margin-left: 15px;">
-                                                LOGO设计
+                                            <div class="list-style-PerTitle">
+                                                ${enterprise.title!''}
+                                            </div>
+                                            <div class="list-style-PerContent">
+                                                ${enterprise.content!''}
+                                            </div>
+                                            <div class="list-style-details">
+                                                <a href="/request/detail?id=${enterprise.id}"> <a
+                                                        href="/request/detail?id=${enterprise.id}">查看详情</a></a>
+                                            </div>
+                                            <div class="list-style-viewtime">
+                                                <i class="iconfont i-view"> &#xe60d;</i>
+                                                <span class="span-view">${enterprise.viewCount!'0'}</span>
+                                                <i class="iconfont i-times">&#xe75f;</i>
+                                                <span class="span-times"><#if enterprise.createTime??>${enterprise.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="list-style-PerTitle">
-                                        我提供服务产品设计服务，这个……
-                                    </div>
-                                    <div class="list-style-PerContent">
-                                        几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-                                    </div>
-                                    <div class="list-style-details">
-                                        查看详情
-                                    </div>
-                                    <div class="list-style-viewtime">
-                                        <i class="iconfont i-view"> &#xe60d;</i>
-                                        <span class="span-view">13021</span>
-                                        <i class="iconfont i-times">&#xe75f;</i>
-                                        <span class="span-times">2018-03-31 23:59:59</span>
-                                    </div>
-                                </div>
-                                <div class="list-style">
-                                    <div class="list-style-1">
-                                        公司需求
-                                        <img class="list-style-1-img1" src="../img/demandHall1.png"/>
-                                        <div class="list-style-1-img2">
-                                            <img src="../img/demandHall2.png"/>
-                                        </div>
-                                    </div>
-                                    <div class="list-style-headImg">
-                                        <img src="../img/demandHall3.png"/>
-                                    </div>
-                                    <div class="list-style-name">
-                                        某某某有限公司
-                                    </div>
-                                    <div class="list-style-explain">
-                                        我要找国际人才或资源
-                                    </div>
-                                    <div class="list-style-place">
-                                        现所在地
-                                        <span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-                                        <div class="list-style-place-img">
-                                            <img src="../img/demandHall2.png"/>
-                                        </div>
-                                    </div>
-                                    <div class="list-style-specialty">
-                                        <div class="specialty-label-box">
-                                            <div class="specialty-label specialty-label-style">
-                                                钢琴
-                                            </div>
-                                            <div class="specialty-label specialty-label-style"
-                                                 style="margin-left: 15px;">
-                                                LOGO设计
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list-style-PerTitle">
-                                        我提供服务产品设计服务，这个……
-                                    </div>
-                                    <div class="list-style-PerContent">
-                                        几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-                                    </div>
-                                    <div class="list-style-details">
-                                        查看详情
-                                    </div>
-                                    <div class="list-style-viewtime">
-                                        <i class="iconfont i-view"> &#xe60d;</i>
-                                        <span class="span-view">13021</span>
-                                        <i class="iconfont i-times">&#xe75f;</i>
-                                        <span class="span-times">2018-03-31 23:59:59</span>
-                                    </div>
-                                </div>
-                                <div class="list-style">
-                                    <div class="list-style-1">
-                                        公司需求
-                                        <img class="list-style-1-img1" src="../img/demandHall1.png"/>
-                                        <div class="list-style-1-img2">
-                                            <img src="../img/demandHall2.png"/>
-                                        </div>
-                                    </div>
-                                    <div class="list-style-headImg">
-                                        <img src="../img/demandHall3.png"/>
-                                    </div>
-                                    <div class="list-style-name">
-                                        某某某有限公司
-                                    </div>
-                                    <div class="list-style-explain">
-                                        我要找国际人才或资源
-                                    </div>
-                                    <div class="list-style-place">
-                                        现所在地
-                                        <span class="list-style-place-span">湖南&nbsp;&nbsp;&nbsp;长沙</span>
-                                        <div class="list-style-place-img">
-                                            <img src="../img/demandHall2.png"/>
-                                        </div>
-                                    </div>
-                                    <div class="list-style-specialty">
-                                        <div class="specialty-label-box">
-                                            <div class="specialty-label specialty-label-style">
-                                                钢琴
-                                            </div>
-                                            <div class="specialty-label specialty-label-style"
-                                                 style="margin-left: 15px;">
-                                                LOGO设计
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list-style-PerTitle">
-                                        我提供服务产品设计服务，这个……
-                                    </div>
-                                    <div class="list-style-PerContent">
-                                        几乎每一个人对"服务"一词都不会陌生，但如果要回答"什么是服务"，相信没有几个人能说得清楚。 " 服务"也和"管理"一样，很多
-                                    </div>
-                                    <div class="list-style-details">
-                                        查看详情
-                                    </div>
-                                    <div class="list-style-viewtime">
-                                        <i class="iconfont i-view"> &#xe60d;</i>
-                                        <span class="span-view">13021</span>
-                                        <i class="iconfont i-times">&#xe75f;</i>
-                                        <span class="span-times">2018-03-31 23:59:59</span>
-                                    </div>
-                                </div>
+                                    </#list>
+                                </#if>
                             </div>
-
                         </div>
 
                         <div class="leftbtn">
