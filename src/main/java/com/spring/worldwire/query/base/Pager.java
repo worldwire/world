@@ -29,11 +29,11 @@ public class Pager {
     }
 
     public void setPageStart(int pageStart) {
-        this.pageStart = pageNo == null ? null : (pageSize - 1) * pageNo;
+        this.pageStart = pageStart;
     }
 
     public Integer getPageStart() {
-        return pageStart;
+        return pageNo == null ? null : (pageNo - 1) * pageSize;
     }
 
     public int getPageCount() {

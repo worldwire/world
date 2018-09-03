@@ -43,11 +43,14 @@
                 <div class="login-title">
                     <i></i><span>快捷登陆</span><i></i>
                     <div>
-                        <a href="###"><i class="iconfont" style="color: #8dc51c" onclick="redirectClick('/login/wechat/auth')">&#xe6ed;</i></a>
+                        <a href="###"><i class="iconfont" style="color: #8dc51c"
+                                         onclick="redirectClick('/login/wechat/auth')">&#xe6ed;</i></a>
                         <a href="###"><i class="iconfont" style="color: #62a4ee">&#xe64d;</i></a>
-                        <a href="###"><i class="iconfont" style="color: #ec6061" onclick="redirectClick('/login/weibo/auth')">&#xe63c;</i></a>
+                        <a href="###"><i class="iconfont" style="color: #ec6061"
+                                         onclick="redirectClick('/login/weibo/auth')">&#xe63c;</i></a>
                         <a href="###"><i class="iconfont" style="color: #667eba">&#xe627;</i></a>
-                        <a href="###"><i class="iconfont" style="color: #3aa6d7" onclick="redirectClick('/login/linkedin/auth')">&#xe6c1;</i></a>
+                        <a href="###"><i class="iconfont" style="color: #3aa6d7"
+                                         onclick="redirectClick('/login/linkedin/auth')">&#xe6c1;</i></a>
                         <a href="###"><i class="iconfont" style="color: #5fd4ff">&#xe60a;</i></a>
                         <!--<a href="####"></a>-->
                         <!--<a href="####" style="background-position: -50px 0"></a>-->
@@ -68,13 +71,13 @@
     <#include "../public/foot.html" encoding="utf-8">
 </body>
 <script>
-    layui.use(['form', 'layedit', 'laydate','carousel'], function() {
+    layui.use(['form', 'layedit', 'laydate', 'carousel'], function () {
         var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , laydate = layui.laydate
-            , carousel = layui.carousel
-            , $ = layui.jquery;
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate
+                , carousel = layui.carousel
+                , $ = layui.jquery;
         var lastUrl = document.referrer;
         $(".nextBtn").click(function () {
             var em = $("[name=email]").val();
@@ -82,17 +85,17 @@
             $.ajax({
                 type: "POST",
                 url: "/login/ajaxLogin",
-                data: {email:em, password:psw},
+                data: {email: em, password: psw},
                 dataType: "json",
                 success: function (data) {
-                    if(data == null){
-                        $('.msg').show();
+                    if (data.code != 200) {
+                        layer.msg(data.desc);
                         return false;
                     }
-                    window.location.href = "/login/login?email="+em+"&password="+psw;
+                    window.location.href = "/login/login?email=" + em + "&password=" + psw;
                 },
                 error: function () {
-                    
+
                 }
             });
         });

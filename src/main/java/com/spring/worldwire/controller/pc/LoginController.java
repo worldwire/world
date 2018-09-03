@@ -5,6 +5,7 @@ import com.spring.worldwire.constants.Constants;
 import com.spring.worldwire.enums.StatusCodeEnum;
 import com.spring.worldwire.manager.LoginManager;
 import com.spring.worldwire.manager.ProductRequestManager;
+import com.spring.worldwire.model.LoginInfo;
 import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.result.ResponseResult;
 import com.spring.worldwire.service.LoginInfoService;
@@ -100,6 +101,10 @@ public class LoginController {
             UserInfo userInfo = loginManager.login(email, password, response);
             if (Objects.isNull(userInfo)) {
                 return new ResponseResult(null, StatusCodeEnum.EMPTY.getCode(), "用户名密码不正确");
+            }
+            LoginInfo loginInfo = loginInfoService.selectByPrimaryKey(userInfo.getLoginId());
+            if(Objects.isNull(loginInfo)||loginInfo.getStatus()==0){
+                return new ResponseResult(userInfo, StatusCodeEnum.SUCCESS.getCode(), "账号未激活，请登录邮箱激活");
             }
             return new ResponseResult(userInfo, StatusCodeEnum.SUCCESS.getCode(), "登陆成功");
         } catch (Exception e) {

@@ -1,5 +1,6 @@
 package com.spring.worldwire.enums;
 
+import com.alibaba.fastjson.JSONObject;
 import com.spring.worldwire.extent.INumericEnum;
 
 @SuppressWarnings("unused")
@@ -47,4 +48,5 @@ public enum RequestTypeEnum implements INumericEnum {
     public int getNumericValue() {
         return this.code;
     }
+
 }

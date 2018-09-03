@@ -6,32 +6,32 @@
     <link rel="stylesheet" type="text/css" href="/css/demandHall.css"/>
 
     <#include "../public/common.html" encoding="utf-8">
-        </head>
+</head>
 <body>
 <#include "../public/head.html" encoding="utf-8">
     <#include "../public/navigator.html" encoding="utf-8">
-        <div class="content">
-            <div class="contentBox">
-                <div class="contentBox-choose">
-                    <ul class="contentBox-choose1">
-                        <li class="li-1">服务提供</li>
-                        <li onclick="selectService('0')">全部</li>
-                        <li onclick="selectService('1')">服务</li>
-                        <li onclick="selectService('2')">需求</li>
-                    </ul>
-                </div>
-                <div class="contentBox-body">
-                    <div class="layui-carousel" id="contentBox-body-list1" lay-filter="contentBox-body-list1">
-                        <div carousel-item style="background: #FFFFFF;">
-                            <!--个人第一页-->
-                            <div class="carousel-item" style="width: 1077px;">
+<div class="content">
+    <div class="contentBox">
+        <div class="contentBox-choose">
+            <ul class="contentBox-choose1">
+                <li class="li-1">服务提供</li>
+                <li onclick="selectService('0')">全部</li>
+                <li onclick="selectService('1')">服务</li>
+                <li onclick="selectService('2')">需求</li>
+            </ul>
+        </div>
+        <div class="contentBox-body">
+            <div class="layui-carousel" id="contentBox-body-list1" lay-filter="contentBox-body-list1">
+                <div carousel-item style="background: #FFFFFF;">
+                    <!--个人第一页-->
+                    <div class="carousel-item" style="width: 1077px;">
                                 <#if personalVo??&&personalVo.list??>
                                     <#list personalVo.list as personal>
                                         <div class="list-style">
                                             <div class="list-style-title">
                                                 个人
                                                 <#if personal.requestType.code == 1>服务
-                                                    <#else>需求
+                                                <#else>需求
                                                 </#if>
                                                 <img class="list-style-title-img1" src="/images/demandHall1.png"/>
                                                 <div class="list-style-title-img2">
@@ -46,7 +46,7 @@
                                             </div>
                                             <div class="list-style-explain">
                                                 <#if personal.requestType.code == 1>我能提供国际人才或资源
-                                                    <#else>我要找国际人才或资源
+                                                <#else>我要找国际人才或资源
                                                 </#if>
                                             </div>
                                             <div class="list-style-place">
@@ -94,27 +94,27 @@
                                         </div>
                                     </#list>
                                 </#if>
-                            </div>
-                            <div class="leftbtn">
-                                <i class="iconfont">&#xe68a;</i>
-                            </div>
-                            <div class="rightbtn">
-                                <i class="iconfont">&#xe6c6;</i>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="leftbtn">
+                        <i class="iconfont">&#xe68a;</i>
+                    </div>
+                    <div class="rightbtn">
+                        <i class="iconfont">&#xe6c6;</i>
                     </div>
                 </div>
-                <div class="layui-carousel" id="contentBox-body-list2" lay-filter="contentBox-body-list2">
+            </div>
+        </div>
+        <div class="layui-carousel" id="contentBox-body-list2" lay-filter="contentBox-body-list2">
 
-                    <div carousel-item style="background: #FFFFFF;">
-                        <div class="carousel-item" style="width: 1077px;">
+            <div carousel-item style="background: #FFFFFF;">
+                <div class="carousel-item" style="width: 1077px;">
                             <#if enterpriseVo??&&enterpriseVo.list??>
                                 <#list enterpriseVo.list as enterprise>
                                     <div class="list-style">
                                         <div class="list-style-1">
                                             公司
                                             <#if enterprise.requestType.code == 1>服务
-                                                <#else>需求
+                                            <#else>需求
                                             </#if>
                                             <img class="list-style-1-img1" src="/images/demandHall1.png"/>
                                             <div class="list-style-1-img2">
@@ -130,7 +130,7 @@
                                         <div class="list-style-explain">
                                             ${enterprise.requestType.code}
                                             <#if enterprise.requestType.code == 1>我能提供国际人才或资源
-                                                <#else>我要找国际人才或资源
+                                            <#else>我要找国际人才或资源
                                             </#if>
                                         </div>
                                         <div class="list-style-place">
@@ -141,7 +141,7 @@
                                                     <#else>
 														未知
                                                     </#if>
-                                                </span>
+                                            </span>
                                             <div class="list-style-place-img">
                                                 <img src="/images/demandHall2.png"/>
                                             </div>
@@ -179,21 +179,21 @@
                                     </div>
                                 </#list>
                             </#if>
-                        </div>
-                    </div>
-                    <div class="leftbtn">
-                        <i class="iconfont">&#xe68a;</i>
-                    </div>
-                    <div class="rightbtn">
-                        <i class="iconfont">&#xe6c6;</i>
-                    </div>
                 </div>
             </div>
+            <div class="leftbtn">
+                <i class="iconfont">&#xe68a;</i>
+            </div>
+            <div class="rightbtn">
+                <i class="iconfont">&#xe6c6;</i>
+            </div>
+        </div>
+    </div>
 
-        </div>
+</div>
 
-        </div>
-        </div>
+</div>
+</div>
         <#include "../public/foot.html" encoding="utf-8">
 
 </body>
@@ -201,11 +201,11 @@
 <script>
     layui.use(['form', 'layedit', 'laydate', 'carousel'], function () {
         var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , laydate = layui.laydate
-            , carousel = layui.carousel
-            , $ = layui.jquery;
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate
+                , carousel = layui.carousel
+                , $ = layui.jquery;
 
         $(".contentBox-choose1 li").click(function () {
             $(this).addClass("li-selected").siblings().removeClass("li-selected")
@@ -302,7 +302,7 @@
                             } else {
                                 html += "公司";
                             }
-                            if (item.requestType.code == 1) {
+                            if (item.requestType == "SERVICE") {
                                 html += '服务';
                             } else {
                                 html += '需求';
@@ -313,7 +313,7 @@
                             html += '<div class="list-style-headImg"><img src="' + item.userInfo.showImg + '"/></div>';
                             html += '<div class="list-style-name">' + item.userInfo.nickName + '</div>';
                             html += '<div class="list-style-explain">';
-                            if (item.requestType.code == 1) {
+                            if (item.requestType == "SERVICE") {
                                 html += '我能提供国际人才或资源';
                             } else {
                                 html += '我要找国际人才或资源';

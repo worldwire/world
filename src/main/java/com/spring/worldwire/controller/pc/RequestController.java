@@ -56,6 +56,8 @@ public class RequestController {
 
         model.addAttribute("personalVo", personalVo);
         model.addAttribute("enterpriseVo", enterpriseVo);
+        model.addAttribute("requestType",requestType);
+        model.addAttribute("pageNo",pageNo);
 
         return "pc/requestList";
 
