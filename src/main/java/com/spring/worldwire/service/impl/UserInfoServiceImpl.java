@@ -44,4 +44,9 @@ public class UserInfoServiceImpl implements UserInfoService {
     public UserInfo selectSimpleById(long id) {
         return userInfoDao.selectSimpleById(id);
     }
+
+    @Override
+    public int updateByPrimaryKeySelective(UserInfo userInfo) {
+        return userInfoDao.updateByPrimaryKeySelective(userInfo);
+    }
 }
