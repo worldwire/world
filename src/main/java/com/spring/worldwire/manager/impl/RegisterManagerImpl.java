@@ -42,6 +42,7 @@ public class RegisterManagerImpl implements RegisterManager {
         loginInfoService.insert(loginInfo);
 
         UserInfo userInfo = new UserInfo();
+        userInfo.setNickName(userName);
         userInfo.setLoginId(loginInfo.getId());
         userInfo.setShowImg("/images/defaultHeadImg.png");
         userInfoService.insert(userInfo);
@@ -63,9 +64,9 @@ public class RegisterManagerImpl implements RegisterManager {
 
 
         Date date = new Date();
-        String url = Constants.MAIL_ADDRESS_PREFIX + "/" + loginInfo.getId() + "/" + date.getTime();
+        String url = Constants.MAIL_ACTIVE_USER_PREFIX + "/" + loginInfo.getId() + "/" + date.getTime();
         try {
-            MailUtils.sendSimpleMail(loginInfo.getEmail(), date, url);
+            MailUtils.sendActiveMail(loginInfo.getEmail(), date, url);
         } catch (Exception e) {
             throw new RuntimeException("mailSendError");
         }

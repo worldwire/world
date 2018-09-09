@@ -16,7 +16,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Controller
 @RequestMapping("/")
-public class IndexController {
+public class IndexController extends BaseController{
 
     @Autowired
     private ProductRequestService productRequestService;
@@ -42,6 +42,9 @@ public class IndexController {
 
         model.addAttribute("personalList", personalList);
         model.addAttribute("enterpriseList", enterpriseList);
+
+        navigateMessage(model);
+
         return "pc/index";
     }
 
