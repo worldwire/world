@@ -37,9 +37,19 @@ public class MailUtils {
         });
     }
 
-    public static void sendSimpleMail(String receiverEmail, Date date, String url) throws IOException, MessagingException {
+    public static void sendActiveMail(String receiverEmail, Date date, String url) throws IOException, MessagingException {
 
         String mailTemplate = SpringFileUtil.getFileStrFromResource(Constants.MAIL_SEND_TEMPLATE);
+
+        mailTemplate = mailTemplate.replaceAll("##URL##", url);
+
+        sendMail(receiverEmail, Constants.MAIL_SEND_TITLE, mailTemplate, null);
+
+    }
+
+    public static void sendResetPasswordMail(String receiverEmail, Date date, String url) throws IOException, MessagingException {
+
+        String mailTemplate = SpringFileUtil.getFileStrFromResource(Constants.MAIL_PASSWORD_TEMPLATE);
 
         mailTemplate = mailTemplate.replaceAll("##URL##", url);
 
@@ -63,7 +73,8 @@ public class MailUtils {
 
     /**
      * 构造邮件的主体部分
-     *K
+     * K
+     *
      * @param session
      * @param receiveMail
      * @param title
@@ -130,7 +141,7 @@ public class MailUtils {
     }
 
     public static void main(String[] args) throws IOException, MessagingException {
-        sendSimpleMail("luxun@jd.com", new Date(), "http://wwww.baidu.com");
+        sendActiveMail("luxun@jd.com", new Date(), "http://wwww.baidu.com");
     }
 
 }

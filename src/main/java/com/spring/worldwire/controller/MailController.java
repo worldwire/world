@@ -6,7 +6,6 @@ import com.spring.worldwire.service.LoginInfoService;
 import com.spring.worldwire.utils.MailUtils;
 import com.spring.worldwire.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,8 +30,8 @@ public class MailController {
         LoginInfo info = loginInfoService.selectByPrimaryKey(userId);
         try {
             Date date = new Date();
-            String url = Constants.MAIL_ADDRESS_PREFIX + "?timestamps=" + date.getTime() + "&userId=" + userId;
-            MailUtils.sendSimpleMail(info.getEmail(), date, url);
+            String url = Constants.MAIL_ACTIVE_USER_PREFIX + "?timestamps=" + date.getTime() + "&userId=" + userId;
+            MailUtils.sendActiveMail(info.getEmail(), date, url);
             redisUtils.set(Constants.CACHE_MAIL_VALID_PREFIX + userId + "_" + date.getTime() ,"" ,10 * 60 * 1000);
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,7 +46,7 @@ public class MailController {
         try {
             Date date = new Date();
             String url = wrapRegisterUrl(userId,date);
-            MailUtils.sendSimpleMail(info.getEmail(), date, url);
+            MailUtils.sendActiveMail(info.getEmail(), date, url);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (MessagingException e) {
@@ -57,7 +56,7 @@ public class MailController {
     }
 
     private String wrapRegisterUrl(Long userId,Date date){
-        String url = Constants.MAIL_ADDRESS_PREFIX + "?timestamps=" + date.getTime() + "&userId=" + userId;
+        String url = Constants.MAIL_ACTIVE_USER_PREFIX + "?timestamps=" + date.getTime() + "&userId=" + userId;
         redisUtils.set(Constants.CACHE_MAIL_VALID_PREFIX + userId + "_" + date.getTime() ,"" ,Constants.MAIL_CODE_INVALIDATE_TIME);
         return url;
     }

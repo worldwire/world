@@ -17,23 +17,24 @@
     <div class="layui-tab-content">
         <div class="layui-tab-item layui-show">
             <form class="layui-form layui-form-pane" action="">
+                <input type="hidden" name="data" value="${data}">
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <input class="layui-input" type="password" name="oldpass" placeholder="请输入原密码">
+                        <input class="layui-input" type="text" name="email" placeholder="请再输入一遍邮箱">
+                        <div class="bord-fa"></div>
+                        <i class="iconfont vercode">&#xe75a;</i>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <input class="layui-input" type="password" name="password" placeholder="请输入您的新密码">
                         <div class="bord-fa"></div>
                         <i class="iconfont vercode">&#xe673;</i>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <input class="layui-input" type="password" name="newpass" placeholder="请输入您的新密码">
-                        <div class="bord-fa"></div>
-                        <i class="iconfont vercode">&#xe673;</i>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                        <input class="layui-input" type="password" name="newpass2" placeholder="请再输入一遍密码">
+                        <input class="layui-input" type="password" name="password2" placeholder="请再输入一遍密码">
                         <div class="bord-fa"></div>
                         <i class="iconfont vercode">&#xe673;</i>
                     </div>
@@ -57,17 +58,13 @@
                 , element = layui.element;
 
         $(".nextBtn").on("click", function () {
-            if ($("[name=newpass]").val() != $("[name=newpass2]").val()) {
-                layer.msg("两次输入的新密码不一致");
-                $("[name=newpass2]").val("");
-                return false;
-            }
             $.ajax({
                 type: "POST",
-                url: "/usercenter/modify",
+                url: "/usercenter/reset",
                 data: {
-                    oldPass: $("[name=oldpass]").val(),
-                    newPass: $("[name=newpass]").val()
+                    email: $("[name=email]").val(),
+                    data: "${data}",
+                    password: $("[name=password]").val()
                 },
                 dataType: "json",
                 success: function (data) {
@@ -75,6 +72,7 @@
                         layer.msg(data.desc);
                         return false;
                     }
+                    layer.msg("修改成功");
                     window.location.href = "/login/logout";
 
                 },

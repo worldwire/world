@@ -17,9 +17,11 @@ public class Constants {
     // 发送邮件的模板页面
     public static final String MAIL_SEND_TEMPLATE = "templates/mail/mail_send_template.html";
     // 找回密码的模板页面
-    public static final String MAIL_PASSWORD_TEMPLATE = "templates/mail/mail_password_template.html";
+    public static final String MAIL_PASSWORD_TEMPLATE = "templates/mail/mail_reset_password_template.html";
+    //激活账号
+    public static final String MAIL_ACTIVE_USER_PREFIX = "http://www.theworldwire.cn/register/active";
     //找回密码邮件里面url的模板
-    public static final String MAIL_ADDRESS_PREFIX = "http://www.theworldwire.cn/register/active";
+    public static final String MAIL_MODIFY_ADDRESS_PREFIX = "http://www.theworldwire.cn/usercenter/toModify";
     //邮件有效期
     public static final String CACHE_MAIL_VALID_PREFIX = "mail_valid_";
     //邮件链接失效时间,10分钟有效
