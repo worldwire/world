@@ -33,24 +33,11 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
         return new LoginInterceptor();
     }
 
-    @Bean
-    public LocaleResolver localeResolver() {
-        SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
-        sessionLocaleResolver.setDefaultLocale(Locale.CHINA);
-        return sessionLocaleResolver;
-    }
-
-    private LocaleChangeInterceptor localeChangeInterceptor() {
-        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-        localeChangeInterceptor.setParamName("lan");
-        return localeChangeInterceptor;
-    }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(getHandlerInterceptor()).addPathPatterns("/**").excludePathPatterns("/login/");
         registry.addInterceptor(getLoginHandlerInterceptor()).addPathPatterns("/**/lc/**");
-        registry.addInterceptor(localeChangeInterceptor());
         super.addInterceptors(registry);
     }
 

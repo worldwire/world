@@ -7,12 +7,10 @@ import com.spring.worldwire.enums.StatusCodeEnum;
 import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.result.ResponseResult;
 import com.spring.worldwire.service.UserInfoService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.jnlp.UnavailableServiceException;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -27,39 +25,39 @@ public class UserInfoController {
     private UserInfoService userInfoService;
 
     @RequestMapping("/insert")
-    public ResponseResult insertUserInfo(UserInfo userInfo){
-        try{
+    public ResponseResult insertUserInfo(UserInfo userInfo) {
+        try {
             int status = userInfoService.insert(userInfo);
-            if(status == 1){
+            if (status == 1) {
                 return new ResponseResult<>(null, StatusCodeEnum.SUCCESS.getCode(), "添加成功");
             }
             return new ResponseResult<>(null, StatusCodeEnum.FAIL.getCode(), "添加返回码错误");
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseResult<>(null, StatusCodeEnum.ERROR.getCode(), "添加操作系统异常:");
         }
     }
 
 
     @RequestMapping("detail")
-    public String detail(){
+    public String detail() {
         return "";
     }
 
     @RequestMapping("toModify")
-    public String toModify(HttpServletRequest request){
+    public String toModify(HttpServletRequest request) {
         String userIdStr = request.getAttribute(Constants.USER_ID_SESSION).toString();
         UserInfo userInfo = userInfoService.selectById(Long.parseLong(userIdStr));
 
 
-        request.setAttribute("userInfo",userInfo);
-        request.setAttribute("languageValues",LanguageEnum.values());
-        request.setAttribute("levelValues",LevelEnum.values());
+        request.setAttribute("userInfo", userInfo);
+        request.setAttribute("languageValues", LanguageEnum.values());
+        request.setAttribute("levelValues", LevelEnum.values());
 
         return "pc/personData";
     }
 
     @RequestMapping("modify")
-    public String modify(HttpServletRequest request,UserInfo userInfo){
+    public String modify(HttpServletRequest request, UserInfo userInfo) {
         String userIdStr = request.getAttribute(Constants.USER_ID_SESSION).toString();
 
         userInfo.setId(Long.parseLong(userIdStr));

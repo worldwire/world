@@ -1,6 +1,5 @@
 package com.spring.worldwire.controller.i18n;
 
-import com.spring.worldwire.controller.TestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -17,7 +16,7 @@ import java.util.Locale;
 @Controller
 public class I18NController {
 
-    private static Logger logger = LoggerFactory.getLogger(TestController.class);
+    private static Logger logger = LoggerFactory.getLogger(I18NController.class);
 
     /**
      * 国际化语言切换
@@ -31,7 +30,6 @@ public class I18NController {
     public ModelAndView language(HttpServletRequest request, HttpServletResponse response, String lang) {
         String oriUrl = request.getHeader("Referer");
         Locale locale = request.getLocale();
-        logger.error(locale.toString());
         LocaleResolver localeResolver = RequestContextUtils.getLocaleResolver(request);
         lang = lang.toLowerCase();
         logger.info("language:" + lang);
@@ -43,7 +41,6 @@ public class I18NController {
             } else {
                 localeResolver.setLocale(request, response, Locale.CHINA);
             }
-
         }
         request.getSession().setAttribute("lan", lang);
         return new ModelAndView("redirect:" + oriUrl);
