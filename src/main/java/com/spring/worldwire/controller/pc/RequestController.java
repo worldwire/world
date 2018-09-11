@@ -2,9 +2,7 @@ package com.spring.worldwire.controller.pc;
 
 import com.alibaba.fastjson.JSON;
 import com.spring.worldwire.constants.Constants;
-import com.spring.worldwire.enums.ProductRequestStatusEnum;
-import com.spring.worldwire.enums.RequestTypeEnum;
-import com.spring.worldwire.enums.UserTypeEnum;
+import com.spring.worldwire.enums.*;
 import com.spring.worldwire.manager.ProductRequestManager;
 import com.spring.worldwire.manager.UserCenterManager;
 import com.spring.worldwire.model.ProductRequest;
@@ -33,13 +31,10 @@ public class RequestController {
 
     @Autowired
     private UserCenterManager userCenterManager;
-
     @Autowired
     private ProductRequestManager productRequestManager;
-
     @Autowired
     private ProductRequestService productRequestService;
-
     @Autowired
     private UserInfoService userInfoService;
 
@@ -56,8 +51,8 @@ public class RequestController {
 
         model.addAttribute("personalVo", personalVo);
         model.addAttribute("enterpriseVo", enterpriseVo);
-        model.addAttribute("requestType",requestType);
-        model.addAttribute("pageNo",pageNo);
+        model.addAttribute("requestType", requestType);
+        model.addAttribute("pageNo", pageNo);
 
         return "pc/requestList";
 
@@ -66,33 +61,26 @@ public class RequestController {
     @RequestMapping("/list/search")
     @ResponseBody
     public String ajaxProductRequestList(int userType, int requestType, int pageSize, int pageNo, String key) {
-
         ProductRequestVo request = productRequestManager.getRequestByQuery(UserTypeEnum.getNameByCode(userType), requestType, RequestTypeEnum.getNameByCode(requestType), pageSize, pageNo, key);
-
 
         return JSON.toJSONString(request);
     }
 
 
     @RequestMapping("/detail")
-    public String toDetail(Model model, Long id) {
+    public String toDetail(Model model, Long id, HttpServletRequest request) {
         ProductRequest productRequest = productRequestService.findById(id);
         productRequest.setViewCount(productRequest.getViewCount() + 1);
         productRequestService.update(productRequest);
 
+        Object userId = request.getAttribute(Constants.USER_ID_SESSION);
+        UserInfo userInfo = userInfoService.selectById(Long.parseLong(userId.toString()));
+
+        model.addAttribute("userInfo", userInfo);
         model.addAttribute("productRequest", productRequest);
+
         return "pc/requestDetail";
     }
-
-//
-//    @RequestMapping("myDetail")
-//    public String toMyDetail(Model model, long id) {
-//        ProductRequest productRequest = productRequestService.findById(id);
-//
-//        model.addAttribute("productRequest", productRequest);
-//
-//        return "pc/myDetail";
-//    }
 
     @RequestMapping("/lc/release")
     public String release(Model model) {
@@ -172,6 +160,8 @@ public class RequestController {
         productRequest.setUserId((Long) userId);
 
         model.addAttribute("productRequest", productRequest);
+        request.setAttribute("languageValues", LanguageEnum.values());
+        request.setAttribute("levelValues", LevelEnum.values());
         return "pc/releaseDetailAdd";
     }
 

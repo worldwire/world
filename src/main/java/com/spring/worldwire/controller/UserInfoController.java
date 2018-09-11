@@ -7,10 +7,12 @@ import com.spring.worldwire.enums.StatusCodeEnum;
 import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.result.ResponseResult;
 import com.spring.worldwire.service.UserInfoService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.jnlp.UnavailableServiceException;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -61,7 +63,7 @@ public class UserInfoController {
         String userIdStr = request.getAttribute(Constants.USER_ID_SESSION).toString();
 
         userInfo.setId(Long.parseLong(userIdStr));
-        userInfoService.update(userInfo);
+        userInfoService.updateByPrimaryKeySelective(userInfo);
 
         return "redirect:/usercenter/";
 

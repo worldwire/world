@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>忘记密码</title>
+    <#include "../public/common.html" encoding="utf-8">
+    <link rel="stylesheet" href="/css/resultPsd.css">
+</head>
+<body>
+<!--头部-->
+<#include "../public/head.html" encoding="utf-8">
+<!--导航-->
+    <#include "../public/navigator.html" encoding="utf-8">
+
+<div class="container">
+    <div class="title">重置密码</div>
+    <div>
+        <div class="layui-tab layui-tab-brief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">邮箱</li>
+                <li>手机号</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <form class="layui-form layui-form-pane" action="javascript:;">
+                        <div class="layui-form-item" style="margin-bottom: 50px">
+                            <div class="layui-input-block">
+                                <input class="layui-input" type="text" name="email" placeholder="请输入您的邮箱">
+                                <div class="bord-fa"></div>
+                                <i class="iconfont vercode">&#xe75a;</i>
+                                <!--<div class="ok-icon"><i class="iconfont" style="color: green;">&#xe75c;</i></div>-->
+                            </div>
+                        </div>
+                        <div>
+                            <button type="button" class="layui-btn nextBtn next">下一步</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="layui-tab-item">
+                    <form class="layui-form layui-form-pane" action="javascript:;">
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <input class="layui-input" type="text" placeholder="请输入您的手机号">
+                                <div class="bord-fa"></div>
+                                <i class="iconfont vercode">&#xe75b;</i>
+                                <div class="ok-icon" style="display: none"><i class="iconfont" style="color: green;">&#xe75c;</i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-form-item" style="margin-bottom: 30px">
+                            <div class="layui-input-block">
+                                <input class="layui-input half-input" type="text" placeholder="请输入验证码">
+                                <div class="bord-fa"></div>
+                                <i class="iconfont vercode">&#xe75d;</i>
+                                <a href="javascript:" class="layui-form-label notSupport">获取验证码</a>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="button" class="layui-btn nextBtn notSupport">下一步</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        <#include "../public/foot.html" encoding="utf-8">
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'element'], function () {
+        var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate
+                , $ = layui.jquery
+                , element = layui.element;
+        $(".notSupport").on("click", function () {
+            layer.msg("暂不支持手机找回密码!");
+        })
+        $(".next").on("click", function () {
+            $.ajax({
+                type: "POST",
+                url: "/usercenter/checkmail",
+                data: {email: $("imput [name=email]").val()},
+                dataType: "json",
+                success: function (data) {
+                    if (data.code != 200) {
+                        layer.msg(data.desc);
+                        return false;
+                    }
+                    window.location.href = "/usercenter/toSendMail?mail=" + $("[name=email]").val();
+                },
+                error: function (data) {
+                    layer.msg("网络异常，请稍后重试!");
+                }
+            })
+        })
+
+    })
+</script>
+</body>
+</html>

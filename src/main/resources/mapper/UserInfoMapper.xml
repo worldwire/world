@@ -393,127 +393,127 @@
       <if test="type != null" >
         type = #{type,typeHandler=com.spring.worldwire.extent.NumericEnumHandler},
       </if>
-      <if test="isForeign != null" >
+      <if test="isForeign != null"  >
         is_foreign = #{isForeign,jdbcType=INTEGER},
       </if>
-      <if test="showImg != null" >
+      <if test="showImg != null and showImg != ''" >
         show_img = #{showImg,jdbcType=VARCHAR},
       </if>
       <if test="birthday != null" >
         birthday = #{birthday,jdbcType=TIMESTAMP},
       </if>
-      <if test="nickName != null" >
+      <if test="nickName != null and nickName != ''" >
         nick_name = #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="language != null" >
         language = #{language,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel},
       </if>
-      <if test="briNationality != null" >
+      <if test="briNationality != null and briNationality!=''" >
         bri_nationality = #{briNationality,jdbcType=VARCHAR},
       </if>
-      <if test="nowNationality != null" >
+      <if test="nowNationality != null and nowNationality != ''" >
         now_nationality = #{nowNationality,jdbcType=VARCHAR},
       </if>
-      <if test="localAddr != null" >
+      <if test="localAddr != null and localAddr!=''" >
         local_addr = #{localAddr,jdbcType=VARCHAR},
       </if>
-      <if test="occupation != null" >
+      <if test="occupation != null and occupation != ''" >
         occupation = #{occupation,jdbcType=VARCHAR},
       </if>
-      <if test="email != null" >
+      <if test="email != null and email != ''" >
         email = #{email,jdbcType=VARCHAR},
       </if>
-      <if test="mobile != null" >
+      <if test="mobile != null " >
         mobile = #{mobile,jdbcType=VARCHAR},
       </if>
-      <if test="website != null" >
+      <if test="website != null and website != ''" >
         website = #{website,jdbcType=VARCHAR},
       </if>
-      <if test="publicPlatform != null" >
+      <if test="publicPlatform != null and publicPlatform != ''" >
         public_platform = #{publicPlatform,jdbcType=VARCHAR},
       </if>
-      <if test="wechatQrcode != null" >
+      <if test="wechatQrcode != null and wechatQrcode != ''" >
         wechat_qrcode = #{wechatQrcode,jdbcType=VARCHAR},
       </if>
-      <if test="wechat != null" >
+      <if test="wechat != null and wechat != ''" >
         wechat = #{wechat,jdbcType=VARCHAR},
       </if>
-      <if test="facebook != null" >
+      <if test="facebook != null and facebook != ''" >
         facebook = #{facebook,jdbcType=VARCHAR},
       </if>
-      <if test="whatsapp != null" >
+      <if test="whatsapp != null and whatsapp != ''" >
         whatsapp = #{whatsapp,jdbcType=VARCHAR},
       </if>
-      <if test="linkedin != null" >
+      <if test="linkedin != null and linkedin!= ''" >
         linkedin = #{linkedin,jdbcType=VARCHAR},
       </if>
-      <if test="communication != null" >
+      <if test="communication != null and communication != ''" >
         communication = #{communication,typeHandler=com.spring.worldwire.model.typeHandler.CommunicationHandel},
       </if>
-      <if test="idcardOnImg != null" >
+      <if test="idcardOnImg != null and idcardOnImg != ''" >
         idcard_on_img = #{idcardOnImg,jdbcType=VARCHAR},
       </if>
-      <if test="idcardDownImg != null" >
+      <if test="idcardDownImg != null and idcardDownImg != ''" >
         idcard_down_img = #{idcardDownImg,jdbcType=VARCHAR},
       </if>
-      <if test="idcardHandImg != null" >
+      <if test="idcardHandImg != null and idcardHandImg != ''" >
         idcard_hand_img = #{idcardHandImg,jdbcType=VARCHAR},
       </if>
-      <if test="realName != null" >
+      <if test="realName != null and realName != ''" >
         real_name = #{realName,jdbcType=VARCHAR},
       </if>
-      <if test="idcard != null" >
+      <if test="idcard != null and idcard != ''" >
         idcard = #{idcard,jdbcType=VARCHAR},
       </if>
-      <if test="companyName != null" >
+      <if test="companyName != null and companyName!=''" >
         company_name = #{companyName,jdbcType=VARCHAR},
       </if>
-      <if test="companyTime != null" >
+      <if test="companyTime != null and companyTime != ''" >
         company_time = #{companyTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="companyNum != null" >
+      <if test="companyNum != null and companyNum != ''" >
         company_num = #{companyNum,jdbcType=VARCHAR},
       </if>
-      <if test="companyAddr != null" >
+      <if test="companyAddr != null and companyAddr != ''" >
         company_addr = #{companyAddr,jdbcType=VARCHAR},
       </if>
-      <if test="companyTel != null" >
+      <if test="companyTel != null and companyTel != ''" >
         company_tel = #{companyTel,jdbcType=VARCHAR},
       </if>
-      <if test="companyMobile != null" >
+      <if test="companyMobile != null and companyMobile != ''" >
         company_mobile = #{companyMobile,jdbcType=VARCHAR},
       </if>
-      <if test="companyPostCode != null" >
+      <if test="companyPostCode != null and companyPostCode != ''" >
         company_post_code = #{companyPostCode,jdbcType=VARCHAR},
       </if>
-      <if test="companyFax != null" >
+      <if test="companyFax != null and companyFax != ''" >
         company_fax = #{companyFax,jdbcType=VARCHAR},
       </if>
-      <if test="companyEmail != null" >
+      <if test="companyEmail != null and companyEmail != ''" >
         company_email = #{companyEmail,jdbcType=VARCHAR},
       </if>
-      <if test="companyMainBusiness != null" >
+      <if test="companyMainBusiness != null and companyMainBusiness != ''" >
         company_main_business = #{companyMainBusiness,jdbcType=VARCHAR},
       </if>
-      <if test="companyMainContry != null" >
+      <if test="companyMainContry != null and companyMainContry != ''" >
         company_main_contry = #{companyMainContry,jdbcType=VARCHAR},
       </if>
-      <if test="businessLicenseImg != null" >
+      <if test="businessLicenseImg != null and businessLicenseImg != ''" >
         business_license_img = #{businessLicenseImg,jdbcType=VARCHAR},
       </if>
-      <if test="businessSpecialLicenseImg != null" >
+      <if test="businessSpecialLicenseImg != null and businessSpecialLicenseImg != ''" >
         business_special_license_img = #{businessSpecialLicenseImg,jdbcType=VARCHAR},
       </if>
-      <if test="businessBank != null" >
+      <if test="businessBank != null and businessBank != ''" >
         business_bank = #{businessBank,jdbcType=VARCHAR},
       </if>
-      <if test="businessBankName != null" >
+      <if test="businessBankName != null and businessBankName != ''" >
         business_bank_name = #{businessBankName,jdbcType=VARCHAR},
       </if>
-      <if test="businessBankAddr != null" >
+      <if test="businessBankAddr != null and businessBankAddr != ''" >
         business_bank_addr = #{businessBankAddr,jdbcType=VARCHAR},
       </if>
-      <if test="businessBankImg != null" >
+      <if test="businessBankImg != null and businessBankImg != ''" >
         business_bank_img = #{businessBankImg,jdbcType=VARCHAR},
       </if>
     </set>

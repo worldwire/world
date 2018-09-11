@@ -16,4 +16,6 @@ public interface UserInfoService {
     int update(UserInfo userInfo);
 
     UserInfo selectSimpleById(long l);
+
+    int updateByPrimaryKeySelective(UserInfo userInfo);
 }

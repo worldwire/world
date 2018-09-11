@@ -190,7 +190,7 @@
                         </div>
                         <div class="body-ComMethods-com">
                             <i class="iconfont body-ComMethods-com-addbtn">&#xe601;</i>
-                            <#if productRequest.others??>
+                            <#if productRequest.others?? && productRequest.others?length gt 2>
                                 <#list productRequest.others?split(";") as item>
                                     <#if item??>
                                         <div class="layui-form body-ComMethods-com-box">
@@ -200,7 +200,7 @@
                                                     <span class="body-ComMethods-com-span">:</span>
                                                 </#if>
                                                 <#if communicate_index == 1>
-                                                    <input class="layui-input body-ComMethods-com-content" type="text" value="${communicate[0]}" placeholder="请填写该通信方式的账号">
+                                                    <input class="layui-input body-ComMethods-com-content" type="text" value="${communicate}" placeholder="请填写该通信方式的账号">
                                                 </#if>
                                             </#list>
                                         </div>

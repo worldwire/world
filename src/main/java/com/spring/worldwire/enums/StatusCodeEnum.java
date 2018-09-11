@@ -10,6 +10,7 @@ public enum StatusCodeEnum {
     EMPTY(302,"empty result","没有数据"),
     EXISTS(303,"exists already","已经存在"),
     OUT_OF_DATE(304,"out of date","已过期"),
+    ILLEGAL(305,"illegal operation","非法操作"),
     ERROR(500,"error","出错");
 
     StatusCodeEnum(Integer code, String msg, String desc) {
