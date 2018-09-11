@@ -1,11 +1,12 @@
+<#import "/spring.ftl" as spring/>
 <div class="nav">
     <div class="nav1">
         <ul>
-            <li onclick="redirectClick('/')">${home}</li>
-            <li onclick="redirectClick('/request.html')">${requestlist}</li>
-            <li onclick="redirectClick('/')">${productdesc}</li>
-            <li onclick="redirectClick('/')">${aboutus}</li>
-            <li onclick="redirectClick('/helpCenter.html')">${helpcenter}</li>
+            <li onclick="redirectClick('/')"><@spring.message code="home"/></li>
+            <li onclick="redirectClick('/request.html')"><@spring.message code="requestlist"/></li>
+            <li onclick="redirectClick('/')"><@spring.message code="productdesc"/></li>
+            <li onclick="redirectClick('/')"><@spring.message code="aboutus"/></li>
+            <li onclick="redirectClick('/helpCenter.html')"><@spring.message code="helpcenter"/></li>
         </ul>
     </div>
 </div>

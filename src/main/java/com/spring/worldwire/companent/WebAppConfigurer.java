@@ -38,6 +38,7 @@ public class WebAppConfigurer extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(getHandlerInterceptor()).addPathPatterns("/**").excludePathPatterns("/login/");
         registry.addInterceptor(getLoginHandlerInterceptor()).addPathPatterns("/**/lc/**");
+        registry.addInterceptor(new LocaleChangeInterceptor());
         super.addInterceptors(registry);
     }
 

@@ -43,7 +43,7 @@ public class IndexController extends BaseController{
         model.addAttribute("personalList", personalList);
         model.addAttribute("enterpriseList", enterpriseList);
 
-        navigateMessage(model);
+//        navigateMessage(model);
 
         return "pc/index";
     }
