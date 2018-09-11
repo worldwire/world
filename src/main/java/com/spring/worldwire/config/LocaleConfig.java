@@ -2,6 +2,7 @@ package com.spring.worldwire.config;
 
 import java.util.Locale;
 
+import com.spring.worldwire.companent.MyLocaleResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -13,7 +14,7 @@ public class LocaleConfig {
 
 	@Bean(name = "localeResolver")
 	public LocaleResolver localeResolver() {
-		SessionLocaleResolver slr = new SessionLocaleResolver();
+		MyLocaleResolver slr = new MyLocaleResolver();
 		// 默认语言
 		slr.setDefaultLocale(Locale.CHINA);
 		return slr;
