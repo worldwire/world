@@ -115,10 +115,11 @@
                             <label for="nationality" class="req">本人出生地</label>
                             <div class="layui-input-inline">
                                 <select name="nationality" id="nationality">
-                                    <option value="">国籍</option>
-                                    <option value="">中国</option>
-                                    <option value="">美国</option>
-                                    <option value="">俄罗斯</option>
+                                    <#list countryList as country>
+                                        <option>国家</option>
+                                        <option value="${country.enName}" <#if country.country == briNationality.country>selected="selected"</#if>>${country.cnName}</option>
+                                    </#list>
+
                                 </select>
                             </div>
 
@@ -139,10 +140,9 @@
                             <label class="req">本人现有国籍</label>
                             <div class="layui-input-inline">
                                 <select name="" >
-                                    <option value="">国籍</option>
-                                    <option value="">中国</option>
-                                    <option value="">美国</option>
-                                    <option value="">俄罗斯</option>
+                                    <#list countryList as country>
+                                    <option value="${country.enName}" <#if country.country == nowNationality.country>selected="selected"</#if> >${country.cnName}</option>
+                                    </#list>
                                 </select>
                             </div>
 
@@ -163,16 +163,9 @@
                             <label class="req">现居住城市</label>
                             <div class="layui-input-inline">
                                 <select name="nationality">
-                                    <option value="">国籍</option>
-                                    <option value="">中国</option>
-                                    <option value="">美国</option>
-                                    <option value="">俄罗斯</option>
-                                    <option value="">法国</option>
-                                    <option value="">德国</option>
-                                    <option value="">新西兰</option>
-                                    <option value="">瑞士</option>
-                                    <option value="">加拿大</option>
-                                    <option value="">印度</option>
+                                    <#list countryList as country>
+                                    <option value="${country.enName}"  <#if country.country == localAddr.country>selected="selected"</#if>>${country.cnName}</option>
+                                    </#list>
                                 </select>
                             </div>
 

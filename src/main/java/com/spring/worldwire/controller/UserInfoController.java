@@ -1,17 +1,25 @@
 package com.spring.worldwire.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.spring.worldwire.constants.Constants;
+import com.spring.worldwire.enums.CountryEnum;
 import com.spring.worldwire.enums.LanguageEnum;
 import com.spring.worldwire.enums.LevelEnum;
 import com.spring.worldwire.enums.StatusCodeEnum;
+import com.spring.worldwire.model.Location;
 import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.result.ResponseResult;
 import com.spring.worldwire.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 /**
  * Created by luxun on 2018/4/27.
@@ -48,9 +56,9 @@ public class UserInfoController {
         String userIdStr = request.getAttribute(Constants.USER_ID_SESSION).toString();
         UserInfo userInfo = userInfoService.selectById(Long.parseLong(userIdStr));
 
-
         request.setAttribute("userInfo", userInfo);
         request.setAttribute("languageValues", LanguageEnum.values());
+        request.setAttribute("countryList",  CountryEnum.values());
         request.setAttribute("levelValues", LevelEnum.values());
 
         return "pc/personData";
@@ -66,6 +74,5 @@ public class UserInfoController {
         return "redirect:/usercenter/";
 
     }
-
 
 }

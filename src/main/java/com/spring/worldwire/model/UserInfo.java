@@ -28,11 +28,11 @@ public class UserInfo implements Serializable {
 
     private List<LanguageLevel> language;
 
-    private String briNationality;
+    private Location briNationality;
 
-    private String nowNationality;
+    private Location nowNationality;
 
-    private String localAddr;
+    private Location localAddr;
 
     private String occupation;
 
@@ -164,28 +164,28 @@ public class UserInfo implements Serializable {
         this.language = language;
     }
 
-    public String getBriNationality() {
+    public Location getBriNationality() {
         return briNationality;
     }
 
-    public void setBriNationality(String briNationality) {
-        this.briNationality = briNationality == null ? null : briNationality.trim();
+    public void setBriNationality(Location briNationality) {
+        this.briNationality = briNationality;
     }
 
-    public String getNowNationality() {
+    public Location getNowNationality() {
         return nowNationality;
     }
 
-    public void setNowNationality(String nowNationality) {
-        this.nowNationality = nowNationality == null ? null : nowNationality.trim();
+    public void setNowNationality(Location nowNationality) {
+        this.nowNationality = nowNationality;
     }
 
-    public String getLocalAddr() {
+    public Location getLocalAddr() {
         return localAddr;
     }
 
-    public void setLocalAddr(String localAddr) {
-        this.localAddr = localAddr == null ? null : localAddr.trim();
+    public void setLocalAddr(Location localAddr) {
+        this.localAddr = localAddr;
     }
 
     public String getOccupation() {

@@ -12,9 +12,15 @@
     <result column="language" property="language" jdbcType="VARCHAR"
             typeHandler="com.spring.worldwire.model.typeHandler.LanguageLevelHandel"
             javaType="com.spring.worldwire.model.LanguageLevel"/>
-    <result column="bri_nationality" property="briNationality" jdbcType="VARCHAR" />
-    <result column="now_nationality" property="nowNationality" jdbcType="VARCHAR" />
-    <result column="local_addr" property="localAddr" jdbcType="VARCHAR" />
+    <result column="bri_nationality" property="briNationality" jdbcType="VARCHAR"
+            typeHandler="com.spring.worldwire.model.typeHandler.LocationHandel"
+            javaType="com.spring.worldwire.model.Location" />
+    <result column="now_nationality" property="nowNationality" jdbcType="VARCHAR"
+            typeHandler="com.spring.worldwire.model.typeHandler.LocationHandel"
+            javaType="com.spring.worldwire.model.Location" />
+    <result column="local_addr" property="localAddr" jdbcType="VARCHAR"
+            typeHandler="com.spring.worldwire.model.typeHandler.LocationHandel"
+            javaType="com.spring.worldwire.model.Location" />
     <result column="occupation" property="occupation" jdbcType="VARCHAR" />
     <result column="email" property="email" jdbcType="VARCHAR" />
     <result column="mobile" property="mobile" jdbcType="VARCHAR" />

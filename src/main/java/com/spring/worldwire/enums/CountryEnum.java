@@ -183,9 +183,9 @@ public enum CountryEnum implements IStringEnum {
     OTHER("其他","other","other"),
     ;
 
-    CountryEnum(String enName, String cnName, String picUrl) {
-        this.enName = enName;
+    CountryEnum(String cnName, String enName, String picUrl) {
         this.cnName = cnName;
+        this.enName = enName;
         this.picUrl = picUrl;
     }
 
@@ -210,7 +210,7 @@ public enum CountryEnum implements IStringEnum {
     }
 
     public String getPicUrl() {
-        return picUrl;
+        return "/images/country/"+picUrl+".png";
     }
 
     public void setPicUrl(String picUrl) {
