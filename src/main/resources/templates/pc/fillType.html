@@ -11,17 +11,17 @@
 <#include "../public/head.html" encoding="utf-8">
 
 <div class="container">
-    <div class="title">注册</div>
+    <div class="title"><@spring.message code="register"/></div>
     <div class="main">
         <form class="layui-form layui-form-pane" method="get" action="/register/completeType/1">
             <div class="btnbox">
-                <button class="layui-btn nextBtn">公司</button>
+                <button class="layui-btn nextBtn"><@spring.message code="ernterprise"/></button>
             </div>
         </form>
 
         <form class="layui-form layui-form-pane" method="get" action="/register/completeType/2">
             <div class="btnbox">
-                <button class="layui-btn nextBtn">个人</button>
+                <button class="layui-btn nextBtn"><@spring.message code="personal"/></button>
             </div>
         </form>
     </div>

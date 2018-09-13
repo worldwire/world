@@ -18,10 +18,10 @@
 				</div>
 				
 				<div class="send-text">
-					<p class="usermail">验证邮件已发送至${mail!''}</p>
-					<p class="text">请在24小时内点击邮件中的链接继续注册。</p>
+					<p class="usermail"><@spring.message code='sendmail'/>${mail!''}</p>
+					<p class="text"><@spring.message code='tipmsg'/></p>
 					<a class="layui-btn check-btn mail">
-						立即查收邮件
+						<@spring.message code='getmail'/>
 					</a>
 						
 					</div>

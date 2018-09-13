@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>翻译页面</title>
+    <title>需求详情</title>
     <link rel="stylesheet" href="/css/translate.css">
     <script src="/js/t2.js" type="text/javascript" charset="utf-8"></script>
     <#include "../public/common.html" encoding="utf-8"/>
@@ -19,19 +19,19 @@
             <div>
                 <div class="information">
                     <div class="photo">
-                        <a href=""><img src="${productRequest.userInfo.showImg!''}" alt="头像"></a>
+                        <a href=""><img src="${productRequest.userInfo.showImg!''}" alt="<@spring.message code='headimg'/>"></a>
                     </div>
                     <div class="info">
                         <p class="name">${productRequest.userInfo.nickName!''}</p>
                         <p class="nat"><i class="iconfont">&#xe611;</i><span>${productRequest.userInfo.localAddr!''}</span><img src="/images/gj.png" alt="国籍"></p>
                         <p class="text">
-                            <span><#if productRequest.userType.code ==1>个人<#else>企业</#if><#if productRequest.requestType.code == 1>服务<#else>需求</#if></span>
-                            <#if productRequest.requestType.code == 1>我可以提供国际人才或资源<#else>我要找国际人才或资源</#if>
+                            <span><#if productRequest.userType.code ==1><@spring.message code='personal'/><#else><@spring.message code='enterprise'/></#if><#if productRequest.requestType.code == 1><@spring.message code='service'/><#else><@spring.message code='requirement'/></#if></span>
+                            <#if productRequest.requestType.code == 1><@spring.message code='supplyservice'/><#else><@spring.message code='requireservice'/></#if>
                         </p>
                     </div>
                     <div class="nationality">
                         <p>国籍</p>
-                        <p><img src="/images/gj.png" alt="国籍"></p>
+                        <p><img src="/images/gj.png" alt="<@spring.message code='nationality'/>"></p>
                     </div>
                 </div>
             </div>
@@ -41,36 +41,18 @@
                     ${productRequest.content!''}
                 </div>
                 <div class="time">
-                    <p>发布时间: <#if productRequest.createTime??>${productRequest.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></p>
+                    <p><@spring.message code='publishdate'/>: <#if productRequest.createTime??>${productRequest.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></p>
                 </div>
             </div>
             <div class="level">
-                <p>发布者水平</p>
+                <p><@spring.message code='langugelevel'/></p>
                 <div>
-                    <dl>
-                        <dt>日语</dt>
-                        <dd>不会</dd>
-                    </dl>
-                    <dl>
-                        <dt>韩语</dt>
-                        <dd>不会</dd>
-                    </dl>
-                    <dl>
-                        <dt>中文</dt>
-                        <dd>精通</dd>
-                    </dl>
-                    <dl>
-                        <dt>英文</dt>
-                        <dd>一般</dd>
-                    </dl>
-                    <dl>
-                        <dt>意大利语</dt>
-                        <dd>不会</dd>
-                    </dl>
-                    <dl>
-                        <dt>法语</dt>
-                        <dd>不会</dd>
-                    </dl>
+                    <#list productRequest.languageLevel as languageLevel>
+                        <dl>
+                            <dt>${languageLevel.languageEnum.cnName}</dt>
+                            <dd>${languageLevel.level.cnName}</dd>
+                        </dl>
+                    </#list>
                 </div>
             </div>
             <div class="other">
@@ -83,21 +65,21 @@
                 </div>
                 <div class="contact">
                     <div style="width: 132px; float: left;margin-right: 20px">
-                        <div class="ewm"><img src="../img/ewm1.jpg" alt="二维码"></div>
-                        <p>微信二维码</p>
+                        <div class="ewm"><img src="../img/ewm1.jpg" alt="<@spring.message code='qrcode'/>"></div>
+                        <p><@spring.message code='qrcode'/></p>
                     </div>
                     <ul>
-                        <li>手机号：<span>${productRequest.mobile!''}</span></li>
-                        <li>微信号：<span>${productRequest.wechat!''}</span></li>
+                        <li><@spring.message code='mobile'/>：<span>${productRequest.mobile!''}</span></li>
+                        <li><@spring.message code='wechat'/>：<span>${productRequest.wechat!''}</span></li>
                         <li>LinkedIn：<span>${productRequest.linkedin!''}</span></li>
                     </ul>
                     <ul>
-                        <li>座机号：<span>${productRequest.phone!''}</span></li>
-                        <li>联系邮箱：<span>${productRequest.email!''}</span></li>
+                        <li><@spring.message code='telephone'/>：<span>${productRequest.phone!''}</span></li>
+                        <li><@spring.message code='email'/>：<span>${productRequest.email!''}</span></li>
                         <li>WhatsApp：<span>${productRequest.whatsapp!''}</span></li>
                     </ul>
                     <ul>
-                        <li>我的网站：<span>${productRequest.website!''}</span></li>
+                        <li><@spring.message code='website'/>：<span>${productRequest.website!''}</span></li>
                         <li>FaceBook：<span>${productRequest.facebook!''}</span></li>
                     </ul>
                 </div>
@@ -107,10 +89,10 @@
                 </div>
                 <div class="btn-group">
                     <div style="margin-right: -30px;">
-                        <a href="###" id="tran-btn">翻译</a>
-                        <a href="/request/lc/edit?id=${productRequest.id}">修改</a>
+                        <a href="###" id="tran-btn"><@spring.message code='translate'/></a>
+                        <a href="/request/lc/edit?id=${productRequest.id}"><@spring.message code='modify'/></a>
                         <a href="/request/lc/modify?id=${productRequest.id}">
-                            <#if productRequest.status.code == 2>开启<#elseif productRequest.status.code == 3>关闭<#else>上架</#if>
+                            <#if productRequest.status.code == 2><@spring.message code='open'/><#elseif productRequest.status.code == 3><@spring.message code='shutdown'/><#else><@spring.message code='onshelf'/></#if>
                         </a>
                     </div>
                 </div>
@@ -124,25 +106,25 @@
     <!-- 翻译弹出层 -->
     <div class="tran-box" style="display: none;">
         <div class="tran-tit">
-            <h2>本次翻译次数为<span>365</span>字</h2>
+            <h2><@spring.message code='nowtranslate'/><span>365</span><@spring.message code='words'/></h2>
         </div>
         <div class="tran-main">
             <div class="row">
-                <p>选择支付币种</p>
-                <div class="active">￥ 人民币</div>
-                <div>$ 美金</div>
+                <p><@spring.message code='choosepaymentcurrency'/></p>
+                <div class="active">￥ <@spring.message code='rmb'/></div>
+                <div>$ <@spring.message code='dollar'/></div>
             </div>
             <div class="layui-clear"></div>
             <div class="row">
-                <p>选择支付方式</p>
-                <div><img src="../img/wx.png"/>微信支付</div>
-                <div class="active"><img src="../img/zfb.png"/>支付宝支付</div>
+                <p><@spring.message code='choosepayment'/></p>
+                <div><img src="../img/wx.png"/><@spring.message code='weixnpayment'/></div>
+                <div class="active"><img src="../img/zfb.png"/><@spring.message code='alipayment'/></div>
                 <div><img src="../img/paypal.jpg" width="150"/></div>
             </div>
             <hr/>
             <div class="conf">
-                <div><button type="button" class="layui-btn">立即充值</button></div>
-                <div>实付人民币<span>￥50.00</span></div>
+                <div><button type="button" class="layui-btn"><@spring.message code='chargenow'/></button></div>
+                <div><@spring.message code='realpayrmb'/><span>￥50.00</span></div>
             </div>
         </div>
         <div class="tran-close-btn"><i class="layui-icon" style="font-size: 30px">&#x1006;</i></div>
@@ -179,11 +161,8 @@
 
                 allA.removeClass("active");
                 target.addClass("active");
-
                 return false;
             })
-
-
         })
     </script>
 </body>

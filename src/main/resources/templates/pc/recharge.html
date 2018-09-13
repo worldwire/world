@@ -10,24 +10,24 @@
         <#include "../public/head.html" encoding="utf-8">
         <#include "../public/navigator.html" encoding="utf-8">
 		<div class="container">
-			<div class="title"><p>充值</p></div>
-			<div class="tip"><span>1</span>选择支付币种</div>
+			<div class="title"><p><@spring.message code='rechage'/></p></div>
+			<div class="tip"><span>1</span><@spring.message code='choosepaymentcurrency'/></div>
 			<div class="money-type">
-				<a href="###" name="china" class="hv">￥&nbsp;人民币</a>
-				<a href="###" name="english" class="hv">$&nbsp;&nbsp;美金</a>
+				<a href="###" name="china" class="hv">￥&nbsp;<@spring.message code='rmb'/></a>
+				<a href="###" name="english" class="hv">$&nbsp;&nbsp;<@spring.message code='dollar'/></a>
 			</div>
-			<div class="tip"><span>2</span>选购买次数</div>
+			<div class="tip"><span>2</span><@spring.message code='choosebuycount'/></div>
 			<div class="money-type" id="times">
 			</div>
-			<div class="tip"><span>3</span>选择支付方式</div>
+			<div class="tip"><span>3</span><@spring.message code='choosepayment'/></div>
 			<div class="money-type" id="thirdPay">
-				<a href="###" id="WEI_CHAT" name="WEI_CHAT" class="hv"><img src="/images/wx.png" width="30" style="vertical-align: -6px">微信支付</a>
-				<a href="###" id="ALIPAY" name="ALIPAY" class="hv"><img src="/images/zfb.png" width="30" style="vertical-align: -7px;">支付宝支付</a>
+				<a href="###" id="WEI_CHAT" name="WEI_CHAT" class="hv"><img src="/images/wx.png" width="30" style="vertical-align: -6px"><@spring.message code='weixnpayment'/></a>
+				<a href="###" id="ALIPAY" name="ALIPAY" class="hv"><img src="/images/zfb.png" width="30" style="vertical-align: -7px;"><@spring.message code='alipayment'/></a>
 				<a href="###" id="PAY_PAL" name="PAY_PAL" class="hv"><img src="/images/paypal.jpg" width="150" height="50"></a>
 			</div>
 			<hr/>
 			<div class="settlement">
-				<div><button class="layui-btn" onclick="payRecharge()">立即充值</button></div>
+				<div><button class="layui-btn" onclick="payRecharge()"><@spring.message code='chargenow'/></button></div>
 				<div class="msg" id="payAmount"></div>
 			</div>
 		</div>
@@ -77,7 +77,7 @@
 				$("#times").empty();
 
 				data.forEach(function(val,index){
-					var text = '<a href="###" class="hv" value="'+val.amount+'" productId="'+val.id+'">'+currency+val.amount+'/'+val.times+'次</a>';
+					var text = '<a href="###" class="hv" value="'+val.amount+'" productId="'+val.id+'">'+currency+val.amount+'/'+val.times+'<@spring.message code="times"/></a>';
 					$("#times").append(text);
 				});
 
@@ -92,9 +92,9 @@
 					productId = target.attr("productId");
 					$("#payAmount").empty();
 					if(code==1){
-						$("#payAmount").append("<span>实付金额人民币</span>￥"+productAmount);
+						$("#payAmount").append("<span><@spring.message code='realpayrmb'/></span>￥"+productAmount);
 					}else if(code==2){
-						$("#payAmount").append("<span>实付金额美元</span>$"+productAmount);
+						$("#payAmount").append("<span><@spring.message code='realpayusd'/></span>$"+productAmount);
 					}
 
 				});

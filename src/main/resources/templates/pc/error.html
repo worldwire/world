@@ -16,11 +16,11 @@
 				<img src="/images/err.png" width="300"/>
 			</div>
 			<div class="err-text">
-				<#if msg??>${msg}<#else>出错了</#if>
+				<#if msg??>${msg}<#else><@spring.message code="error"/></#if>
 			</div>
 			<div class="err-btn" onclick="redirectClick('/')">
 				<div class="layui-btn err-on">
-					返回首页
+					<@spring.message code="backhome"/>
 				</div>
 			</div>
 			

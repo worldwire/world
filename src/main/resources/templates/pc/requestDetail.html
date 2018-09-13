@@ -15,23 +15,23 @@
         <div>
             <div class="information">
                 <div class="photo">
-                    <a href=""><img src="${productRequest.userInfo.showImg!''}" alt="头像"></a>
+                    <a href=""><img src="${productRequest.userInfo.showImg!''}" alt="<@spring.message code='headimg'/>"></a>
                 </div>
                 <div class="info">
                     <p class="name">${productRequest.userInfo.nickName!''}</p>
                     <p class="nat"><i
                             class="iconfont">&#xe611;</i><span>${productRequest.userInfo.localAddr!''}</span><img
-                            src="/images/gj.png" alt="国籍"></p>
+                            src="/images/gj.png" alt="<@spring.message code='nationality'/>"></p>
                     <p class="text"><span class="disc"></span>
-                        <span><#if productRequest.userType.code ==1>个人<#else>企业</#if><#if productRequest.requestType.code == 1>服务<#else>需求</#if></span>
-                        <#if productRequest.requestType.code == 1>我可以提供国际人才或资源
-                            <#else>我要找国际人才或资源
+                        <span><#if productRequest.userType.code ==1><@spring.message code='personal'/><#else><@spring.message code='enterprise'/></#if><#if productRequest.requestType.code == 1><@spring.message code='service'/><#else><@spring.message code='requirement'/></#if></span>
+                        <#if productRequest.requestType.code == 1><@spring.message code='supplyservice'/>
+                            <#else><@spring.message code='requireservice'/>
                         </#if>
                     </p>
                 </div>
                 <div class="nationality">
-                    <p>国籍</p>
-                    <p><img src="/images/gj.png" alt="国籍"></p>
+                    <p><@spring.message code='nationality'/></p>
+                    <p><img src="/images/gj.png" alt="<@spring.message code='nationality'/>"></p>
                 </div>
             </div>
             <div class="content">
@@ -40,7 +40,7 @@
                     ${productRequest.content!''}
                 </div>
                 <div class="time">
-                    <p>发布时间:
+                    <p><@spring.message code='publishdate'/>:
                         <#if productRequest.createTime??>${productRequest.createTime?string("yyyy-MM-dd HH:mm:ss")}
                         </#if>
                     </p>
@@ -48,7 +48,7 @@
             </div>
             <#if userInfo.language??>
                 <div class="level">
-                    <p>发布者水平</p>
+                    <p><@spring.message code='langugelevel'/></p>
                     <div>
                         <#list userInfo.language as languageLevel>
                             <dl>
@@ -108,51 +108,51 @@
         <#if userInfo??>
             <!-- 已登陆 -->
             <div class="login">
-                <p class="login-title">获取项目发起者联系方式</p>
-                <button class="layui-btn">点击获取</button>
+                <p class="login-title"><@spring.message code='getcontracts'/></p>
+                <button class="layui-btn"><@spring.message code='getit'/></button>
                 <div class="login-msg">
-                    <p>您每天有一次免费查看<span>${productRequest.userInfo.nickName!''}</span></p>
-                    <p>联系方式的权限</p>
+                    <p><@spring.message code='freeget'/><span>${productRequest.userInfo.nickName!''}</span></p>
+                    <p><@spring.message code='freepreveledge'/></p>
                 </div>
             </div>
 
             <#else>
                 <!-- 未登录/注册 -->
                 <div class="reg">
-                    <p>获取项目发起者联系方式请先</p>
-                    <p><a href="./login.html">登陆</a>或<a href="./register.html">注册</a></p>
+                    <p><@spring.message code='contractlogin'/></p>
+                    <p><a href="./login.html"><@spring.message code='login'/></a><@spring.message code='or'/><a href="./register.html"><@spring.message code='register'/></a></p>
                     <form action="javascript:void(0)" id="login-form" class="layui-form" method="post">
                         <div class="layui-form-item">
                             <div class="layui-input-block">
-                                <input name="email" type="text" id="email" placeholder="请输入邮箱" class="layui-input">
+                                <input name="email" type="text" id="email" placeholder="<@spring.message code='inputmail'/>" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <div class="layui-input-block">
-                                <input name="passwd" type="password" id="passwd" placeholder="请输入密码"
+                                <input name="passwd" type="password" id="passwd" placeholder="<@spring.message code='inputpassword'/>"
                                        class="layui-input">
                             </div>
                         </div>
-                        <input type="button" class="layui-btn subBtn" value="登录"/>
+                        <input type="button" class="layui-btn subBtn" value="<@spring.message code='login'/>"/>
                     </form>
                 </div>
         </#if>
         <div class="contact">
             <p>联系方式</p>
             <ul>
-                <li style="margin-top: 27px;">手机号:<span name="mobile">******</span></li>
-                <li>座机号:<span name="phone">******</span></li>
-                <li>我的网站:<span name="website">******</span></li>
-                <li>微信号:<span name="wechat">******</span></li>
-                <li>联系邮箱:<span name="email">******</span></li>
+                <li style="margin-top: 27px;"><@spring.message code='mobile'/>:<span name="mobile">******</span></li>
+                <li><@spring.message code='telephone'/>:<span name="phone">******</span></li>
+                <li><@spring.message code='website'/>:<span name="website">******</span></li>
+                <li><@spring.message code='wechat'/>:<span name="wechat">******</span></li>
+                <li><@spring.message code='email'/>:<span name="email">******</span></li>
                 <li>Facebook:<span name="facebook">******</span></li>
                 <li>LikedIn:<span name="linkedin">******</span></li>
                 <li>WhatsApp:<span name="whatsapp">******</span></li>
             </ul>
         </div>
         <div class="ewm">
-            <img src="/images/ewm.png" alt="二维码">
-            <span>微信二维码</span>
+            <img src="/images/ewm.png" alt="<@spring.message code='qrcode'/>">
+            <span><@spring.message code='qrcode'/></span>
         </div>
     </div>
 </div>
@@ -179,16 +179,16 @@
                     alert(JSON.stringify(data));
                     window.location.reload();
                     if (data == "error") {
-                        alert("参数错误");
+                        alert("<@spring.message code='errorparam'/>");
                     }
                     if (data == "false") {
-                        alert("没有查看次数，请充值后再查看");
+                        alert("<@spring.message code='nofreelookup'/>");
                     }
 
 
                 },
                 error: function (data) {
-                    alert("网络出错，请稍后重试");
+                    alert("<@spring.message code='networkerror'/>");
                 }
             });
         });

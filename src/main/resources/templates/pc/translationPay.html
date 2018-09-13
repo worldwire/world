@@ -8,21 +8,21 @@
 	</head>
 	<body>
 		<div class="container">
-			<div class="tran-box"><p class="tran-tit">本次翻译字数为 <span>${wordsCount}</span> 字</p></div>
-			<div class="tip"><span>1</span>选择支付币种</div>
+			<div class="tran-box"><p class="tran-tit"><@spring.message code='nowtranslate'/><span>${wordsCount}</span><@spring.message code='words'/></p></div>
+			<div class="tip"><span>1</span><@spring.message code='choosepaymentcurrency'/></div>
 			<div class="money-type">
-				<a href="###" name="china" class="hv" id="china">￥&nbsp;人民币</a>
-				<a href="###" name="english" class="hv" id="english">$&nbsp;&nbsp;美金</a>
+				<a href="###" name="china" class="hv" id="china">￥&nbsp;<@spring.message code='rmb'/></a>
+				<a href="###" name="english" class="hv" id="english">$&nbsp;&nbsp;<@spring.message code='dollar'/></a>
 			</div>
-			<div class="tip"><span>3</span>选择支付方式</div>
+			<div class="tip"><span>3</span><@spring.message code='choosepayment'/></div>
 			<div class="money-type" id="thirdPay">
-				<a href="###" id="WEI_CHAT" name="WEI_CHAT" class="hv"><img src="/images/wx.png" width="30" style="vertical-align: -6px">微信支付</a>
-				<a href="###" id="ALIPAY" name="ALIPAY" class="hv"><img src="/images/zfb.png" width="30" style="vertical-align: -7px;">支付宝支付</a>
+				<a href="###" id="WEI_CHAT" name="WEI_CHAT" class="hv"><img src="/images/wx.png" width="30" style="vertical-align: -6px"><@spring.message code='weixnpayment'/></a>
+				<a href="###" id="ALIPAY" name="ALIPAY" class="hv"><img src="/images/zfb.png" width="30" style="vertical-align: -7px;"><@spring.message code='alipayment'/></a>
 				<a href="###" id="PAY_PAL" name="PAY_PAL" class="hv"><img src="/images/paypal.jpg" width="150" height="50"></a>
 			</div>
 			<hr/>
 			<div class="settlement">
-				<div><button class="layui-btn" onclick="payRecharge()">立即充值</button></div>
+				<div><button class="layui-btn" onclick="payRecharge()"><@spring.message code='chargenow'/></button></div>
 				<div class="msg" id="payAmount"></div>
 			</div>
 		</div>
@@ -61,10 +61,10 @@
 				if(code==1){
 					$("#WEI_CHAT").show();
 					$("#ALIPAY").show();
-					$("#payAmount").append("<span>实付金额人民币</span>￥"+${rmbAmount});
+					$("#payAmount").append("<span><@spring.message code='realpayrmb'/></span>￥"+'${rmbAmount}');
 				}else if(code ==2){
 					$("#PAY_PAL").show();
-					$("#payAmount").append("<span>实付金额美元</span>$"+${usdAmount});
+					$("#payAmount").append("<span><@spring.message code='realpayusd'/></span>$"+'${usdAmount}');
 				}
 			}
 

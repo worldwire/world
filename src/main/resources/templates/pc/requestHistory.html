@@ -21,7 +21,7 @@
 					<div class="contentbox-list" style="margin-top: 0px;">
 						<div class="list-tt">
 							<span class="list-tt-title">${productRequest.title!''}</span>
-							<span class="list-tt-time">发布时间：<#if productRequest.createTime??>${productRequest.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span>
+							<span class="list-tt-time"><@spring.message code='publishdate'/>：<#if productRequest.createTime??>${productRequest.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span>
 						</div>
 						<div class="list-cont">
 							${productRequest.content}
@@ -32,9 +32,9 @@
 								<span class="list-btn-state-span"><#if productRequest.status??>${productRequest.status.getName()!''}</#if></span>
 							</div>
 							<div class="list-btn-btns">
-								<div class="list-btn-btns-style list-btn-btns-translation" value="${productRequest.id}" >翻译</div>
-								<div class="list-btn-btns-style" onclick="redirectClick('/request/lc/edit?id=${productRequest.id}')">修改</div>
-								<div class="list-btn-btns-style" onclick="redirectClick('/request/lc/myDetail?id=${productRequest.id}')">查看详情</div>
+								<div class="list-btn-btns-style list-btn-btns-translation" value="${productRequest.id}" ><@spring.message code='translate'/></div>
+								<div class="list-btn-btns-style" onclick="redirectClick('/request/lc/edit?id=${productRequest.id}')"><@spring.message code='modify'/></div>
+								<div class="list-btn-btns-style" onclick="redirectClick('/request/lc/myDetail?id=${productRequest.id}')"><@spring.message code='detail'/></div>
 							</div>
 						</div>
 					</div>

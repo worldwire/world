@@ -5,95 +5,91 @@
     <title>注册页面</title>
 
     <#include "../public/common.html" encoding="utf-8">
-    <link rel="stylesheet" href="/css/register.css">
-</head>
+        <link rel="stylesheet" href="/css/register.css">
+        </head>
 <body>
 <#include "../public/head.html" encoding="utf-8">
 
-<div class="container">
-    <div class="title">注册</div>
-    <div class="main">
-        <div class="layui-form layui-form-pane" name="register">
-            <div class="layui-form-item">
-                <label class="layui-form-label"><i class="iconfont">&#xe757;</i></label>
-                <div class="layui-input-block">
-                    <input type="text" name="userName" placeholder="请输入用户名" class="layui-input">
-                    <div class="bord-fa"></div>
-                    <!--<p class="msg">请输入名字</p>-->
+    <div class="container">
+        <div class="title"><@spring.message code='register'/></div>
+        <div class="main">
+            <div class="layui-form layui-form-pane" name="register">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="iconfont">&#xe757;</i></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="userName" placeholder="<@spring.message code='inputusername'/>" class="layui-input">
+                        <div class="bord-fa"></div>
+                        <!--<p class="msg">请输入名字</p>-->
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label"><i class="iconfont">&#xe75a;</i></label>
-                <div class="layui-input-block">
-                    <input type="text" name="email" placeholder="请输入邮箱" class="layui-input">
-                    <div class="bord-fa"></div>
-                    <!--<p class="msg">请输入正确邮箱</p>-->
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="iconfont">&#xe75a;</i></label>
+                    <div class="layui-input-block">
+                        <input type="text" name="email" placeholder="<@spring.message code='inputemail'/>" class="layui-input">
+                        <div class="bord-fa"></div>
+                        <!--<p class="msg">请输入正确邮箱</p>-->
+                    </div>
                 </div>
-            </div>
-            <div class="layui-form-item">
-                <label class="layui-form-label"><i class="iconfont">&#xe757;</i></label>
-                <div class="layui-input-block">
-                    <input type="password" name="password" placeholder="密码不得少于6位" class="layui-input">
-                    <div class="bord-fa"></div>
-                    <!--<p class="msg">密码不得少于6位</p>-->
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><i class="iconfont">&#xe757;</i></label>
+                    <div class="layui-input-block">
+                        <input type="password" name="password" placeholder="<@spring.message code='passwordtooshot'/>" class="layui-input">
+                        <div class="bord-fa"></div>
+                        <!--<p class="msg">密码不得少于6位</p>-->
+                    </div>
                 </div>
-            </div>
-            <div class="btnbox">
-                <button class="layui-btn nextBtn">下一步</button>
+                <div class="btnbox">
+                    <button class="layui-btn nextBtn"><@spring.message code='next'/></button>
+                </div>
             </div>
         </div>
+        <div class="footer">
+            <p><!--已有账号?--><a href="/login/"><@spring.message code='login'/></a></p>
+        </div>
     </div>
-    <div class="footer">
-        <p><!--已有账号?--><a href="/login/">登陆</a></p>
-    </div>
-</div>
 
     <#include "../public/foot.html" encoding="utf-8">
 </body>
 <script>
-        layui.use(['form', 'layedit', 'laydate'], function(){
-            var form = layui.form
-                ,layer = layui.layer
-                ,layedit = layui.layedit
-                ,laydate = layui.laydate
-                ,$ = layui.jquery;
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , $ = layui.jquery;
 
-            $(".nextBtn").click(function () {
+        $(".nextBtn").click(function () {
 
-                var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
-                if(!reg.test($("[name='email']").val())){
-                    layer.msg("邮箱格式不合法");
-                    return false;
-                }
-                if($("[name=password]").val().length < 6){
-                    layer.msg("密码位数不能少于6位！");
-                    return false;
-                }
-                $.ajax({
-                    url: "/register/save",
-                    type: "POST",
-                    data:{userName:$("[name=userName]").val(), email:$("[name=email]").val(), password:$("[name=password]").val()},
-                    dataType: "json",
-                    success:function (data) {
-                        if(data.code == 200){
-                            window.location.href = "/register/toSendMail?id="+ data.data.id;
-                        }else{
-                            layer.msg(data.desc);
-                            // layer.open({
-                            //     skin: 'layui-layer-lan',
-                            //     type: 1,
-                            //     content: data.desc //这里content是一个普通的String
-                            // });
-                        }
-                    },
-                    error:function(){
-                        layer.msg("网络异常，请稍后重试");
+            var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //正则表达式
+            if (!reg.test($("[name='email']").val())) {
+                layer.msg("<@spring.message code='emailwrong'/>");
+                return false;
+            }
+            if ($("[name=password]").val().length < 6) {
+                layer.msg("<@spring.message code='passwordtooshot'/>");
+                return false;
+            }
+            $.ajax({
+                url: "/register/save",
+                type: "POST",
+                data: {
+                    userName: $("[name=userName]").val(),
+                    email: $("[name=email]").val(),
+                    password: $("[name=password]").val()
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.code == 200) {
+                        window.location.href = "/register/toSendMail?id=" + data.data.id;
+                    } else {
+                        layer.msg(data.desc);
                     }
-                });
-            })
-
-
-
+                },
+                error: function () {
+                    layer.msg("<@spring.message code='networkerror'/>");
+                }
+            });
         })
-    </script>
+    })
+</script>
 </html>

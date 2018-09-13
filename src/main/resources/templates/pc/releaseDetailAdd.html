@@ -17,8 +17,7 @@
                 <#include "../public/left.html" encoding="utf-8">
                     <div class="contentbox-right">
                         <div class="contentbox-body-title">
-                            添加需求
-
+                            <@spring.message code='addrequiremment'/>
                         </div>
                         <form method="POST" action="/request/save" name="form" accept-charset="UTF-8"
                               onsubmit="document.charset='UTF-8';">
@@ -28,7 +27,7 @@
                                 <input type="hidden" name="requestType" value="${productRequest.requestType}">
                                 <div class="body-tag">
                                     <div class="body-line-style">
-                                        <span class="body-line-style-span">您寻找的才能（最多添加八项）</span>
+                                        <span class="body-line-style-span"><@spring.message code='telent'/></span>
                                     </div>
                                     <input type="hidden" name="keyWord">
                                     <div class="body-tag-content">
@@ -37,25 +36,26 @@
                                         </span>
                                         <span class="body-tag-content-btn">
                                             <i class="iconfont span-add">&#xe601;</i>
-                                            添加才能
+                                            <@spring.message code='addtelent'/>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="body-DeTitle">
                                     <div class="body-line-style">
-                                        <span class="body-line-style-span">需求标题(30字)</span>
+                                        <span class="body-line-style-span"><@spring.message code='title'/></span>
                                     </div>
                                     <div class="layui-form">
                                         <input class="layui-input body-DeTitle-input" type="text" name="title"
-                                               placeholder="请输入标题">
+                                               placeholder="<@spring.message code='inputtitle'/>">
                                     </div>
                                 </div>
                                 <div class="body-DeContent">
                                     <div class="body-line-style">
-                                        <span class="body-line-style-span">详细补充需求内容</span>
+                                        <span class="body-line-style-span"><@spring.message code='content'/></span>
                                     </div>
                                     <div class="layui-form">
-                                            <textarea name="content" placeholder="请输入内容"
+                                            <textarea name="content"
+                                                      placeholder="<@spring.message code='inputcontent'/>"
                                                       class="layui-textarea body-DeContent-textarea"></textarea>
                                     </div>
                                 </div>
@@ -65,45 +65,47 @@
                                         <div class="body-epsp-ep-email">
                                             <div class="body-line-style">
                                                 <span class="body-line-style-dot"></span>&nbsp;&nbsp;
-                                                <span class="body-line-style-span">邮箱</span>
+                                                <span class="body-line-style-span"><@spring.message code='email'/></span>
                                             </div>
                                             <div class="layui-form">
                                                 <input class="layui-input body-epsp-ep-email-input" type="text"
                                                        name="email"
-                                                       value="${userInfo.email!''}" placeholder="请输入邮箱">
+                                                       value="${userInfo.email!''}"
+                                                       placeholder="<@spring.message code='inputemail'/>">
                                             </div>
                                         </div>
                                         <div class="body-epsp-ep-phone">
                                             <div class="body-line-style">
                                                 <span class="body-line-style-dot"></span>&nbsp;&nbsp;
-                                                <span class="body-line-style-span">手机号</span>
+                                                <span class="body-line-style-span"><@spring.message code='mobile'/></span>
                                             </div>
                                             <div class="layui-form">
                                                 <input class="layui-input body-epsp-ep-phone-input" type="text"
                                                        name="mobile"
-                                                       value="${userInfo.mobile!''}" placeholder="请输入手机号">
+                                                       value="${userInfo.mobile!''}"
+                                                       placeholder="<@spring.message code='inputmobile'/>">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="body-epsp-sp">
                                         <div class="body-epsp-sp-site">
                                             <div class="body-line-style">
-                                                <span class="body-line-style-span">网站</span>
+                                                <span class="body-line-style-span"><@spring.message code='website'/></span>
                                             </div>
                                             <div class="layui-form">
                                                 <input class="layui-input body-epsp-ep-site-input" type="text"
                                                        name="website" value="${userInfo.website!''}"
-                                                       placeholder="请输入网站地址">
+                                                       placeholder="<@spring.message code='inputwebsite'/>">
                                             </div>
                                         </div>
                                         <div class="body-epsp-sp-public">
                                             <div class="body-line-style">
-                                                <span class="body-line-style-span">公众号</span>
+                                                <span class="body-line-style-span"><@spring.message code='wechatpublicaccount'/></span>
                                             </div>
                                             <div class="layui-form">
                                                 <input class="layui-input body-epsp-sp-public-input" type="text"
                                                        name="publicPlatform" value="${userInfo.publicPlatform!''}"
-                                                       placeholder="请输入公众号">
+                                                       placeholder="<@spring.message code='inputwechatpublicaccount'/>">
                                             </div>
                                         </div>
                                     </div>
@@ -111,19 +113,19 @@
                                 <div class="body-details">
                                     <input type="hidden" name="qrcode">
                                     <div class="body-details-img">
-                                        <p>点击上传<br/>我的微信二维码</p>
+                                        <p><@spring.message code='upload'/><br/><@spring.message code='qrcode'/></p>
                                         <img class="body-details-ewm"/>
                                     </div>
                                     <div class="body-details-list">
                                         <div class="body-details-vf">
                                             <div class="body-details-vf-vx">
                                                 <div class="body-line-style">
-                                                    <span class="body-line-style-span">微信</span>
+                                                    <span class="body-line-style-span"><@spring.message code='wechat'/></span>
                                                 </div>
                                                 <div class="layui-form">
                                                     <input class="layui-input body-details-vf-vx-input" type="text"
                                                            name="wechat" value="${userInfo.wechat!''}"
-                                                           placeholder="请输入微信号">
+                                                           placeholder="<@spring.message code='inputwechat'/>">
                                                 </div>
                                             </div>
                                             <div class="body-details-vf-facebook">
@@ -134,7 +136,7 @@
                                                     <input class="layui-input body-details-vf-facebook-input"
                                                            type="text"
                                                            name="facebook" value="${userInfo.facebook!''}"
-                                                           placeholder="请输入Facebook帐号">
+                                                           placeholder="<@spring.message code='inputfacebook'/>">
                                                 </div>
                                             </div>
                                         </div>
@@ -146,7 +148,7 @@
                                                 <div class="layui-form">
                                                     <input class="layui-input body-details-wl-wapp-input" type="text"
                                                            name="whatsapp" value="${userInfo.whatsapp!''}"
-                                                           placeholder="请输入WhatsApp">
+                                                           placeholder="<@spring.message code='inputwhatsapp'/>">
                                                 </div>
                                             </div>
                                             <div class="body-details-wl-lin">
@@ -156,7 +158,7 @@
                                                 <div class="layui-form">
                                                     <input class="layui-input body-details-wl-lin-input" type="text"
                                                            name="linkedIn" value="${userInfo.linkedin!''}"
-                                                           placeholder="请输入LinkedIn">
+                                                           placeholder="<@spring.message code='inputinkedin'/>">
                                                 </div>
                                             </div>
                                         </div>
@@ -165,28 +167,29 @@
                                 <div class="body-ComMethods">
                                     <input type="hidden" name="others">
                                     <div class="body-line-style">
-                                        <span class="body-line-style-span">其他即时通讯方式（例，QQ：1652669536）</span>
+                                        <span class="body-line-style-span"><@spring.message code='othercommunications'/></span>
                                     </div>
                                     <div class="body-ComMethods-com">
                                         <i class="iconfont body-ComMethods-com-addbtn">&#xe601;</i>
                                         <div class="layui-form body-ComMethods-com-box">
                                             <input class="layui-input body-ComMethods-com-name" type="text"
-                                                   placeholder="请填写即时通信种类">
+                                                   placeholder="<@spring.message code='inputcommunicatetype'/>">
                                             <span class="body-ComMethods-com-span">:</span>
                                             <input class="layui-input body-ComMethods-com-content" type="text"
-                                                   placeholder="请填写该通信方式的账号">
+                                                   placeholder="<@spring.message code='inputcommunicateaccount'/>">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="body-userAgreement">
                                     <div class="layui-form">
-                                        <input name="agreement" type="radio" value="nan" title="同意用户电子协议">
+                                        <input name="agreement" type="radio" value="nan"
+                                               title="<@spring.message code='acceptdeal'/>">
                                     </div>
 
                                 </div>
                                 <div class="body-SaveBtn">
                                     <div class="body-SaveBtn-btn">
-                                        保存
+                                        <@spring.message code='save'/>
                                     </div>
                                 </div>
                             </div>
@@ -233,11 +236,11 @@
         $(document).on("click", ".body-tag-content-btn", function (e) {
             //询问框
             layer.open({
-                title: '请添加一个才能',
+                title: "<@spring.message code='pleaseaddtelent'/>",
                 type: 1,
                 skin: 'layui-layer-rim', //加上边框
                 area: ['360px', '120px'], //宽高
-                content: '<div class="layer-from"><input type="text" name="line3-value"  placeholder="点击输入8个字以内" " class="layui-input  line3-label"/></div><div class="layui-btn add-btn" style="width: 100px;float: right">确定</div>'
+                content: '<div class="layer-from"><input type="text" name="line3-value"  placeholder="' + "<@spring.message code='inputtelent'/>" + '" " class="layui-input  line3-label"/></div><div class="layui-btn add-btn" style="width: 100px;float: right">' + "<@spring.message code='submit'/>" + '</div>'
             });
         })
 
@@ -245,7 +248,7 @@
         $(document).on("click", ".add-btn", function (e) {
             var value = $("input[type=text][name=line3-value]").val();
             if (!value) {
-                layer.msg("才能内容不能为空", {time: 1500});
+                layer.msg("<@spring.message code='errortelent'/>", {time: 1500});
                 return false;
             }
             var list = $(".body-tag-content-list span")
@@ -254,7 +257,7 @@
                 layer.closeAll();
             } else {
                 layer.closeAll();
-                layer.msg("你添加的才能已经上限")
+                layer.msg("<@spring.message code='telentlimit'/>")
             }
             var keyWord = $("[name=keyWord]").val();
             if (!!keyWord) {
@@ -283,41 +286,41 @@
         $(document).on("click", ".body-SaveBtn", function (e) {
             var title = $("[name=title]").val();
             if (!title) {
-                layer.msg("标题不能为空", {time: 1500});
+                layer.msg("<@spring.message code='errortitle'/>", {time: 1500});
                 return false;
             }
             if (title.length > 30) {
-                layer.msg("标题不能超过30个字", {time: 1500});
+                layer.msg("<@spring.message code='titlelimit'/>", {time: 1500});
                 return false;
             }
             var content = $("[name=content]").val();
             if (!content) {
-                layer.msg("内容不能为空", {time: 1500});
+                layer.msg("<@spring.message code='errorcontent'/>", {time: 1500});
                 return false;
             }
             var email = $("[name=email]").val();
             if (!email) {
-                layer.msg("邮箱不能为空", {time: 1500});
+                layer.msg("<@spring.message code='erroremail'/>", {time: 1500});
                 return false;
             }
             var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
             if (!reg.test(email)) {
-                layer.msg("请输入正确的邮箱地址", {time: 1500});
+                layer.msg("<@spring.message code='emailwrong'/>", {time: 1500});
                 return false;
             }
             var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
             var mobile = $("[name=mobile]").val();
             if (!mobile) {
-                layer.msg("手机号不能为空", {time: 1500});
+                layer.msg("", {time: 1500});
                 return false;
             }
             if (!myreg.test(mobile)) {
-                layer.msg("请输入正确的手机号", {time: 1500});
+                layer.msg("<@spring.message code='invalidphone'/>", {time: 1500});
                 return false;
             }
             var agree = $("[name=agreement]:checked").val();
             if (!agree) {
-                layer.msg("请选中同意用户协议按钮", {time: 1500});
+                layer.msg("<@spring.message code='agreedeal'/>", {time: 1500});
                 return false;
             }
             var others = "";
@@ -351,7 +354,7 @@
             , done: function (res) {		//上传成功的回调
                 //如果上传失败
                 if (res.code > 0) {
-                    return layer.msg('上传失败');
+                    return layer.msg("<@spring.message code='uploadfail'/>");
                 }
                 var path = res.path;
                 $("[name=qrcode]").val(path);

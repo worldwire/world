@@ -24,6 +24,7 @@ public class LocaleConfig {
 	public ResourceBundleMessageSource resourceBundleMessageSource() {
 		ResourceBundleMessageSource source = new ResourceBundleMessageSource();
 		source.setBasename("messages/messages");
+		source.setFallbackToSystemLocale(false);
 		source.setDefaultEncoding("utf-8");
 		return source;
 	}

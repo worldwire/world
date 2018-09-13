@@ -1,56 +1,56 @@
 <link rel="stylesheet" type="text/css" href="/css/left_style.css"/>
 
-  <div class="left-nav">
-      <div class="left-userhead">
-          <img src="${userInfo.showImg!'/images/defaultHeadImg.png'}"/>
-      </div>
-      <div class="left-username">
-          ${userInfo.nickName!''}
-      </div>
-      <!--发布需求-->
-      <div class="left-demand left-btn-style" style="margin-top:20px ;" onclick="redirectClick('/request/lc/release')">
-          <i class="iconfont">&#xe75e;</i>
-          <span class="">发布需求</span>
-      </div>
-      <!--发布历史-->
-      <div class="left-history left-btn-style" onclick="redirectClick('/request/lc/history')">
-          <i class="iconfont">&#xe75f;</i>
-          <span class="" >发布历史</span>
-      </div>
-      <!--翻译申请-->
-      <div class="left-history left-btn-style" onclick="redirectClick('/translation/list')">
-          <i class="iconfont">&#xe75f;</i>
-          <span class="" >翻译申请</span>
-      </div>
-      <!--交易记录-->
-      <div class="left-record left-btn-style" onclick="redirectClick('/usercenter/')">
-          <i class="iconfont">&#xe762;</i>
-          <span class="" >交易记录</span>
-      </div>
-      <!--我的资料-->
-      <div class="left-data left-btn-style" onclick="redirectClick('/info/toModify')">
-          <i class="iconfont">&#xe760;</i>
-          <span class="" >我的资料</span>
-      </div>
-      <!--修改密码-->
-      <div class="left-password left-btn-style" onclick="redirectClick('/usercenter/passwd/edit')">
-          <i class="iconfont">&#xe762;</i>
-          <span class="" >修改密码</span>
-      </div>
-      <!--签到-->
-      <div class="left-sign">
-          <span class="left-sign-span">已连续签到<#if account??>${account.signNum!'0'}<#else>0</#if>天</span>
-          <div class="left-sign-btn">签到</div>
-      </div>
-  </div>
+<div class="left-nav">
+    <div class="left-userhead">
+        <img src="${userInfo.showImg!'/images/defaultHeadImg.png'}"/>
+    </div>
+    <div class="left-username">
+        ${userInfo.nickName!''}
+    </div>
+    <!--发布需求-->
+    <div class="left-demand left-btn-style" style="margin-top:20px ;" onclick="redirectClick('/request/lc/release')">
+        <i class="iconfont">&#xe75e;</i>
+        <span class=""><@spring.message code="publishrequirement"/></span>
+    </div>
+    <!--发布历史-->
+    <div class="left-history left-btn-style" onclick="redirectClick('/request/lc/history')">
+        <i class="iconfont">&#xe75f;</i>
+        <span class=""><@spring.message code="publishhistory"/></span>
+    </div>
+    <!--翻译申请-->
+    <div class="left-history left-btn-style" onclick="redirectClick('/translation/list')">
+        <i class="iconfont">&#xe75f;</i>
+        <span class=""><@spring.message code="translationapply"/></span>
+    </div>
+    <!--交易记录-->
+    <div class="left-record left-btn-style" onclick="redirectClick('/usercenter/')">
+        <i class="iconfont">&#xe762;</i>
+        <span class=""><@spring.message code="traderecord"/></span>
+    </div>
+    <!--我的资料-->
+    <div class="left-data left-btn-style" onclick="redirectClick('/info/toModify')">
+        <i class="iconfont">&#xe760;</i>
+        <span class=""><@spring.message code="personaldata"/></span>
+    </div>
+    <!--修改密码-->
+    <div class="left-password left-btn-style" onclick="redirectClick('/usercenter/passwd/edit')">
+        <i class="iconfont">&#xe762;</i>
+        <span class=""><@spring.message code="passwordmodify"/></span>
+    </div>
+    <!--签到-->
+    <div class="left-sign">
+        <span class="left-sign-span"><@spring.message code="continuousignin"/><#if account??>${account.signNum!'0'}<#else>0</#if><@spring.message code="day"/></span>
+        <div class="left-sign-btn"><@spring.message code="signin"/></div>
+    </div>
+</div>
 <script>
     layui.use(['form', 'layedit', 'laydate', 'carousel'], function () {
         var form = layui.form
-                , layer = layui.layer
-                , layedit = layui.layedit
-                , laydate = layui.laydate
-                , carousel = layui.carousel
-                , $ = layui.jquery;
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , carousel = layui.carousel
+            , $ = layui.jquery;
         $(".left-sign-btn").click(function () {
             $.ajax({
                 type: "POST",
@@ -59,15 +59,15 @@
                 dataType: "json",
                 success: function (data) {
                     if (data == null) {
-                        alert("签到失败");
+                        alert("<@spring.message code='signfail'/>");
                         return false;
                     }
-                    alert("签到成功");
-                    $(".left-sign-span").text("已连续签到"+($(".left-sign-span").val() + 1)+"天");
+                    alert("<@spring.message code='signsuccess'/>");
+                    $(".left-sign-span").text('<@spring.message code="continuousignin"/>' + ($(".left-sign-span").val() + 1) + "<@spring.message code='day'/>");
 
                 },
                 error: function () {
-                    alert("签到失败，您今天已经签到或者登录超时");
+                    alert("<@spring.message code='signerror'/>");
                 }
             });
         });

@@ -6,8 +6,8 @@
             <i class="layui-icon layui-icon-face-smile search-icon">&#xe615;</i>
             <div class="layui-input-inline head-search-input">
                 <select name="modules" lay-verify="required" lay-search="" onkeyup="openRequireList(this)">
-                    <option value="1">个人需求</option>
-                    <option value="2">企业需求</option>
+                    <option value="1"><@spring.message code="personalrequirement"/></option>
+                    <option value="2"><@spring.message code="enterpriserequirement"/></option>
                 </select>
             </div>
         </div>
@@ -41,26 +41,26 @@
                             <span class="userbox-usename">${userInfo.nickName!''}</span>
                             <span class="userbox-usertype">
                                 <#if loginInfo?? && loginInfo.type && loginInfo.type == 2>
-                                    企业用户
+                                    <@spring.message code="enterpriseuser"/>
                                 <#else>
-                                    个人用户
+                                    <@spring.message code="personaluser"/>
                                 </#if>
                             </span>
                         </div>
                         <div class="userbox-set" onclick="redirectClick('/usercenter/')">
                             <i class="iconfont " style="font-size: 14px;color: #333333;" >&#xe606;</i>
-                            &nbsp;&nbsp;&nbsp;设置
+                            &nbsp;&nbsp;&nbsp;<@spring.message code="setting"/>
                         </div>
                         <div class="userbox-out" onclick="redirectClick('/login/logout')">
                             <i class="iconfont " style="font-size: 14px;color: #333333;">&#xe652;</i>
-                            &nbsp;&nbsp;&nbsp;安全退出
+                            &nbsp;&nbsp;&nbsp;<@spring.message code="quit"/>
                         </div>
                     </div>
                 </div>
             <#else>
-                <span class="login-btn" onclick="redirectClick('/login/')">登录</span>
+                <span class="login-btn" onclick="redirectClick('/login/')"><@spring.message code="login"/></span>
                 <span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-                <span class="register-btn" onclick="redirectClick('/register/')">注册</span>
+                <span class="register-btn" onclick="redirectClick('/register/')"><@spring.message code="register"/></span>
             </#if>
 
         </div>

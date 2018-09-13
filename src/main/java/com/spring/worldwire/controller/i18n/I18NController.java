@@ -37,13 +37,17 @@ public class I18NController {
         if (!StringUtils.isEmpty(lang)) {
             if (lang.equals("zh_cn")) {
                 localeResolver.setLocale(request, response, Locale.CHINA);
+                request.getSession().setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, Locale.CHINA);
             } else if (lang.equals("en")) {
                 localeResolver.setLocale(request, response, Locale.US);
+                request.getSession().setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, Locale.US);
             } else {
                 localeResolver.setLocale(request, response, Locale.CHINA);
+                request.getSession().setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, Locale.CHINA);
             }
         }
-        request.getSession().setAttribute(SessionLocaleResolver.LOCALE_SESSION_ATTRIBUTE_NAME, locale);
+        //org.springframework.web.servlet.i18n.SessionLocaleResolver.LOCALE
+
         request.getSession().setAttribute("lan", lang);
         return new ModelAndView("redirect:" + oriUrl);
     }

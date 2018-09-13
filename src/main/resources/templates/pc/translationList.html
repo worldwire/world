@@ -21,8 +21,8 @@
 					<div class="contentbox-list" style="margin-top: 0px;">
 						<div class="list-tt">
 							<span class="list-tt-title">${translationApply.title!''}</span>
-							<span class="list-tt-language">原始语言：${translationApply.origType.cnName}  --> 翻译语言：${translationApply.fromType.cnName}</span>
-							<span class="list-tt-time">发布时间：<#if translationApply.createTime??>${translationApply.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span>
+							<span class="list-tt-language"><@spring.message code='orilanguage'/>：${translationApply.origType.cnName}  --> <@spring.message code='translatelanguage'/>：${translationApply.fromType.cnName}</span>
+							<span class="list-tt-time"><@spring.message code='publishdate'/>：<#if translationApply.createTime??>${translationApply.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span>
 						</div>
 						<div class="list-btn">
 							<div class="list-btn-state">
@@ -33,7 +33,7 @@
 								<#if translationApply.status.code == 0>
 									<div class="list-btn-btns-style list-btn-btns-translation" value="${translationApply.id}" >支付</div>
 								</#if>
-								<div class="list-btn-btns-style">关闭</div>
+								<div class="list-btn-btns-style"><@spring.message code='shutdown'/></div>
 							</div>
 						</div>
 					</div>
@@ -64,7 +64,6 @@
 	  ,tips = layui.tips
 	  ,$ = layui.jquery;
 
-
 		//翻译弹出层
 		$(".list-btn-btns-translation").click(function(){
 			toReqId = $(this).attr("value");
@@ -77,15 +76,10 @@
 			  ,shadeClose: true //开启遮罩关闭
 			  ,closeBtn: 1, //不显示关闭按钮
 			});
-
 		})
-
-
 		//关闭弹出层
 		$(document).on('click', '.layer-div-btns-cancel', function() {
 			layer.closeAll()
 		});
-
-
 })
   	</script>

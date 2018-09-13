@@ -13,34 +13,34 @@
     <#include "../public/navigator.html" encoding="utf-8">
 
 <div class="container">
-    <div class="title">重置密码</div>
+    <div class="title"><@spring.message code="resetpassword"/></div>
     <div class="layui-tab-content">
         <div class="layui-tab-item layui-show">
             <form class="layui-form layui-form-pane" action="">
                 <input type="hidden" name="data" value="${data}">
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <input class="layui-input" type="text" name="email" placeholder="请再输入一遍邮箱">
+                        <input class="layui-input" type="text" name="email" placeholder='<@spring.message code="inputemail"/>'>
                         <div class="bord-fa"></div>
                         <i class="iconfont vercode">&#xe75a;</i>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <input class="layui-input" type="password" name="password" placeholder="请输入您的新密码">
+                        <input class="layui-input" type="password" name="password" placeholder='<@spring.message code="inputnewpassword"/>'>
                         <div class="bord-fa"></div>
                         <i class="iconfont vercode">&#xe673;</i>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <input class="layui-input" type="password" name="password2" placeholder="请再输入一遍密码">
+                        <input class="layui-input" type="password" name="password2" placeholder=‘<@spring.message code="inputpasswordagain"/>'>
                         <div class="bord-fa"></div>
                         <i class="iconfont vercode">&#xe673;</i>
                     </div>
                 </div>
                 <div>
-                    <button type="button" class="layui-btn nextBtn" style="margin-top: 40px;">提交</button>
+                    <button type="button" class="layui-btn nextBtn" style="margin-top: 40px;"><@spring.message code="submit"/></button>
                 </div>
             </form>
         </div>
@@ -72,12 +72,12 @@
                         layer.msg(data.desc);
                         return false;
                     }
-                    layer.msg("修改成功");
+                    layer.msg("<@spring.message code=‘modifysuccess/>");
                     window.location.href = "/login/logout";
 
                 },
                 error: function (data) {
-                    layer.msg("网络异常，请稍后重试!");
+                    layer.msg("<@spring.message code=‘networkerror/>");
                 }
             })
         })

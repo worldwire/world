@@ -5,33 +5,36 @@
     <title>需求大厅</title>
     <link rel="stylesheet" type="text/css" href="/css/demandHall.css"/>
     <#include "../public/common.html" encoding="utf-8">
-</head>
+        </head>
 <body>
 <!--头部-->
 <#include "../public/head.html" encoding="utf-8">
-<!--导航-->
+    <!--导航-->
     <#include "../public/navigator.html" encoding="utf-8">
 
-<div class="content">
-    <div class="contentBox">
-        <div class="contentBox-choose">
-            <ul class="contentBox-choose1">
-                <li class="li-1">服务提供</li>
-                <li>全部</li>
-                <li>服务</li>
-                <li>需求</li>
-            </ul>
-        </div>
-        <div class="contentBox-body">
-            <div id="contentBox-body-list1">
-                <div carousel-item>
-                    <!--个人第一页-->
-                    <div class="carousel-item">
+        <div class="content">
+            <div class="contentBox">
+                <div class="contentBox-choose">
+                    <ul class="contentBox-choose1">
+                        <li class="li-1"><@spring.message code='type'/></li>
+                        <li><@spring.message code='all'/></li>
+                        <li><@spring.message code='service'/></li>
+                        <li><@spring.message code='requirement'/></li>
+                    </ul>
+                </div>
+                <div class="contentBox-body">
+                    <div id="contentBox-body-list1">
+                        <div carousel-item>
+                            <!--个人第一页-->
+                            <div class="carousel-item">
                                 <#if personalVo??&&personalVo.list??>
                                     <#list personalVo.list as personal>
                                         <div class="list-style">
                                             <div class="list-style-title">
-                                                个人<#if personal.requestType.code == 1>服务<#else>需求</#if>
+                                                <@spring.message code='personal'/>
+                                                <#if personal.requestType.code == 1><@spring.message code='service'/>
+                                                    <#else><@spring.message code='requirement'/>
+                                                </#if>
                                                 <img class="list-style-title-img1" src="/images/demandHall1.png"/>
                                                 <div class="list-style-title-img2">
                                                     <img src="/images/demandHall2.png"/>
@@ -45,17 +48,17 @@
                                             </div>
                                             <div class="list-style-explain">
                                                 <#if personal.requestType.code == 1>
-                                                    我能提供国际人才或资源
-                                                <#else>我要找国际人才或资源
+                                                    <@spring.message code='supplyservice'/>
+                                                    <#else><@spring.message code='requireservice'/>
                                                 </#if>
                                             </div>
                                             <div class="list-style-place">
-                                                现所在地
+                                                <@spring.message code='nowplace'/>
                                                 <span class="list-style-place-span">
                                                     <#if personal.userInfo??>
                                                         ${personal.userInfo.localAddr!''}
                                                     <#else>
-                                                                未知
+                                                                <@spring.message code='unknown'/>
                                                     </#if>
                                                 </span>
                                                 <div class="list-style-place-img">
@@ -83,7 +86,8 @@
                                             </div>
                                             <div class="list-style-details">
                                                 <a href="/request/detail?id=${personal.id}"> <a
-                                                        href="/request/detail?id=${personal.id}">查看详情</a></a>
+                                                        href="/request/detail?id=${personal.id}"><@spring.message
+                                                    code='detail'/></a></a>
                                             </div>
                                             <div class="list-style-viewtime">
                                                 <i class="iconfont i-view"> &#xe60d;</i>
@@ -94,26 +98,29 @@
                                         </div>
                                     </#list>
                                 </#if>
-                    </div>
+                            </div>
 
-                    <div class="leftbtn personal">
-                        <i class="iconfont">&#xe68a;</i>
-                    </div>
-                    <div class="rightbtn personal">
-                        <i class="iconfont">&#xe6c6;</i>
-                    </div>
-                </div>
+                            <div class="leftbtn personal">
+                                <i class="iconfont">&#xe68a;</i>
+                            </div>
+                            <div class="rightbtn personal">
+                                <i class="iconfont">&#xe6c6;</i>
+                            </div>
+                        </div>
 
-            </div>
-            <div id="contentBox-body-list2">
+                    </div>
+                    <div id="contentBox-body-list2">
 
-                <div carousel-item>
-                    <div class="carousel-item">
+                        <div carousel-item>
+                            <div class="carousel-item">
                                 <#if enterpriseVo??&&enterpriseVo.list??>
                                     <#list enterpriseVo.list as enterprise>
                                         <div class="list-style">
                                             <div class="list-style-1">
-                                                公司<#if enterprise.requestType.code == 1>服务<#else>需求</#if>
+                                                <@spring.message code='enterprise'/>
+                                                <#if enterprise.requestType.code == 1><@spring.message code='service'/>
+                                                    <#else><@spring.message code='requirement'/>
+                                                </#if>
                                                 <img class="list-style-1-img1" src="/images/demandHall1.png"/>
                                                 <div class="list-style-1-img2">
                                                     <img src="/images/demandHall2.png"/>
@@ -128,15 +135,15 @@
                                             <div class="list-style-explain">
                                                 ${enterprise.requestType.code}
                                                 <#if enterprise.requestType.code == 1>
-                                                    我能提供国际人才或资源
-                                                <#else>我要找国际人才或资源
+                                                    <@spring.message code='supplyservice'/>
+                                                    <#else><@spring.message code='requireservice'/>
                                                 </#if>
                                             </div>
                                             <div class="list-style-place">
-                                                现所在地
+                                                <@spring.message code='nowplace'/>
                                                 <span class="list-style-place-span">
                                                     <#if enterprise.userInfo??>${enterprise.userInfo.companyAddr!''}<#else>
-                                                        未知</#if>
+                                                        <@spring.message code='unknown'/></#if>
                                                 </span>
                                                 <div class="list-style-place-img">
                                                     <img src="/images/demandHall2.png"/>
@@ -163,7 +170,8 @@
                                             </div>
                                             <div class="list-style-details">
                                                 <a href="/request/detail?id=${enterprise.id}"> <a
-                                                        href="/request/detail?id=${enterprise.id}">查看详情</a></a>
+                                                        href="/request/detail?id=${enterprise.id}"><@spring.message
+                                                    code='detail'/></a></a>
                                             </div>
                                             <div class="list-style-viewtime">
                                                 <i class="iconfont i-view"> &#xe60d;</i>
@@ -174,32 +182,32 @@
                                         </div>
                                     </#list>
                                 </#if>
+                            </div>
+                        </div>
+
+                        <div class="leftbtn enterprise">
+                            <i class="iconfont">&#xe68a;</i>
+                        </div>
+                        <div class="rightbtn enterprise">
+                            <i class="iconfont">&#xe6c6;</i>
+                        </div>
                     </div>
+
                 </div>
 
-                <div class="leftbtn enterprise">
-                    <i class="iconfont">&#xe68a;</i>
-                </div>
-                <div class="rightbtn enterprise">
-                    <i class="iconfont">&#xe6c6;</i>
-                </div>
             </div>
-
         </div>
-
-    </div>
-</div>
 
         <#include "../public/foot.html" encoding="utf-8">
 </body>
 <script>
     layui.use(['form', 'layedit', 'laydate', 'carousel'], function () {
         var form = layui.form
-                , layer = layui.layer
-                , layedit = layui.layedit
-                , laydate = layui.laydate
-                , carousel = layui.carousel
-                , $ = layui.jquery;
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , carousel = layui.carousel
+            , $ = layui.jquery;
 
         $(".contentBox-choose1").on("click", "li", function () {      //只需要找到你点击的是哪个ul里面的就行
             var index = $(this).index() - 1;
@@ -217,7 +225,7 @@
             var pageNo = 0;
             if ($(this).hasClass('leftbtn')) {
                 if (currentPersonalPage - 1 <= 0) {
-                    layer.msg("当前已经是第一页");
+                    layer.msg("<@spring.message code='firstpage'/>");
                     return false;
                 }
                 pageNo = currentPersonalPage - 1;
@@ -231,7 +239,7 @@
             var pageNo = 0;
             if ($(this).hasClass('leftbtn')) {
                 if (currentEnterprisePage - 1 <= 0) {
-                    layer.msg("当前已经是第一页");
+                    layer.msg("<@spring.message code='lastpage'/>");
                     return false;
                 }
                 pageNo = currentEnterprisePage - 1;
@@ -256,7 +264,7 @@
                 dataType: "json",
                 success: function (data) {
                     if (!data.list || data.list.length == 0) {
-                        layer.msg("没有更多数据");
+                        layer.msg("<@spring.message code='nomoredata'/>");
                         return false;
                     }
                     if (userType == 1) {
@@ -272,15 +280,15 @@
 
                         if (userType == 1) {
                             html += "<div class=\"list-style-title\">";
-                            html += "个人";
+                            html += "<@spring.message code='personal'/>";
                         } else {
                             html += "<div class=\"list-style-1\">";
-                            html += "公司";
+                            html += "<@spring.message code='enterprise'/>";
                         }
                         if (item.requestType == "SERVICE") {
-                            html += '服务';
+                            html += '<@spring.message code="service"/>';
                         } else {
-                            html += '需求';
+                            html += '<@spring.message code="requirement"/>';
                         }
                         if (userType == 1) {
                             html += "<img class=\"list-style-title-img1\" src=\"/images/demandHall1.png\"/>";
@@ -298,13 +306,13 @@
                         html += '<div class="list-style-name">' + (!!item.userInfo.nickName ? item.userInfo.nickName : '') + '</div>';
                         html += '<div class="list-style-explain">';
                         if (item.requestType == "SERVICE") {
-                            html += '我能提供国际人才或资源';
+                            html += "<@spring.message code='supplyservice'/>";
                         } else {
-                            html += '我要找国际人才或资源';
+                            html += "<@spring.message code='requireservice'/>";
                         }
                         html += '</div>';
-                        html += '<div class="list-style-place">现所在地<span class="list-style-place-span">';
-                        html += (!!item.userInfo.localAddr ? item.userInfo.localAddr : '未知');
+                        html += '<div class="list-style-place">' + "<@spring.message code='nowplace'/>" + '<span class="list-style-place-span">';
+                        html += (!!item.userInfo.localAddr ? item.userInfo.localAddr : "<@spring.message code='unknown'/>");
                         html += '</span><div class="list-style-place-img"><img src="/images/demandHall2.png"/></div></div>';
                         html += '<div class="list-style-specialty"><div class="specialty-label-box">';
                         if (!!item.keyWord) {
@@ -319,7 +327,7 @@
                         html += '</div>\n\n</div>';
                         html += '<div class="list-style-PerTitle">' + item.title + '</div>';
                         html += '<div class="list-style-PerContent">' + item.content + '</div>';
-                        html += '<div class="list-style-details"><a href="/request/detail?id=' + item.id + '"> 查看详情</a></div>';
+                        html += '<div class="list-style-details"><a href="/request/detail?id=' + item.id + '"> ' + "<@spring.message code='detail'/>" + '</a></div>';
                         html += '<div class="list-style-viewtime"><i class="iconfont i-view"> &#xe60d;</i>';
                         html += '<span class="span-view">' + item.viewCount + '</span>';
                         html += '<i class="iconfont i-times">&#xe75f;</i>';
@@ -338,13 +346,10 @@
 
                 },
                 error: function () {
-                    layer.msg("请求异常,请稍后重试!");
+                    layer.msg("<@spring.message code='networkerror'/>");
                 }
             })
-
         }
-
-
     })
 </script>
 </html>
