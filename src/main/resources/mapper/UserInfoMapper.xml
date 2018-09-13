@@ -104,8 +104,8 @@
       business_bank_img)
     values (#{id,jdbcType=BIGINT}, #{loginId,jdbcType=BIGINT}, #{type,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, 
       #{isForeign,jdbcType=INTEGER}, #{showImg,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP},
-      #{nickName,jdbcType=VARCHAR}, #{language,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel}, #{briNationality,jdbcType=VARCHAR},
-      #{nowNationality,jdbcType=VARCHAR}, #{localAddr,jdbcType=VARCHAR}, #{occupation,jdbcType=VARCHAR}, 
+      #{nickName,jdbcType=VARCHAR}, #{language,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel}, #{briNationality,typeHandler=com.spring.worldwire.model.typeHandler.LocationHandel},
+      #{nowNationality,typeHandler=com.spring.worldwire.model.typeHandler.LocationHandel}, #{localAddr,typeHandler=com.spring.worldwire.model.typeHandler.LocationHandel}, #{occupation,jdbcType=VARCHAR},
       #{email,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{website,jdbcType=VARCHAR}, 
       #{publicPlatform,jdbcType=VARCHAR}, #{wechatQrcode,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, 
       #{facebook,jdbcType=VARCHAR}, #{whatsapp,jdbcType=VARCHAR}, #{linkedin,jdbcType=VARCHAR}, 
@@ -281,13 +281,13 @@
         #{language,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel},
       </if>
       <if test="briNationality != null" >
-        #{briNationality,jdbcType=VARCHAR},
+        #{briNationality,typeHandler=com.spring.worldwire.model.typeHandler.LocationHandel},
       </if>
       <if test="nowNationality != null" >
-        #{nowNationality,jdbcType=VARCHAR},
+        #{nowNationality,typeHandler=com.spring.worldwire.model.typeHandler.LocationHandel},
       </if>
       <if test="localAddr != null" >
-        #{localAddr,jdbcType=VARCHAR},
+        #{localAddr,typeHandler=com.spring.worldwire.model.typeHandler.LocationHandel},
       </if>
       <if test="occupation != null" >
         #{occupation,jdbcType=VARCHAR},
@@ -415,13 +415,13 @@
         language = #{language,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel},
       </if>
       <if test="briNationality != null and briNationality!=''" >
-        bri_nationality = #{briNationality,jdbcType=VARCHAR},
+        bri_nationality = #{briNationality,typeHandler=com.spring.worldwire.model.typeHandler.LocationHandel},
       </if>
       <if test="nowNationality != null and nowNationality != ''" >
-        now_nationality = #{nowNationality,jdbcType=VARCHAR},
+        now_nationality = #{nowNationality,typeHandler=com.spring.worldwire.model.typeHandler.LocationHandel},
       </if>
       <if test="localAddr != null and localAddr!=''" >
-        local_addr = #{localAddr,jdbcType=VARCHAR},
+        local_addr = #{localAddr,typeHandler=com.spring.worldwire.model.typeHandler.LocationHandel},
       </if>
       <if test="occupation != null and occupation != ''" >
         occupation = #{occupation,jdbcType=VARCHAR},
@@ -534,9 +534,9 @@
       birthday = #{birthday,jdbcType=TIMESTAMP},
       nick_name = #{nickName,jdbcType=VARCHAR},
       language = #{language,typeHandler=com.spring.worldwire.model.typeHandler.LanguageLevelHandel},
-      bri_nationality = #{briNationality,jdbcType=VARCHAR},
-      now_nationality = #{nowNationality,jdbcType=VARCHAR},
-      local_addr = #{localAddr,jdbcType=VARCHAR},
+      bri_nationality = #{briNationality,typeHandler=com.spring.worldwire.model.typeHandler.LocationHandel},
+      now_nationality = #{nowNationality,typeHandler=com.spring.worldwire.model.typeHandler.LocationHandel},
+      local_addr = #{localAddr,typeHandler=com.spring.worldwire.model.typeHandler.LocationHandel},
       occupation = #{occupation,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       mobile = #{mobile,jdbcType=VARCHAR},
