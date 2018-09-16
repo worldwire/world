@@ -15,17 +15,13 @@ public class SpringFileUtil {
     }
 
     public static String getFileStrFromResource(String path) throws IOException {
-        File file = ResourceUtils.getFile("classpath:" + path);
-        StringBuilder sb = new StringBuilder();
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String temp = "";
-        while((temp = br.readLine()) != null){
-            sb.append(temp).append("\n");
-        }
-        return sb.toString();
+        InputStream stream = SpringFileUtil.class.getClassLoader().getResourceAsStream(path);
+        byte[] bytes = new byte[stream.available()];
+        stream.read(bytes);
+        return new String(bytes);
     }
 
     public static void main(String[] args) throws IOException {
-        System.out.println(SpringFileUtil.getFileStrFromResource("templates/mail/mail_send_template.html"));
+        System.out.println(SpringFileUtil.getFileStrFromResource("static/mail/mail_send_template.html"));
     }
 }

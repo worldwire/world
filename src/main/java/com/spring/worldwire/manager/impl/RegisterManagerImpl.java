@@ -71,6 +71,7 @@ public class RegisterManagerImpl implements RegisterManager {
         try {
             MailUtils.sendActiveMail(loginInfo.getEmail(), date, url);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException("mailSendError");
         }
 //        redisUtils.set(CACHE_MAIL_VALID_PREFIX + loginInfo.getId() + "_" + date.getTime() ,"" ,MAIL_CODE_INVALIDATE_TIME);

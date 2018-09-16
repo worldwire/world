@@ -15,9 +15,9 @@ public class Constants {
     //邮箱的host地址
     public static final String MAIL_SMTP_HOST  = "smtp.163.com";
     // 发送邮件的模板页面
-    public static final String MAIL_SEND_TEMPLATE = "templates/mail/mail_send_template.html";
+    public static final String MAIL_SEND_TEMPLATE = "static/mail/mail_send_template.html";
     // 找回密码的模板页面
-    public static final String MAIL_PASSWORD_TEMPLATE = "templates/mail/mail_reset_password_template.html";
+    public static final String MAIL_PASSWORD_TEMPLATE = "static/mail/mail_reset_password_template.html";
     //激活账号
     public static final String MAIL_ACTIVE_USER_PREFIX = "http://www.theworldwire.cn/register/active";
     //找回密码邮件里面url的模板
