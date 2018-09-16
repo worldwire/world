@@ -100,6 +100,8 @@ public class UserInfo implements Serializable {
 
     private String businessBankImg;
 
+    private String exhibition;
+
     public Long getId() {
         return id;
     }
@@ -450,6 +452,14 @@ public class UserInfo implements Serializable {
 
     public void setCommunication(List<Communication> communication) {
         this.communication = communication;
+    }
+
+    public String getExhibition() {
+        return exhibition;
+    }
+
+    public void setExhibition(String exhibition) {
+        this.exhibition = exhibition;
     }
 
     @Override

@@ -13,6 +13,7 @@ import com.spring.worldwire.utils.MailUtils;
 import com.spring.worldwire.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -30,6 +31,7 @@ public class RegisterManagerImpl implements RegisterManager {
 
 
     @Override
+    @Transactional
     public LoginInfo register(String userName, String email, String password) {
 
         LoginInfo loginInfo = new LoginInfo();
@@ -45,6 +47,7 @@ public class RegisterManagerImpl implements RegisterManager {
         userInfo.setNickName(userName);
         userInfo.setLoginId(loginInfo.getId());
         userInfo.setShowImg("/images/defaultHeadImg.png");
+        userInfo.setExhibition("");
         userInfoService.insert(userInfo);
 
         UserAccount userAccount = new UserAccount();

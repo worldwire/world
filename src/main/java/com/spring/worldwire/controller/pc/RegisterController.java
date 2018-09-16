@@ -9,6 +9,8 @@ import com.spring.worldwire.model.LoginInfo;
 import com.spring.worldwire.result.ResponseResult;
 import com.spring.worldwire.service.LoginInfoService;
 import com.spring.worldwire.utils.RedisUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +38,7 @@ public class RegisterController {
     @Autowired
     private RedisUtils redisUtils;
 
+    private Logger logger = LoggerFactory.getLogger(RegisterController.class);
 
     @RequestMapping("/")
     public String toRegister() {
@@ -59,6 +62,8 @@ public class RegisterController {
             LoginInfo info = registerManager.register(userName, email, password);
             return new ResponseResult(info, StatusCodeEnum.SUCCESS.getCode(), StatusCodeEnum.SUCCESS.getMsg());
         } catch (Exception e) {
+            e.printStackTrace();
+            logger.error(e.getMessage());
             return new ResponseResult(null, StatusCodeEnum.ERROR.getCode(), StatusCodeEnum.ERROR.getMsg());
         }
 

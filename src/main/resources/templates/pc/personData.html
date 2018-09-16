@@ -19,54 +19,63 @@
 
     <!-- 主体 -->
     <div class="main">
-        <form class="layui-form layui-form-pane" id="userBasic" action="/info/modify" method="post" accept-charset="UTF-8"
+        <form class="layui-form layui-form-pane" id="userBasic" action="/info/modify" method="post"
+              accept-charset="UTF-8"
               onsubmit="document.charset='UTF-8';">
             <div class="head-img">
-            <div class="head-box">
-                <img src="${userInfo.showImg!'/images/defaultHeadImg.png'}"/>
-                <input type="hidden" name="showImg" value="${userInfo.showImg!}" id="showImg" />
-            </div>
+                <div class="head-box">
+                    <img src="${userInfo.showImg!'/images/defaultHeadImg.png'}"/>
+                    <input type="hidden" name="showImg" value="${userInfo.showImg!}" id="showImg"/>
+                </div>
 
-        </div>
+            </div>
             <div class="wrap">
                 <div class="title">
                     <p><@spring.message code='basicdata'/></p>
                 </div>
                 <div class="base">
 
-                        <input type="hidden" name="id" value="${userInfo.id}">
-                        <div class="layui-form-item layui-form-text">
-                            <label for="userName" class="req"><@spring.message code='nickname'/></label>
-                            <div class="layui-input-block">
-                                <input type="text" id="nickName" name="nickName" value="${userInfo.nickName!}" class="layui-input tiput" placeholder="<@spring.message code='inputnickname'/>">
-                            </div>
+                    <input type="hidden" name="id" value="${userInfo.id}">
+                    <div class="layui-form-item layui-form-text">
+                        <label for="userName" class="req"><@spring.message code='nickname'/></label>
+                        <div class="layui-input-block">
+                            <input type="text" id="nickName" name="nickName" value="${userInfo.nickName!}"
+                                   class="layui-input tiput" placeholder="<@spring.message code='inputnickname'/>">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label for="year" class="req"><@spring.message code='birthday'/></label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" id="year" name="year"
+                                   value="${(userInfo.birthday?string('YYYY'))!}"
+                                   placeholder="<@spring.message code='year'/>"/>
                         </div>
 
-                        <div class="layui-form-item">
-                            <label for="year" class="req"><@spring.message code='birthday'/></label>
-                            <div class="layui-input-inline">
-                                <input type="text"  class="layui-input" id = "year" name="year" value="${(userInfo.birthday?string('YYYY'))!}" placeholder="<@spring.message code='year'/>"/>
-                            </div>
-
-                            <div class="layui-input-inline">
-                                <input type="text"  class="layui-input" id = "month" name="month"  value="${(userInfo.birthday?string('MM'))!}"  placeholder="<@spring.message code='month'/>"/>
-                            </div>
-
-                            <div class="layui-input-inline">
-                                <input type="text"  class="layui-input" id = "day" name="day"  value="${(userInfo.birthday?string('dd'))!}" placeholder="<@spring.message code='days'/>"/>
-                            </div>
-                            <input type="hidden" name="birthday" id="birthday" />
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" id="month" name="month"
+                                   value="${(userInfo.birthday?string('MM'))!}"
+                                   placeholder="<@spring.message code='month'/>"/>
                         </div>
 
-                        <div class="layui-form-item item2-wrap">
-                            <label for="lang" class="req"><@spring.message code='languagelevel'/></label>
+                        <div class="layui-input-inline">
+                            <input type="text" class="layui-input" id="day" name="day"
+                                   value="${(userInfo.birthday?string('dd'))!}"
+                                   placeholder="<@spring.message code='days'/>"/>
+                        </div>
+                        <input type="hidden" name="birthday" id="birthday"/>
+                    </div>
+
+                    <div class="layui-form-item item2-wrap">
+                        <label for="lang" class="req"><@spring.message code='languagelevel'/></label>
                             <#if (userInfo.language)?? >
                                 <#list userInfo.language as userLanguage>
-                                <div class="item2-box"  style="clear:both">
+                                <div class="item2-box" style="clear:both">
                                     <div class="layui-input-inline item2">
                                         <select name="lang" id="lang">
                                             <#list languageValues as language>
-                                            <option value="${language.code}"  <#if userLanguage.languageEnum.code == language.code>selected="selected"</#if> >${language.cnName}</option>
+                                                <option value="${language.code}"
+                                                        <#if userLanguage.languageEnum.code == language.code>selected="selected"</#if> >${language.cnName}</option>
                                             </#list>
 
                                         </select>
@@ -75,14 +84,15 @@
                                     <div class="layui-input-inline item2">
                                         <select name="level">
                                             <#list levelValues as level>
-                                                <option value="${level.code}" <#if userLanguage.level.code == level.code>selected="selected"</#if>>${level.cnName}</option>
+                                                <option value="${level.code}"
+                                                        <#if userLanguage.level.code == level.code>selected="selected"</#if>>${level.cnName}</option>
                                             </#list>
                                         </select>
                                     </div>
                                 </div>
                                 </#list>
                             <#else>
-                            <div class="item2-box" >
+                            <div class="item2-box">
                                 <div class="layui-input-inline item2">
                                     <select name="lang" id="lang">
                                         <option value=""><@spring.message code='chooselanguage'/></option>
@@ -103,88 +113,92 @@
                                 </div>
                             </div>
                             </#if>
-                            <i class="iconfont plus-btn">&#xe601;</i>
-                        </div>
-                        <input type="hidden" name="language" id="language">
+                        <i class="iconfont plus-btn">&#xe601;</i>
+                    </div>
+                    <input type="hidden" name="language" id="language">
 
 
-                        <div class="layui-form-item">
-                            <label for="nationality" class="req"><@spring.message code='birthplace'/></label>
-                            <div class="layui-input-inline">
-                                <select name="nationality" id="nationality">
+                    <div class="layui-form-item">
+                        <label for="nationality" class="req"><@spring.message code='birthplace'/></label>
+                        <div class="layui-input-inline">
+                            <select name="nationality" id="nationality">
                                     <#list countryList as country>
                                         <option><@spring.message code='nationnality'/></option>
-                                        <option value="${country.enName}" <#if country.country == briNationality.country>selected="selected"</#if>>${country.cnName}</option>
+                                        <option value="${country.enName}"
+                                                <#if userInfo.briNationality??&&country.country == userInfo.briNationality.country>selected="selected"</#if>>${country.cnName}</option>
                                     </#list>
 
-                                </select>
-                            </div>
-
-                            <div class="layui-input-inline">
-                                <select name="">
-                                    <option value=""><@spring.message code='province'/></option>
-                                </select>
-                            </div>
-
-                            <div class="layui-input-inline">
-                                <select name="">
-                                    <option value=""><@spring.message code='city'/></option>
-                                </select>
-                            </div>
+                            </select>
                         </div>
 
-                        <div class="layui-form-item">
-                            <label class="req"><@spring.message code='nownationality'/></label>
-                            <div class="layui-input-inline">
-                                <select name="" >
+                        <div class="layui-input-inline">
+                            <select name="">
+                                <option value=""><@spring.message code='province'/></option>
+                            </select>
+                        </div>
+
+                        <div class="layui-input-inline">
+                            <select name="">
+                                <option value=""><@spring.message code='city'/></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="req"><@spring.message code='nownationality'/></label>
+                        <div class="layui-input-inline">
+                            <select name="">
                                     <#list countryList as country>
-                                    <option value="${country.enName}" <#if country.country == nowNationality.country>selected="selected"</#if> >${country.cnName}</option>
+                                        <option value="${country.enName}"
+                                                <#if userInfo.nowNationality??&&country.country == userInfo.nowNationality.country>selected="selected"</#if> >${country.cnName}</option>
                                     </#list>
-                                </select>
-                            </div>
-
-                            <div class="layui-input-inline">
-                                <select name="">
-                                    <option value=""><@spring.message code='province'/></option>
-                                </select>
-                            </div>
-
-                            <div class="layui-input-inline">
-                                <select name="">
-                                    <option value=""><@spring.message code='province'/></option>
-                                </select>
-                            </div>
+                            </select>
                         </div>
 
-                        <div class="layui-form-item">
-                            <label class="req"><@spring.message code='livecity'/></label>
-                            <div class="layui-input-inline">
-                                <select name="nationality">
+                        <div class="layui-input-inline">
+                            <select name="">
+                                <option value=""><@spring.message code='province'/></option>
+                            </select>
+                        </div>
+
+                        <div class="layui-input-inline">
+                            <select name="">
+                                <option value=""><@spring.message code='province'/></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="req"><@spring.message code='livecity'/></label>
+                        <div class="layui-input-inline">
+                            <select name="nationality">
                                     <#list countryList as country>
-                                    <option value="${country.enName}"  <#if country.country == localAddr.country>selected="selected"</#if>>${country.cnName}</option>
+                                        <option value="${country.enName}"
+                                                <#if userInfo.localAddr??&&country.country == userInfo.localAddr.country>selected="selected"</#if>>${country.cnName}</option>
                                     </#list>
-                                </select>
-                            </div>
-
-                            <div class="layui-input-inline">
-                                <select name="">
-                                    <option value=""><@spring.message code='province'/></option>
-                                </select>
-                            </div>
-
-                            <div class="layui-input-inline">
-                                <select name="">
-                                    <option value=""><@spring.message code='city'/></option>
-                                </select>
-                            </div>
+                            </select>
                         </div>
 
-                        <div class="layui-form-item layui-form-text">
-                            <label><@spring.message code='occupation'/></label>
-                            <div class="layui-input-block">
-                                <input type="text" class="layui-input tiput" value="${userInfo.occupation!}" name="occupation" placeholder="我从事的职业标签">
-                            </div>
+                        <div class="layui-input-inline">
+                            <select name="">
+                                <option value=""><@spring.message code='province'/></option>
+                            </select>
                         </div>
+
+                        <div class="layui-input-inline">
+                            <select name="">
+                                <option value=""><@spring.message code='city'/></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-form-text">
+                        <label><@spring.message code='occupation'/></label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input tiput" value="${userInfo.occupation!}"
+                                   name="occupation" placeholder="我从事的职业标签">
+                        </div>
+                    </div>
 
                 </div>
 
@@ -192,109 +206,126 @@
                     <p><@spring.message code='contracts'/></p>
                 </div>
                 <div class="contact">
-                        <!--<div class="layui-form-item">
-                            <button type="button" class="layui-btn" id="contact-btn">保存</button>
-                        </div>-->
-                        <div class="layui-form-item">
+                    <!--<div class="layui-form-item">
+                        <button type="button" class="layui-btn" id="contact-btn">保存</button>
+                    </div>-->
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="req"><@spring.message code='email'/></label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="email" value="${userInfo.email!}"
+                                       placeholder="user@example.com"/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="req"><@spring.message code='mobile'/></label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="mobile" value="${userInfo.mobile!}"
+                                       placeholder="我的手机或座机号"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div></div>
+                        <div class="layui-inline">
+                            <label><@spring.message code='website'/></label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="website" value="${userInfo.website!}"
+                                       placeholder="我自己的网站"/>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label><@spring.message code='wechatpublicaccounts'/></label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="publicPlatform"
+                                       value="${userInfo.publicPlatform!}" placeholder="我自己的公众号"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <div class="click-upload" id="up-ewm">
+                                <p><@spring.message code='upload'/><br/><@spring.message code='qrcode'/></p>
+                                <input type="hidden" name="wechatQrcode" value="${userInfo.wechatQrcode!}"
+                                       id="wechatQrcode"/>
+                            </div>
+                        </div>
+                        <div class="account">
                             <div class="layui-inline">
-                                <label class="req"><@spring.message code='email'/></label>
+                                <label><@spring.message code='wechat'/></label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" name="email" value="${userInfo.email!}" placeholder="user@example.com" />
+                                    <input type="text" class="layui-input" name="wechat" value="${userInfo.wechat!}"
+                                           placeholder="我的微信号或绑定的手机号"/>
                                 </div>
                             </div>
                             <div class="layui-inline">
-                                <label class="req"><@spring.message code='mobile'/></label>
+                                <label>Facebook</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" name="mobile" value="${userInfo.mobile!}" placeholder="我的手机或座机号" />
+                                    <input type="text" class="layui-input" name="facebook" value="${userInfo.facebook!}"
+                                           placeholder="我的Facebook账号"/>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label>WhatsApp</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" name="whatsapp" value="${userInfo.whatsapp!}"
+                                           placeholder="我的WhatsApp"/>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label>LikedIn</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input" name="linkedin" value="${userInfo.linkedin!}"
+                                           placeholder="我的LikedIn"/>
                                 </div>
                             </div>
                         </div>
-                        <div class="layui-form-item">
-                            <div></div>
-                            <div class="layui-inline">
-                                <label><@spring.message code='website'/></label>
-                                <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" name="website" value="${userInfo.website!}" placeholder="我自己的网站" />
-                                </div>
-                            </div>
-                            <div class="layui-inline">
-                                <label><@spring.message code='wechatpublicaccounts'/></label>
-                                <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" name="publicPlatform" value="${userInfo.publicPlatform!}" placeholder="我自己的公众号" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="layui-form-item">
-                            <div class="layui-inline">
-                                <div class="click-upload" id="up-ewm">
-                                    <p><@spring.message code='upload'/><br/><@spring.message code='qrcode'/></p>
-                                    <input type="hidden" name="wechatQrcode" value="${userInfo.wechatQrcode!}" id="wechatQrcode" />
-                                </div>
-                            </div>
-                            <div class="account">
-                                <div class="layui-inline">
-                                    <label><@spring.message code='wechat'/></label>
-                                    <div class="layui-input-inline">
-                                        <input type="text" class="layui-input" name="wechat" value="${userInfo.wechat!}" placeholder="我的微信号或绑定的手机号" />
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label>Facebook</label>
-                                    <div class="layui-input-inline">
-                                        <input type="text" class="layui-input" name="facebook" value="${userInfo.facebook!}" placeholder="我的Facebook账号" />
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label>WhatsApp</label>
-                                    <div class="layui-input-inline">
-                                        <input type="text" class="layui-input" name="whatsapp" value="${userInfo.whatsapp!}" placeholder="我的WhatsApp" />
-                                    </div>
-                                </div>
-                                <div class="layui-inline">
-                                    <label>LikedIn</label>
-                                    <div class="layui-input-inline">
-                                        <input type="text" class="layui-input" name="linkedin" value="${userInfo.linkedin!}" placeholder="我的LikedIn" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
 
-                        <div class="layui-form-item item2-wrap">
-                            <label><@spring.message code='othercommunications'/></label>
+                    <div class="layui-form-item item2-wrap">
+                        <label><@spring.message code='othercommunications'/></label>
                             <#if (userInfo.communication)?? >
                                 <#list userInfo.communication as commun >
                                     <div class="item2-box" style="clear:both">
                                         <div class="layui-input-inline item2" style="width: 195px;">
-                                            <input type="text" class="layui-input" placeholder="<@spring.message code='inputcommunicatetype'/>" name="communicationName" value="${commun.name!}">
+                                            <input type="text" class="layui-input"
+                                                   placeholder="<@spring.message code='inputcommunicatetype'/>"
+                                                   name="communicationName" value="${commun.name!}">
                                         </div>
                                         <div class="layui-form-mid">：</div>
                                         <div class="layui-input-inline" style="width: 434px;">
-                                            <input type="text" class="layui-input" placeholder="<@spring.message code='inputcommunicateaccount'/>" name="communicationValue" value="${commun.value!}">
+                                            <input type="text" class="layui-input"
+                                                   placeholder="<@spring.message code='inputcommunicateaccount'/>"
+                                                   name="communicationValue" value="${commun.value!}">
                                         </div>
                                     </div>
                                 </#list>
                             <#else>
                                 <div class="item2-box">
                                     <div class="layui-input-inline item2" style="width: 195px;">
-                                        <input type="text" class="layui-input" placeholder="<@spring.message code='inputcommunicatetype'/>" name="communicationName">
+                                        <input type="text" class="layui-input"
+                                               placeholder="<@spring.message code='inputcommunicatetype'/>"
+                                               name="communicationName">
                                     </div>
                                     <div class="layui-form-mid">：</div>
                                     <div class="layui-input-inline" style="width: 434px;">
-                                        <input type="text" class="layui-input" placeholder="<@spring.message code='inputcommunicateaccount'/>" name="communicationValue">
+                                        <input type="text" class="layui-input"
+                                               placeholder="<@spring.message code='inputcommunicateaccount'/>"
+                                               name="communicationValue">
                                     </div>
                                 </div>
                             </#if>
-                            <i class="iconfont plus-btn">&#xe601;</i>
-                        </div>
-                        <input type="hidden" name="communication" id="communication" />
+                        <i class="iconfont plus-btn">&#xe601;</i>
+                    </div>
+                    <input type="hidden" name="communication" id="communication"/>
 
-                        <div class="layui-form-item item2-wrap">
-                            <label><@spring.message code='showimage'/></label>
-                            <div></div>
-                            <div class="preview" id="preview"></div>
-                            <button type="button" id="upload-btn" class="layui-btn">+</button>
-                            <input type="hidden" name="exhibition" />
-                        </div>
+                    <div class="layui-form-item item2-wrap">
+                        <label><@spring.message code='showimage'/></label>
+                        <div></div>
+                        <div class="preview" id="preview"></div>
+                        <button type="button" id="upload-btn" class="layui-btn">+</button>
+                        <input type="hidden" name="exhibition"/>
+                    </div>
 
 
                 </div>
@@ -303,10 +334,11 @@
                     <p><@spring.message code='relatelicence'/></p>
                 </div>
                 <div class="certificates">
-                        <div class="layui-form-item">
-                            <label><@spring.message code='id'/><a href="###" class="upload-a"><@spring.message code='uploadpassport'/></a></label>
-                            <div class="layui-inline">
-                                <div class="layui-input-inline" id="up-face">
+                    <div class="layui-form-item">
+                        <label><@spring.message code='id'/><a href="###"
+                                                              class="upload-a"><@spring.message code='uploadpassport'/></a></label>
+                        <div class="layui-inline">
+                            <div class="layui-input-inline" id="up-face">
                                     <#if (userInfo.idcardOnImg)??>
                                         <img src="${userInfo.idcardOnImg}">
                                     <#else>
@@ -315,37 +347,38 @@
                                             <p class="cer-msg"><@spring.message code='uploadidface'/></p>
                                         </div>
                                     </#if>
-                                </div>
-                                <input type="hidden" name="idcardOnImg" value="${userInfo.idcardOnImg!}" id="idcardOnImg" />
-                                <div class="layui-input-inline" id="up-badge">
+                            </div>
+                            <input type="hidden" name="idcardOnImg" value="${userInfo.idcardOnImg!}" id="idcardOnImg"/>
+                            <div class="layui-input-inline" id="up-badge">
                                     <#if (userInfo.idcardDownImg)??>
-                                    <img src="${userInfo.idcardDownImg}">
+                                        <img src="${userInfo.idcardDownImg}">
                                     <#else>
                                     <div class="msg-box">
                                         <p><i class="layui-icon" style="font-size: 56px">&#xe654;</i></p>
                                         <p class="cer-msg"><@spring.message code='uploadidback'/></p>
                                     </div>
                                     </#if>
-                                </div>
-                                <input type="hidden" name="idcardDownImg" value="${userInfo.idcardDownImg!}" id="idcardDownImg" />
                             </div>
-
-                            <div class="layui-inline">
-                                <div class="example">
-                                    <p><@spring.message code='licenceboth'/>：</p>
-                                    <div><img src="/images/z.png"/></div>
-                                    <div><img src="/images/f.png"/></div>
-                                </div>
-                            </div>
+                            <input type="hidden" name="idcardDownImg" value="${userInfo.idcardDownImg!}"
+                                   id="idcardDownImg"/>
                         </div>
 
-                <div class="layui-form-item">
-                            <label style="float: left;width: 255px"></label>
-                            <label style="float: left;"><@spring.message code='licencewithhand'/></label>
-                            <div class="layui-inline" style="float: left;clear: both">
-                                <div class="layui-input-inline" id="up-take">
+                        <div class="layui-inline">
+                            <div class="example">
+                                <p><@spring.message code='licenceboth'/>：</p>
+                                <div><img src="/images/z.png"/></div>
+                                <div><img src="/images/f.png"/></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label style="float: left;width: 255px"></label>
+                        <label style="float: left;"><@spring.message code='licencewithhand'/></label>
+                        <div class="layui-inline" style="float: left;clear: both">
+                            <div class="layui-input-inline" id="up-take">
                                     <#if (userInfo.idcardHandImg)??>
-                                    <img src="${userInfo.idcardHandImg}">
+                                        <img src="${userInfo.idcardHandImg}">
                                     <#else>
                                     <div class="msg-box">
                                         <p><i class="layui-icon" style="font-size: 56px">&#xe654;</i></p>
@@ -353,29 +386,34 @@
                                     </div>
                                     </#if>
 
-                                </div>
-                            </div>
-                            <input type="hidden" name="idcardHandImg" value="${userInfo.idcardHandImg!}" id="idcardHandImg" />
-
-                            <div class="layui-inline" style="float: left;">
-                                <img src="/images/s.jpg" class="sc">
                             </div>
                         </div>
+                        <input type="hidden" name="idcardHandImg" value="${userInfo.idcardHandImg!}"
+                               id="idcardHandImg"/>
 
-                <div class="layui-form-item">
-                            <label style="float: left;width: 340px"><@spring.message code='realname'/></label>
-                            <label style="float: left;"><@spring.message code='idnumber'/></label>
-                            <div class="layui-clear"></div>
-                            <input type="text" class="layui-input" name="realName" value="${userInfo.realName!}" placeholder="<@spring.message code='inputrealname'/>" style="width: 315px;float:left;margin-right: 27px" />
-                            <input type="text" class="layui-input" name="idcard" value="${userInfo.idcard!}" placeholder="<@spring.message code='inputidno'/>" style="width: 315px;;float:left;" />
+                        <div class="layui-inline" style="float: left;">
+                            <img src="/images/s.jpg" class="sc">
                         </div>
-
-
-                <div class="layui-form-item">
-                        <button type="button" class="layui-btn" id="save"  lay-submit lay-filter="*" ><@spring.message code='save'/></button>
                     </div>
 
-            </div>
+                    <div class="layui-form-item">
+                        <label style="float: left;width: 340px"><@spring.message code='realname'/></label>
+                        <label style="float: left;"><@spring.message code='idnumber'/></label>
+                        <div class="layui-clear"></div>
+                        <input type="text" class="layui-input" name="realName" value="${userInfo.realName!}"
+                               placeholder="<@spring.message code='inputrealname'/>"
+                               style="width: 315px;float:left;margin-right: 27px"/>
+                        <input type="text" class="layui-input" name="idcard" value="${userInfo.idcard!}"
+                               placeholder="<@spring.message code='inputidno'/>" style="width: 315px;;float:left;"/>
+                    </div>
+
+
+                    <div class="layui-form-item">
+                        <button type="button" class="layui-btn" id="save" lay-submit
+                                lay-filter="*"><@spring.message code='save'/></button>
+                    </div>
+
+                </div>
         </form>
     </div>
 </div>
@@ -386,47 +424,47 @@
 
 
 <script>
-    layui.use(['form', 'layedit', 'laydate','upload'], function(){
+    layui.use(['form', 'layedit', 'laydate', 'upload'], function () {
         var form = layui.form
-            ,layer = layui.layer
-            ,layedit = layui.layedit
-            ,laydate = layui.laydate
-            ,$ = layui.jquery
-            ,upload = layui.upload;
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate
+                , $ = layui.jquery
+                , upload = layui.upload;
 
-         $(".language-btns").click(function(){
-                if(!$(".span-div").is(':hidden')){//如果当前不隐藏
-                    $('.span-div').hide();//就隐藏div
-                    $(".language-icon").html("&#xe61a;")
-                }else{//否则
-					$('.userbox').hide();//就隐藏div
-					$(".user-icon").html("&#xe61a;")
-                    $('.span-div').show();//那么就显示div
-                    $(".language-icon").html("&#xe619;")
-                }
-            })
+        $(".language-btns").click(function () {
+            if (!$(".span-div").is(':hidden')) {//如果当前不隐藏
+                $('.span-div').hide();//就隐藏div
+                $(".language-icon").html("&#xe61a;")
+            } else {//否则
+                $('.userbox').hide();//就隐藏div
+                $(".user-icon").html("&#xe61a;")
+                $('.span-div').show();//那么就显示div
+                $(".language-icon").html("&#xe619;")
+            }
+        })
 
-            $(".user-btn").click(function(){
-                if(!$(".userbox").is(':hidden')){//如果当前不隐藏
-                    $('.userbox').hide();//就隐藏div
-                    $(".user-icon").html("&#xe61a;")
-                }else{//否则
- 					$('.span-div').hide();//就隐藏div
- 					$(".language-icon").html("&#xe61a;")
-                    $('.userbox').show();//那么就显示div
-                    $(".user-icon").html("&#xe619;")
-                }
-            });
+        $(".user-btn").click(function () {
+            if (!$(".userbox").is(':hidden')) {//如果当前不隐藏
+                $('.userbox').hide();//就隐藏div
+                $(".user-icon").html("&#xe61a;")
+            } else {//否则
+                $('.span-div').hide();//就隐藏div
+                $(".language-icon").html("&#xe61a;")
+                $('.userbox').show();//那么就显示div
+                $(".user-icon").html("&#xe619;")
+            }
+        });
 
         // 添加按钮
         $('.plus-btn').click(function (e) {
             var target = $(e.target);
-                item2Wrap = $(target.parent()),
-                item2Box = $(target.prev()),
-                dom = item2Box.clone()
-                    .attr("class","layui-form")
-                    .attr("lay-filter","dom")
-                    .attr("style","clear:both");
+            item2Wrap = $(target.parent()),
+                    item2Box = $(target.prev()),
+                    dom = item2Box.clone()
+                            .attr("class", "layui-form")
+                            .attr("lay-filter", "dom")
+                            .attr("style", "clear:both");
 
             dom.find("input").val('');
 
@@ -441,19 +479,19 @@
         //展示照片上传
         var uploadList = upload.render({
             elem: '#upload-btn'
-            ,url: '/file/upload'
-            ,data: {type: 'request'}
-            ,method: "post"
-            ,auto: false
-            ,bindAction: "#contact-btn"
-            ,accept: "images"
-            ,multiple: true
-            ,number: 6
-            ,choose: function(obj){
+            , url: '/file/upload'
+            , data: {type: 'request'}
+            , method: "post"
+            , auto: false
+            , bindAction: "#contact-btn"
+            , accept: "images"
+            , multiple: true
+            , number: 6
+            , choose: function (obj) {
                 var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
                 console.log(files);
                 //预读本地文件示例，不支持ie8
-                obj.preview(function(index, file, result){
+                obj.preview(function (index, file, result) {
                     var pre = $('<img src="' + result + '">');
                     var preBoxCloe = $("<i class='iconfont pre-box-close'>&#xe638;</i>");
                     var preBox = $('<div class="pre-box">').append(pre).append(preBoxCloe);
@@ -461,12 +499,12 @@
 
                     preBoxCloe.click(function (e) {
                         var target = $(e.target),
-                            box = $(target.parent());
+                                box = $(target.parent());
 
                         delete files[index]; //删除对应的文件
                         box.remove();
                         uploadList.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
-                        if(le >= 6) {
+                        if (le >= 6) {
                             $("#upload-btn").show();
                         }
 
@@ -474,7 +512,7 @@
                     });
 
                     var le = $(".preview img").length;
-                    if(le >= 6){
+                    if (le >= 6) {
                         $("#upload-btn").hide();
                     }
 
@@ -482,17 +520,17 @@
 
 
             }
-            ,done: function(res){
+            , done: function (res) {
                 //上传完毕
             }
-            ,error: function (index, upload) {
+            , error: function (index, upload) {
                 // 文件上传错误
             }
         });
 
-        var uploadIdCard = function (el, type,prevBox,subBtn,inputId) {
+        var uploadIdCard = function (el, type, prevBox, subBtn, inputId) {
             upload.render({
-                elem:el
+                elem: el
                 , url: '/file/upload'
                 , method: 'POST'
                 , data: {type: type}
@@ -503,10 +541,10 @@
                 , accept: 'images'
                 , acceptMime: 'image/*'
                 , exts: 'jpg|png|gif|bmp|jpeg'
-                , before: function(obj) {
+                , before: function (obj) {
                     console.log("upload img start")
-                    obj.preview(function(index, file, result){
-                        var box = $(prevBox).empty().attr('title','<@spring.message code="replaceimg"/>');
+                    obj.preview(function (index, file, result) {
+                        var box = $(prevBox).empty().attr('title', '<@spring.message code="replaceimg"/>');
                         var pre = $('<img src="' + result + '">');
                         box.append(pre);
 
@@ -519,8 +557,8 @@
                         return layer.msg('<@spring.message code="uploadfail"/>');
                     }
                     var path = res.path;
-                    $("#"+inputId).val(path);
-                    console.log("upload img path:"+path)
+                    $("#" + inputId).val(path);
+                    console.log("upload img path:" + path)
                 },
                 error: function (index, upload) {
                     console.log("upload img error");
@@ -529,33 +567,33 @@
         }
 
         // 人脸面
-        uploadIdCard('#up-face', 'identity', '#up-face','#up-face','idcardOnImg');
+        uploadIdCard('#up-face', 'identity', '#up-face', '#up-face', 'idcardOnImg');
         // 国徽面
-        uploadIdCard('#up-badge', 'identity', '#up-badge', '#up-badge','idcardDownImg');
+        uploadIdCard('#up-badge', 'identity', '#up-badge', '#up-badge', 'idcardDownImg');
         // 手持面
-        uploadIdCard('#up-take', 'identity', '#up-take', '#up-take','idcardHandImg');
+        uploadIdCard('#up-take', 'identity', '#up-take', '#up-take', 'idcardHandImg');
         // 二维码
-        uploadIdCard('#up-ewm', 'user', '#up-ewm', '#contact-btn','wechatQrcode');
+        uploadIdCard('#up-ewm', 'user', '#up-ewm', '#contact-btn', 'wechatQrcode');
         // 上传头像
-        uploadIdCard('.head-box', 'avatar', '.head-box', '.head-box','showImg');
+        uploadIdCard('.head-box', 'avatar', '.head-box', '.head-box', 'showImg');
 
 
         //提交表单
-        form.on('submit(*)', function(data){
+        form.on('submit(*)', function (data) {
 
-            if(data.field.nickName==null||data.field.nickName==''){
+            if (data.field.nickName == null || data.field.nickName == '') {
                 layer.msg('<@spring.message code="nicknamenotnull"/>', {icon: 0, shade: 0.3, time: 1000}, function () {
                     typeof call === "function" && call();
                 });
                 return;
             }
-            if(!/^1\d{10}$/.test(data.field.mobile)){
+            if (!/^1\d{10}$/.test(data.field.mobile)) {
                 layer.msg('<@spring.message code="mobilewrong"/>', {icon: 0, shade: 0.3, time: 1000}, function () {
                     typeof call === "function" && call();
                 });
                 return;
             }
-            if(!/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test(data.field.email)){
+            if (!/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test(data.field.email)) {
                 layer.msg('<@spring.message code="emailwrong"/>', {icon: 0, shade: 0.3, time: 1000}, function () {
                     typeof call === "function" && call();
                 });
@@ -566,84 +604,88 @@
             var year = $("#year").val();
             var month = $("#month").val();
             var day = $("#day").val();
-            if(year!=null&&year!=''&&month!=null&&month!=''&&day!=null&&day!=''){
-                $("#birthday").val(year+"-"+month+"-"+day);
-            }else{
+            if (year != null && year != '' && month != null && month != '' && day != null && day != '') {
+                $("#birthday").val(year + "-" + month + "-" + day);
+            } else {
                 layer.msg('<@spring.message code="birthdaynotempty"/>', {icon: 0, shade: 0.3, time: 1000}, function () {
                     typeof call === "function" && call();
                 });
                 return;
             }
 
-            var communicationName=$("[name='communicationName']");
-            var communicationValue=$("[name='communicationValue']");
+            var communicationName = $("[name='communicationName']");
+            var communicationValue = $("[name='communicationValue']");
 
             var communication = "[";
-            for(var i=0;i<communicationName.length;i++){
-                if(i!=0){
-                    communication+=",";
+            for (var i = 0; i < communicationName.length; i++) {
+                if (i != 0) {
+                    communication += ",";
                 }
 
                 var value1 = $(communicationName[i]).val();
                 var value2 = $(communicationValue[i]).val();
-                if(value1==''||value2==''){
+                if (value1 == '' || value2 == '') {
                     break;
                 }
-                communication+="{";
-                communication+="\""+value1+"\""+":";
-                communication+="\""+value2+"\"";
-                communication+="}";
+                communication += "{";
+                communication += "\"" + value1 + "\"" + ":";
+                communication += "\"" + value2 + "\"";
+                communication += "}";
             }
             communication += "]";
-            if(communication!="[]")
+            if (communication != "[]")
                 $("#communication").val(communication);
 
 
-            var lang=$("[name='lang']");
-            var level=$("[name='level']");
+            var lang = $("[name='lang']");
+            var level = $("[name='level']");
             var language = "[";
-            for(var i=0;i<lang.length;i++){
-                if(i!=0){
-                    language+=",";
+            for (var i = 0; i < lang.length; i++) {
+                if (i != 0) {
+                    language += ",";
                 }
 
                 var value1 = $(lang[i]).val();
                 var value2 = $(level[i]).val();
-                if(value1==''||value2==''){
-                    layer.msg('<@spring.message code="communicatenotnull"/>', {icon: 0, shade: 0.3, time: 1000}, function () {
+                if (value1 == '' || value2 == '') {
+                    layer.msg('<@spring.message code="communicatenotnull"/>', {
+                        icon: 0,
+                        shade: 0.3,
+                        time: 1000
+                    }, function () {
                         typeof call === "function" && call();
                     });
                     return;
                 }
-                language+="{";
-                language+="\""+value1+"\""+":";
-                language+="\""+value2+"\"";
-                language+="}";
+                language += "{";
+                language += "\"" + value1 + "\"" + ":";
+                language += "\"" + value2 + "\"";
+                language += "}";
             }
             language += "]";
             $("#language").val(language);
 
-            console.log("communication:"+communication);
-            console.log("language:"+language);
+            console.log("communication:" + communication);
+            console.log("language:" + language);
             $("#userBasic").submit();
 
         });
 
-				laydate.render({
-				  elem: '#year'
-				  ,type: 'year'
-				});
+        laydate.render({
+            elem: '#year'
+            , type: 'year'
+        });
 
-				laydate.render({
-				  elem: '#month'
-				  ,type:"month"
-				  ,format: 'MM'
-				});
+        laydate.render({
+            elem: '#month'
+            , type: "month"
+            , format: 'MM'
+        });
 
-				laydate.render({
-				  elem: '#day'
-				  ,format: 'dd'
-				});
+        laydate.render({
+            elem: '#day'
+            , format: 'dd'
+        });
 
     })
 </script>
