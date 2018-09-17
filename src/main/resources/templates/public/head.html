@@ -31,9 +31,11 @@
             <span>&nbsp;&nbsp;&nbsp;</span>
             <#if userId??>
                 <div class="img-userhead">
-                    <img src="${userInfo.showImg!'/images/defaultHeadImg.png'}" width="32" height="32" style="border-radius: 16px;;"><!--头像-->
+                    <img src="${userInfo.showImg!'/images/defaultHeadImg.png'}" width="32" height="32"
+                         style="border-radius: 16px;;"><!--头像-->
                     <span class="user-btn">${userInfo.nickName!''}
-                                <i class="layui-icon layui-icon-face-smile user-icon" style="font-size: 14px;">&#xe61a;</i>
+                                <i class="layui-icon layui-icon-face-smile user-icon"
+                                   style="font-size: 14px;">&#xe61a;</i>
                             </span>
                     <div class="userbox">
                         <div class="userbox-user">
@@ -48,7 +50,7 @@
                             </span>
                         </div>
                         <div class="userbox-set" onclick="redirectClick('/usercenter/')">
-                            <i class="iconfont " style="font-size: 14px;color: #333333;" >&#xe606;</i>
+                            <i class="iconfont " style="font-size: 14px;color: #333333;">&#xe606;</i>
                             &nbsp;&nbsp;&nbsp;<@spring.message code="setting"/>
                         </div>
                         <div class="userbox-out" onclick="redirectClick('/login/logout')">
@@ -57,10 +59,11 @@
                         </div>
                     </div>
                 </div>
-            <#else>
-                <span class="login-btn" onclick="redirectClick('/login/')"><@spring.message code="login"/></span>
-                <span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
-                <span class="register-btn" onclick="redirectClick('/register/')"><@spring.message code="register"/></span>
+                <#else>
+                    <span class="login-btn" onclick="redirectClick('/login/')"><@spring.message code="login"/></span>
+                    <span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;</span>
+                    <span class="register-btn"
+                          onclick="redirectClick('/register/')"><@spring.message code="register"/></span>
             </#if>
 
         </div>
@@ -68,18 +71,18 @@
 
 </div>
 <script>
-    layui.use(['form', 'layedit', 'laydate'], function(){
+    layui.use(['form', 'layedit', 'laydate'], function () {
         var form = layui.form
-            ,layer = layui.layer
-            ,layedit = layui.layedit
-            ,laydate = layui.laydate
-            ,$ = layui.jquery;
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , $ = layui.jquery;
 
-        $(".language-btns").click(function(){
-            if(!$(".span-div").is(':hidden')){//如果当前不隐藏
+        $(".language-btns").click(function () {
+            if (!$(".span-div").is(':hidden')) {//如果当前不隐藏
                 $('.span-div').hide();//就隐藏div
                 $(".language-icon").html("&#xe61a;")
-            }else{//否则
+            } else {//否则
                 $('.userbox').hide();//就隐藏div
                 $(".user-icon").html("&#xe61a;")
                 $('.span-div').show();//那么就显示div
@@ -87,23 +90,22 @@
             }
         })
 
-        $(".user-btn").click(function(){
-            if(!$(".userbox").is(':hidden')){//如果当前不隐藏
+        $(".user-btn").click(function () {
+            if (!$(".userbox").is(':hidden')) {//如果当前不隐藏
                 $('.userbox').hide();//就隐藏div
                 $(".user-icon").html("&#xe61a;")
-            }else{//否则
+            } else {//否则
                 $('.span-div').hide();//就隐藏div
                 $(".language-icon").html("&#xe61a;")
                 $('.userbox').show();//那么就显示div
                 $(".user-icon").html("&#xe619;")
             }
         });
-        var openRequireList = function (that) {
-            var selected = that.value;
-            window.location.href = "/request/list/"+selected+"/2/4/1.html";
-        }
-
-
-
+        $("[name=modules]").keydown(function (e) {
+            if (e.keyCode == 13) {
+                var selected = $("[name=modules]:selected").val();
+                window.location.href = "/request/list/" + selected + "/2/4/1.html";
+            }
+        });
     })
 </script>
