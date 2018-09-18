@@ -122,8 +122,8 @@
                         <label for="nationality" class="req"><@spring.message code='birthplace'/></label>
                         <div class="layui-input-inline">
                             <select name="nationality" id="nationality">
+                                    <option><@spring.message code='nationnality'/></option>
                                     <#list countryList as country>
-                                        <option><@spring.message code='nationnality'/></option>
                                         <option value="${country.enName}"
                                                 <#if userInfo.briNationality??&&country.country == userInfo.briNationality.country>selected="selected"</#if>>${country.cnName}</option>
                                     </#list>
@@ -196,7 +196,7 @@
                         <label><@spring.message code='occupation'/></label>
                         <div class="layui-input-block">
                             <input type="text" class="layui-input tiput" value="${userInfo.occupation!}"
-                                   name="occupation" placeholder="我从事的职业标签">
+                                   name="occupation" placeholder="<@spring.message code='myoccupation'/>">
                         </div>
                     </div>
 
@@ -221,7 +221,7 @@
                             <label class="req"><@spring.message code='mobile'/></label>
                             <div class="layui-input-inline">
                                 <input type="text" class="layui-input" name="mobile" value="${userInfo.mobile!}"
-                                       placeholder="我的手机或座机号"/>
+                                       placeholder="<@spring.message code='phoneno'/>"/>
                             </div>
                         </div>
                     </div>
@@ -231,14 +231,14 @@
                             <label><@spring.message code='website'/></label>
                             <div class="layui-input-inline">
                                 <input type="text" class="layui-input" name="website" value="${userInfo.website!}"
-                                       placeholder="我自己的网站"/>
+                                       placeholder="<@spring.message code='websites'/>"/>
                             </div>
                         </div>
                         <div class="layui-inline">
                             <label><@spring.message code='wechatpublicaccounts'/></label>
                             <div class="layui-input-inline">
                                 <input type="text" class="layui-input" name="publicPlatform"
-                                       value="${userInfo.publicPlatform!}" placeholder="我自己的公众号"/>
+                                       value="${userInfo.publicPlatform!}" placeholder=""/>
                             </div>
                         </div>
                     </div>
@@ -254,29 +254,25 @@
                             <div class="layui-inline">
                                 <label><@spring.message code='wechat'/></label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" name="wechat" value="${userInfo.wechat!}"
-                                           placeholder="我的微信号或绑定的手机号"/>
+                                    <input type="text" class="layui-input" name="wechat" value="${userInfo.wechat!}"/>
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label>Facebook</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" name="facebook" value="${userInfo.facebook!}"
-                                           placeholder="我的Facebook账号"/>
+                                    <input type="text" class="layui-input" name="facebook" value="${userInfo.facebook!}"/>
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label>WhatsApp</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" name="whatsapp" value="${userInfo.whatsapp!}"
-                                           placeholder="我的WhatsApp"/>
+                                    <input type="text" class="layui-input" name="whatsapp" value="${userInfo.whatsapp!}"/>
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label>LikedIn</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" name="linkedin" value="${userInfo.linkedin!}"
-                                           placeholder="我的LikedIn"/>
+                                    <input type="text" class="layui-input" name="linkedin" value="${userInfo.linkedin!}"/>
                                 </div>
                             </div>
                         </div>
