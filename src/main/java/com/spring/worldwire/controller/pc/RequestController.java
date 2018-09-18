@@ -73,8 +73,7 @@ public class RequestController {
         productRequest.setViewCount(productRequest.getViewCount() + 1);
         productRequestService.update(productRequest);
 
-        Object userId = request.getAttribute(Constants.USER_ID_SESSION);
-        UserInfo userInfo = userInfoService.selectById(Long.parseLong(userId.toString()));
+        UserInfo userInfo = userInfoService.selectById(productRequest.getUserId());
 
         model.addAttribute("userInfo", userInfo);
         model.addAttribute("productRequest", productRequest);
