@@ -2,11 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>
-        <#if productRequest.id??><@spring.message code='modifyrequirement'/>
-            <#else><@spring.message code='addrequirement'/>
-        </#if>
-    </title>
+    <title>WorldWire</title>
     <#include "../public/common.html" encoding="utf-8">
         <link rel="stylesheet" type="text/css" href="/css/modify.css"/>
         </head>
@@ -121,7 +117,7 @@
                             </div>
                             <div class="body-epsp-sp-public">
                                 <div class="body-line-style">
-                                    <span class="body-line-style-span"><@spring.message code='wechatpublicaccount'/></span>
+                                    <span class="body-line-style-span"><@spring.message code='wechatpublicaccounts'/></span>
                                 </div>
                                 <div class="layui-form">
                                     <input class="layui-input body-epsp-sp-public-input" type="text"

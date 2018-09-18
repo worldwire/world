@@ -73,9 +73,6 @@ public class RequestController {
         productRequest.setViewCount(productRequest.getViewCount() + 1);
         productRequestService.update(productRequest);
 
-        UserInfo userInfo = userInfoService.selectById(productRequest.getUserId());
-
-        model.addAttribute("userInfo", userInfo);
         model.addAttribute("productRequest", productRequest);
 
         return "pc/requestDetail";

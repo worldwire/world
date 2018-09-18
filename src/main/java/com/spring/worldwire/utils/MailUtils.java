@@ -65,7 +65,7 @@ public class MailUtils {
         multiAttatchFileUpload(mp, files);//处理附件
 
         Transport transport = session.getTransport("smtp");
-        transport.connect(Constants.MAIL_SENDT_ACCOUNT, Constants.MAIL_SEND_PASSWORD);
+        transport.connect(Constants.MAIL_SMTP_HOST, 25, Constants.MAIL_SENDT_ACCOUNT, Constants.MAIL_SEND_PASSWORD);
         transport.sendMessage(msg, msg.getRecipients(Message.RecipientType.TO));
         transport.close();
 
@@ -107,6 +107,8 @@ public class MailUtils {
         props.setProperty("mail.transport.protocol", "stmp");   // 使用的协议（JavaMail规范要求）
         props.setProperty("mail.smtp.host", Constants.MAIL_SMTP_HOST);   // 发件人的邮箱的 SMTP 服务器地址
         props.setProperty("mail.smtp.auth", "true");
+        props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.setProperty("mail.smtp.socketFactory.port", "465");
 
         return props;
     }

@@ -47,12 +47,15 @@
             <div class="level">
                 <p><@spring.message code='langugelevel'/></p>
                 <div>
-                    <#list productRequest.languageLevel as languageLevel>
-                        <dl>
-                            <dt>${languageLevel.languageEnum.cnName}</dt>
-                            <dd>${languageLevel.level.cnName}</dd>
-                        </dl>
-                    </#list>
+                    <#if productRequest.languageLevel??>
+                        <#list productRequest.languageLevel as languageLevel>
+                            <dl>
+                                <dt>${languageLevel.languageEnum.cnName}</dt>
+                                <dd>${languageLevel.level.cnName}</dd>
+                            </dl>
+                        </#list>
+                    </#if>
+
                 </div>
             </div>
             <div class="other">
