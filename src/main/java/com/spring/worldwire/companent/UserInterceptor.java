@@ -7,7 +7,9 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.spring.worldwire.service.UserInfoService;
 import com.spring.worldwire.utils.Base64;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public class UserInterceptor implements HandlerInterceptor {
 
+    @Autowired
+    private UserInfoService userInfoService;
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) {
@@ -33,7 +37,8 @@ public class UserInterceptor implements HandlerInterceptor {
             userInfo.analysisCookiesValue(new String(Base64.decode(cookie.getValue())));
             if(userInfo.getId()!=null) {
                 httpServletRequest.setAttribute(Constants.USER_ID_SESSION, userInfo.getId());
-                httpServletRequest.setAttribute(Constants.USER_SESSION, userInfo);
+                UserInfo dbInfo = userInfoService.selectById(userInfo.getId());
+                httpServletRequest.setAttribute(Constants.USER_SESSION, dbInfo);
             }
         }
     }

@@ -12,9 +12,9 @@ body .head .head1 .btns { float: right; margin-top: 15px; margin-right: 15px; fo
 body .head .head1 .btns .language-icon { color: #333333; font-size: 14px; margin-left: 15px; }
 body .head .head1 .btns .language-btns { position: relative; cursor: pointer; font-size: 12px; color: #333333; float: left; }
 body .head .head1 .btns .language-btns .span-div { cursor: default;padding: 5px; width: 52px; position: absolute; top: 25px; left: 0;  background: #fff; border-radius: 3px; z-index: 80; display: none; background: url(../images/userbox.png) 1px no-repeat;background-size: 61px 63px;text-align: center;}
-body .head .head1 .btns .language-btns .span-div .cn{position: relative;top: 5px; } 
-body .head .head1 .btns .language-btns .span-div p{cursor: pointer;} 
-body .head .head1 .btns .language-btns .span-div p:hover{color: #33333350;} 
+body .head .head1 .btns .language-btns .span-div .cn{position: relative;top: 5px; }
+body .head .head1 .btns .language-btns .span-div p{cursor: pointer;}
+body .head .head1 .btns .language-btns .span-div p:hover{color: #33333350;}
 body .head .head1 .btns .login-btn { cursor: pointer; color: #333333; font-size: 12px; }
 body .head .head1 .btns .login-btn:hover { color: #D42026; }
 body .head .head1 .btns .register-btn { cursor: pointer; color: #333333; font-size: 12px; }
@@ -23,7 +23,7 @@ body .head .head1 .btns .img-userhead .user-btn { cursor: pointer; }
 body .head .head1 .btns .img-userhead .userbox { height: 156px; width: 160px; position: absolute; top: 35px; left: -22px; background-image: url(../images/userbox.png); background-size: 160px 156px; display: none; z-index: 999; }
 body .head .head1 .btns .img-userhead .userbox .userbox-user { width: 140px; height: 50px; border-top: 1px; margin-top: 26px; margin-left: 10px; position: relative; font-size: 14px; }
 body .head .head1 .btns .img-userhead .userbox .userbox-user img { width: 32px; height: 32px; border-radius: 16px; position: absolute; top: 10px; left: 10px; }
-body .head .head1 .btns .img-userhead .userbox .userbox-user .userbox-usename { color: #333333; position: absolute; top: 10px; left: 50px; }
+body .head .head1 .btns .img-userhead .userbox .userbox-user .userbox-usename { color: #333333; position: absolute; top: 10px; left: 50px; width: 88px;overflow: hidden}
 body .head .head1 .btns .img-userhead .userbox .userbox-user .userbox-usertype { color: #979797; position: absolute; top: 27px; left: 50px; }
 body .head .head1 .btns .img-userhead .userbox .userbox-set { border: 1px; margin-top: 10px; margin-left: 4px; border-left: 3px solid #FFFFFF00; padding: 2px 0 2px 0; }
 body .head .head1 .btns .img-userhead .userbox .userbox-set i { margin-left: 14px; }

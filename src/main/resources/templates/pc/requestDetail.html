@@ -120,11 +120,11 @@
                 <!-- 未登录/注册 -->
                 <div class="reg">
                     <p><@spring.message code='contractlogin'/></p>
-                    <p><a href="./login.html"><@spring.message code='login'/></a><@spring.message code='or'/><a href="./register.html"><@spring.message code='register'/></a></p>
+                    <p><a href="./login.html"><@spring.message code='login'/></a> <@spring.message code='or'/> <a href="./register.html"><@spring.message code='register'/></a></p>
                     <form action="javascript:void(0)" id="login-form" class="layui-form" method="post">
                         <div class="layui-form-item">
                             <div class="layui-input-block">
-                                <input name="email" type="text" id="email" placeholder="<@spring.message code='inputmail'/>" class="layui-input">
+                                <input name="email" type="text" id="email" placeholder="<@spring.message code='inputemail'/>" class="layui-input">
                             </div>
                         </div>
                         <div class="layui-form-item">
@@ -176,7 +176,6 @@
                 data: {email: $("#email").val(), password: $("#passwd").val()},
                 dataType: "json",
                 success: function (data) {
-                    alert(JSON.stringify(data));
                     window.location.reload();
                     if (data == "error") {
                         alert("<@spring.message code='errorparam'/>");
@@ -184,8 +183,6 @@
                     if (data == "false") {
                         alert("<@spring.message code='nofreelookup'/>");
                     }
-
-
                 },
                 error: function (data) {
                     alert("<@spring.message code='networkerror'/>");

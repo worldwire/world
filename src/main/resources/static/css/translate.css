@@ -93,6 +93,7 @@ body {
     float: right;
     font-size: 14px;
     margin: 20px 50px 0 0;
+    text-align: center;
 }
 .nationality img {
     width: 24px;
@@ -227,7 +228,7 @@ body {
 .btn-group {
     clear: both;
     margin: 140px auto 60px auto;
-    width: 463px;
+        width: 516px;
 }
 .btn-group a {
     font-size: 18px;

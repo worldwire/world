@@ -12,6 +12,8 @@ import com.spring.worldwire.utils.RedisUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,14 +22,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Locale;
 import java.util.Objects;
-
-import static com.spring.worldwire.constants.Constants.CACHE_MAIL_VALID_PREFIX;
 
 @SuppressWarnings("unused")
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
+
+    @Autowired
+    private MessageSource messageSource;
+
+    private Locale locale = LocaleContextHolder.getLocale();
 
     @Autowired
     private LoginInfoService loginInfoService;
@@ -70,14 +76,14 @@ public class RegisterController {
     }
 
     @RequestMapping("toSendMail")
-    public String sendMail(Long id,Model model){
+    public String sendMail(Long id, Model model) {
 
         LoginInfo loginInfo = loginInfoService.selectByPrimaryKey(id);
-        if(!Objects.isNull(loginInfo)&&loginInfo.getStatus() ==0){
-            model.addAttribute("mail",loginInfo.getEmail());
+        if (!Objects.isNull(loginInfo) && loginInfo.getStatus() == 0) {
+            model.addAttribute("mail", loginInfo.getEmail());
             return "pc/sendmail";
         }
-        model.addAttribute("msg","用户状态异常");
+        model.addAttribute("msg", "用户状态异常");
         return "pc/error";
     }
 
@@ -90,7 +96,7 @@ public class RegisterController {
             return "pc/error";
         }
         if (loginInfo.getStatus() != 0) {
-            model.addAttribute("msg", "该账号不是激活状态，激活失败!");
+            model.addAttribute("msg", messageSource.getMessage("notactive", null, locale));
             return "pc/error";
         }
 //        //redis缓存
@@ -98,9 +104,9 @@ public class RegisterController {
 //            model.addAttribute("msg", "邮箱激活已过期，请重新注册激活！");
 //            return "pc/error";
 //        }
-        loginInfo.setStatus((byte)1);
+        loginInfo.setStatus((byte) 1);
         loginInfoService.update(loginInfo);
-        model.addAttribute("msg", "激活成功，请登录");
+        model.addAttribute("msg", messageSource.getMessage("activesuccess", null, locale));
         return "pc/success";
     }
 

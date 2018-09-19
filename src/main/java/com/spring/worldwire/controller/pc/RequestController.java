@@ -44,11 +44,10 @@ public class RequestController {
     }
 
     @RequestMapping("/list/{userType}/{requestType}/{pageSize}/{pageNo}.html")
-    public String productRequestList(Model model, @PathVariable int userType, @PathVariable int requestType, @PathVariable int pageSize, @PathVariable int pageNo, String key) {
+    public String productRequestList(HttpServletRequest request, Model model, @PathVariable int userType, @PathVariable int requestType, @PathVariable int pageSize, @PathVariable int pageNo, String key) {
 
         ProductRequestVo personalVo = productRequestManager.getRequestByQuery(UserTypeEnum.PERSONAL, requestType, RequestTypeEnum.getNameByCode(requestType), pageSize, pageNo, key);
         ProductRequestVo enterpriseVo = productRequestManager.getRequestByQuery(UserTypeEnum.ENTERPRISE, requestType, RequestTypeEnum.getNameByCode(requestType), pageSize, pageNo, key);
-
         model.addAttribute("personalVo", personalVo);
         model.addAttribute("enterpriseVo", enterpriseVo);
         model.addAttribute("requestType", requestType);

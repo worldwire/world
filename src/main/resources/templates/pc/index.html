@@ -34,10 +34,10 @@
         </div>
         <div class="demand-list">
             <div class="demand-personal">
-                <div class="dpt"><@spring.message code="personalrequirement"/></div>
+                <div class="dpt" ><@spring.message code="personalrequirement"/></div>
 							<#if personalList??>
                                 <#list personalList as personal>
-									<div class="demand-personal-list">
+									<div class="demand-personal-list" onclick="redirectClick('/request/detail?id=${personal.id}')">
                                         <div class="demand-personal-list-img">
                                             <img src="${personal.userInfo.showImg!''}" width="100" height="100"/>
                                         </div>
@@ -55,7 +55,7 @@
                 <div class="dpt"><@spring.message code="enterpriserequirement"/></div>
 							<#if enterpriseList??>
                                 <#list enterpriseList as enterprise>
-									<div class="demand-enterprise-list">
+									<div class="demand-enterprise-list" onclick="redirectClick('/request/detail?id=${personal.id}')">
                                         <div class="demand-enterprise-list-img">
                                             <img src="${enterprise.userInfo.showImg!''}" width="100" height="100"/>
                                         </div>

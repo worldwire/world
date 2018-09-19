@@ -16,7 +16,7 @@ public class LocaleConfig {
 	public LocaleResolver localeResolver() {
 		MyLocaleResolver slr = new MyLocaleResolver();
 		// 默认语言
-		slr.setDefaultLocale(Locale.CHINA);
+		slr.setDefaultLocale(Locale.US);
 		return slr;
 	}
 
