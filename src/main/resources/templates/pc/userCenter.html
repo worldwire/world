@@ -21,23 +21,32 @@
                         <i class="iconfont">&#xe643;</i>
                     </div>
                     <span class="contentBox-head-view-span1"><@spring.message code='viewcount'/></span>
-                    <span class="contentBox-head-view-num">${account.viewingTimes}</span>
-                    <span class="contentBox-head-view-span2"><@spring.message code='unit'/></span>
-                    <div class="contentBox-head-view-btn" onclick="toRecharge()">
-                        <@spring.message code='buy'/>
-                    </div>
+                    <span class="contentBox-head-view-num">
+			<span id="">
+				${account.viewingTimes}
+			</span>
+			<span class="contentBox-head-view-span2"><@spring.message code='unit'/>
+				<span class="contentBox-head-view-btn" onclick="toRecharge()">
+					<@spring.message code='buy'/>
+				</span>
+			</span>
+		</span>
                 </div>
+
                 <div class="contentBox-head-translation">
                     <div class="contentBox-head-translation-i">
                         <i class="iconfont">&#xe69c;</i>
                     </div>
                     <a href="" title="<@spring.message code='viewdesc'/>"><i class="iconfont a-i">&#xe758;</i></a>
                     <span class="contentBox-head-translation-span1"><@spring.message code='freetranslate'/></span>
-                    <span class="contentBox-head-translation-num">${account.freeTranslate}</span>
-                    <span class="contentBox-head-translation-span2"><@spring.message code='unit'/></span>
+                    <span class="contentBox-head-translation-num">
+			<span id="">
+				1
+			</span>
+			<span class="contentBox-head-translation-span2"><@spring.message code='unit'/></span>
+		</span>
                 </div>
             </div>
-
             <div class="contentBox-trading">
                 <div class="contentBox-trading-title">
                     <span class="contentBox-trading-title-span"><@spring.message code='traderecord'/></span>
