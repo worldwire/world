@@ -64,6 +64,8 @@ public class ProductRequest implements Serializable {
 
     private UserInfo userInfo;
 
+    private String countryPic;
+
     private Long viewCount;
 
     public Long getId() {
@@ -240,6 +242,14 @@ public class ProductRequest implements Serializable {
 
     public void setPublicPlatform(String publicPlatform) {
         this.publicPlatform = publicPlatform;
+    }
+
+    public String getCountryPic() {
+        return countryPic;
+    }
+
+    public void setCountryPic(String countryPic) {
+        this.countryPic = countryPic;
     }
 
     /**

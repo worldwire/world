@@ -50,9 +50,10 @@
                                                     <#else><@spring.message code='requirement'/>
                                                 </#if>
                                                 <img class="list-style-title-img1" src="/images/demandHall1.png"/>
-                                                <div class="list-style-title-img2">
-                                                    <img src="/images/demandHall2.png"/>
-                                                </div>
+                                            <div class="list-style-title-img2">
+
+                                                <img src="${enterprise.countryPic}" class="countryPic">
+
                                             </div>
                                             <div class="list-style-headImg">
                                                 <img src="${personal.userInfo.showImg!''}"/>
@@ -76,7 +77,7 @@
                                                     </#if>
                                                 </span>
                                                 <div class="list-style-place-img">
-                                                    <img src="/images/demandHall2.png"/>
+                                                    <img src="${enterprise.countryPic}" class="countryPic">
                                                 </div>
                                             </div>
                                             <div class="list-style-specialty">
@@ -137,7 +138,7 @@
                                                 </#if>
                                                 <img class="list-style-1-img1" src="/images/demandHall1.png"/>
                                                 <div class="list-style-1-img2">
-                                                    <img src="/images/demandHall2.png"/>
+                                                    <img src="${enterprise.countryPic}" class="countryPic">
                                                 </div>
                                             </div>
                                             <div class="list-style-headImg">
@@ -160,7 +161,7 @@
                                                         <@spring.message code='unknown'/></#if>
                                                 </span>
                                                 <div class="list-style-place-img">
-                                                    <img src="/images/demandHall2.png"/>
+                                                    <img src="${enterprise.countryPic}" class="countryPic">
                                                 </div>
                                             </div>
                                             <div class="list-style-specialty">
@@ -312,7 +313,7 @@
                             html += "<div class=\"list-style-1-img2\">";
                         }
 
-                        html += "<img src=\"/images/demandHall2.png\"/>";
+                        html += "<img src=\""+ item.countryPic +"\"  class=\"countryPic\"/>";
                         html += "</div>";
                         html += "</div>";
                         html += '<div class="list-style-headImg"><img src="' + item.userInfo.showImg + '"/></div>';
@@ -327,7 +328,7 @@
                         html += '</div>';
                         html += '<div class="list-style-place">' + "<@spring.message code='nowplace'/>" + '<span class="list-style-place-span">';
                         html += (!!item.userInfo.localAddr ? item.userInfo.localAddr : "<@spring.message code='unknown'/>");
-                        html += '</span><div class="list-style-place-img"><img src="/images/demandHall2.png"/></div></div>';
+                        html += '</span><div class="list-style-place-img"><img src="'+item.countryPic+'"  class="countryPic"/></div></div>';
                         html += '<div class="list-style-specialty"><div class="specialty-label-box">';
                         if (!!item.keyWord) {
                             var keys = item.keyWord.split(";");

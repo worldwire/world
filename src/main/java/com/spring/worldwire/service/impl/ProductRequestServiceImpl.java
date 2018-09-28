@@ -2,7 +2,9 @@ package com.spring.worldwire.service.impl;
 
 import com.spring.worldwire.dao.ProductRequestDao;
 import com.spring.worldwire.dao.UserInfoDao;
+import com.spring.worldwire.enums.CountryEnum;
 import com.spring.worldwire.model.ProductRequest;
+import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.query.ProductRequestQuery;
 import com.spring.worldwire.service.ProductRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +43,9 @@ public class ProductRequestServiceImpl implements ProductRequestService {
             return list;
         }
         list.stream().forEach(request -> {
-            request.setUserInfo(userInfoDao.selectByPrimaryKey(request.getUserId()));
+            UserInfo nowUser = userInfoDao.selectByPrimaryKey(request.getUserId());
+            request.setUserInfo(nowUser);
+            request.setCountryPic(CountryEnum.getCountryByenName(nowUser.getNowNationality()));
         });
         return list;
     }
