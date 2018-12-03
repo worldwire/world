@@ -29,12 +29,12 @@
 </div>
 <div class="demand">
     <div class="demand-box">
-        <div class="demand-title">
+        <div class="demand-title" onclick="redirectClick('/')" style="cursor: pointer">
             <@spring.message code="latestrequrequire"/>
         </div>
         <div class="demand-list">
             <div class="demand-personal">
-                <div class="dpt" ><@spring.message code="personalrequirement"/></div>
+                <div class="dpt" onclick="redirectClick('/')" style="cursor: pointer"><@spring.message code="personalrequirement"/></div>
 							<#if personalList??>
                                 <#list personalList as personal>
 									<div class="demand-personal-list" onclick="redirectClick('/request/detail?id=${personal.id}')">
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="demand-enterprise">
-                <div class="dpt"><@spring.message code="enterpriserequirement"/></div>
+                <div class="dpt" onclick="redirectClick('/')" style="cursor: pointer"><@spring.message code="enterpriserequirement"/></div>
 							<#if enterpriseList??>
                                 <#list enterpriseList as enterprise>
 									<div class="demand-enterprise-list" onclick="redirectClick('/request/detail?id=${personal.id}')">

@@ -27,7 +27,6 @@
                     <img src="${userInfo.showImg!'/images/defaultHeadImg.png'}"/>
                     <input type="hidden" name="showImg" value="${userInfo.showImg!}" id="showImg"/>
                 </div>
-
             </div>
             <div class="wrap">
                 <div class="title">
@@ -117,61 +116,6 @@
                     </div>
                     <input type="hidden" name="language" id="language">
 
-
-                    <div class="layui-form-item">
-                        <label for="nationality" class="req"><@spring.message code='birthplace'/></label>
-                        <div class="layui-input-inline">
-                            <select name="nationality" id="nationality">
-                                    <option><@spring.message code='nationnality'/></option>
-                                    <#list countryList as country>
-                                        <option value="${country.enName}"
-                                                <#if userInfo.briNationality??&&country.country == userInfo.briNationality.country>selected="selected"</#if>>${country.cnName}</option>
-                                    </#list>
-
-                            </select>
-                        </div>
-
-                        <div class="layui-input-inline">
-                            <!--<select name="">
-                                <option value=""><@spring.message code='province'/></option>
-                            </select>-->
-                            <input type="text" class="layui-input" placeholder="<@spring.message code='province'/>" name="province">
-                        </div>
-
-                        <div class="layui-input-inline">
-                            <!--<select name="">
-                                <option value=""><@spring.message code='city'/></option>
-                            </select>-->
-                            <input type="text" class="layui-input" placeholder="<@spring.message code='city'/>" name="city">
-                        </div>
-                    </div>
-
-                    <div class="layui-form-item">
-                        <label class="req"><@spring.message code='nownationality'/></label>
-                        <div class="layui-input-inline">
-                            <select name="">
-                                    <#list countryList as country>
-                                        <option value="${country.enName}"
-                                                <#if userInfo.nowNationality??&&country.country == userInfo.nowNationality.country>selected="selected"</#if> >${country.cnName}</option>
-                                    </#list>
-                            </select>
-                        </div>
-
-                        <div class="layui-input-inline">
-                            <!--<select name="">
-                                <option value=""><@spring.message code='province'/></option>
-                            </select>-->
-                            <input type="text" class="layui-input" placeholder="<@spring.message code='province'/>" name="province">
-                        </div>
-
-                        <div class="layui-input-inline">
-                            <!--<select name="">
-                                <option value=""><@spring.message code='province'/></option>
-                            </select>-->
-                            <input type="text" class="layui-input" placeholder="<@spring.message code='city'/>" name="city">
-                        </div>
-                    </div>
-
                     <div class="layui-form-item">
                         <label class="req"><@spring.message code='livecity'/></label>
                         <div class="layui-input-inline">
@@ -245,6 +189,32 @@
                             <div class="layui-input-inline">
                                 <input type="text" class="layui-input" name="publicPlatform"
                                        value="${userInfo.publicPlatform!}" placeholder=""/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div></div>
+                        <div class="layui-inline">
+                            <label><@spring.message code='birthplace'/></label>
+                            <div class="layui-input-inline">
+                                <select name="birthplace" id="birthplace">
+                                    <option><@spring.message code='nationnality'/></option>
+                                    <#list countryList as country>
+                                        <option value="${country.enName}"
+                                        <#if userInfo.briNationality??&&country.country == userInfo.briNationality.country>selected="selected"</#if>>${country.cnName}</option>
+                                    </#list>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label><@spring.message code='nownationality'/></label>
+                            <div class="layui-input-inline">
+                                <select name="">
+                                    <#list countryList as country>
+                                        <option value="${country.enName}"
+                                        <#if userInfo.nowNationality??&&country.country == userInfo.nowNationality.country>selected="selected"</#if> >${country.cnName}</option>
+                                    </#list>
+                                </select>
                             </div>
                         </div>
                     </div>

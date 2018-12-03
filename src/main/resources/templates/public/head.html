@@ -1,13 +1,14 @@
 <div class="head">
 
     <div class="head1 ">
-        <img class="img" src="/images/top1.jpg" alt="汇网" width="50" height="50"/>
+        <img class="img" src="/images/top1.jpg" alt="汇网" width="50" height="50" onclick="redirectClick('/')" style="cursor: pointer"/>
         <div class="head-search layui-form">
             <i class="layui-icon layui-icon-face-smile search-icon">&#xe615;</i>
             <div class="layui-input-inline head-search-input">
                 <select name="modules" lay-verify="required" lay-search="" onkeyup="openRequireList(this)">
-                    <option value="1"><@spring.message code="personalrequirement"/></option>
-                    <option value="2"><@spring.message code="enterpriserequirement"/></option>
+                    <option value="1"><@spring.message code="searchtelent"/></option>
+                    <option value="2"><@spring.message code="searchwork"/></option>
+                    <option value="3"><@spring.message code="searchresources"/></option>
                 </select>
             </div>
         </div>
