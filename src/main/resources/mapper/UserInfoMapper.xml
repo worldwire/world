@@ -56,6 +56,7 @@
     <result column="business_bank_name" property="businessBankName" jdbcType="VARCHAR" />
     <result column="business_bank_addr" property="businessBankAddr" jdbcType="VARCHAR" />
     <result column="business_bank_img" property="businessBankImg" jdbcType="VARCHAR" />
+    <result column="education" property="education" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, login_id, `type`, is_foreign, show_img, birthday, nick_name, language, bri_nationality,
@@ -65,7 +66,7 @@
     company_num, company_addr, company_tel, company_mobile, company_post_code, company_fax, 
     company_email, company_main_business, company_main_contry, business_license_img, 
     business_special_license_img, business_bank, business_bank_name, business_bank_addr, 
-    business_bank_img
+    business_bank_img,education
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
@@ -100,7 +101,7 @@
       company_post_code, company_fax, company_email, 
       company_main_business, company_main_contry, 
       business_license_img, business_special_license_img, 
-      business_bank, business_bank_name, business_bank_addr, 
+      business_bank, business_bank_name, business_bank_addr, education,
       business_bank_img)
     values (#{id,jdbcType=BIGINT}, #{loginId,jdbcType=BIGINT}, #{type,typeHandler=com.spring.worldwire.extent.NumericEnumHandler}, 
       #{isForeign,jdbcType=INTEGER}, #{showImg,jdbcType=VARCHAR}, #{birthday,jdbcType=TIMESTAMP},
@@ -116,8 +117,8 @@
       #{companyPostCode,jdbcType=VARCHAR}, #{companyFax,jdbcType=VARCHAR}, #{companyEmail,jdbcType=VARCHAR}, 
       #{companyMainBusiness,jdbcType=VARCHAR}, #{companyMainContry,jdbcType=VARCHAR}, 
       #{businessLicenseImg,jdbcType=VARCHAR}, #{businessSpecialLicenseImg,jdbcType=VARCHAR}, 
-      #{businessBank,jdbcType=VARCHAR}, #{businessBankName,jdbcType=VARCHAR}, #{businessBankAddr,jdbcType=VARCHAR}, 
-      #{businessBankImg,jdbcType=VARCHAR})
+      #{businessBank,jdbcType=VARCHAR}, #{businessBankName,jdbcType=VARCHAR}, #{businessBankAddr,jdbcType=VARCHAR},
+      #{education,jdbcType=VARCHAR}, #{businessBankImg,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.spring.worldwire.model.UserInfo" keyProperty="id">
     insert into user_info
@@ -522,6 +523,9 @@
       <if test="businessBankImg != null and businessBankImg != ''" >
         business_bank_img = #{businessBankImg,jdbcType=VARCHAR},
       </if>
+      <if test="education != null and education != ''" >
+        education = #{education,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -569,7 +573,8 @@
       business_bank = #{businessBank,jdbcType=VARCHAR},
       business_bank_name = #{businessBankName,jdbcType=VARCHAR},
       business_bank_addr = #{businessBankAddr,jdbcType=VARCHAR},
-      business_bank_img = #{businessBankImg,jdbcType=VARCHAR}
+      business_bank_img = #{businessBankImg,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 

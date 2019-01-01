@@ -108,4 +108,7 @@
     from product_info
     where type = #{type}
   </select>
+
+
+
 </mapper>

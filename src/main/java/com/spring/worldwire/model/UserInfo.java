@@ -26,6 +26,8 @@ public class UserInfo implements Serializable {
 
     private String nickName;
 
+    private String education;
+
     private List<LanguageLevel> language;
 
     private Location briNationality;
@@ -460,6 +462,14 @@ public class UserInfo implements Serializable {
 
     public void setExhibition(String exhibition) {
         this.exhibition = exhibition;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
     }
 
     @Override

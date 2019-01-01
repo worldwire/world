@@ -21,4 +21,7 @@ public interface ProductInfoDao {
     List<ProductInfo> selectCheckProductList(@Param("code") int code,@Param("type") int type);
 
     List<ProductInfo> selectProductByType(@Param("type") int type);
+
+
+    ProductInfo selectByList(List<String> types);
 }

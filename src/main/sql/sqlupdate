@@ -53,3 +53,6 @@ INSERT INTO `product_info` (`id`, `product_name`, `amount`, `pay_type`, `type`, 
 
 alter TABLE translation_apply ADD `operator_name` VARCHAR(64) DEFAULT NULL COMMENT '操作人账户';
 alter TABLE translation_apply ADD `auditor_name` VARCHAR(64) DEFAULT NULL COMMENT '审核人账户';
+
+
+alter TABLE user_info ADD `education` VARCHAR(64) DEFAULT NULL COMMENT '学历';

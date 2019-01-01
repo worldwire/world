@@ -151,6 +151,19 @@
                         </div>
                     </div>
 
+                    <div class="layui-form-item layui-form-text">
+                        <label><@spring.message code='education'/></label>
+                        <select name="education">
+                            <option value="小学" <#if userInfo.education??&&userInfo.education == '小学'>selected="selected"</#if>><@spring.message code='PrimarySchool'/></option>
+                            <option value="初中" <#if userInfo.education??&&userInfo.education == '初中'>selected="selected"</#if>><@spring.message code='JuniorMiddleSchool'/></option>
+                            <option value="高中" <#if userInfo.education??&&userInfo.education == '高中'>selected="selected"</#if>><@spring.message code='highSchool'/></option>
+                            <option value="专科" <#if userInfo.education??&&userInfo.education == '专科'>selected="selected"</#if>><@spring.message code='Specialty'/></option>
+                            <option value="本科" <#if userInfo.education??&&userInfo.education == '本科'>selected="selected"</#if>><@spring.message code='Undergraduate'/></option>
+                            <option value="研究生" <#if userInfo.education??&&userInfo.education == '研究生'>selected="selected"</#if>><@spring.message code='GraduateStudent'/></option>
+                            <option value="博士" <#if userInfo.education??&&userInfo.education == '博士'>selected="selected"</#if>><@spring.message code='doctor'/></option>
+                            <option value="其他" <#if userInfo.education??&&userInfo.education == '其他'>selected="selected"</#if>><@spring.message code='Other'/></option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="title">
