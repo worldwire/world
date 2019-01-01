@@ -1,10 +1,7 @@
 package com.spring.worldwire.controller;
 
 import com.spring.worldwire.constants.Constants;
-import com.spring.worldwire.enums.CountryEnum;
-import com.spring.worldwire.enums.LanguageEnum;
-import com.spring.worldwire.enums.LevelEnum;
-import com.spring.worldwire.enums.StatusCodeEnum;
+import com.spring.worldwire.enums.*;
 import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.result.ResponseResult;
 import com.spring.worldwire.service.UserInfoService;
@@ -54,7 +51,11 @@ public class UserInfoController {
         request.setAttribute("countryList",  CountryEnum.values());
         request.setAttribute("levelValues", LevelEnum.values());
 
-        return "pc/personData";
+        if(UserTypeEnum.ENTERPRISE.equals(userInfo.getType())){
+            return "pc/companyData";
+        }else {
+            return "pc/personData";
+        }
     }
 
     @RequestMapping("modify")

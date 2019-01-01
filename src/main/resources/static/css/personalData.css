@@ -100,6 +100,11 @@ form label.req::before {
     margin-right: 12px;
 }
 
+.base .layui-form-item .layui-input-block {
+    width: 319px;
+    margin-right: 12px;
+}
+
 .container form .layui-form-item .item2 {
     width: 325px;
     margin-bottom: 10px;
