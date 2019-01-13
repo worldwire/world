@@ -37,10 +37,19 @@
 
                     <input type="hidden" name="id" value="${userInfo.id}">
                     <div class="layui-form-item layui-form-text">
-                        <label for="userName" class="req"><@spring.message code='nickname'/></label>
-                        <div class="layui-input-block">
-                            <input type="text" id="nickName" name="nickName" value="${userInfo.nickName!}"
-                                   class="layui-input tiput" placeholder="<@spring.message code='inputnickname'/>">
+                        <div class="layui-inline">
+                            <label for="userName" class="req"><@spring.message code='nickname'/></label>
+                            <div class="layui-input-block">
+                                <input type="text" id="nickName" name="nickName" value="${userInfo.nickName!}"
+                                       class="layui-input tiput" placeholder="<@spring.message code='inputnickname'/>">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label for="companyName" class="req"><@spring.message code='companyName'/></label>
+                            <div class="layui-input-block">
+                                <input type="text" id="companyName" name="companyName" value="${userInfo.companyName!}"
+                                       class="layui-input tiput" placeholder="<@spring.message code='inputcompanyname'/>">
+                            </div>
                         </div>
                     </div>
 
@@ -67,7 +76,7 @@
                     </div>
 
                     <div class="layui-form-item">
-                        <label class="req"><@spring.message code='livecity'/></label>
+                        <label class="req"><@spring.message code='companyLivecity'/></label>
                         <div class="layui-input-inline">
                             <select name="nationality">
                                     <#list countryList as country>
@@ -151,32 +160,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="layui-form-item">
-                        <div></div>
-                        <div class="layui-inline">
-                            <label><@spring.message code='birthplace'/></label>
-                            <div class="layui-input-inline">
-                                <select name="birthplace" id="birthplace">
-                                    <option><@spring.message code='nationnality'/></option>
-                                    <#list countryList as country>
-                                        <option value="${country.enName}"
-                                        <#if userInfo.briNationality??&&country.country == userInfo.briNationality.country>selected="selected"</#if>>${country.cnName}</option>
-                                    </#list>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label><@spring.message code='nownationality'/></label>
-                            <div class="layui-input-inline">
-                                <select name="">
-                                    <#list countryList as country>
-                                        <option value="${country.enName}"
-                                        <#if userInfo.nowNationality??&&country.country == userInfo.nowNationality.country>selected="selected"</#if> >${country.cnName}</option>
-                                    </#list>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
+
                     <div class="layui-form-item">
                         <div class="layui-inline">
                             <div class="click-upload" id="up-ewm">
@@ -258,7 +242,6 @@
                         <input type="hidden" name="exhibition"/>
                     </div>
 
-
                 </div>
 
                 <div class="title">
@@ -266,7 +249,7 @@
                 </div>
                 <div class="certificates">
                     <div class="layui-form-item">
-                        <label><@spring.message code='id'/><a href="###"
+                        <label><@spring.message code='companyId'/><a href="###"
                                                               class="upload-a"><@spring.message code='uploadpassport'/></a></label>
                         <div class="layui-inline">
                             <div class="layui-input-inline" id="up-face">
@@ -275,7 +258,7 @@
                                     <#else>
                                         <div class="msg-box">
                                             <p><i class="layui-icon" style="font-size: 56px">&#xe654;</i></p>
-                                            <p class="cer-msg"><@spring.message code='uploadidface'/></p>
+                                            <p class="cer-msg"><@spring.message code='uploadidCompanyFace'/></p>
                                         </div>
                                     </#if>
                             </div>
@@ -286,7 +269,7 @@
                                     <#else>
                                     <div class="msg-box">
                                         <p><i class="layui-icon" style="font-size: 56px">&#xe654;</i></p>
-                                        <p class="cer-msg"><@spring.message code='uploadidback'/></p>
+                                        <p class="cer-msg"><@spring.message code='uploadidbackCompany'/></p>
                                     </div>
                                     </#if>
                             </div>
@@ -313,7 +296,7 @@
                                     <#else>
                                     <div class="msg-box">
                                         <p><i class="layui-icon" style="font-size: 56px">&#xe654;</i></p>
-                                        <p class="cer-msg"><@spring.message code='uploadidwithhand'/></p>
+                                        <p class="cer-msg"><@spring.message code='uploadidwithhandCompany'/></p>
                                     </div>
                                     </#if>
 
@@ -328,12 +311,8 @@
                     </div>
 
                     <div class="layui-form-item">
-                        <label style="float: left;width: 340px"><@spring.message code='realname'/></label>
-                        <label style="float: left;"><@spring.message code='idnumber'/></label>
+                        <label style="float: left;"><@spring.message code='idnumberCompany'/></label>
                         <div class="layui-clear"></div>
-                        <input type="text" class="layui-input" name="realName" value="${userInfo.realName!}"
-                               placeholder="<@spring.message code='inputrealname'/>"
-                               style="width: 315px;float:left;margin-right: 27px"/>
                         <input type="text" class="layui-input" name="idcard" value="${userInfo.idcard!}"
                                placeholder="<@spring.message code='inputidno'/>" style="width: 315px;;float:left;"/>
                     </div>
@@ -474,14 +453,16 @@
             });
         }
 
+        // 二维码
+        uploadIdCard('#up-ewm', 'user', '#up-ewm', '#contact-btn', 'wechatQrcode');
+
         // 人脸面
         uploadIdCard('#up-face', 'identity', '#up-face', '#up-face', 'idcardOnImg');
         // 国徽面
         uploadIdCard('#up-badge', 'identity', '#up-badge', '#up-badge', 'idcardDownImg');
         // 手持面
         uploadIdCard('#up-take', 'identity', '#up-take', '#up-take', 'idcardHandImg');
-        // 二维码
-        uploadIdCard('#up-ewm', 'user', '#up-ewm', '#contact-btn', 'wechatQrcode');
+
         // 上传头像
         uploadIdCard('.head-box', 'avatar', '.head-box', '.head-box', 'showImg');
 
@@ -521,60 +502,6 @@
                 return;
             }
 
-            var communicationName = $("[name='communicationName']");
-            var communicationValue = $("[name='communicationValue']");
-
-            var communication = "[";
-            for (var i = 0; i < communicationName.length; i++) {
-                if (i != 0) {
-                    communication += ",";
-                }
-
-                var value1 = $(communicationName[i]).val();
-                var value2 = $(communicationValue[i]).val();
-                if (value1 == '' || value2 == '') {
-                    break;
-                }
-                communication += "{";
-                communication += "\"" + value1 + "\"" + ":";
-                communication += "\"" + value2 + "\"";
-                communication += "}";
-            }
-            communication += "]";
-            if (communication != "[]")
-                $("#communication").val(communication);
-
-
-            var lang = $("[name='lang']");
-            var level = $("[name='level']");
-            var language = "[";
-            for (var i = 0; i < lang.length; i++) {
-                if (i != 0) {
-                    language += ",";
-                }
-
-                var value1 = $(lang[i]).val();
-                var value2 = $(level[i]).val();
-                if (value1 == '' || value2 == '') {
-                    layer.msg('<@spring.message code="communicatenotnull"/>', {
-                        icon: 0,
-                        shade: 0.3,
-                        time: 1000
-                    }, function () {
-                        typeof call === "function" && call();
-                    });
-                    return;
-                }
-                language += "{";
-                language += "\"" + value1 + "\"" + ":";
-                language += "\"" + value2 + "\"";
-                language += "}";
-            }
-            language += "]";
-            $("#language").val(language);
-
-            console.log("communication:" + communication);
-            console.log("language:" + language);
             $("#userBasic").submit();
 
         });

@@ -475,7 +475,7 @@
       <if test="companyName != null and companyName!=''" >
         company_name = #{companyName,jdbcType=VARCHAR},
       </if>
-      <if test="companyTime != null and companyTime != ''" >
+      <if test="companyTime != null" >
         company_time = #{companyTime,jdbcType=TIMESTAMP},
       </if>
       <if test="companyNum != null and companyNum != ''" >
