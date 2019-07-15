@@ -1,166 +1,195 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>需求详情</title>
     <#include "../public/common.html" encoding="utf-8"/>
 
     <link rel="stylesheet" href="/css/demand.css">
+    <link rel="stylesheet" href="/css/lrtk.css">
+    <script src="/js/slide.js"></script>
 </head>
+
 <body>
-<#include "../public/head.html" encoding="utf-8"/>
-<#include "../public/navigator.html" encoding="utf-8"/>
+<#include "../public/head.html" encoding="utf-8">
+<#include "../public/navigator.html" encoding="utf-8">
 <div class="container">
     <div class="main-box">
         <div>
-            <div class="information">
-                <div class="photo">
-                    <a href=""><img src="${productRequest.userInfo.showImg!''}" alt="<@spring.message code='headimg'/>"></a>
-                </div>
-                <div class="info">
-                    <p class="name">${productRequest.userInfo.nickName!''}</p>
-                    <p class="nat"><i
-                            class="iconfont">&#xe611;</i><span>${productRequest.userInfo.localAddr!''}</span><img
-                            src="/images/gj.png" alt="<@spring.message code='nationality'/>"></p>
-                    <p class="text"><span class="disc"></span>
-                        <span><#if productRequest.userType.code ==1><@spring.message code='personal'/><#else><@spring.message code='enterprise'/></#if><#if productRequest.requestType.code == 1><@spring.message code='service'/><#else><@spring.message code='requirement'/></#if></span>
-                        <#if productRequest.requestType.code == 1><@spring.message code='supplyservice'/>
-                            <#else><@spring.message code='requireservice'/>
-                        </#if>
-                    </p>
-                </div>
-                <div class="nationality">
-                    <p><@spring.message code='nationality'/></p>
-                    <p><img src="/images/gj.png" alt="<@spring.message code='nationality'/>"></p>
-                </div>
-            </div>
             <div class="content">
-                <div><h2>${productRequest.title!''}</h2></div>
-                <div class="content-main">
-                    ${productRequest.content!''}
+                <div>
+                    <h2>我提供服务产品设计服务，这个是服务标题，最多显示30个字</h2>
                 </div>
-                <div class="time">
-                    <p><@spring.message code='publishdate'/>:
-                        <#if productRequest.createTime??>${productRequest.createTime?string("yyyy-MM-dd HH:mm:ss")}
-                        </#if>
-                    </p>
+                <div class="mes">
+                    <span class="circleMes">
+                        <span class="circle"></span>外国个人需求
+                    </span>
+                    <span>我要找国际人才或资源</span>
+                        <img src="/images/times.png" class="times">
+                    <span style=" margin-right: 15px;">2018-03-29</span>
+                    <img src="/images/eye.png" style="width:18px;height:13px;margin-right:5px;vertical-align:middle;">
+                    <span>4666</span>
                 </div>
-            </div>
-            <#if productRequest.userInfo.language??>
-                <div class="level">
-                    <p><@spring.message code='langugelevel'/></p>
-                    <div>
-                        <#list productRequest.userInfo.language as languageLevel>
-                            <dl>
-                                <dt>${languageLevel.languageEnum.cnName}</dt>
-                                <dd>${languageLevel.level.cnName}</dd>
-                            </dl>
-                        </#list>
-                    </div>
-                </div>
-            </#if>
+                <div id=picarea>
+                    <div class="">
+                        <div id=bigpicarea>
+                            <div id=image_xixi-01 class=image>
+                                <IMG alt="" src="/images/42766101.jpg" width=772 height=434/>
+                                <div class=word>
 
-            <div class="other">
-                <div style="margin-bottom: 50px;">
-                    <#if productRequest.keyWord??>
-                        <#list productRequest.keyWord?split(";") as key>
-                            <a href="###">${key}</a>
-                        </#list>
-                    </#if>
-                </div>
-                <div style="float: right;">
-                    <div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a
-                            href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#"
-                                                                                               class="bds_weixin"
-                                                                                               data-cmd="weixin"
-                                                                                               title="分享到微信"></a><a
-                            href="#" class="bds_tqf" data-cmd="tqf" title="分享到腾讯朋友"></a><a href="#" class="bds_fbook"
-                                                                                           data-cmd="fbook"
-                                                                                           title="分享到Facebook"></a><a
-                            href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a><a href="#"
-                                                                                                         class="bds_twi"
-                                                                                                         data-cmd="twi"
-                                                                                                         title="分享到Twitter"></a>
+                                </div>
+                            </div>
+                            <div id=image_xixi-02 class=image>
+                                <IMG alt="" src="/images/42813100.jpg" width=772 height=434/>
+                                <div class=word>
+
+                                </div>
+                            </div>
+                            <div id=image_xixi-03 class=image>
+                                <IMG alt="" src="/images/42813102.jpg" width=772 height=434/>
+                                <div class=word>
+
+                                </div>
+                            </div>
+                            <div id=image_xixi-04 class=image>
+                                <IMG alt="" src="/images/42813139.jpg" width=772 height=434>
+                                <div class=word>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <script>
-                        window._bd_share_config = {
-                            "common": {
-                                "bdSnsKey": {},
-                                "bdText": "",
-                                "bdMini": "2",
-                                "bdMiniList": false,
-                                "bdPic": "",
-                                "bdStyle": "1",
-                                "bdSize": "24",
-                                "onAfterClick": function (cmd) {
-                                    //创建异步对象
-                                }
-                            },
-                            "share": {}
-                        };
-                        with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~( -new Date() / 36e5)];
-                    </script>
+                    <div id=smallpicarea>
+                        <div id=thumbs>
+                            <ul>
+                                <li class="first btnPrev"><IMG id=play_prev src="/images/left.png"></li>
+                                <li class=slideshowItem>
+                                    <a id=thumb_xixi-01 href="#"><IMG src="/images/42766316.jpg" width=90
+                                                                      height=60></a>
+                                </li>
+                                <li class=slideshowItem>
+                                    <a id=thumb_xixi-02 href="#"><IMG src="/images/42813171.jpg" width=90
+                                                                      height=60></a>
+                                </li>
+                                <li class=slideshowItem>
+                                    <a id=thumb_xixi-03 href="#"><IMG src="/images/42813178.jpg" width=90
+                                                                      height=60></a>
+                                </li>
+                                <li class=slideshowItem>
+                                    <a id=thumb_xixi-04 href="#"><IMG src="/images/42813186.jpg" width=90
+                                                                      height=60></a>
+                                </li>
+                                <li class="last btnNext"><IMG id=play_next src="/images/right.png"></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="peopleMes">
+                    <p><span>姓&nbsp&nbsp名：&nbsp&nbsp</span> 张某某</p>
+                    <p><span>性&nbsp&nbsp别：&nbsp&nbsp</span> 张某某</p>
+                    <p><span>年&nbsp&nbsp龄：&nbsp&nbsp</span> 张某某</p>
+                    <p><span>国&nbsp&nbsp际：&nbsp&nbsp</span> 张某某</p>
+                    <p><span>所在地：&nbsp&nbsp</span> 张某某</p>
+                    <p><span>座机号：&nbsp&nbsp</span> 张某某</p>
+                    <p><span>微信号：&nbsp&nbsp</span> 张某某</p>
+                    <p><span>我的网站：&nbsp&nbsp</span> 张某某</p>
+                    <p><span>联系邮箱：&nbsp&nbsp</span> 张某某</p>
+                    <p><span>Facebook：&nbsp&nbsp</span> 张某某</p>
+                    <p><span>LinkedIn：&nbsp&nbsp</span> 张某某</p>
+                    <p><span>WhatsApp：&nbsp&nbsp</span> 张某某</p>
+                    <p><span>Twitter：&nbsp&nbsp</span> 张某某</p>
+                    <p><span>Instagram：&nbsp&nbsp</span> 张某某</p>
+                    <div>
+                        <div class="phone">
+                            <div><img src="/images/phone.png"></div>
+                            15555555555
+                        </div>
+                        <img src="/images/ewm2.png" class="ewm2">
+                    </div>
+                </div>
+                <div class="introduce">需求详情介绍</div>
+            </div>
+
+        </div>
+
+        <div class="other">
+            <div class="otherMes">
+                App全球亿万富翁身家2018年全年合计蒸发了5000亿美元，名列该榜单前500名的富翁合计损失了4510亿美元，与2017年增加1万亿美元形成了鲜明对比。脸书创始人扎克伯格财富缩水207亿美元，缩水规模为2018年全球富翁之最。
+
+                几家欢乐几家愁。尽管金融市场2018年下跌成为主基调，但仍然不妨碍有人在这一年获得巨额财富。贝佐斯、中国智能手机生产商小米的创始人雷军、拼多多创始人黄峥就是其中的幸运儿。
+
+                贝佐斯成最大赢家
+
+                截至2018年12月31日，共有31位“新贵”登上彭博亿万富翁指数榜单。WE Family
+                Offices管理合伙人米切尔·佐伊纳表示：“（2018年）是个创造财富的好年份，尽管对于金融市场来说是艰难的一年，但对通过公司来创造财富的人来说，经济本身很强。”
+
+                据彭博报道，全球爆款游戏《堡垒之夜(Fortnite)》的制作者、Epic Games创始人兼首席执行官蒂姆·斯维尼（Tim
+                Sweeney）在2018年的财富规模达到72亿美元。石油公司Endeavour能源资源公司将被收购，使得创始人奥特里·斯蒂文斯身家达到114亿美元。
+            </div>
+            <div style="margin-bottom: 50px;">
+                <a href="###">钢 管</a>
+                <a href="###">LED灯设计</a>
+                <a href="###">钢 管</a>
+                <a href="###">LED灯设计</a>
+                <a href="###">钢 管</a>
+                <a href="###">LED灯设计</a>
+                <a href="###">钢 管</a>
+                <a href="###">钢 管</a>
+                <a href="###">LED灯设计</a>
+            </div>
+            <div style="float: right;">
+                <div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a
+                        href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#"
+                                                                                           class="bds_weixin"
+                                                                                           data-cmd="weixin"
+                                                                                           title="分享到微信"></a><a href="#"
+                                                                                                                class="bds_tqf"
+                                                                                                                data-cmd="tqf"
+                                                                                                                title="分享到腾讯朋友"></a><a
+                        href="#" class="bds_fbook" data-cmd="fbook"
+                        title="分享到Facebook"></a><a href="#" class="bds_linkedin" data-cmd="linkedin"
+                                                   title="分享到linkedin"></a><a href="#" class="bds_twi" data-cmd="twi"
+                                                                              title="分享到Twitter"></a>
+                </div>
+                <script>window._bd_share_config = {
+                    "common": {
+                        "bdSnsKey": {},
+                        "bdText": "",
+                        "bdMini": "2",
+                        "bdMiniList": false,
+                        "bdPic": "",
+                        "bdStyle": "1",
+                        "bdSize": "24"
+                    }, "share": {}
+                };
+                with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
             </div>
         </div>
     </div>
-    <div class="right-box">
-        <#if userInfo??>
-            <!-- 已登陆 -->
-            <div class="login">
-                <p class="login-title"><@spring.message code='getcontracts'/></p>
-                <button class="layui-btn"><@spring.message code='getit'/></button>
-                <div class="login-msg">
-                    <p><@spring.message code='freeget'/><span>${productRequest.userInfo.nickName!''}</span></p>
-                    <p><@spring.message code='freepreveledge'/></p>
-                </div>
-            </div>
-
-            <#else>
-                <!-- 未登录/注册 -->
-                <div class="reg">
-                    <p><@spring.message code='contractlogin'/></p>
-                    <p><a href="./login.html"><@spring.message code='login'/></a> <@spring.message code='or'/> <a href="./register.html"><@spring.message code='register'/></a></p>
-                    <form action="javascript:void(0)" id="login-form" class="layui-form" method="post">
-                        <div class="layui-form-item">
-                            <div class="layui-input-block">
-                                <input name="email" type="text" id="email" placeholder="<@spring.message code='inputemail'/>" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-form-item">
-                            <div class="layui-input-block">
-                                <input name="passwd" type="password" id="passwd" placeholder="<@spring.message code='inputpassword'/>"
-                                       class="layui-input">
-                            </div>
-                        </div>
-                        <input type="button" class="layui-btn subBtn" value="<@spring.message code='login'/>"/>
-                    </form>
-                </div>
-        </#if>
-        <div class="contact">
-            <p>联系方式</p>
+    <div>
+        <div class="level">
+            <p>发布者语言水平</p>
             <ul>
-                <li style="margin-top: 27px;"><@spring.message code='mobile'/>:<span name="mobile">******</span></li>
-                <li><@spring.message code='telephone'/>:<span name="phone">******</span></li>
-                <li><@spring.message code='website'/>:<span name="website">******</span></li>
-                <li><@spring.message code='wechat'/>:<span name="wechat">******</span></li>
-                <li><@spring.message code='email'/>:<span name="email">******</span></li>
-                <li>Facebook:<span name="facebook">******</span></li>
-                <li>LikedIn:<span name="linkedin">******</span></li>
-                <li>WhatsApp:<span name="whatsapp">******</span></li>
+                <li><span>日语</span>流利</li>
+                <li><span>韩语</span>流利</li>
+                <li><span>中文</span>流利</li>
+                <li><span>英语</span>流利</li>
+                <li><span>意大利语</span>不会</li>
+                <li><span>法语</span>一般</li>
             </ul>
         </div>
-        <div class="ewm">
-            <img src="/images/ewm.png" alt="<@spring.message code='qrcode'/>">
-            <span><@spring.message code='qrcode'/></span>
-        </div>
+
     </div>
 </div>
+
+</div>
+
 <#include "../public/foot.html" encoding="utf-8">
 
-</body>
-
 <script>
+    var target = ["xixi-01", "xixi-02", "xixi-03", "xixi-04"];
     layui.use(['form', 'layedit', 'laydate'], function () {
         var form = layui.form
             , layer = layui.layer
@@ -212,6 +241,9 @@
                 }
             });
         });
-    });
+
+    })
 </script>
+</body>
+
 </html>

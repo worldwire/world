@@ -21,21 +21,27 @@ body .content .search-div .search-box { width: 986px; margin: auto; opacity: 1; 
 body .content .search-div .search-box input { height: 50px; color: #808080; }
 body .content .search-div .search-box-btn { position: absolute; top: 0; right: 0; width: 157px; height: 50px; font-size: 16px; background: #D42026; }
 body .demand { width: 100%; overflow: hidden; position: relative; }
-body .demand .demand-box { width: 1200px; margin: auto; overflow: hidden; }
-body .demand .demand-box .demand-title { font-size: 30px; font-weight: 500; text-align: center; padding: 35px 0 35px 0; border-bottom: 1px solid #f0f0f0; }
+body .demand .demand-box { width:100%; margin: auto; overflow: hidden;}
+body .demand .demand-box .demand-title { font-size: 30px; font-weight: 500;background: #f5f5f5; text-align: center; height: 150px; border-bottom: 1px solid #f0f0f0; }
+body .demand .demand-box .demand-title .mes{ height: 100%;width:  1140px; display: flex;margin-left: 9%;}
+.mes .flex1{flex: 1;height: 100%;  margin-top: 25px;}
+.mes .flex1 div{width: 100%; padding: 0px;margin: 0px;}
+.mes .flex1 div img{width: 80px;height: 80px; border-radius: 50%;background: #e5e5e5; }
+.mes .flex1 p{font-size: 16px;color: #333333;padding: 0px;margin: 0px;}
+
 body .demand .demand-box .demand-list { width: 100%; overflow: hidden; }
-body .demand .demand-box .demand-list .demand-personal { width: 580px; float: left; }
-body .demand .demand-box .demand-list .demand-personal .demand-personal-list { width: 580px; height: 130px; overflow: hidden; border: 1px solid #f1f1f1;margin-top:20px ; }
+body .demand .demand-box .demand-list .demand-personal { width: 551px; float: left;  margin-left: 9%;}
+body .demand .demand-box .demand-list .demand-personal .demand-personal-list { width: 551px; height: 130px; overflow: hidden; border: 1px solid #f1f1f1;margin-top:20px ; }
 body .demand .demand-box .demand-list .demand-personal .demand-personal-list:nth-of-type(0){margin-top: 0;}
 body .demand .demand-box .demand-list .demand-personal .demand-personal-list div { float: left; }
 body .demand .demand-box .demand-list .demand-personal .demand-personal-list .demand-personal-list-img { width: 88px; height: 88px; border-radius: 50px; border: 2px solid #F1F1F1; overflow: hidden; margin: 15px 0 0 15px; }
 body .demand .demand-box .demand-list .demand-personal .demand-personal-list .list-conten { position: relative; }
 body .demand .demand-box .demand-list .demand-personal .demand-personal-list .list-conten p { position: absolute; top: 19px; left: 15px; width: 400px; font-size: 18px;  color: #333333; text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
 body .demand .demand-box .demand-list .demand-personal .demand-personal-list .list-conten div { position: absolute; top: 60px; left: 15px; width: 400px; max-height: 40px; font-size: 14px; color: #838383; display: -moz-box; display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;-moz-line-clamp: 2;overflow: hidden;}
-body .demand .demand-box .demand-list .demand-personal .demand-personal-btn { float: right; color: #838383; cursor: pointer; margin-top: 40px; font-size: 14px; }
+body .demand .demand-box .demand-list .demand-personal .demand-personal-btn { float: right; color: #838383; cursor: pointer; margin-top: 40px; margin-right: -46px; font-size: 14px; }
 body .demand .demand-box .demand-list .demand-personal .demand-personal-btn:hover { color: #D42026; }
-body .demand .demand-box .demand-list .demand-enterprise { width: 580px; float: left; margin-left: 36px; }
-body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list { width: 580px; height: 130px; overflow: hidden; border: 1px solid #f1f1f1;margin-top:20px ;  }
+body .demand .demand-box .demand-list .demand-enterprise { width: 551px; float: left; margin-left: 36px; }
+body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list { width: 551px; height: 130px; overflow: hidden; border: 1px solid #f1f1f1;margin-top:20px ;  }
 body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list:nth-of-type(0){margin-top: 0;}
 body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list div { float: left; }
 body .demand .demand-box .demand-list .demand-enterprise .demand-enterprise-list .demand-enterprise-list-img { width: 88px; height: 88px; border-radius: 50px; border: 2px solid #F1F1F1; overflow: hidden; margin: 15px 0 0 15px; }

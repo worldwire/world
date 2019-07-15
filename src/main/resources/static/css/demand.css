@@ -109,9 +109,11 @@ body {
 
 /* 内容区 */
 .content {
+    height: 600px;
     margin-top: 30px;
     padding: 0 30px;
     overflow: hidden;
+
 }
 .content h2 {
     font-size: 18px;
@@ -165,9 +167,9 @@ body {
 /* 其他 */
 .other {
     border-top: 1px solid #cccccc;
-    margin: 40px 0;
+    /* margin: 40px 0; */
     padding: 0 20px;
-    padding-top: 50px;
+    padding-top: 20px;
     clear: both;
     overflow: hidden;
 }
@@ -268,3 +270,21 @@ body {
     left: 32px;
     bottom: -30px;
 }
+.mes {font-size: 12px; color: #838383;margin: 10px 0;height: 30px;line-height: 30px;}
+.mes .circle{width: 8px;height: 8px; background: #ea5559;display: inline-block;border-radius: 50%;margin-right: 10px;}
+.circleMes{color: #ea5559; padding-right: 20px;}
+.times{width: 15px;height: 15px;vertical-align: middle;margin:0 5px 0 15px;}
+.peopleMes{position: relative;left: 400px; bottom: 0px;font-size: 14px;color: #333333;}
+.peopleMes span{display: inline-block; color: #838383;width: 80px; text-align: right;}
+.peopleMes p{height: 27px;}
+.phone{width: 244px;height: 58px;line-height: 58px;display: inline-block; background: #d42026;border-radius: 5px;margin-top: 15px;font-size: 24px;color: #fff;overflow: hidden;}
+.phone div{height: 58px;width: 58px;line-height: 58px; text-align: center; background: #da4146;display: inline-block;}
+.phone img{width: 42px;height: 42px;margin-top: 7px;}
+.ewm2{height: 60px;width: 118px;;margin-top: 15px;margin-left: 10px;}
+.introduce{font-size: 16px;font-weight: 600;color: #333333;margin-top: 30px;}
+.otherMes{font-size: 12px;color: #838383;padding-bottom: 20px;}
+.level {padding: 30px;}
+.level p{font-size: 12px;font-weight: 700;}
+.level ul{padding-top: 20px;}
+.level li{height: 40px;line-height: 40px;}
+.level span{color: #838383;font-size: 12px;display: inline-block;width: 50px;text-align: left; padding-right: 105px;}

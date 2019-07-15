@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>需求详情</title>
+    <#include "../public/common.html" encoding="utf-8"/>
+
+    <link rel="stylesheet" href="/css/demand.css">
+</head>
+<body>
+<#include "../public/head.html" encoding="utf-8"/>
+<#include "../public/navigator.html" encoding="utf-8"/>
+<div class="container">
+    <div class="main-box">
+        <div>
+            <div class="information">
+                <div class="photo">
+                    <a href=""><img src="${productRequest.userInfo.showImg!''}" alt="<@spring.message code='headimg'/>"></a>
+                </div>
+                <div class="info">
+                    <p class="name">${productRequest.userInfo.nickName!''}</p>
+                    <p class="nat"><i
+                            class="iconfont">&#xe611;</i><span>${productRequest.userInfo.localAddr!''}</span><img
+                            src="/images/gj.png" alt="<@spring.message code='nationality'/>"></p>
+                    <p class="text"><span class="disc"></span>
+                        <span><#if productRequest.userType.code ==1><@spring.message code='personal'/><#else><@spring.message code='enterprise'/></#if><#if productRequest.requestType.code == 1><@spring.message code='service'/><#else><@spring.message code='requirement'/></#if></span>
+                        <#if productRequest.requestType.code == 1><@spring.message code='supplyservice'/>
+                            <#else><@spring.message code='requireservice'/>
+                        </#if>
+                    </p>
+                </div>
+                <div class="nationality">
+                    <p><@spring.message code='nationality'/></p>
+                    <p><img src="/images/gj.png" alt="<@spring.message code='nationality'/>"></p>
+                </div>
+            </div>
+            <div class="content">
+                <div><h2>${productRequest.title!''}</h2></div>
+                <div class="content-main">
+                    ${productRequest.content!''}
+                </div>
+                <div class="time">
+                    <p><@spring.message code='publishdate'/>:
+                        <#if productRequest.createTime??>${productRequest.createTime?string("yyyy-MM-dd HH:mm:ss")}
+                        </#if>
+                    </p>
+                </div>
+            </div>
+            <#if productRequest.userInfo.language??>
+                <div class="level">
+                    <p><@spring.message code='langugelevel'/></p>
+                    <div>
+                        <#list productRequest.userInfo.language as languageLevel>
+                            <dl>
+                                <dt>${languageLevel.languageEnum.cnName}</dt>
+                                <dd>${languageLevel.level.cnName}</dd>
+                            </dl>
+                        </#list>
+                    </div>
+                </div>
+            </#if>
+
+            <div class="other">
+                <div style="margin-bottom: 50px;">
+                    <#if productRequest.keyWord??>
+                        <#list productRequest.keyWord?split(";") as key>
+                            <a href="###">${key}</a>
+                        </#list>
+                    </#if>
+                </div>
+                <div style="float: right;">
+                    <div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a
+                            href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#"
+                                                                                               class="bds_weixin"
+                                                                                               data-cmd="weixin"
+                                                                                               title="分享到微信"></a><a
+                            href="#" class="bds_tqf" data-cmd="tqf" title="分享到腾讯朋友"></a><a href="#" class="bds_fbook"
+                                                                                           data-cmd="fbook"
+                                                                                           title="分享到Facebook"></a><a
+                            href="#" class="bds_linkedin" data-cmd="linkedin" title="分享到linkedin"></a><a href="#"
+                                                                                                         class="bds_twi"
+                                                                                                         data-cmd="twi"
+                                                                                                         title="分享到Twitter"></a>
+                    </div>
+                    <script>
+                        window._bd_share_config = {
+                            "common": {
+                                "bdSnsKey": {},
+                                "bdText": "",
+                                "bdMini": "2",
+                                "bdMiniList": false,
+                                "bdPic": "",
+                                "bdStyle": "1",
+                                "bdSize": "24",
+                                "onAfterClick": function (cmd) {
+                                    //创建异步对象
+                                }
+                            },
+                            "share": {}
+                        };
+                        with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~( -new Date() / 36e5)];
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right-box">
+        <#if userInfo??>
+            <!-- 已登陆 -->
+            <div class="login">
+                <p class="login-title"><@spring.message code='getcontracts'/></p>
+                <button class="layui-btn"><@spring.message code='getit'/></button>
+                <div class="login-msg">
+                    <p><@spring.message code='freeget'/><span>${productRequest.userInfo.nickName!''}</span></p>
+                    <p><@spring.message code='freepreveledge'/></p>
+                </div>
+            </div>
+
+            <#else>
+                <!-- 未登录/注册 -->
+                <div class="reg">
+                    <p><@spring.message code='contractlogin'/></p>
+                    <p><a href="./login.html"><@spring.message code='login'/></a> <@spring.message code='or'/> <a href="./register.html"><@spring.message code='register'/></a></p>
+                    <form action="javascript:void(0)" id="login-form" class="layui-form" method="post">
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <input name="email" type="text" id="email" placeholder="<@spring.message code='inputemail'/>" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <input name="passwd" type="password" id="passwd" placeholder="<@spring.message code='inputpassword'/>"
+                                       class="layui-input">
+                            </div>
+                        </div>
+                        <input type="button" class="layui-btn subBtn" value="<@spring.message code='login'/>"/>
+                    </form>
+                </div>
+        </#if>
+        <div class="contact">
+            <p>联系方式</p>
+            <ul>
+                <li style="margin-top: 27px;"><@spring.message code='mobile'/>:<span name="mobile">******</span></li>
+                <li><@spring.message code='telephone'/>:<span name="phone">******</span></li>
+                <li><@spring.message code='website'/>:<span name="website">******</span></li>
+                <li><@spring.message code='wechat'/>:<span name="wechat">******</span></li>
+                <li><@spring.message code='email'/>:<span name="email">******</span></li>
+                <li>Facebook:<span name="facebook">******</span></li>
+                <li>LikedIn:<span name="linkedin">******</span></li>
+                <li>WhatsApp:<span name="whatsapp">******</span></li>
+            </ul>
+        </div>
+        <div class="ewm">
+            <img src="/images/ewm.png" alt="<@spring.message code='qrcode'/>">
+            <span><@spring.message code='qrcode'/></span>
+        </div>
+    </div>
+</div>
+<#include "../public/foot.html" encoding="utf-8">
+
+</body>
+
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , $ = layui.jquery;
+
+        // 登陆按钮事件
+        $(".subBtn").click(function () {
+            $.ajax({
+                type: "POST",
+                url: "/login/ajaxLogin",
+                data: {email: $("#email").val(), password: $("#passwd").val()},
+                dataType: "json",
+                success: function (data) {
+                    window.location.reload();
+                    if (data == "error") {
+                        alert("<@spring.message code='errorparam'/>");
+                    }
+                    if (data == "false") {
+                        alert("<@spring.message code='nofreelookup'/>");
+                    }
+                },
+                error: function (data) {
+                    alert("<@spring.message code='networkerror'/>");
+                }
+            });
+        });
+        $(".login button:eq(0)").click(function () {
+            var loginBox = $(".login:eq(0)"),// 登陆后的盒子
+                contactBox = $(".contact:eq(0)"); // 联系方式的盒子
+//              loginBox.hide(); // 获取资料后隐藏信息
+            $.ajax({
+                type: "POST",
+                url: "/login/showContracts",
+                data: {productRequestId: '${productRequest.id}'},
+                dataType: "json",
+                success: function (data) {
+                    $("[name='mobile']").text(data.mobile);
+                    $("[name='phone']").text(data.phone);
+                    $("[name='wechat']").text(data.wechat);
+                    $("[name='email']").text(data.email);
+                    $("[name='facebook']").text(data.facebook);
+                    $("[name='linkedin']").text(data.linkedin);
+                    $("[name='whatsapp']").text(data.whatsapp);
+                },
+                error: function (data) {
+                    alert(JSON.stringify(data));
+                }
+            });
+        });
+    });
+</script>
+</html>

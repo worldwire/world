@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>世界汇网</title>
+    <link rel="stylesheet" href="css/index.css"/>
+		<#include "../public/common.html" encoding="utf-8">
+</head>
+<body>
+        <#include "../public/head.html" encoding="utf-8">
+        <#include "../public/navigator.html" encoding="utf-8">
+<div class="content">
+    <div class="content1">
+        <img class="img1" src="/images/a.png" height="700"/>
+        <img class="img2" src="/images/b.png" height="80"/>
+        <img class="img3" src="/images/c.png" height="45"/>
+        <img class="img4" src="/images/7.png" width="300"/>
+        <img class="img5" src="/images/d.png"/>
+        <img class="img6" src="/images/e.png" width="380"/>
+
+    </div>
+    <div class="search-div">
+        <div class="search-box">
+            <input type="text" name="title" placeholder="<@spring.message code='searchIndex'/>" autocomplete="off" class="layui-input"/>
+            <button class="layui-btn search-box-btn"><@spring.message code="search"/></button>
+        </div>
+    </div>
+
+</div>
+<div class="demand">
+    <div class="demand-box">
+        <div class="demand-title" onclick="redirectClick('/')" style="cursor: pointer">
+            <@spring.message code="latestrequrequire"/>
+        </div>
+        <div class="demand-list">
+            <div class="demand-personal">
+                <div class="dpt" onclick="redirectClick('/')" style="cursor: pointer"><@spring.message code="personalrequirement"/></div>
+							<#if personalList??>
+                                <#list personalList as personal>
+									<div class="demand-personal-list" onclick="redirectClick('/request/detail?id=${personal.id}')">
+                                        <div class="demand-personal-list-img">
+                                            <img src="${personal.userInfo.showImg!''}" width="100" height="100"/>
+                                        </div>
+                                        <div class="list-conten">
+                                            <p>${personal.title!''}</p>
+                                            <div>${personal.content!''}</div>
+                                        </div>
+                                    </div>
+                                </#list>
+                            </#if>
+                <div><span class="demand-personal-btn" onclick="redirectClick('/request/list/1/0/6/1.html')"><@spring.message code="more"/>>></span>
+                </div>
+            </div>
+            <div class="demand-enterprise">
+                <div class="dpt" onclick="redirectClick('/')" style="cursor: pointer"><@spring.message code="enterpriserequirement"/></div>
+							<#if enterpriseList??>
+                                <#list enterpriseList as enterprise>
+									<div class="demand-enterprise-list" onclick="redirectClick('/request/detail?id=${personal.id}')">
+                                        <div class="demand-enterprise-list-img">
+                                            <img src="${enterprise.userInfo.showImg!''}" width="100" height="100"/>
+                                        </div>
+
+                                        <div class="list-conten">
+                                            <p>${enterprise.title!''}</p>
+                                            <div>${enterprise.content!''}</div>
+                                        </div>
+                                    </div>
+                                </#list>
+                            </#if>
+                <div><span class="demand-enterprise-btn"
+                           onclick="redirectClick('/request/list/2/0/6/1.html')"><@spring.message code="more"/>>></span></div>
+            </div>
+        </div>
+    </div>
+    <div class="demand-vx">
+        <div class="demand-vx-img">
+            <img class="vx-img" src="/images/8.png" width="110"/>
+        </div>
+        <div class="demand-vx-text">
+            <@spring.message code="qrcode"/>
+        </div>
+    </div>
+</div>
+        <#include "../public/foot.html" encoding="utf-8">
+
+</body>
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'carousel'], function () {
+        var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate
+                , carousel = layui.carousel
+                , $ = layui.jquery;
+        $(".search-box-btn").on("click",function () {
+            var key = $("[name=title]").val();
+            if(!key){
+                return false;
+            }
+            window.location.href = "/request/list/0/0/4/1.html?key="+encodeURIComponent(key);
+        });
+    });
+</script>
+</html>
+

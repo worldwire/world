@@ -2,6 +2,11 @@ server:
   port: 80
   tomcat:
     uri-encoding: UTF-8
+  http:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.spring.worldwire.model
@@ -19,7 +24,7 @@ spring:
     template-loader-path: classpath:/templates
   redis:
     database: 0
-    host: 101.200.137.78
+    host: 127.0.0.1
     port: 6379
     password: 123456QWEasd
     max-active: 8
