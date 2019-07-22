@@ -19,17 +19,36 @@
         <div>
             <div class="content">
                 <div>
-                    <h2>我提供服务产品设计服务，这个是服务标题，最多显示30个字</h2>
+                    <h2>${productRequest.title!''}</h2>
                 </div>
                 <div class="mes">
                     <span class="circleMes">
-                        <span class="circle"></span>外国个人需求
+                        <span class="circle"></span>
+                        <#if productRequest.userType.code ==1>
+                        <@spring.message code='personal'/>
+                        <#else>
+                        <@spring.message code='enterprise'/>
+                        </#if>
+                        <#if productRequest.requestType.code == 1>
+                        <@spring.message code='service'/>
+                        <#else>
+                        <@spring.message code='requirement'/>
+                        </#if>
                     </span>
-                    <span>我要找国际人才或资源</span>
+                    <span>
+                        <#if productRequest.requestType.code == 1>
+                        <@spring.message code='supplyservice'/>
+                        <#else>
+                        <@spring.message code='requireservice'/>
+                        </#if>
+                    </span>
                         <img src="/images/times.png" class="times">
-                    <span style=" margin-right: 15px;">2018-03-29</span>
+                    <span style=" margin-right: 15px;">
+                        <#if productRequest.createTime??>${productRequest.createTime?string("yyyy-MM-dd HH:mm:ss")}
+                        </#if>
+                    </span>
                     <img src="/images/eye.png" style="width:18px;height:13px;margin-right:5px;vertical-align:middle;">
-                    <span>4666</span>
+                    <span>${productRequest.viewCount!''}</span>
                 </div>
                 <div id=picarea>
                     <div class="">
@@ -87,20 +106,20 @@
                 </div>
 
                 <div class="peopleMes">
-                    <p><span>姓&nbsp&nbsp名：&nbsp&nbsp</span> 张某某</p>
-                    <p><span>性&nbsp&nbsp别：&nbsp&nbsp</span> 张某某</p>
-                    <p><span>年&nbsp&nbsp龄：&nbsp&nbsp</span> 张某某</p>
-                    <p><span>国&nbsp&nbsp际：&nbsp&nbsp</span> 张某某</p>
-                    <p><span>所在地：&nbsp&nbsp</span> 张某某</p>
-                    <p><span>座机号：&nbsp&nbsp</span> 张某某</p>
-                    <p><span>微信号：&nbsp&nbsp</span> 张某某</p>
-                    <p><span>我的网站：&nbsp&nbsp</span> 张某某</p>
-                    <p><span>联系邮箱：&nbsp&nbsp</span> 张某某</p>
-                    <p><span>Facebook：&nbsp&nbsp</span> 张某某</p>
-                    <p><span>LinkedIn：&nbsp&nbsp</span> 张某某</p>
-                    <p><span>WhatsApp：&nbsp&nbsp</span> 张某某</p>
-                    <p><span>Twitter：&nbsp&nbsp</span> 张某某</p>
-                    <p><span>Instagram：&nbsp&nbsp</span> 张某某</p>
+                    <p><span>姓&nbsp&nbsp名：&nbsp&nbsp</span> ${productRequest.userInfo.nickName!''}</p>
+                    <p><span><@spring.message code='nationality'/>：&nbsp&nbsp</span> ${productRequest.userInfo.nowNationality!''}</p>
+                    <p><span>所在地：&nbsp&nbsp</span> ${productRequest.userInfo.localAddr!''}</p>
+                    <p><span>座机号：&nbsp&nbsp</span> ${productRequest.userInfo.mobile!''}</p>
+                    <p><span>微信号：&nbsp&nbsp</span> ${productRequest.userInfo.wechat!''}</p>
+                    <p><span>我的网站：&nbsp&nbsp</span> ${productRequest.userInfo.website!''}</p>
+                    <p><span>所在地：&nbsp&nbsp</span> ${productRequest.userInfo.localAddr!''}</p>
+                    <p><span>座机号：&nbsp&nbsp</span> ${productRequest.userInfo.mobile!''}</p>
+                    <p><span>微信号：&nbsp&nbsp</span> ${productRequest.userInfo.wechat!''}</p>
+                    <p><span>我的网站：&nbsp&nbsp</span> ${productRequest.userInfo.website!''}</p>
+                    <p><span>联系邮箱：&nbsp&nbsp</span> ${productRequest.userInfo.email!''}</p>
+                    <p><span>Facebook：&nbsp&nbsp</span> ${productRequest.userInfo.facebook!''}</p>
+                    <p><span>LinkedIn：&nbsp&nbsp</span> ${productRequest.userInfo.linkedin!''}</p>
+                    <p><span>WhatsApp：&nbsp&nbsp</span> ${productRequest.userInfo.whatsapp!''}</p>
                     <div>
                         <div class="phone">
                             <div><img src="/images/phone.png"></div>
@@ -116,28 +135,14 @@
 
         <div class="other">
             <div class="otherMes">
-                App全球亿万富翁身家2018年全年合计蒸发了5000亿美元，名列该榜单前500名的富翁合计损失了4510亿美元，与2017年增加1万亿美元形成了鲜明对比。脸书创始人扎克伯格财富缩水207亿美元，缩水规模为2018年全球富翁之最。
-
-                几家欢乐几家愁。尽管金融市场2018年下跌成为主基调，但仍然不妨碍有人在这一年获得巨额财富。贝佐斯、中国智能手机生产商小米的创始人雷军、拼多多创始人黄峥就是其中的幸运儿。
-
-                贝佐斯成最大赢家
-
-                截至2018年12月31日，共有31位“新贵”登上彭博亿万富翁指数榜单。WE Family
-                Offices管理合伙人米切尔·佐伊纳表示：“（2018年）是个创造财富的好年份，尽管对于金融市场来说是艰难的一年，但对通过公司来创造财富的人来说，经济本身很强。”
-
-                据彭博报道，全球爆款游戏《堡垒之夜(Fortnite)》的制作者、Epic Games创始人兼首席执行官蒂姆·斯维尼（Tim
-                Sweeney）在2018年的财富规模达到72亿美元。石油公司Endeavour能源资源公司将被收购，使得创始人奥特里·斯蒂文斯身家达到114亿美元。
+                ${productRequest.content!''}
             </div>
             <div style="margin-bottom: 50px;">
-                <a href="###">钢 管</a>
-                <a href="###">LED灯设计</a>
-                <a href="###">钢 管</a>
-                <a href="###">LED灯设计</a>
-                <a href="###">钢 管</a>
-                <a href="###">LED灯设计</a>
-                <a href="###">钢 管</a>
-                <a href="###">钢 管</a>
-                <a href="###">LED灯设计</a>
+                <#if productRequest.keyWord??>
+                    <#list productRequest.keyWord?split(";") as key>
+                    <a href="###">${key}</a>
+                    </#list>
+                </#if>
             </div>
             <div style="float: right;">
                 <div class="bdsharebuttonbox"><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a
@@ -170,14 +175,16 @@
     </div>
     <div>
         <div class="level">
-            <p>发布者语言水平</p>
+            <p><@spring.message code='langugelevel'/></p>
             <ul>
-                <li><span>日语</span>流利</li>
-                <li><span>韩语</span>流利</li>
-                <li><span>中文</span>流利</li>
-                <li><span>英语</span>流利</li>
-                <li><span>意大利语</span>不会</li>
-                <li><span>法语</span>一般</li>
+                <#if productRequest.userInfo.language??>
+                <#list productRequest.userInfo.language as languageLevel>
+                <li>
+                    <span>${languageLevel.languageEnum.cnName}</span>
+                    ${languageLevel.level.cnName}
+                </li>
+                </#list>
+                </#if>
             </ul>
         </div>
 
@@ -196,51 +203,6 @@
             , layedit = layui.layedit
             , laydate = layui.laydate
             , $ = layui.jquery;
-
-        // 登陆按钮事件
-        $(".subBtn").click(function () {
-            $.ajax({
-                type: "POST",
-                url: "/login/ajaxLogin",
-                data: {email: $("#email").val(), password: $("#passwd").val()},
-                dataType: "json",
-                success: function (data) {
-                    window.location.reload();
-                    if (data == "error") {
-                        alert("<@spring.message code='errorparam'/>");
-                    }
-                    if (data == "false") {
-                        alert("<@spring.message code='nofreelookup'/>");
-                    }
-                },
-                error: function (data) {
-                    alert("<@spring.message code='networkerror'/>");
-                }
-            });
-        });
-        $(".login button:eq(0)").click(function () {
-            var loginBox = $(".login:eq(0)"),// 登陆后的盒子
-                contactBox = $(".contact:eq(0)"); // 联系方式的盒子
-//              loginBox.hide(); // 获取资料后隐藏信息
-            $.ajax({
-                type: "POST",
-                url: "/login/showContracts",
-                data: {productRequestId: '${productRequest.id}'},
-                dataType: "json",
-                success: function (data) {
-                    $("[name='mobile']").text(data.mobile);
-                    $("[name='phone']").text(data.phone);
-                    $("[name='wechat']").text(data.wechat);
-                    $("[name='email']").text(data.email);
-                    $("[name='facebook']").text(data.facebook);
-                    $("[name='linkedin']").text(data.linkedin);
-                    $("[name='whatsapp']").text(data.whatsapp);
-                },
-                error: function (data) {
-                    alert(JSON.stringify(data));
-                }
-            });
-        });
 
     })
 </script>

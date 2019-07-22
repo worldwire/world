@@ -23,9 +23,22 @@
                             class="iconfont">&#xe611;</i><span>${productRequest.userInfo.localAddr!''}</span><img
                             src="/images/gj.png" alt="<@spring.message code='nationality'/>"></p>
                     <p class="text"><span class="disc"></span>
-                        <span><#if productRequest.userType.code ==1><@spring.message code='personal'/><#else><@spring.message code='enterprise'/></#if><#if productRequest.requestType.code == 1><@spring.message code='service'/><#else><@spring.message code='requirement'/></#if></span>
-                        <#if productRequest.requestType.code == 1><@spring.message code='supplyservice'/>
-                            <#else><@spring.message code='requireservice'/>
+                        <span>
+                            <#if productRequest.userType.code ==1>
+                            <@spring.message code='personal'/>
+                            <#else>
+                            <@spring.message code='enterprise'/>
+                            </#if>
+                            <#if productRequest.requestType.code == 1>
+                            <@spring.message code='service'/>
+                            <#else>
+                            <@spring.message code='requirement'/>
+                            </#if>
+                            </span>
+                        <#if productRequest.requestType.code == 1>
+                        <@spring.message code='supplyservice'/>
+                        <#else>
+                        <@spring.message code='requireservice'/>
                         </#if>
                     </p>
                 </div>
