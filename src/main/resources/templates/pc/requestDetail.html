@@ -53,20 +53,12 @@
                 <div id=picarea>
                     <div class="">
                         <div id=bigpicarea>
+<!--                            <#if productRequest.userInfo??>-->
+
+<!--                            </#if>-->
+
                             <div id=image_xixi-01 class=image>
                                 <IMG alt="" src="/images/42766101.jpg" width=772 height=434/>
-                                <div class=word>
-
-                                </div>
-                            </div>
-                            <div id=image_xixi-02 class=image>
-                                <IMG alt="" src="/images/42813100.jpg" width=772 height=434/>
-                                <div class=word>
-
-                                </div>
-                            </div>
-                            <div id=image_xixi-03 class=image>
-                                <IMG alt="" src="/images/42813102.jpg" width=772 height=434/>
                                 <div class=word>
 
                                 </div>
@@ -123,9 +115,11 @@
                     <div>
                         <div class="phone">
                             <div><img src="/images/phone.png"></div>
-                            15555555555
+                            <#if productRequest.userInfo.mobile??>
+                                ${productRequest.userInfo.mobile}
+                            </#if>
                         </div>
-                        <img src="/images/ewm2.png" class="ewm2">
+                        <img src="${productRequest.qrcode}" onerror="this.src='../images/ewm2.png'" class="ewm2">
                     </div>
                 </div>
                 <div class="introduce">需求详情介绍</div>

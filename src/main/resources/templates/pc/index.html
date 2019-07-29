@@ -36,35 +36,35 @@
         <div class="demand-title" onclick="redirectClick('/')">
 
             <div class="mes">
-                <div class="flex1">
+                <div class="flex1" onclick="redirectClick('')">
                     <div>
                         <img src="/images/chinesePeople.png">
                     </div>
-                    <p>中国人才</p>
+                    <p><@spring.message code="chineseTelent"/></p>
                 </div>
-                <div class="flex1">
+                <div class="flex1" onclick="redirectClick('/request/list/1/2/10/1.html')">
                     <div>
                         <img src="/images/foreignPeople.png">
                     </div>
-                    <p>外国人才</p>
+                    <p><@spring.message code="foreignTelent"/></p>
                 </div>
-                <div class="flex1">
+                <div class="flex1" onclick="redirectClick('/request/list/1/1/10/1.html')">
                     <div>
                         <img src="/images/chineseEnterprise.png">
                     </div>
-                    <p>中国企业</p>
+                    <p><@spring.message code="chineseEnterprise"/></p>
                 </div>
-                <div class="flex1">
+                <div class="flex1" onclick="redirectClick('/request/list/2/2/10/1.html')">
                     <div>
                         <img src="/images/foreignEnterprise.png">
                     </div>
-                    <p>外国企业</p>
+                    <p><@spring.message code="foreignEnterprise"/></p>
                 </div>
             </div>
         </div>
         <div class="demand-list">
             <div class="demand-personal">
-                <div class="dpt" onclick="redirectClick('/')">
+                <div class="dpt" onclick="redirectClick('/request/list/2/1/10/1.html')">
                     <@spring.message code="personalrequirement"/>
                 </div>
                 <#if personalList??>
@@ -82,7 +82,7 @@
                     </div>
                 </#list>
             </#if>
-        <div><span class="demand-personal-btn" onclick="redirectClick('/request/list/1/0/6/1.html')"><@spring.message code="more"/>>></span>
+        <div>
         </div>
     </div>
     <div class="demand-enterprise">
@@ -102,6 +102,7 @@
             </#list>
         </#if>
 </div>
+<!--<span class="demand-personal-btn" onclick="redirectClick('/request/list/1/0/6/1.html')"><@spring.message code="more"/>>></span>-->
 </div>
 </div>
 <div class="demand-vx">

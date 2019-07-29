@@ -580,7 +580,7 @@
 
 
   <select id="selectSimpleById" resultMap="BaseResultMap">
-    SELECT id,show_img,login_id,type,nick_name FROM user_info WHERE id = #{id }
+    SELECT id,language,mobile,show_img,login_id,type,nick_name FROM user_info WHERE id = #{id }
 
   </select>
 
