@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>需求大厅</title>
+    <link rel="stylesheet" type="text/css" href="/css/demandHall.css"/>
+    <#include "../public/common.html" encoding="utf-8">
+        </head>
+<body>
+<!--头部-->
+<#include "../public/head.html" encoding="utf-8">
+    <!--导航-->
+    <#include "../public/navigator.html" encoding="utf-8">
+
+        <div class="content">
+            <div class="contentBox">
+                <div class="contentBox-choose">
+                    <ul class="contentBox-choose1">
+                        <li class="li-1"><@spring.message code='quanbu'/></li>
+                        <li><@spring.message code='all'/></li>
+                        <li><@spring.message code='personal'/></li>
+                        <li><@spring.message code='enterprise'/></li>
+                    </ul>
+                    <br />
+                    <ul class="contentBox-choose1">
+                        <li class="li-1"><@spring.message code='type'/></li>
+                        <li><@spring.message code='all'/></li>
+                        <li><@spring.message code='gerenfuwu'/></li>
+                        <li><@spring.message code='gongsifuwu'/></li>
+                    </ul>
+                    <br />
+                    <ul class="contentBox-choose1">
+                        <li class="li-1"><@spring.message code='xuqiuxunzhao'/></li>
+                        <li><@spring.message code='all'/></li>
+                        <li><@spring.message code='gerenxuqiu'/></li>
+                        <li><@spring.message code='gongsixuqiu'/></li>
+                    </ul>
+                </div>
+                <div class="contentBox-body">
+                    <div id="contentBox-body-list1">
+                        <div carousel-item>
+                            <!--个人第一页-->
+                            <div class="carousel-item">
+                                <#if personalVo??&&personalVo.list??>
+                                    <#list personalVo.list as personal>
+                                        <div class="list-style">
+                                            <div class="list-style-title">
+                                                <@spring.message code='personal'/>
+                                                <#if personal.requestType.code == 1><@spring.message code='service'/>
+                                                    <#else><@spring.message code='requirement'/>
+                                                </#if>
+                                                <img class="list-style-title-img1" src="/images/demandHall1.png"/>
+                                            <div class="list-style-title-img2">
+
+                                                <img src="${enterprise.countryPic!''}" class="countryPic">
+
+                                            </div>
+                                            <div class="list-style-headImg">
+                                                <img src="${personal.userInfo.showImg!''}"/>
+                                            </div>
+                                            <div class="list-style-name">
+                                                ${personal.userInfo.nickName!''}
+                                            </div>
+                                            <div class="list-style-explain">
+                                                <#if personal.requestType.code == 1>
+                                                    <@spring.message code='supplyservice'/>
+                                                    <#else><@spring.message code='requireservice'/>
+                                                </#if>
+                                            </div>
+                                            <div class="list-style-place">
+                                                <@spring.message code='nowplace'/>
+                                                <span class="list-style-place-span">
+                                                    <#if personal.userInfo??>
+                                                        ${personal.userInfo.localAddr!''}
+                                                    <#else>
+                                                                <@spring.message code='unknown'/>
+                                                    </#if>
+                                                </span>
+                                                <div class="list-style-place-img">
+                                                    <img src="${enterprise.countryPic}" class="countryPic">
+                                                </div>
+                                            </div>
+                                            <div class="list-style-specialty">
+                                                <div class="specialty-label-box">
+                                                    <#if personal.keyWord??>
+                                                        <#list personal.keyWord?split(";") as key>
+                                                            <#if key_index lt 4>
+                                                                <div class="specialty-label specialty-label-style">
+                                                                    ${key}
+                                                                </div>
+                                                            </#if>
+                                                        </#list>
+                                                    </#if>
+                                                </div>
+                                            </div>
+                                            <div class="list-style-PerTitle">
+                                                ${personal.title!''}
+                                            </div>
+                                            <div class="list-style-PerContent">
+                                                ${personal.content!''}
+                                            </div>
+                                            <div class="list-style-details">
+                                                <a href="/request/detail?id=${personal.id}"> <a
+                                                        href="/request/detail?id=${personal.id}"><@spring.message
+                                                    code='detail'/></a></a>
+                                            </div>
+                                            <div class="list-style-viewtime">
+                                                <i class="iconfont i-view"> &#xe60d;</i>
+                                                <span class="span-view">${personal.viewCount!'0'}</span>
+                                                <i class="iconfont i-times">&#xe75f;</i>
+                                                <span class="span-times"><#if personal.createTime??>${personal.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span>
+                                            </div>
+                                        </div>
+                                    </#list>
+                                </#if>
+                            </div>
+
+                            <div class="leftbtn personal">
+                                <i class="iconfont">&#xe68a;</i>
+                            </div>
+                            <div class="rightbtn personal">
+                                <i class="iconfont">&#xe6c6;</i>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="contentBox-body-list2">
+
+                        <div carousel-item>
+                            <div class="carousel-item">
+                                <#if enterpriseVo??&&enterpriseVo.list??>
+                                    <#list enterpriseVo.list as enterprise>
+                                        <div class="list-style">
+                                            <div class="list-style-1">
+                                                <@spring.message code='enterprise'/>
+                                                <#if enterprise.requestType.code == 1><@spring.message code='service'/>
+                                                    <#else><@spring.message code='requirement'/>
+                                                </#if>
+                                                <img class="list-style-1-img1" src="/images/demandHall1.png"/>
+                                                <div class="list-style-1-img2">
+                                                    <img src="${enterprise.countryPic}" class="countryPic">
+                                                </div>
+                                            </div>
+                                            <div class="list-style-headImg">
+                                                <img src="${enterprise.userInfo.showImg!''}"/>
+                                            </div>
+                                            <div class="list-style-name">
+                                                ${enterprise.userInfo.companyName!''}
+                                            </div>
+                                            <div class="list-style-explain">
+                                                ${enterprise.requestType.code}
+                                                <#if enterprise.requestType.code == 1>
+                                                    <@spring.message code='supplyservice'/>
+                                                    <#else><@spring.message code='requireservice'/>
+                                                </#if>
+                                            </div>
+                                            <div class="list-style-place">
+                                                <@spring.message code='nowplace'/>
+                                                <span class="list-style-place-span">
+                                                    <#if enterprise.userInfo??>${enterprise.userInfo.companyAddr!''}<#else>
+                                                        <@spring.message code='unknown'/></#if>
+                                                </span>
+                                                <div class="list-style-place-img">
+                                                    <img src="${enterprise.countryPic}" class="countryPic">
+                                                </div>
+                                            </div>
+                                            <div class="list-style-specialty">
+                                                <div class="specialty-label-box">
+                                                    <#if enterprise.keyWord??>
+                                                        <#list enterprise.keyWord?split(";") as key>
+                                                            <#if key_index lt 4>
+                                                                <div class="specialty-label specialty-label-style">
+                                                                    ${key}
+                                                                </div>
+                                                            </#if>
+                                                        </#list>
+                                                    </#if>
+                                                </div>
+                                            </div>
+                                            <div class="list-style-PerTitle">
+                                                ${enterprise.title!''}
+                                            </div>
+                                            <div class="list-style-PerContent">
+                                                ${enterprise.content!''}
+                                            </div>
+                                            <div class="list-style-details">
+                                                <a href="/request/detail?id=${enterprise.id}"> <a
+                                                        href="/request/detail?id=${enterprise.id}"><@spring.message
+                                                    code='detail'/></a></a>
+                                            </div>
+                                            <div class="list-style-viewtime">
+                                                <i class="iconfont i-view"> &#xe60d;</i>
+                                                <span class="span-view">${enterprise.viewCount!'0'}</span>
+                                                <i class="iconfont i-times">&#xe75f;</i>
+                                                <span class="span-times"><#if enterprise.createTime??>${enterprise.createTime?string("yyyy-MM-dd HH:mm:ss")}</#if></span>
+                                            </div>
+                                        </div>
+                                    </#list>
+                                </#if>
+                            </div>
+                        </div>
+
+                        <div class="leftbtn enterprise">
+                            <i class="iconfont">&#xe68a;</i>
+                        </div>
+                        <div class="rightbtn enterprise">
+                            <i class="iconfont">&#xe6c6;</i>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <#include "../public/foot.html" encoding="utf-8">
+</body>
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'carousel'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , carousel = layui.carousel
+            , $ = layui.jquery;
+
+        $(".contentBox-choose1").on("click", "li", function () {      //只需要找到你点击的是哪个ul里面的就行
+            var index = $(this).index() - 1;
+            var key = getQueryString("key");
+            if (!!key) {
+                window.location.href = "/request/list/0/" + index + "/4/1.html?key=" + key;
+            } else {
+                window.location.href = "/request/list/0/" + index + "/4/1.html";
+            }
+        });
+        var currentPersonalPage = parseInt("${pageNo}");
+        var currentEnterprisePage = parseInt("${pageNo}");
+        var requestType = parseInt("${requestType}");
+        $(".personal").on("click", function () {
+            var pageNo = 0;
+            if ($(this).hasClass('leftbtn')) {
+                if (currentPersonalPage - 1 <= 0) {
+                    layer.msg("<@spring.message code='firstpage'/>");
+                    return false;
+                }
+                pageNo = currentPersonalPage - 1;
+            } else {
+                pageNo = currentPersonalPage + 1;
+            }
+            personalAjaxRequest(1, pageNo)
+        })
+
+        $(".enterprise").on("click", function () {
+            var pageNo = 0;
+            if ($(this).hasClass('leftbtn')) {
+                if (currentEnterprisePage - 1 <= 0) {
+                    layer.msg("<@spring.message code='lastpage'/>");
+                    return false;
+                }
+                pageNo = currentEnterprisePage - 1;
+            } else {
+                pageNo = currentEnterprisePage + 1;
+            }
+            personalAjaxRequest(2, pageNo)
+        })
+
+        var personalAjaxRequest = function (userType, pageNo) {
+
+            $.ajax({
+                type: "POST",
+                url: "/request/list/search",
+                data: {
+                    userType: userType,
+                    requestType: requestType,
+                    pageSize: 4,
+                    pageNo: pageNo,
+                    key: getQueryString("key")
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (!data.list || data.list.length == 0) {
+                        layer.msg("<@spring.message code='nomoredata'/>");
+                        return false;
+                    }
+                    if (userType == 1) {
+                        $("#contentBox-body-list1 .carousel-item").html('');
+                    } else {
+                        $("#contentBox-body-list2 .carousel-item").html('');
+                    }
+
+                    var html = "";
+                    for (var i = 0; i < data.list.length; i++) {
+                        var item = data.list[i];
+                        html += "<div class=\"list-style\">";
+
+                        if (userType == 1) {
+                            html += "<div class=\"list-style-title\">";
+                            html += "<@spring.message code='personal'/>";
+                        } else {
+                            html += "<div class=\"list-style-1\">";
+                            html += "<@spring.message code='enterprise'/>";
+                        }
+                        if (item.requestType == "SERVICE") {
+                            html += '<@spring.message code="service"/>';
+                        } else {
+                            html += '<@spring.message code="requirement"/>';
+                        }
+                        if (userType == 1) {
+                            html += "<img class=\"list-style-title-img1\" src=\"/images/demandHall1.png\"/>";
+                            html += "<div class=\"list-style-title-img2\">";
+                        } else {
+                            html += "<img class=\"list-style-1-img1\" src=\"/images/demandHall1.png\"/>";
+                            html += "<div class=\"list-style-1-img2\">";
+                        }
+
+                        html += "<img src=\""+ item.countryPic +"\"  class=\"countryPic\"/>";
+                        html += "</div>";
+                        html += "</div>";
+                        html += '<div class="list-style-headImg"><img src="' + item.userInfo.showImg + '"/></div>';
+                        ;
+                        html += '<div class="list-style-name">' + (!!item.userInfo.nickName ? item.userInfo.nickName : '') + '</div>';
+                        html += '<div class="list-style-explain">';
+                        if (item.requestType == "SERVICE") {
+                            html += "<@spring.message code='supplyservice'/>";
+                        } else {
+                            html += "<@spring.message code='requireservice'/>";
+                        }
+                        html += '</div>';
+                        html += '<div class="list-style-place">' + "<@spring.message code='nowplace'/>" + '<span class="list-style-place-span">';
+                        html += (!!item.userInfo.localAddr ? item.userInfo.localAddr : "<@spring.message code='unknown'/>");
+                        html += '</span><div class="list-style-place-img"><img src="'+item.countryPic+'"  class="countryPic"/></div></div>';
+                        html += '<div class="list-style-specialty"><div class="specialty-label-box">';
+                        if (!!item.keyWord) {
+                            var keys = item.keyWord.split(";");
+                            for (var j = 0; j < keys.length; j++) {
+                                if (j < 4) {
+                                    html += '<div class="specialty-label specialty-label-style">' + keys[j] + '</div>';
+                                }
+
+                            }
+                        }
+                        html += '</div>\n\n</div>';
+                        html += '<div class="list-style-PerTitle">' + item.title + '</div>';
+                        html += '<div class="list-style-PerContent">' + item.content + '</div>';
+                        html += '<div class="list-style-details"><a href="/request/detail?id=' + item.id + '"> ' + "<@spring.message code='detail'/>" + '</a></div>';
+                        html += '<div class="list-style-viewtime"><i class="iconfont i-view"> &#xe60d;</i>';
+                        html += '<span class="span-view">' + item.viewCount + '</span>';
+                        html += '<i class="iconfont i-times">&#xe75f;</i>';
+                        html += '<span class="span-times">' + timeTransfer(item.createTime) + '</span>';
+                        html += '</div>';
+                        html += '</div>';
+                    }
+
+                    if (userType == 1) {
+                        $("#contentBox-body-list1 .carousel-item").append(html);
+                        currentPersonalPage = pageNo;
+                    } else {
+                        $("#contentBox-body-list2 .carousel-item").append(html);
+                        currentEnterprisePage = pageNo;
+                    }
+
+                },
+                error: function () {
+                    layer.msg("<@spring.message code='networkerror'/>");
+                }
+            })
+        }
+    })
+</script>
+</html>

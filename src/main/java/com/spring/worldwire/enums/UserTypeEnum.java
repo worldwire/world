@@ -38,10 +38,13 @@ public enum UserTypeEnum implements INumericEnum {
     }
 
 
-    public static UserTypeEnum getNameByCode(int code){
+    public static UserTypeEnum getNameByCode(int code) {
+        if (code == 0) {
+            return null;
+        }
         UserTypeEnum[] array = UserTypeEnum.values();
         for (UserTypeEnum value : array) {
-            if(code == value.getCode()){
+            if (code == value.getCode()) {
                 return value;
             }
         }

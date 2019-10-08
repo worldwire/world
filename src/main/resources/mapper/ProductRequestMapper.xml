@@ -40,8 +40,8 @@
 
     </resultMap>
     <sql id="Base_Column_List">
-    id, request_type, key_word, title, content, mobile, email, phone, website, public_platform, wechat,linkedin, language_type,
-    language_id, status,language_level , user_type,user_id,view_count,create_time,update_time,facebook,whatsapp,
+    product_request.id, product_request.request_type, product_request.key_word, product_request.title, content, product_request.mobile, product_request.email, phone, product_request.website, product_request.public_platform, product_request.wechat,product_request.linkedin, language_type,
+    language_id, status,language_level , user_type,user_id,view_count,create_time,update_time,product_request.facebook,product_request.whatsapp,
     others,qrcode
   </sql>
 
@@ -74,7 +74,14 @@
         select
         <include refid="Base_Column_List"/>
         from product_request
+        <if test="query.nationType != null">
+            ,user_info
+        </if>
         <where>
+            <if test="query.nationType != null">
+                user_info.id = product_request.user_id and
+                user_info.is_foreign = ${query.nationType} and
+            </if>
             <include refid="select_query"/>
         </where>
         <if test="query.pageStart != null">
@@ -85,7 +92,14 @@
     <select id="selectCountByQuery" resultType="java.lang.Integer">
         select count(*)
         from product_request
+        <if test="query.nationType != null">
+        ,user_info
+        </if>
         <where>
+            <if test="query.nationType != null">
+            user_info.id = product_request.user_id and
+            user_info.is_foreign = ${query.nationType} and
+            </if>
             <include refid="select_query"/>
         </where>
 

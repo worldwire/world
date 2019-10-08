@@ -1,0 +1,214 @@
+body {
+	background: #F2F2F2;
+}
+
+body ul li {
+	list-style: none;
+}
+
+body .content {
+	background: #F2F2F2;
+    padding-top: 1px;
+}
+
+
+body .content .center {
+	width: 1200px;
+    margin: auto;
+}
+
+.leftBox {
+	margin-right: 12px;
+}
+
+.centerBox {
+	width: 740px;
+}
+
+.centerBox .firstCell {
+	display: flex;
+	justify-content: space-between;
+}
+
+.centerBox .secondCell {
+	margin-bottom: 10px;
+	font-size: 14px;
+}
+
+.centerBox .thirdCell p {
+	font-size: 12px;
+	color: #838383; 
+	line-height: 1.5;
+}
+
+.centerBox .lastCell {
+	margin-top: 20px;
+}
+
+.centerBox .lastCell .tag{
+	padding: 10px 15px; 
+	background-color: #e0e0e0; 
+	border-radius: 2px; 
+	font-size: 13px; 
+	margin-right: 10px;
+}
+
+.centerBox .lastCell .more{
+	color: #ea5559; 
+	margin-left: 20px;
+}
+
+.centerBox .firstCell .firstCellLeft{
+	display: flex; 
+	align-items: center; 
+	margin-bottom: 10px;
+	height: 24px;
+}
+
+.centerBox .firstCell .firstCellRight{
+	display: flex;
+	align-items: center; 
+	height: 24px;
+}
+
+.centerBox .firstCell .firstCellLeft .name{
+	font-size: 16px;
+    margin-right: 16px;
+}
+
+.centerBox .firstCell .firstCellLeft .age{
+	font-size: 10px; 
+	color: #838383; 
+	margin-right: 50px;
+}
+
+.centerBox .firstCell .firstCellLeft .address{
+	font-size: 10px; 
+	color: #838383; 
+	margin-right: 10px;
+}
+
+.centerBox .firstCell .firstCellLeft img{
+	border-radius: 50%; 
+	border: 3px solid #fff; 
+	margin-right: 50px;
+}
+
+.centerBox .firstCell .firstCellLeft .title1{
+	font-size: 10px; 
+	color: #838383;
+}
+
+.addressBox {
+	display: flex; 
+	align-items: center; 
+	margin-right: 25px;
+}
+
+.addressBox img{
+	margin-right: 10px
+}
+
+.addressBox .address{
+	font-size: 10px; 
+	color: #838383;
+}
+
+.numberBox {
+	display: flex; 
+	align-items: center;
+}
+
+.numberBox img{
+	margin-right: 10px
+}
+
+.numberBox .num{
+	font-size: 10px; 
+	color: #838383;
+}
+
+.centerBox {
+	width: 740px;
+}
+
+.centerBox {
+	width: 740px;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	background-color: #fff;
+	height: 70px;
+}
+
+.title-screen {
+	margin-left: 30px; 
+	margin-right: 50px;
+}
+
+.titles {
+	display: flex;
+	justify-content: space-between;
+	align-items: center; 
+	width: 1028px;
+	height: 30px;
+	cursor: pointer;
+}
+
+.titles div:hover {
+	color: #d42026;
+}
+
+.personInformation {
+	display: flex;
+    justify-content: space-between;
+	align-items: center;
+	height: 140px;
+	width: 1140px;
+	margin: 0 auto; 
+	padding: 20px 0;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.personImg {
+	border-radius: 50%;
+    border: 3px solid #e7e7e7;
+}
+
+.personTitleBox {
+	display: flex;
+	align-items: center;
+	margin-top: 12px;
+}
+
+.personTitleBox .spot{
+	color: #ea5559;
+	width: 8px;
+	height: 8px;
+	background-color: #ea5559;
+	border-radius: 50%;
+}
+
+.personTitleBox .personTitle {
+	color: #ea5559;
+    margin-left: 10px;
+}
+
+.myButton {
+	display: flex; 
+	justify-content: center; 
+	align-items: center; 
+	width: 90px; 
+	height: 32px; 
+	border: 1px solid#e7e7e7;
+	margin-top: 20px;
+}
+
+.shadow {
+	box-shadow: 0 0 10px rgba(0,0,0,.2);
+    border-radius: 2px;
+}
+
+

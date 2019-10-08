@@ -13,7 +13,7 @@
     <!-- 需求大厅 -->
     <rule>
         <from>^/request.html</from>
-        <to>/request/list/0/0/4/1.html</to>
+        <to>/request/list/0/0/0/4/1.html</to>
     </rule>
 
     <!-- 需求大厅 -->

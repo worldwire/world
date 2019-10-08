@@ -2,11 +2,8 @@ package com.spring.worldwire.manager;
 
 import com.spring.worldwire.enums.RequestTypeEnum;
 import com.spring.worldwire.enums.UserTypeEnum;
-import com.spring.worldwire.model.ProductRequest;
 import com.spring.worldwire.model.UserInfo;
 import com.spring.worldwire.model.vo.ProductRequestVo;
-
-import java.util.List;
 
 /**
  * Desc: Desc
@@ -18,5 +15,6 @@ public interface ProductRequestManager {
 
     UserInfo viewRequestContract(Long userId, Long productRequestId);
 
-    ProductRequestVo getRequestByQuery(UserTypeEnum userTypeEnum, int requestType, RequestTypeEnum requestTypeEnum, int pageSize, int pageNo, String key);
+    ProductRequestVo getRequestByQuery(UserTypeEnum userTypeEnum, int nationType, RequestTypeEnum requestTypeEnum, int pageSize, int pageNo, String key);
+
 }

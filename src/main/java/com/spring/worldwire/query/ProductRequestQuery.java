@@ -18,6 +18,8 @@ public class ProductRequestQuery extends Pager {
     // userId
     private Long userId;
 
+    private Integer nationType;
+
     private String key;
 
     public UserTypeEnum getUserType() {
@@ -50,5 +52,13 @@ public class ProductRequestQuery extends Pager {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public Integer getNationType() {
+        return nationType;
+    }
+
+    public void setNationType(Integer nationType) {
+        this.nationType = nationType;
     }
 }

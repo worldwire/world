@@ -75,12 +75,15 @@ public class ProductRequestManagerImpl implements ProductRequestManager {
     }
 
     @Override
-    public ProductRequestVo getRequestByQuery(UserTypeEnum userTypeEnum, int requestType, RequestTypeEnum requestTypeEnum, int pageSize, int pageNo, String key) {
+    public ProductRequestVo getRequestByQuery(UserTypeEnum userTypeEnum, int nationType, RequestTypeEnum requestTypeEnum, int pageSize, int pageNo, String key) {
 
         ProductRequestQuery query = new ProductRequestQuery();
         query.setPageSize(pageSize);
         query.setPageNo(pageNo);
         query.setRequestType(requestTypeEnum);
+        if (nationType != 0) {
+            query.setNationType(nationType);
+        }
         query.setUserType(userTypeEnum);
         query.setPageCount(productRequestService.selectCountByQuery(query));
         query.setKey(key);

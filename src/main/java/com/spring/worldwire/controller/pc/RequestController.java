@@ -2,7 +2,11 @@ package com.spring.worldwire.controller.pc;
 
 import com.alibaba.fastjson.JSON;
 import com.spring.worldwire.constants.Constants;
-import com.spring.worldwire.enums.*;
+import com.spring.worldwire.enums.LanguageEnum;
+import com.spring.worldwire.enums.LevelEnum;
+import com.spring.worldwire.enums.ProductRequestStatusEnum;
+import com.spring.worldwire.enums.RequestTypeEnum;
+import com.spring.worldwire.enums.UserTypeEnum;
 import com.spring.worldwire.manager.ProductRequestManager;
 import com.spring.worldwire.manager.UserCenterManager;
 import com.spring.worldwire.model.ProductRequest;
@@ -43,14 +47,26 @@ public class RequestController {
         this.productRequestService = productRequestService;
     }
 
-    @RequestMapping("/list/{userType}/{requestType}/{pageSize}/{pageNo}.html")
-    public String productRequestList(HttpServletRequest request, Model model, @PathVariable int userType, @PathVariable int requestType, @PathVariable int pageSize, @PathVariable int pageNo, String key) {
+//    @RequestMapping("/list/{userType}/{requestType}/{pageSize}/{pageNo}.html")
+//    public String productRequestList(HttpServletRequest request, Model model, @PathVariable int userType, @PathVariable int requestType, @PathVariable int pageSize, @PathVariable int pageNo, String key) {
+//
+//        ProductRequestVo personalVo = productRequestManager.getRequestByQuery(UserTypeEnum.PERSONAL, requestType, RequestTypeEnum.getNameByCode(requestType), pageSize, pageNo, key);
+//        ProductRequestVo enterpriseVo = productRequestManager.getRequestByQuery(UserTypeEnum.ENTERPRISE, requestType, RequestTypeEnum.getNameByCode(requestType), pageSize, pageNo, key);
+//        model.addAttribute("personalVo", personalVo);
+//        model.addAttribute("enterpriseVo", enterpriseVo);
+//        model.addAttribute("requestType", requestType);
+//        model.addAttribute("pageNo", pageNo);
+//
+//        return "pc/requestList";
+//
+//    }
 
-        ProductRequestVo personalVo = productRequestManager.getRequestByQuery(UserTypeEnum.PERSONAL, requestType, RequestTypeEnum.getNameByCode(requestType), pageSize, pageNo, key);
-        ProductRequestVo enterpriseVo = productRequestManager.getRequestByQuery(UserTypeEnum.ENTERPRISE, requestType, RequestTypeEnum.getNameByCode(requestType), pageSize, pageNo, key);
-        model.addAttribute("personalVo", personalVo);
-        model.addAttribute("enterpriseVo", enterpriseVo);
-        model.addAttribute("requestType", requestType);
+    @RequestMapping("/list/{nationType}/{userType}/{requestType}/{pageSize}/{pageNo}.html")
+    public String newProductRequestList(HttpServletRequest request, Model model, @PathVariable int nationType, @PathVariable int userType, @PathVariable int requestType, @PathVariable int pageSize, @PathVariable int pageNo, String key) {
+
+        ProductRequestVo requestVo = productRequestManager.getRequestByQuery(UserTypeEnum.getNameByCode(userType), nationType, RequestTypeEnum.getNameByCode(requestType), pageSize, pageNo, key);
+
+        model.addAttribute("requestList", requestVo);
         model.addAttribute("pageNo", pageNo);
 
         return "pc/requestList";

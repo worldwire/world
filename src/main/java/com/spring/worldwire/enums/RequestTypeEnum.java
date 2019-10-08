@@ -1,13 +1,13 @@
 package com.spring.worldwire.enums;
 
-import com.alibaba.fastjson.JSONObject;
 import com.spring.worldwire.extent.INumericEnum;
 
 @SuppressWarnings("unused")
 public enum RequestTypeEnum implements INumericEnum {
 
     SERVICE(1, "服务"),
-    REQUEST(2, "需求"),;
+    REQUEST(2, "需求"),
+    ;
 
     private int code;
 
@@ -35,6 +35,9 @@ public enum RequestTypeEnum implements INumericEnum {
     }
 
     public static RequestTypeEnum getNameByCode(int code) {
+        if (code == 0) {
+            return null;
+        }
         RequestTypeEnum[] array = RequestTypeEnum.values();
         for (RequestTypeEnum value : array) {
             if (code == value.getCode()) {

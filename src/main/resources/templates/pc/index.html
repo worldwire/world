@@ -33,28 +33,28 @@
 </div>
 <div class="demand">
     <div class="demand-box">
-        <div class="demand-title" onclick="redirectClick('/')">
+        <div class="demand-title">
 
             <div class="mes">
-                <div class="flex1" onclick="redirectClick('')">
+                <div class="flex1" onclick="redirectClick('/request/list/1/2/0/10/1.html')">
                     <div>
                         <img src="/images/chinesePeople.png">
                     </div>
                     <p><@spring.message code="chineseTelent"/></p>
                 </div>
-                <div class="flex1" onclick="redirectClick('/request/list/1/2/10/1.html')">
+                <div class="flex1" onclick="redirectClick('/request/list/2/1/0/10/1.html')">
                     <div>
                         <img src="/images/foreignPeople.png">
                     </div>
                     <p><@spring.message code="foreignTelent"/></p>
                 </div>
-                <div class="flex1" onclick="redirectClick('/request/list/1/1/10/1.html')">
+                <div class="flex1" onclick="redirectClick('/request/list/1/2/0/10/1.html')">
                     <div>
                         <img src="/images/chineseEnterprise.png">
                     </div>
                     <p><@spring.message code="chineseEnterprise"/></p>
                 </div>
-                <div class="flex1" onclick="redirectClick('/request/list/2/2/10/1.html')">
+                <div class="flex1" onclick="redirectClick('/request/list/2/1/0/10/1.html')">
                     <div>
                         <img src="/images/foreignEnterprise.png">
                     </div>
@@ -64,12 +64,12 @@
         </div>
         <div class="demand-list">
             <div class="demand-personal">
-                <div class="dpt" onclick="redirectClick('/request/list/2/1/10/1.html')">
+                <div class="dpt" onclick="redirectClick('/request/list/0/1/2/10/1.html')" style="">
                     <@spring.message code="personalrequirement"/>
                 </div>
                 <#if personalList??>
                 <#list personalList as personal>
-                    <div class="demand-personal-list">
+                    <div class="demand-personal-list" onclick="redirectClick('/request/detail?id=${personal.id}')">
                         <div class="demand-personal-list-img">
                             <img src="${personal.userInfo.showImg!''}" width="100" height="100"/>
                         </div>
@@ -86,7 +86,7 @@
         </div>
     </div>
     <div class="demand-enterprise">
-        <div class="dpt" onclick="redirectClick('/')"><@spring.message code="enterpriserequirement"/></div>
+        <div class="dpt" onclick="redirectClick('/request/list/0/2/2/10/1.html')"><@spring.message code="enterpriserequirement"/></div>
         <#if enterpriseList??>
             <#list enterpriseList as enterprise>
                 <div class="demand-enterprise-list" onclick="redirectClick('/request/detail?id=${enterprise.id}')">
@@ -130,7 +130,7 @@
             if(!key){
                 return false;
             }
-            window.location.href = "/request/list/0/0/4/1.html?key="+encodeURIComponent(key);
+            window.location.href = "/request/list/0/0/0/4/1.html?key="+encodeURIComponent(key);
         });
     });
 </script>
