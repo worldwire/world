@@ -119,7 +119,12 @@
 </body>
 <script>
     layui.use(['form', 'layedit', 'laydate', 'carousel'], function () {
-xian            , $ = layui.jquery;
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate
+            , carousel = layui.carousel
+            , $ = layui.jquery;
         $(".search-box-btn").on("click",function () {
             var key = $("[name=title]").val();
             if(!key){
