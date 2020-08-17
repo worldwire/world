@@ -40,13 +40,13 @@
                     <div>
                         <img src="/images/chinesePeople.png">
                     </div>
-                    <p><@spring.message code="chineseTelent"/></p>
+                    <p><@spring.message code="chineseTalent"/></p>
                 </div>
                 <div class="flex1" onclick="redirectClick('/request/list/2/1/0/10/1.html')">
                     <div>
                         <img src="/images/foreignPeople.png">
                     </div>
-                    <p><@spring.message code="foreignTelent"/></p>
+                    <p><@spring.message code="foreignTalent"/></p>
                 </div>
                 <div class="flex1" onclick="redirectClick('/request/list/1/2/0/10/1.html')">
                     <div>
@@ -119,12 +119,7 @@
 </body>
 <script>
     layui.use(['form', 'layedit', 'laydate', 'carousel'], function () {
-        var form = layui.form
-            , layer = layui.layer
-            , layedit = layui.layedit
-            , laydate = layui.laydate
-            , carousel = layui.carousel
-            , $ = layui.jquery;
+xian            , $ = layui.jquery;
         $(".search-box-btn").on("click",function () {
             var key = $("[name=title]").val();
             if(!key){
